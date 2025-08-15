@@ -12,7 +12,9 @@ const Navbar = ({ logo }: { logo: string }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   return (
-    <nav className={`bg-ivory shadow-lg z-50 ${isMenuOpen ? "fixed top-0 left-0 right-0" : "md:fixed md:top-0 md:left-0 md:right-0"}`}>
+    <nav
+      className={`bg-ivory shadow-lg z-50 ${isMenuOpen ? "fixed top-0 left-0 right-0" : "md:fixed md:top-0 md:left-0 md:right-0"}`}
+    >
       <TopBar />
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-20">

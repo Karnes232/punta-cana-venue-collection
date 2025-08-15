@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-golden: #D4AF37;
-  --color-turquoise: #40E0D0;
-  --color-ivory: #FAF9F6;
-  --color-charcoal: #1C1C1C;
+  --color-golden: #d4af37;
+  --color-turquoise: #40e0d0;
+  --color-ivory: #faf9f6;
+  --color-charcoal: #1c1c1c;
 
   /* optional: fonts */
   --font-crimson-pro: var(--font-crimson-pro), serif;
