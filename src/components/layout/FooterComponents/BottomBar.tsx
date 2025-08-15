@@ -1,3 +1,4 @@
+import Link from "next/link"
 import React from "react"
 
 const BottomBar = () => {
@@ -9,24 +10,24 @@ const BottomBar = () => {
             © 2025 Punta Cana Venue Collection. All rights reserved.
           </div>
           <div className="flex space-x-6 text-sm">
-            <a
+            <Link
               href="/privacy"
               className="text-ivory/60 hover:text-turquoise transition-colors"
             >
               Privacy Policy
-            </a>
-            <a
+            </Link>
+            <Link
               href="/terms"
               className="text-ivory/60 hover:text-turquoise transition-colors"
             >
               Terms of Service
-            </a>
-            <a
+            </Link>
+            <Link
               href="/cookies"
               className="text-ivory/60 hover:text-turquoise transition-colors"
             >
               Cookie Policy
-            </a>
+            </Link>
           </div>
         </div>
       </div>
