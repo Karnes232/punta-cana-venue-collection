@@ -92,7 +92,8 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }>) {
   const { locale } = await params
-
+ const logo = await getLogo()
+ console.log(logo)
 
   if (!hasLocale(routing.locales, locale)) {
     notFound()
@@ -133,7 +134,7 @@ export default async function LocaleLayout({
         >
 
           <div className="min-h-screen flex flex-col justify-between overflow-x-hidden">
-            <Navbar />
+            <Navbar logo={logo.logo.asset.url} />
             {children}
             <Footer />
           </div>

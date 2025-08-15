@@ -8,7 +8,7 @@ import ActionButtons from './ActionButtons';
 import SearchBar from './SearchBar';
 import MobileMenu from './MobileMenu';
 
-const Navbar = () => {
+const Navbar = ({ logo }: { logo: string }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   return (
@@ -16,7 +16,7 @@ const Navbar = () => {
         <TopBar />
         <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-20">
-            <Logo />
+            <Logo logo={logo} />
             <DesktopNav />
             <ActionButtons isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} isSearchOpen={isSearchOpen} setIsSearchOpen={setIsSearchOpen} />
             <SearchBar isSearchOpen={isSearchOpen} />
