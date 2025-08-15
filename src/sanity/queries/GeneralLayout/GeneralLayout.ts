@@ -1,11 +1,11 @@
 import { client } from "@/sanity/lib/client"
 
 interface Logo {
-    logo: {
-        asset: {
-            url: string
-        }
+  logo: {
+    asset: {
+      url: string
     }
+  }
 }
 
 export const logoQuery = `*[_type == "generalLayout"][0] {
@@ -17,6 +17,6 @@ export const logoQuery = `*[_type == "generalLayout"][0] {
 }`
 
 export async function getLogo(): Promise<Logo> {
-    const logo = await client.fetch<Logo>(logoQuery)
-    return logo
+  const logo = await client.fetch<Logo>(logoQuery)
+  return logo
 }

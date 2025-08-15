@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono, Crimson_Pro } from "next/font/google";
+import { Geist, Geist_Mono, Crimson_Pro } from "next/font/google"
 import "../../globals.css"
 
 //import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google"
@@ -8,18 +8,18 @@ import "../../globals.css"
 import { NextIntlClientProvider, hasLocale } from "next-intl"
 import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
-import Footer from "@/components/layout/FooterComponents/Footer";
-import Navbar from "@/components/layout/HeaderComponents/Navbar";
-import { getLogo } from "@/sanity/queries/GeneralLayout/GeneralLayout";
+import Footer from "@/components/layout/FooterComponents/Footer"
+import Navbar from "@/components/layout/HeaderComponents/Navbar"
+import { getLogo } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
+})
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
+})
 
 const crimsonPro = Crimson_Pro({
   subsets: ["latin"],
@@ -92,8 +92,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }>) {
   const { locale } = await params
- const logo = await getLogo()
- console.log(logo)
+  const logo = await getLogo()
 
   if (!hasLocale(routing.locales, locale)) {
     notFound()
@@ -132,10 +131,11 @@ export default async function LocaleLayout({
           messages={messages}
           key={locale}
         >
-
-          <div className="min-h-screen flex flex-col justify-between overflow-x-hidden">
+          <div className="min-h-screen flex flex-col overflow-x-hidden">
             <Navbar logo={logo.logo.asset.url} />
-            {children}
+            <main className="flex-1">
+              {children}
+            </main>
             <Footer />
           </div>
         </NextIntlClientProvider>

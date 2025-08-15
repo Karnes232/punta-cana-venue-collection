@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+  --color-golden: #D4AF37;
+  --color-turquoise: #40E0D0;
+  --color-ivory: #FAF9F6;
+  --color-charcoal: #1C1C1C;
+
+  /* optional: fonts */
+  --font-crimson-pro: var(--font-crimson-pro), serif;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -23,4 +33,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-top: 0px; /* Account for fixed navbar height */
+}
+
+html {
+  scroll-behavior: smooth;
 }
