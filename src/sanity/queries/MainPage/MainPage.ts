@@ -27,7 +27,6 @@ interface MainPage {
       }
     }
   }
-  
 }
 
 export interface HeroImage {

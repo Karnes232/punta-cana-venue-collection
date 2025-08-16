@@ -22,25 +22,25 @@ const DesktopNav = () => {
         href="/inspection"
         className="text-charcoal hover:text-turquoise transition-colors font-medium"
       >
-        {t('venueInspection')}
+        {t("venueInspection")}
       </Link>
       <Link
         href="/blog"
         className="text-charcoal hover:text-turquoise transition-colors font-medium"
       >
-        {t('blog')}
+        {t("blog")}
       </Link>
       <Link
         href="/about"
         className="text-charcoal hover:text-turquoise transition-colors font-medium"
       >
-        {t('about')}
+        {t("about")}
       </Link>
       <Link
         href="/contact"
         className="text-charcoal hover:text-turquoise transition-colors font-medium"
       >
-        {t('contact')}
+        {t("contact")}
       </Link>
     </div>
   )

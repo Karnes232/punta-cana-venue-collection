@@ -15,6 +15,12 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: "companyDescription",
+      title: "Company Description",
+      type: "localizedText",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
       name: "email",
       title: "Email",
       type: "string",

@@ -1,3 +1,4 @@
+import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher"
 import { Search, Calendar, Menu, X } from "lucide-react"
 import { useTranslations } from "next-intl"
 import React from "react"
@@ -22,10 +23,13 @@ const ActionButtons = ({
     >
       <Search size={20} />
     </button> */}
+      <div className="hidden xl:flex ">
+        <LanguageSwitcher color="charcoal" />
+      </div>
 
       <button className="hidden md:flex items-center space-x-2 bg-golden text-charcoal px-4 py-2 rounded-full font-medium hover:bg-golden/90 transition-colors">
         <Calendar size={16} />
-        <span>{t('bookInspection')}</span>
+        <span>{t("bookInspection")}</span>
       </button>
 
       {/* Mobile Menu Button */}

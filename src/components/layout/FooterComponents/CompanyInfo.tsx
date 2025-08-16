@@ -1,31 +1,78 @@
-import React from "react"
+"use client"
 
-const CompanyInfo = () => {
+import Image from "next/image"
+import React from "react"
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa"
+import { useParams } from "next/navigation"
+import { languages, fallbackLng } from "@/i18n/settings"
+
+const CompanyInfo = ({
+  companyInfo,
+  logo,
+}: {
+  companyInfo: any
+  logo: string
+}) => {
+  const params = useParams()
+  const currentLocale = (params?.locale as string) || fallbackLng
+  const safeLocale = languages.includes(currentLocale)
+    ? currentLocale
+    : fallbackLng
+
   return (
     <div className="lg:col-span-2">
       <div className="flex items-center space-x-3 mb-6">
-        <div className="w-12 h-12 bg-gradient-to-br from-golden to-turquoise rounded-full flex items-center justify-center">
-          <div className="text-2xl">🌴</div>
+        <div className="w-16 h-16 rounded-full flex items-center justify-center">
+          <Image
+            src={logo}
+            alt="logo"
+            width={64}
+            height={64}
+            className="brightness-100"
+          />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-ivory">Punta Cana</h1>
-          <p className="text-sm text-ivory/70">Venue Collection</p>
+          <h1 className="text-xl font-bold text-ivory">
+            {companyInfo.companyName.split(" ").slice(0, 2).join(" ")}
+          </h1>
+          <p className="text-sm text-ivory/70">
+            {companyInfo.companyName.split(" ").slice(2, 4).join(" ")}
+          </p>
         </div>
       </div>
       <p className="text-ivory/80 mb-6 max-w-md">
-        Discover the most exclusive venues in Punta Cana for your dream events.
-        From beachfront ceremonies to luxury celebrations, we curate the perfect
-        spaces for your special moments.
+        {companyInfo.companyDescription[safeLocale]}
       </p>
       <div className="flex space-x-4">
         <div className="w-10 h-10 bg-ivory/10 rounded-full flex items-center justify-center hover:bg-turquoise transition-colors cursor-pointer">
-          <span className="text-sm">f</span>
+          <a
+            href={companyInfo.socialLinks.facebook}
+            target="_blank"
+            aria-label="Facebook"
+            rel="noreferrer"
+          >
+            <FaFacebookF className="h-5 w-5 cursor-pointer hover:text-ivory transition-colors" />
+          </a>
         </div>
         <div className="w-10 h-10 bg-ivory/10 rounded-full flex items-center justify-center hover:bg-turquoise transition-colors cursor-pointer">
-          <span className="text-sm">ig</span>
+          <a
+            href={companyInfo.socialLinks.instagram}
+            target="_blank"
+            aria-label="Instagram"
+            rel="noreferrer"
+          >
+            <FaInstagram className="h-5 w-5 cursor-pointer hover:text-ivory transition-colors" />
+          </a>
         </div>
         <div className="w-10 h-10 bg-ivory/10 rounded-full flex items-center justify-center hover:bg-turquoise transition-colors cursor-pointer">
-          <span className="text-sm">tw</span>
+          <a
+            href={`https://wa.me/${companyInfo.telephone}`}
+            target="_blank"
+            aria-label="WhatsApp"
+            rel="noreferrer"
+          >
+            <FaWhatsapp className="h-5 w-5 cursor-pointer hover:text-ivory transition-colors" />
+          </a>
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ export const structure: StructureResolver = S =>
           S.documentList()
             .schemaType("pageSeo")
             .title("Page SEO")
-            .filter("_type == 'pageSeo'")
+            .filter("_type == 'pageSeo'"),
         ),
       S.listItem()
         .title("Main Page")
@@ -33,24 +33,22 @@ export const structure: StructureResolver = S =>
         .title("Individual Venue")
         .child(
           S.list()
-          .title("Individual Venue")
-          .items([
-            S.listItem()
-            .title("Amenity")
-            .child(
-              S.documentList()
-              .title("Amenity")
-              .filter("_type == 'amenity'")
-            ),
-            S.listItem()
             .title("Individual Venue")
-            .child(
-              S.documentList()
-              .title("Venue")
-              .filter("_type == 'individualVenue'")
-            )
-            
-          ])
-        )
-
+            .items([
+              S.listItem()
+                .title("Amenity")
+                .child(
+                  S.documentList()
+                    .title("Amenity")
+                    .filter("_type == 'amenity'"),
+                ),
+              S.listItem()
+                .title("Individual Venue")
+                .child(
+                  S.documentList()
+                    .title("Venue")
+                    .filter("_type == 'individualVenue'"),
+                ),
+            ]),
+        ),
     ])

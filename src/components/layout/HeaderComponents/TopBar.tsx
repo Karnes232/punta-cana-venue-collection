@@ -1,24 +1,20 @@
 import { Mail, Phone } from "lucide-react"
 import React from "react"
 
-const TopBar = () => {
+const TopBar = ({ email, telephone }: { email: string; telephone: string }) => {
   return (
     <div className="bg-charcoal text-ivory py-2 px-4">
-      <div className="max-w-7xl mx-auto flex justify-between items-center text-sm">
+      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm xl:text-base">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-1">
             <Phone size={14} />
-            <span>+1 (809) 555-0123</span>
+            <a href={`tel:${telephone}`}>{telephone}</a>
           </div>
           <div className="flex items-center space-x-1">
             <Mail size={14} />
-            <span>info@puntacanavenues.com</span>
+            <a href={`mailto:${email}`}>{email}</a>
           </div>
         </div>
-        {/* <div className="hidden md:flex items-center space-x-4">
-          <span>🇺🇸 EN</span>
-          <span>🇪🇸 ES</span>
-        </div> */}
       </div>
     </div>
   )

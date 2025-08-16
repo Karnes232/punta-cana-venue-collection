@@ -19,22 +19,16 @@ export default async function Home({ params }: PageProps) {
         heroImage={mainPage.heroImage}
         heroTitle={mainPage.title[locale]}
       />
-      <div className="flex flex-col lg:flex-row gap-4">
-        <div className='w-full lg:w-1/2'>
-        <VenueOfDay venueOfTheDay={mainPage.venueOfTheDay}
-        locale={locale}
-        />
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4">
+        <div className="w-full lg:w-1/2">
+          <VenueOfDay venueOfTheDay={mainPage.venueOfTheDay} locale={locale} />
         </div>
-        
-        <div className='lg:w-1/2'></div>
+
+        <div className="lg:w-1/2"></div>
       </div>
-      
     </section>
   )
 }
-
-
-
 
 export async function generateMetadata({
   params,
@@ -45,11 +39,11 @@ export async function generateMetadata({
 }) {
   const { locale } = await params
   const pageSeo = await getPageSeo("home")
-  
+
   if (!pageSeo) {
     return {}
   }
-  
+
   return {
     title: pageSeo.seo.meta[locale].title,
     description: pageSeo.seo.meta[locale].description,

@@ -8,5 +8,20 @@
     "bookInspection": "Reservar Inspección",
     "contact": "Contacto",
     "language": "Idioma"
+  },
+  "Footer": {
+    "allRightsReserved": "Todos los derechos reservados.",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos de Servicio",
+    "cookiePolicy": "Política de Cookies",
+    "builtBy": "Desarrollado por",
+    "quickLinks": "Enlaces Rápidos",
+    "venues": "Venues",
+    "venueInspection": "Inspección de Venue",
+    "blog": "Blog & Guías",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "dominicanRepublic": "República Dominicana",
+    "officeHours": "Horarios de Oficina"
   }
 }

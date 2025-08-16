@@ -1,44 +1,44 @@
 import { client } from "@/sanity/lib/client"
 
 interface PageSeo {
-    pageName: string
-    seo: {
-        meta: {
-        en: {
-          title: string
-          description: string
-          keywords: string[]
-        }
-        es: {
-          title: string
-          description: string
-          keywords: string[]
-        }
+  pageName: string
+  seo: {
+    meta: {
+      en: {
+        title: string
+        description: string
+        keywords: string[]
       }
-      openGraph: {
-        en: {
-          title: string
-          description: string
-        }
-        es: {
-          title: string
-          description: string
-        }
-        image: {
-          url: string
-          alt?: string
-          width?: number
-          height?: number
-        }
+      es: {
+        title: string
+        description: string
+        keywords: string[]
       }
-      structuredData: {
-        en: string
-        es: string
-      }
-      canonicalUrl?: string
-      noIndex: boolean
-      noFollow: boolean
     }
+    openGraph: {
+      en: {
+        title: string
+        description: string
+      }
+      es: {
+        title: string
+        description: string
+      }
+      image: {
+        url: string
+        alt?: string
+        width?: number
+        height?: number
+      }
+    }
+    structuredData: {
+      en: string
+      es: string
+    }
+    canonicalUrl?: string
+    noIndex: boolean
+    noFollow: boolean
+  }
 }
 export const seoQuery = `*[_type == "pageSeo" && pageName == $pageName][0] {
     pageName,
@@ -85,7 +85,6 @@ export const seoQuery = `*[_type == "pageSeo" && pageName == $pageName][0] {
 }`
 
 export async function getPageSeo(pageName: string): Promise<PageSeo> {
-    const pageSeo = await client.fetch(seoQuery, { pageName })
-    return pageSeo
+  const pageSeo = await client.fetch(seoQuery, { pageName })
+  return pageSeo
 }
-

@@ -10,7 +10,10 @@ import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
 import Footer from "@/components/layout/FooterComponents/Footer"
 import Navbar from "@/components/layout/HeaderComponents/Navbar"
-import { getLogo } from "@/sanity/queries/GeneralLayout/GeneralLayout"
+import {
+  getCompanyInfo,
+  getLogo,
+} from "@/sanity/queries/GeneralLayout/GeneralLayout"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,8 +29,6 @@ const crimsonPro = Crimson_Pro({
   display: "swap",
   variable: "--font-crimson-pro",
 })
-
-
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.grandbay-puntacana.com"),
@@ -95,11 +96,10 @@ export default async function LocaleLayout({
 }>) {
   const { locale } = await params
   const logo = await getLogo()
-
+  const companyInfo = await getCompanyInfo()
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
-
   // Import messages for the current locale
   let messages
   try {
@@ -134,10 +134,14 @@ export default async function LocaleLayout({
           key={locale}
         >
           <div className="min-h-screen flex flex-col overflow-x-hidden">
-            <Navbar logo={logo.logo.asset.url} />
+            <Navbar
+              logo={logo.logo.asset.url}
+              email={companyInfo.email}
+              telephone={companyInfo.telephone}
+            />
 
             <main className="flex-1">{children}</main>
-            <Footer />
+            <Footer companyInfo={companyInfo} logo={logo.logo.asset.url} />
           </div>
         </NextIntlClientProvider>
       </body>
