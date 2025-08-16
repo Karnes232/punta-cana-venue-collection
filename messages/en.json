@@ -1,20 +1,13 @@
 {
   "Navbar": {
     "home": "Home",
-    "scubaClasses": "Scuba Classes",
-    "divePackages": "Dive Packages",
-    "localDives": "Local Dives",
-    "sharkDive": "Shark Dive",
-    "diveTrips": "Dive Trips",
-    "deepSeaFishing": "Deep Sea Fishing",
-    "photoGallery": "Photo Gallery",
-    "speciesGuide": "Species Guide",
-    "contactUs": "Contact Us",
-    "scubaDivingPuntaCana": "Scuba Diving Punta Cana",
-    "sharkDivingPuntaCana": "Shark Diving Punta Cana",
-    "liveAboards": "Live Aboards",
-    "cancellationPolicy": "Cancellation Policy",
-    "siteMap": "Site Map",
-    "blog": "Blog"
+    "venues": "Venues",
+    "venueInspection": "Venue Inspection",
+    "Blog": "Blog & Guides",
+    "About": "About",
+    "bookInspection": "Book Inspection",
+    "contact": "Contact",
+    "language": "Language"
+
   }
 }

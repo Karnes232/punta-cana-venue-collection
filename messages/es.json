@@ -1,20 +1,12 @@
 {
   "Navbar": {
     "home": "Inicio",
-    "scubaClasses": "Clases de Buceo",
-    "divePackages": "Paquetes de Buceo",
-    "localDives": "Buceo Local",
-    "sharkDive": "Buceo con Tiburones",
-    "diveTrips": "Viajes de Buceo",
-    "deepSeaFishing": "Pesca en Alta Mar",
-    "photoGallery": "Galería de Fotos",
-    "speciesGuide": "Guía de Especies",
-    "contactUs": "Contacto",
-    "scubaDivingPuntaCana": "Buceo Punta Cana",
-    "sharkDivingPuntaCana": "Buceo con Tiburones Punta Cana",
-    "liveAboards": "Viajes en Barco",
-    "cancellationPolicy": "Política de Cancelación",
-    "siteMap": "Mapa del Sitio",
-    "blog": "Blog"
+    "venues": "Venues",
+    "venueInspection": "Inspección de Venue",
+    "blog": "Blog & Guías",
+    "about": "Acerca de",
+    "bookInspection": "Reservar Inspección",
+    "contact": "Contacto",
+    "language": "Idioma"
   }
 }

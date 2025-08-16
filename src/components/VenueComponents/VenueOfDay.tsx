@@ -10,7 +10,6 @@ const coromantGaramond = Cormorant_Garamond({
   })
 
 const VenueOfDay = ({ venueOfTheDay, locale }: { venueOfTheDay: any, locale: string }) => {
-    console.log(venueOfTheDay.slug)
   return (
     <div className="bg-white">
     <div className="max-w-4xl mx-auto px-4 py-8">

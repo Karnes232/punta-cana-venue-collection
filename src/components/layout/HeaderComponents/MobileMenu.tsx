@@ -1,5 +1,6 @@
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher"
 import { Calendar } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import React from "react"
 
@@ -10,14 +11,15 @@ const MobileMenu = ({
   isMenuOpen: boolean
   setIsMenuOpen: (isMenuOpen: boolean) => void
 }) => {
+  const t = useTranslations("Navbar")
   const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/venues", label: "Venues" },
-    { href: "/inspection", label: "Venue Inspection" },
-    { href: "/blog", label: "Blog & Guides" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
-    { href: "/book-inspection", label: "Book Inspection" },
+    { href: "/", label: t("home") },
+    { href: "/venues", label: t("venues") },
+    { href: "/inspection", label: t("venueInspection") },
+    { href: "/blog", label: t("blog") },
+    { href: "/about", label: t("about") },
+    { href: "/contact", label: t("contact") },
+    { href: "/book-inspection", label: t("bookInspection") },
   ]
   return (
     <>
@@ -57,7 +59,7 @@ const MobileMenu = ({
             </Link>
           ))}
           <div className="px-3 py-2 border-t border-slate-100 mt-2 pt-4">
-            <div className="text-slate-700 font-medium mb-3">Language</div>
+            <div className="text-slate-700 font-medium mb-3">{t("language")}</div>
             <div className="pl-1">
               <LanguageSwitcher color="slate-700" />
             </div>

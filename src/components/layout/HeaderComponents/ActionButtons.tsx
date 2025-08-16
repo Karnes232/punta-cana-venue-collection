@@ -1,4 +1,5 @@
 import { Search, Calendar, Menu, X } from "lucide-react"
+import { useTranslations } from "next-intl"
 import React from "react"
 
 const ActionButtons = ({
@@ -12,6 +13,7 @@ const ActionButtons = ({
   isSearchOpen: boolean
   setIsSearchOpen: (isSearchOpen: boolean) => void
 }) => {
+  const t = useTranslations("Navbar")
   return (
     <div className="flex items-center space-x-4">
       {/* <button 
@@ -23,7 +25,7 @@ const ActionButtons = ({
 
       <button className="hidden md:flex items-center space-x-2 bg-golden text-charcoal px-4 py-2 rounded-full font-medium hover:bg-golden/90 transition-colors">
         <Calendar size={16} />
-        <span>Book Inspection</span>
+        <span>{t('bookInspection')}</span>
       </button>
 
       {/* Mobile Menu Button */}
