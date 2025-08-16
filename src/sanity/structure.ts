@@ -13,4 +13,12 @@ export const structure: StructureResolver = S =>
             .title("General Layout")
             .documentId("generalLayout"),
         ),
+      S.listItem()
+        .title("Main Page")
+        .child(
+          S.document()
+            .schemaType("mainPage")
+            .title("Main Page")
+            .documentId("mainPage"),
+        ),
     ])

@@ -1,18 +1,23 @@
 import Image from "next/image"
+import { getMainPage } from "@/sanity/queries/MainPage/MainPage"
+import HeroComponent from "@/components/HeroComponent/HeroComponent"
 
-export default function Home() {
+interface PageProps {
+  params: Promise<{
+    locale: "en" | "es"
+  }>
+}
+
+export default async function Home({ params }: PageProps) {
+  const { locale } = await params
+  const mainPage = await getMainPage()
+
   return (
-    <div className="font-sans p-8 pb-20 gap-16 sm:p-20">
-      {/* Test content to enable scrolling */}
-      <div className="h-screen bg-blue-100 mb-8 flex items-center justify-center">
-        <h1 className="text-4xl font-bold">Hero Section</h1>
-      </div>
-      <div className="h-screen bg-green-100 mb-8 flex items-center justify-center">
-        <h2 className="text-3xl font-bold">Second Section</h2>
-      </div>
-      <div className="h-screen bg-red-100 mb-8 flex items-center justify-center">
-        <h3 className="text-3xl font-bold">Third Section</h3>
-      </div>
+    <div className="">
+      <HeroComponent
+        heroImage={mainPage.heroImage}
+        heroTitle={mainPage.title[locale]}
+      />
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"

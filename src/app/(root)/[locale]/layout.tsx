@@ -133,6 +133,7 @@ export default async function LocaleLayout({
         >
           <div className="min-h-screen flex flex-col overflow-x-hidden">
             <Navbar logo={logo.logo.asset.url} />
+
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
