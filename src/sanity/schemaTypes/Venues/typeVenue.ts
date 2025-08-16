@@ -11,10 +11,21 @@ export default defineType({
         type: "localizedString",
         validation: r => r.required(),
       }),
+      defineField({
+        name: "image",
+        type: "image",
+        options: {
+          hotspot: true,
+        },
+        fields: [
+          { name: "alt", type: "string" },
+        ],
+      }),
     ],
     preview: {
       select: {
         title: "title.en",
+        media: "image",
       },
     },
   })

@@ -3,6 +3,8 @@ import { getMainPage } from "@/sanity/queries/MainPage/MainPage"
 import HeroComponent from "@/components/HeroComponent/HeroComponent"
 import { getPageSeo } from "@/sanity/queries/SEO/seo"
 import VenueOfDay from "@/components/VenueComponents/VenueOfDay"
+import { getTypeVenue } from "@/sanity/queries/MainPage/MainPage"
+import TypeVenue from "@/components/VenueComponents/TypeVenue"
 
 interface PageProps {
   params: Promise<{
@@ -13,7 +15,8 @@ interface PageProps {
 export default async function Home({ params }: PageProps) {
   const { locale } = await params
   const mainPage = await getMainPage()
-  console.log(mainPage)
+  const typeVenue = await getTypeVenue()
+
   return (
     <section className="">
       <HeroComponent
@@ -25,7 +28,9 @@ export default async function Home({ params }: PageProps) {
           <VenueOfDay venueOfTheDay={mainPage.venueOfTheDay} locale={locale} />
         </div>
 
-        <div className="lg:w-1/2"></div>
+        <div className="lg:w-1/2">
+          <TypeVenue typeVenue={typeVenue} locale={locale} />
+        </div>
       </div>
     </section>
   )

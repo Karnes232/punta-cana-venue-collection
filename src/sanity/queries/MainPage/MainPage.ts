@@ -108,3 +108,35 @@ export async function getMainPage(): Promise<MainPage> {
   const mainPage = await client.fetch<MainPage>(mainPageQuery)
   return mainPage
 }
+
+export const typeVenueQuery = `*[_type == "typeVenue"] {
+  title {
+    en,
+    es
+  },
+  image {
+    alt,
+    asset -> {
+      url,
+      metadata {
+        dimensions {
+          width,
+          height
+        }
+      }
+    }
+  }
+}`
+
+export interface TypeVenue {
+  title: {
+    en: string
+    es: string
+  }
+  image: HeroImage
+}
+
+export async function getTypeVenue(): Promise<TypeVenue[]> {
+  const typeVenue = await client.fetch<TypeVenue[]>(typeVenueQuery)
+  return typeVenue
+}

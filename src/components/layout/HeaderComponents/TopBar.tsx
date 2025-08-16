@@ -5,7 +5,7 @@ const TopBar = ({ email, telephone }: { email: string; telephone: string }) => {
   return (
     <div className="bg-charcoal text-ivory py-2 px-4">
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm xl:text-base">
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-col md:flex-row md:items-center md:space-x-4">
           <div className="flex items-center space-x-1">
             <Phone size={14} />
             <a href={`tel:${telephone}`}>{telephone}</a>

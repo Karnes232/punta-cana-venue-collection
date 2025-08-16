@@ -23,7 +23,7 @@ const VenueOfDay = ({
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <h2
-          className={`${coromantGaramond.className} text-2xl font-bold text-charcoal mb-6 text-center lg:text-left`}
+          className={`${coromantGaramond.className} text-2xl lg:text-4xl font-bold text-charcoal mb-6 text-center lg:text-left`}
         >
           {t("venueOfTheDay")}
         </h2>
@@ -40,7 +40,7 @@ const VenueOfDay = ({
                 height={
                   venueOfTheDay.heroImage.asset.metadata.dimensions.height
                 }
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
               />
               <div className="absolute top-3 left-3">
                 <span className="bg-golden text-charcoal px-2 py-1 rounded-full text-xs font-semibold">

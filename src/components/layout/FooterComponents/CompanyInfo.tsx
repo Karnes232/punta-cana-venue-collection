@@ -5,6 +5,7 @@ import React from "react"
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa"
 import { useParams } from "next/navigation"
 import { languages, fallbackLng } from "@/i18n/settings"
+import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher"
 
 const CompanyInfo = ({
   companyInfo,
@@ -73,6 +74,9 @@ const CompanyInfo = ({
           >
             <FaWhatsapp className="h-5 w-5 cursor-pointer hover:text-ivory transition-colors" />
           </a>
+        </div>
+        <div>
+          <LanguageSwitcher />
         </div>
       </div>
     </div>
