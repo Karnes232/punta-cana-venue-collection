@@ -40,7 +40,7 @@ const Navbar = ({
           </div>
         </div>
       </nav>
-      <div className="md:h-28"></div>
+      <div className="md:h-[7.5rem]"></div>
     </>
   )
 }

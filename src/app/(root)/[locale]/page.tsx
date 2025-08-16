@@ -53,7 +53,7 @@ export async function generateMetadata({
   return {
     title: pageSeo.seo.meta[locale].title,
     description: pageSeo.seo.meta[locale].description,
-    keywords: pageSeo.seo.meta[locale].keywords,
+    keywords: pageSeo.seo.meta[locale].keywords.join(", "),
     url: pageSeo.seo.canonicalUrl,
     openGraph: {
       title: pageSeo.seo.openGraph[locale].title,
