@@ -10,19 +10,7 @@ export default defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "object",
-      fields: [
-        {
-          name: "en",
-          title: "English",
-          type: "string",
-        },
-        {
-          name: "es",
-          title: "Spanish",
-          type: "string",
-        },
-      ],
+      type: "localizedString",
     }),
     defineField({
       name: "heroImage",

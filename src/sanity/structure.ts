@@ -21,4 +21,29 @@ export const structure: StructureResolver = S =>
             .title("Main Page")
             .documentId("mainPage"),
         ),
+      S.listItem()
+        .title("Individual Venue")
+        .child(
+          S.list()
+          .title("Individual Venue")
+          .items([
+            S.listItem()
+            .title("Amenity")
+            .child(
+              S.document()
+              .schemaType("amenity")
+              .title("Amenity")
+              .documentId("amenity")
+            ),
+            S.listItem()
+            .title("Individual Venue")
+            .child(
+              S.documentList()
+              .title("Venue")
+              .filter("_type == 'individualVenue'")
+            )
+            
+          ])
+        )
+
     ])
