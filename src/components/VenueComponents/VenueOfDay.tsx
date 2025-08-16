@@ -1,4 +1,5 @@
 import { Heart, MapPin } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
@@ -16,6 +17,7 @@ const VenueOfDay = ({
   venueOfTheDay: any
   locale: string
 }) => {
+  const t = useTranslations("Home")
   return (
     <div className="bg-white">
       <div className="max-w-4xl mx-auto px-4 py-8">
@@ -23,7 +25,7 @@ const VenueOfDay = ({
         <h2
           className={`${coromantGaramond.className} text-2xl font-bold text-charcoal mb-6 text-center lg:text-left`}
         >
-          Venue of the Day
+          {t("venueOfTheDay")}
         </h2>
 
         {/* Compact Card */}
@@ -42,7 +44,7 @@ const VenueOfDay = ({
               />
               <div className="absolute top-3 left-3">
                 <span className="bg-golden text-charcoal px-2 py-1 rounded-full text-xs font-semibold">
-                  Today's Pick
+                  {t("today")}
                 </span>
               </div>
             </div>
@@ -72,9 +74,9 @@ const VenueOfDay = ({
 
               <div className="flex items-center justify-between">
                 <div className="flex space-x-4 text-xs text-charcoal/60">
-                  <span>Up to {venueOfTheDay.capacityCocktail} guests</span>
+                  <span>{t("upTo")} {venueOfTheDay.capacityCocktail} {t("guests")}</span>
                   <span>•</span>
-                  <span>{venueOfTheDay.type}</span>
+                  <span>{venueOfTheDay.type.title[locale]}</span>
                   <span>•</span>
                   <span>{venueOfTheDay.amenities.title[locale]}</span>
                 </div>
@@ -84,7 +86,7 @@ const VenueOfDay = ({
                   href={`/venues/${venueOfTheDay.slug.current}`}
                   className="bg-turquoise text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-turquoise/90 transition-colors"
                 >
-                  View Venue
+                  {t("viewVenue")}
                 </Link>
               </div>
             </div>

@@ -43,6 +43,13 @@ export const structure: StructureResolver = S =>
                     .filter("_type == 'amenity'"),
                 ),
               S.listItem()
+                .title("Type Venue")
+                .child(
+                  S.documentList()
+                    .title("Type Venue")
+                    .filter("_type == 'typeVenue'"),
+                ),
+              S.listItem()
                 .title("Individual Venue")
                 .child(
                   S.documentList()

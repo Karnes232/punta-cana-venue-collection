@@ -23,5 +23,12 @@
     "contact": "Contact",
     "dominicanRepublic": "Dominican Republic",
     "officeHours": "Office Hours"
+  },
+  "Home": {
+    "venueOfTheDay": "Venue of the Day",
+    "today": "Today",
+    "upTo": "Up to",
+    "guests": "guests",
+    "viewVenue": "View Venue"
   }
 }

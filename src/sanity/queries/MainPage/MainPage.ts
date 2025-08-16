@@ -18,7 +18,12 @@ interface MainPage {
     }
     slug: string
     location: string
-    type: string
+    type: {
+      title: {
+        en: string
+        es: string
+      }
+    }
     capacityCocktail: number
     amenities: {
       title: {
@@ -82,7 +87,12 @@ export const mainPageQuery = `*[_type == "mainPage"][0] {
         },
         slug,
         location,
-        type,
+        type[0]->{
+            title {
+                en,
+                es
+            }
+        },
         capacityCocktail,
         amenities[0]->{
             title {

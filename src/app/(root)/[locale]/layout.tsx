@@ -31,9 +31,9 @@ const crimsonPro = Crimson_Pro({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.grandbay-puntacana.com"),
+  metadataBase: new URL("https://www.puntacanavenues.com"),
   openGraph: {
-    siteName: "Grand Bay of the Sea",
+    siteName: "Punta Cana Venue Collection",
     type: "website",
     locale: "en_US",
   },
@@ -50,24 +50,30 @@ export const metadata: Metadata = {
   //     "application/rss+xml": "https://dminhvu.com/rss.xml"
   //   }
   // },
-  applicationName: "Grand Bay of the Sea",
+  applicationName: "Punta Cana Venue Collection",
   appleWebApp: {
-    title: "Grand Bay of the Sea",
+    title: "Punta Cana Venue Collection",
     statusBarStyle: "default",
     capable: true,
   },
   verification: {
-    google: "QNQfgD0iQIbuHkuZ5fb8hKEYbV6iCN_TvIyRdnAu7yg",
-    // yandex: ["YOUR_DATA"],
-    other: {
-      "google-site-verification": [
-        "_73Leg9k9ryZXyP10IC8Nb2dxu3mfjpQG_zxN69KQCs",
-      ],
-      // "facebook-domain-verification": ["YOUR_DATA"],
-    },
+    // google: "QNQfgD0iQIbuHkuZ5fb8hKEYbV6iCN_TvIyRdnAu7yg",
+    // // yandex: ["YOUR_DATA"],
+    // other: {
+    //   "google-site-verification": [
+    //     "_73Leg9k9ryZXyP10IC8Nb2dxu3mfjpQG_zxN69KQCs",
+    //   ],
+    //   // "facebook-domain-verification": ["YOUR_DATA"],
+    // },
   },
   icons: {
     icon: [
+      {
+        url: "../favicon.ico",
+        type: "image/x-icon",
+      },
+    ],
+    apple: [
       {
         url: "../favicon.ico",
         type: "image/x-icon",

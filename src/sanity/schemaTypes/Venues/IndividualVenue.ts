@@ -60,18 +60,8 @@ export default defineType({
 
     defineField({
       name: "type",
-      type: "string",
-      options: {
-        list: [
-          "Resort",
-          "Beach Club",
-          "Garden",
-          "Chapel",
-          "Ballroom",
-          "Villa",
-          "Rooftop",
-        ],
-      },
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "typeVenue" }] }],
     }),
     defineField({ name: "capacitySeated", type: "number" }),
     defineField({ name: "capacityCocktail", type: "number" }),

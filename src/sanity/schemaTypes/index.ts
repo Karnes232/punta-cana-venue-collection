@@ -13,6 +13,7 @@ import pageSeo from "./SEO/PageSeo"
 import individualVenue from "./Venues/IndividualVenue"
 import amenity from "./Venues/amenity"
 import location from "./Venues/location"
+import typeVenue from "./Venues/typeVenue"
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -30,5 +31,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     individualVenue,
     amenity,
     location,
+    typeVenue,
   ],
 }
