@@ -1,6 +1,5 @@
 import { getPageSeo } from "@/sanity/queries/SEO/seo"
 
-
 export default function Contact() {
   return <div className="min-h-screen">Contact</div>
 }
@@ -14,7 +13,7 @@ export async function generateMetadata({
 }) {
   const { locale } = await params
   const pageSeo = await getPageSeo("contact")
-  
+
   if (!pageSeo) {
     return {}
   }

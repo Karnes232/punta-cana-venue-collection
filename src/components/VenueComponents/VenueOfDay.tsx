@@ -74,7 +74,9 @@ const VenueOfDay = ({
 
               <div className="flex items-center justify-between">
                 <div className="flex space-x-4 text-xs text-charcoal/60">
-                  <span>{t("upTo")} {venueOfTheDay.capacityCocktail} {t("guests")}</span>
+                  <span>
+                    {t("upTo")} {venueOfTheDay.capacityCocktail} {t("guests")}
+                  </span>
                   <span>•</span>
                   <span>{venueOfTheDay.type.title[locale]}</span>
                   <span>•</span>
@@ -84,7 +86,7 @@ const VenueOfDay = ({
               <div className="flex justify-end mt-4">
                 <Link
                   href={`/venues/${venueOfTheDay.slug.current}`}
-                  className="bg-turquoise text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-turquoise/90 transition-colors"
+                  className="bg-gradient-to-br from-turquoise/70 to-turquoise/90 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-turquoise transition-colors"
                 >
                   {t("viewVenue")}
                 </Link>

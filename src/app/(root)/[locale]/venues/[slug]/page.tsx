@@ -1,27 +1,28 @@
 import { getPageSeo } from "@/sanity/queries/SEO/seo"
 
-export default function Privacy() {
-  return <div className="min-h-screen">Privacy</div>
+export default function VenueIndividual() {
+  return <div className="min-h-screen">Venue Individual</div>
 }
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{
+    slug: string
     locale: "en" | "es"
   }>
 }) {
-  const { locale } = await params
-  const pageSeo = await getPageSeo("privacy")
+  const { locale, slug } = await params
+  const pageSeo = await getPageSeo("venueIndividual")
 
   if (!pageSeo) {
     return {}
   }
   let canonicalUrl
   if (locale === "en") {
-    canonicalUrl = "https://www.venues.com/privacy"
+    canonicalUrl = `https://www.venues.com/venues/${slug}`
   } else {
-    canonicalUrl = "https://www.venues.com/es/privacy"
+    canonicalUrl = `https://www.venues.com/es/venues/${slug}`
   }
 
   return {
