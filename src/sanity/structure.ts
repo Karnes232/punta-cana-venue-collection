@@ -14,6 +14,14 @@ export const structure: StructureResolver = S =>
             .documentId("generalLayout"),
         ),
       S.listItem()
+        .title("Page SEO")
+        .child(
+          S.documentList()
+            .schemaType("pageSeo")
+            .title("Page SEO")
+            .filter("_type == 'pageSeo'")
+        ),
+      S.listItem()
         .title("Main Page")
         .child(
           S.document()
@@ -30,10 +38,9 @@ export const structure: StructureResolver = S =>
             S.listItem()
             .title("Amenity")
             .child(
-              S.document()
-              .schemaType("amenity")
+              S.documentList()
               .title("Amenity")
-              .documentId("amenity")
+              .filter("_type == 'amenity'")
             ),
             S.listItem()
             .title("Individual Venue")

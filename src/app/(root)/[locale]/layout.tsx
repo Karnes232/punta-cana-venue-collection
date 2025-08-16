@@ -27,6 +27,8 @@ const crimsonPro = Crimson_Pro({
   variable: "--font-crimson-pro",
 })
 
+
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.grandbay-puntacana.com"),
   openGraph: {

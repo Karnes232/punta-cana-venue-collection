@@ -7,6 +7,7 @@ import {
 import seo from "./SEO/seo"
 import generalLayout from "./GeneralLayout/GeneralLayout"
 import mainPage from "./MainPage/MainPage"
+import pageSeo from "./SEO/PageSeo"
 
 // Venues
 import individualVenue from "./Venues/IndividualVenue"
@@ -20,6 +21,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     localizedText,
     localizedBlock,
     // General
+    pageSeo,
     seo,
     generalLayout,
     // Main Page

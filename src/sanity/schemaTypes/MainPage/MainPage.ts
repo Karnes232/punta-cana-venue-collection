@@ -27,6 +27,12 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: "venueOfTheDay",
+      title: "Venue of the Day",
+      type: "reference",
+      to: [{ type: "individualVenue" }],
+    }),
   ],
   preview: {
     select: {

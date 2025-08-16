@@ -13,6 +13,17 @@ export default defineType({
     defineField({
       name: "icon",
       type: "string",
+      options: {
+        list: [
+          "Pool",
+          "Beach",
+          "Garden",
+          "Chapel",
+          "Ballroom",
+          "Villa",
+          "Rooftop",
+        ],
+      },
       description: "Lucide icon name (optional)",
     }),
   ],

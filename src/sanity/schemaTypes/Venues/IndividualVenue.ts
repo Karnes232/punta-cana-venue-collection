@@ -17,7 +17,7 @@ export default defineType({
       validation: r => r.required(),
     }),
 
-    // defineField({ name: 'teaser', type: 'localizedText' }),
+    defineField({ name: 'teaser', type: 'localizedText' }),
     defineField({
       name: "heroImage",
       type: "image",

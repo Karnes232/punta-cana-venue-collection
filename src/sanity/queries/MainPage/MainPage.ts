@@ -6,6 +6,28 @@ interface MainPage {
     es: string
   }
   heroImage: HeroImage
+  venueOfTheDay: {
+    title: {
+      en: string
+      es: string
+    }
+    heroImage: HeroImage
+    teaser: {
+      en: string
+      es: string
+    }
+    slug: string
+    location: string
+    type: string
+    capacityCocktail: number
+    amenities: {
+      title: {
+        en: string
+        es: string
+      }
+    }
+  }
+  
 }
 
 export interface HeroImage {
@@ -37,6 +59,39 @@ export const mainPageQuery = `*[_type == "mainPage"][0] {
             }
         },
         alt
+    },
+    venueOfTheDay -> {
+        title {
+            en,
+            es
+        },
+        heroImage {
+            asset -> {
+                url,
+                metadata {
+                    dimensions {
+                        width,
+                        height
+                    }
+                }
+            },
+            alt
+        },
+        teaser {
+            en,
+            es
+        },
+        slug,
+        location,
+        type,
+        capacityCocktail,
+        amenities[0]->{
+            title {
+                en,
+                es
+            }
+        }
+
     }
 }`
 
