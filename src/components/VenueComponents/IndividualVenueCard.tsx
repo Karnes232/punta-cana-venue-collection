@@ -5,6 +5,7 @@ import { MapPin, Users, Star, DollarSign } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
+import { useTranslations } from "next-intl"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ const IndividualVenueCard = ({
     amenities,
     startingFrom,
   } = venue
+  const t = useTranslations("venueListing")
 
   // Get localized title
   const localizedTitle = title[locale as keyof typeof title] || title.en
@@ -90,7 +92,9 @@ const IndividualVenueCard = ({
         <div className="absolute top-4 right-4">
           <div className="bg-white/95 backdrop-blur-sm text-charcoal px-3 py-1 rounded-full text-sm font-semibold flex items-center space-x-1">
             <DollarSign size={14} />
-            <span>From {startingFrom}</span>
+            <span>
+              {t("from")} {startingFrom}
+            </span>
           </div>
         </div>
       </div>
@@ -113,7 +117,9 @@ const IndividualVenueCard = ({
         {/* Capacity */}
         <div className="flex items-center space-x-2 text-slate-600 mb-4">
           <Users size={16} className="text-turquoise" />
-          <span className="text-sm">Up to {capacityCocktail} guests</span>
+          <span className="text-sm">
+            {t("upTo")} {capacityCocktail} {t("guests")}
+          </span>
         </div>
 
         {/* Amenities */}
@@ -122,7 +128,7 @@ const IndividualVenueCard = ({
             <div className="flex items-center space-x-2 mb-2">
               <Star size={14} className="text-golden" />
               <span className="text-sm font-medium text-slate-700">
-                Amenities
+                {t("amenities")}
               </span>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -141,7 +147,7 @@ const IndividualVenueCard = ({
               })}
               {amenities.length > 3 && (
                 <span className="text-slate-500 text-xs">
-                  +{amenities.length - 3} more
+                  +{amenities.length - 3} {t("more")}
                 </span>
               )}
             </div>
@@ -153,7 +159,7 @@ const IndividualVenueCard = ({
           href={`/venues/${slug.current}`}
           className="block w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md"
         >
-          View Details
+          {t("viewDetails")}
         </Link>
       </div>
     </div>

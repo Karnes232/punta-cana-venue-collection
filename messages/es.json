@@ -32,5 +32,42 @@
     "viewVenue": "Ver Venue",
     "typeVenue": "Tipo de Venue",
     "exploreVenues": "Explorar Venues"
+  },
+  "venueListing": {
+    "search": "Buscar",
+    "location": "Ubicación",
+    "type": "Tipo",
+    "capacity": "Capacidad",
+    "budget": "Presupuesto",
+    "capacityUpTo50": "Hasta 50",
+    "capacity51To100": "51-100",
+    "capacity101To200": "101-200",
+    "capacity201To500": "201-500",
+    "capacity500Plus": "500+",
+    "budgetUnder1000": "Menos de $1,000",
+    "budget1000To2500": "$1,000 - $2,500",
+    "budget2500To5000": "$2,500 - $5,000",
+    "budget5000To10000": "$5,000 - $10,000",
+    "budget10000Plus": "$10,000+",
+    "noVenuesFound": "No se encontraron venues{searchTerm, select, empty {} other { para \"{searchTerm}\"}}",
+    "venuesFound": "Se encontró {count} venue{count, plural, one {} other {s}}{searchTerm, select, empty {} other { para \"{searchTerm}\"}}",
+    "allLocations": "Todas las Ubicaciones",
+    "allTypes": "Todos los Tipos",
+    "anyCapacity": "Cualquier Capacidad",
+    "anyBudget": "Cualquier Presupuesto",
+    "clearAllFilters": "Limpiar Todos los Filtros",
+    "filters": "Filtros",
+    "from": "Desde",
+    "upTo": "Hasta",
+    "guests": "invitados",
+    "amenities": "Amenidades",
+    "more": "más",
+    "viewDetails": "Ver Detalles"
+  },
+  "individualVenueListing": {
+    "about": "Acerca de Este Venue",
+    "noPhotosAvailable": "No hay fotos disponibles",
+    "viewAllPhotos": "Ver Todas las Fotos",
+    "photos": "foto"
   }
 }

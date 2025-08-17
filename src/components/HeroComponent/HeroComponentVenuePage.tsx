@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { getImageProps } from "next/image"
 import { HeroImage } from "@/sanity/queries/MainPage/MainPage"
 import { Cormorant_Garamond } from "next/font/google"
+import { useTranslations } from "next-intl"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ const HeroComponentVenuePage = ({
     budgetRanges: string[]
   }
 }) => {
+  const t = useTranslations("venueListing")
   const [searchTerm, setSearchTerm] = useState("")
   const [filters, setFilters] = useState<FilterOptions>({
     location: "",
@@ -121,7 +123,7 @@ const HeroComponentVenuePage = ({
               type="text"
               value={searchTerm}
               onChange={handleInputChange}
-              placeholder="Search Venues..."
+              placeholder={t("search")}
               className="w-full px-6 py-4 text-lg text-gray-900 bg-white/95 backdrop-blur-sm rounded-full shadow-lg border-2 border-white/20 focus:outline-none focus:ring-4 focus:ring-white/30 focus:border-white transition-all duration-300 placeholder-gray-500"
             />
             <button
@@ -164,7 +166,7 @@ const HeroComponentVenuePage = ({
               d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z"
             />
           </svg>
-          Filters
+          {t("filters")}
         </button>
 
         {/* Filter Dropdowns */}
@@ -174,14 +176,14 @@ const HeroComponentVenuePage = ({
               {/* Location Filter */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Location
+                  {t("location")}
                 </label>
                 <select
                   value={filters.location}
                   onChange={e => handleFilterChange("location", e.target.value)}
                   className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
                 >
-                  <option value="">All Locations</option>
+                  <option value="">{t("allLocations")}</option>
                   {filterOptions.locations.map(location => (
                     <option key={location} value={location}>
                       {location}
@@ -193,14 +195,14 @@ const HeroComponentVenuePage = ({
               {/* Type Filter */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Type
+                  {t("type")}
                 </label>
                 <select
                   value={filters.type}
                   onChange={e => handleFilterChange("type", e.target.value)}
                   className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
                 >
-                  <option value="">All Types</option>
+                  <option value="">{t("allTypes")}</option>
                   {filterOptions.types.map(type => (
                     <option key={type} value={type}>
                       {type}
@@ -212,14 +214,14 @@ const HeroComponentVenuePage = ({
               {/* Capacity Filter */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Capacity
+                  {t("capacity")}
                 </label>
                 <select
                   value={filters.capacity}
                   onChange={e => handleFilterChange("capacity", e.target.value)}
                   className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
                 >
-                  <option value="">Any Capacity</option>
+                  <option value="">{t("anyCapacity")}</option>
                   {filterOptions.capacityRanges.map(range => (
                     <option key={range} value={range}>
                       {range}
@@ -231,14 +233,14 @@ const HeroComponentVenuePage = ({
               {/* Budget Filter */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Budget
+                  {t("budget")}
                 </label>
                 <select
                   value={filters.budget}
                   onChange={e => handleFilterChange("budget", e.target.value)}
                   className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
                 >
-                  <option value="">Any Budget</option>
+                  <option value="">{t("anyBudget")}</option>
                   {filterOptions.budgetRanges.map(range => (
                     <option key={range} value={range}>
                       {range}
@@ -254,7 +256,7 @@ const HeroComponentVenuePage = ({
                 onClick={clearAllFilters}
                 className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 underline transition-colors duration-200"
               >
-                Clear All Filters
+                {t("clearAllFilters")}
               </button>
             </div>
           </div>

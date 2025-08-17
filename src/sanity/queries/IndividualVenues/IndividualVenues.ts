@@ -175,3 +175,112 @@ export async function getIndividualVenueSchema(
   )
   return data
 }
+
+export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.current == $slug][0]
+{
+  title {
+        en,
+        es
+    },
+    heroImage {
+        asset -> {
+            url,
+            metadata {
+                dimensions {
+                    width,
+                    height
+                }
+            }
+        },
+        alt
+    },
+    gallery[] {
+        asset -> {
+            url,
+            metadata {
+                dimensions {
+                    width,
+                    height
+                }
+            }
+        },
+        alt
+    },
+    slug,
+    location,
+    type[]->{
+        title {
+            en,
+            es
+        }
+    },
+    description {
+        _type,
+        en,
+        es
+    },
+    capacitySeated,
+    capacityCocktail,
+    amenities[]->{
+        title {
+            en,
+            es
+        }
+    },
+    startingFrom,
+}
+`
+
+export interface IndividualVenuePage {
+  title: {
+    en: string
+    es: string
+  }
+  heroImage: HeroImage
+  gallery: {
+    asset: {
+      url: string
+      metadata: {
+        dimensions: {
+          width: number
+          height: number
+        }
+      }
+    }
+    alt: string
+  }[]
+  slug: string
+  location: string
+  type: {
+    title: {
+      en: string
+      es: string
+    }
+  }[]
+  description: {
+    _type: string
+    en: any[]
+    es: any[]
+  }
+  capacitySeated: number
+  capacityCocktail: number
+  amenities: {
+    title: {
+      en: string
+      es: string
+    }
+  }[]
+  startingFrom: number
+}
+
+export async function getIndividualVenuePage(
+  slug: string,
+): Promise<IndividualVenuePage> {
+  const data = await client.fetch<IndividualVenuePage>(
+    individualVenuePageQuery,
+    {
+      slug,
+    },
+  )
+  return data
+}

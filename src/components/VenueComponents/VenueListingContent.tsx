@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useMemo } from "react"
+import { useTranslations } from "next-intl"
 import HeroComponentVenuePage from "../HeroComponent/HeroComponentVenuePage"
 import { VenuePage } from "@/sanity/queries/VenuePage/VenuePage"
 import { IndividualVenue } from "@/sanity/queries/IndividualVenues/IndividualVenues"
@@ -21,6 +22,8 @@ const VenueListingContent = ({
   individualVenues: IndividualVenue[]
   locale: string
 }) => {
+  const t = useTranslations("venueListing")
+
   const [searchTerm, setSearchTerm] = useState("")
   const [filters, setFilters] = useState<FilterOptions>({
     location: "",
@@ -49,18 +52,24 @@ const VenueListingContent = ({
     const capacities = individualVenues
       .map(venue => venue.capacityCocktail)
       .sort((a, b) => a - b)
-    const capacityRanges = ["Up to 50", "51-100", "101-200", "201-500", "500+"]
+    const capacityRanges = [
+      t("capacityUpTo50"),
+      t("capacity51To100"),
+      t("capacity101To200"),
+      t("capacity201To500"),
+      t("capacity500Plus"),
+    ]
 
     // Generate budget ranges based on actual data
     const budgets = individualVenues
       .map(venue => venue.startingFrom)
       .sort((a, b) => a - b)
     const budgetRanges = [
-      "Under $1,000",
-      "$1,000 - $2,500",
-      "$2,500 - $5,000",
-      "$5,000 - $10,000",
-      "$10,000+",
+      t("budgetUnder1000"),
+      t("budget1000To2500"),
+      t("budget2500To5000"),
+      t("budget5000To10000"),
+      t("budget10000Plus"),
     ]
 
     return {
@@ -69,7 +78,7 @@ const VenueListingContent = ({
       capacityRanges,
       budgetRanges,
     }
-  }, [individualVenues, locale])
+  }, [individualVenues, locale, t])
 
   // Filter venues based on search term and filters
   const filteredVenues = useMemo(() => {
@@ -105,15 +114,15 @@ const VenueListingContent = ({
       filtered = filtered.filter(venue => {
         const capacity = venue.capacityCocktail
         switch (filters.capacity) {
-          case "Up to 50":
+          case t("capacityUpTo50"):
             return capacity <= 50
-          case "51-100":
+          case t("capacity51To100"):
             return capacity >= 51 && capacity <= 100
-          case "101-200":
+          case t("capacity101To200"):
             return capacity >= 101 && capacity <= 200
-          case "201-500":
+          case t("capacity201To500"):
             return capacity >= 201 && capacity <= 500
-          case "500+":
+          case t("capacity500Plus"):
             return capacity > 500
           default:
             return true
@@ -126,15 +135,15 @@ const VenueListingContent = ({
       filtered = filtered.filter(venue => {
         const budget = venue.startingFrom
         switch (filters.budget) {
-          case "Under $1,000":
+          case t("budgetUnder1000"):
             return budget < 1000
-          case "$1,000 - $2,500":
+          case t("budget1000To2500"):
             return budget >= 1000 && budget <= 2500
-          case "$2,500 - $5,000":
+          case t("budget2500To5000"):
             return budget >= 2500 && budget <= 5000
-          case "$5,000 - $10,000":
+          case t("budget5000To10000"):
             return budget >= 5000 && budget <= 10000
-          case "$10,000+":
+          case t("budget10000Plus"):
             return budget > 10000
           default:
             return true
@@ -143,7 +152,7 @@ const VenueListingContent = ({
     }
 
     return filtered
-  }, [individualVenues, searchTerm, filters, locale])
+  }, [individualVenues, searchTerm, filters, locale, t])
 
   const handleSearch = (term: string) => {
     setSearchTerm(term)
@@ -170,14 +179,11 @@ const VenueListingContent = ({
           <div className="mb-6 text-center">
             <p className="text-gray-600">
               {filteredVenues.length === 0
-                ? `No venues found${searchTerm ? ` for "${searchTerm}"` : ""}${
-                    hasActiveFilters ? " with selected filters" : ""
-                  }`
-                : `Found ${filteredVenues.length} venue${
-                    filteredVenues.length === 1 ? "" : "s"
-                  }${searchTerm ? ` for "${searchTerm}"` : ""}${
-                    hasActiveFilters ? " with selected filters" : ""
-                  }`}
+                ? t("noVenuesFound", { searchTerm: searchTerm || "" })
+                : t("venuesFound", {
+                    count: filteredVenues.length,
+                    searchTerm: searchTerm || "",
+                  })}
             </p>
           </div>
         )}

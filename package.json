@@ -10,6 +10,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\""
   },
   "dependencies": {
+    "@portabletext/react": "^3.2.1",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^4.4.1",
     "lucide-react": "^0.539.0",
@@ -21,7 +22,8 @@
     "react-icons": "^5.5.0",
     "sanity": "^4.4.1",
     "sanity-plugin-media": "^4.0.0",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "yet-another-react-lightbox": "^3.25.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

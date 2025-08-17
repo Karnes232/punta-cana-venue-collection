@@ -32,5 +32,42 @@
     "viewVenue": "View Venue",
     "typeVenue": "Type Venue",
     "exploreVenues": "Explore Venues"
+  },
+  "venueListing": {
+    "search": "Search",
+    "location": "Location",
+    "type": "Type",
+    "capacity": "Capacity",
+    "budget": "Budget",
+    "capacityUpTo50": "Up to 50",
+    "capacity51To100": "51-100",
+    "capacity101To200": "101-200",
+    "capacity201To500": "201-500",
+    "capacity500Plus": "500+",
+    "budgetUnder1000": "Under $1,000",
+    "budget1000To2500": "$1,000 - $2,500",
+    "budget2500To5000": "$2,500 - $5,000",
+    "budget5000To10000": "$5,000 - $10,000",
+    "budget10000Plus": "$10,000+",
+    "noVenuesFound": "No venues found{searchTerm, select, empty {} other { for \"{searchTerm}\"}}",
+    "venuesFound": "Found {count} venue{count, plural, one {} other {s}}{searchTerm, select, empty {} other { for \"{searchTerm}\"}}",
+    "allLocations": "All Locations",
+    "allTypes": "All Types",
+    "anyCapacity": "Any Capacity",
+    "anyBudget": "Any Budget",
+    "clearAllFilters": "Clear All Filters",
+    "filters": "Filters",
+    "from": "From",
+    "upTo": "Up to",
+    "guests": "guests",
+    "amenities": "Amenities",
+    "more": "more",
+    "viewDetails": "View Details"
+  },
+  "individualVenueListing": {
+    "about": "About This Venue",
+    "noPhotosAvailable": "No photos available",
+    "viewAllPhotos": "View All Photos",
+    "photos": "photo"
   }
 }
