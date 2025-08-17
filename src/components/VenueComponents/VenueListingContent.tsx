@@ -1,11 +1,11 @@
 "use client"
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useEffect } from "react"
 import { useTranslations } from "next-intl"
 import HeroComponentVenuePage from "../HeroComponent/HeroComponentVenuePage"
 import { VenuePage } from "@/sanity/queries/VenuePage/VenuePage"
 import { IndividualVenue } from "@/sanity/queries/IndividualVenues/IndividualVenues"
 import IndividualVenueCard from "./IndividualVenueCard"
-
+import { TypeVenue as TypeVenueType } from "@/sanity/queries/MainPage/MainPage"
 interface FilterOptions {
   location: string
   type: string
@@ -16,21 +16,27 @@ interface FilterOptions {
 const VenueListingContent = ({
   venuePage,
   individualVenues,
+  typeVenue,
   locale,
+  initialFilters = { location: "", type: "", capacity: "", budget: "" },
 }: {
   venuePage: VenuePage
   individualVenues: IndividualVenue[]
+  typeVenue: TypeVenueType[]
   locale: string
+  initialFilters?: FilterOptions
 }) => {
   const t = useTranslations("venueListing")
 
   const [searchTerm, setSearchTerm] = useState("")
-  const [filters, setFilters] = useState<FilterOptions>({
-    location: "",
-    type: "",
-    capacity: "",
-    budget: "",
-  })
+  const [filters, setFilters] = useState<FilterOptions>(initialFilters)
+
+  // Apply initial filters when component mounts
+  useEffect(() => {
+    if (Object.values(initialFilters).some(filter => filter !== "")) {
+      setFilters(initialFilters)
+    }
+  }, [initialFilters])
 
   // Generate filter options from venue data
   const filterOptions = useMemo(() => {
@@ -40,10 +46,8 @@ const VenueListingContent = ({
 
     const types = [
       ...new Set(
-        individualVenues.flatMap(venue =>
-          venue.type.map(
-            t => t.title[locale as keyof typeof t.title] || t.title.en,
-          ),
+        typeVenue.flatMap(venue =>
+          venue.title[locale as keyof typeof venue.title] || venue.title.en,
         ),
       ),
     ].sort()
@@ -172,6 +176,7 @@ const VenueListingContent = ({
         onSearch={handleSearch}
         onFiltersChange={handleFiltersChange}
         filterOptions={filterOptions}
+        initialFilters={initialFilters}
       />
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Search and Filter Results Summary */}

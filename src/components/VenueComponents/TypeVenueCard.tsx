@@ -3,6 +3,7 @@ import { urlFor } from "@/sanity/lib/image"
 import React from "react"
 import Image from "next/image"
 import { Cormorant_Garamond } from "next/font/google"
+import Link from "next/link"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -20,6 +21,7 @@ const TypeVenueCard = ({
   const imageUrl = type.image?.asset?.url
 
   return (
+    <Link href={`/venues?type=${type.title[locale as keyof typeof type.title] || type.title.en}`}>
     <div className="group relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer">
       {/* Background Image */}
       <div className="aspect-[4/3] w-full">
@@ -65,6 +67,7 @@ const TypeVenueCard = ({
       {/* Hover Effect Overlay */}
       <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
     </div>
+    </Link>
   )
 }
 

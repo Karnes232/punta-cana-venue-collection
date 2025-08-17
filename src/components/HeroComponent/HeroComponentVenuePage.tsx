@@ -33,6 +33,7 @@ const HeroComponentVenuePage = ({
   onSearch,
   onFiltersChange,
   filterOptions,
+  initialFilters = { location: "", type: "", capacity: "", budget: "" },
 }: {
   heroImage: HeroImage
   heroTitle: string
@@ -44,16 +45,14 @@ const HeroComponentVenuePage = ({
     capacityRanges: string[]
     budgetRanges: string[]
   }
+  initialFilters?: FilterOptions
 }) => {
   const t = useTranslations("venueListing")
   const [searchTerm, setSearchTerm] = useState("")
-  const [filters, setFilters] = useState<FilterOptions>({
-    location: "",
-    type: "",
-    capacity: "",
-    budget: "",
-  })
-  const [showFilters, setShowFilters] = useState(false)
+  const [filters, setFilters] = useState<FilterOptions>(initialFilters)
+  const [showFilters, setShowFilters] = useState(
+    Object.values(initialFilters).some(value => value !== ""),
+  )
 
   const {
     props: { srcSet },
