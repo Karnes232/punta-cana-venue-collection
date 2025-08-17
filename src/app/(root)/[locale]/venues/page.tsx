@@ -1,7 +1,26 @@
+import VenueListingContent from "@/components/VenueComponents/VenueListingContent"
+import { getIndividualVenues } from "@/sanity/queries/IndividualVenues/IndividualVenues"
 import { getPageSeo } from "@/sanity/queries/SEO/seo"
+import { getVenuePage } from "@/sanity/queries/VenuePage/VenuePage"
 
-export default function Venues() {
-  return <div className="min-h-screen">Venues</div>
+export default async function Venues({
+  params,
+}: {
+  params: Promise<{ locale: "en" | "es" }>
+}) {
+  const { locale } = await params
+  const venuePage = await getVenuePage()
+  const individualVenues = await getIndividualVenues()
+
+  return (
+    <div className="min-h-screen">
+      <VenueListingContent
+        venuePage={venuePage}
+        individualVenues={individualVenues}
+        locale={locale}
+      />
+    </div>
+  )
 }
 
 export async function generateMetadata({

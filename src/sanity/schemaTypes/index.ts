@@ -6,8 +6,13 @@ import {
 } from "./Localized/localized"
 import seo from "./SEO/seo"
 import generalLayout from "./GeneralLayout/GeneralLayout"
-import mainPage from "./MainPage/MainPage"
 import pageSeo from "./SEO/PageSeo"
+
+// Main Page
+import mainPage from "./MainPage/MainPage"
+
+// Venue Page
+import venuePage from "./VenuePage/VenuePage"
 
 // Venues
 import individualVenue from "./Venues/IndividualVenue"
@@ -27,6 +32,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     generalLayout,
     // Main Page
     mainPage,
+    // Venue Page
+    venuePage,
     // Venues
     individualVenue,
     amenity,
