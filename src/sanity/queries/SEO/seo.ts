@@ -31,10 +31,6 @@ interface PageSeo {
         height?: number
       }
     }
-    structuredData: {
-      en: string
-      es: string
-    }
     canonicalUrl?: string
     noIndex: boolean
     noFollow: boolean
@@ -72,11 +68,6 @@ export const seoQuery = `*[_type == "pageSeo" && pageName == $pageName][0] {
       "height": image.asset->metadata.dimensions.height
     }
   },
-  // Structured Data (JSON-LD)
-  structuredData {
-    en,
-    es
-  },
   // Other SEO settings
   canonicalUrl,
   noIndex,
@@ -87,4 +78,31 @@ export const seoQuery = `*[_type == "pageSeo" && pageName == $pageName][0] {
 export async function getPageSeo(pageName: string): Promise<PageSeo> {
   const pageSeo = await client.fetch(seoQuery, { pageName })
   return pageSeo
+}
+
+export const structuredDataQuery = `*[_type == "pageSeo" && pageName == $pageName][0] {
+    pageName,
+    seo {
+        structuredData {
+            en,
+            es
+        }
+    }
+}`
+
+export interface structuredData {
+  pageName: string
+  seo: {
+    structuredData: {
+      en: string
+      es: string
+    }
+  }
+}
+
+export const getStructuredData = async (
+  pageName: string,
+): Promise<structuredData> => {
+  const structuredData = await client.fetch(structuredDataQuery, { pageName })
+  return structuredData
 }

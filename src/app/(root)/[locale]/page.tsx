@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { getMainPage } from "@/sanity/queries/MainPage/MainPage"
 import HeroComponent from "@/components/HeroComponent/HeroComponent"
-import { getPageSeo } from "@/sanity/queries/SEO/seo"
+import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import VenueOfDay from "@/components/VenueComponents/VenueOfDay"
 import { getTypeVenue } from "@/sanity/queries/MainPage/MainPage"
 import TypeVenue from "@/components/VenueComponents/TypeVenue"
@@ -16,23 +16,37 @@ export default async function Home({ params }: PageProps) {
   const { locale } = await params
   const mainPage = await getMainPage()
   const typeVenue = await getTypeVenue()
+  const structuredData = await getStructuredData("home")
 
   return (
-    <section className="">
-      <HeroComponent
-        heroImage={mainPage.heroImage}
-        heroTitle={mainPage.title[locale]}
-      />
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4">
-        <div className="w-full lg:w-1/2">
-          <VenueOfDay venueOfTheDay={mainPage.venueOfTheDay} locale={locale} />
-        </div>
+    <>
+      {structuredData?.seo?.structuredData[locale] && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: structuredData.seo.structuredData[locale],
+          }}
+        />
+      )}
+      <section className="">
+        <HeroComponent
+          heroImage={mainPage.heroImage}
+          heroTitle={mainPage.title[locale]}
+        />
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4">
+          <div className="w-full lg:w-1/2">
+            <VenueOfDay
+              venueOfTheDay={mainPage.venueOfTheDay}
+              locale={locale}
+            />
+          </div>
 
-        <div className="lg:w-1/2">
-          <TypeVenue typeVenue={typeVenue} locale={locale} />
+          <div className="lg:w-1/2">
+            <TypeVenue typeVenue={typeVenue} locale={locale} />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 

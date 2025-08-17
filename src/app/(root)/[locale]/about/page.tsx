@@ -1,7 +1,25 @@
-import { getPageSeo } from "@/sanity/queries/SEO/seo"
+import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
-export default function About() {
-  return <div className="min-h-screen">About</div>
+export default async function About({
+  params,
+}: {
+  params: Promise<{ locale: "en" | "es" }>
+}) {
+  const { locale } = await params
+  const structuredData = await getStructuredData("about")
+  return (
+    <>
+      {structuredData?.seo?.structuredData[locale] && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: structuredData.seo.structuredData[locale],
+          }}
+        />
+      )}
+      <div className="min-h-screen">About</div>
+    </>
+  )
 }
 
 export async function generateMetadata({

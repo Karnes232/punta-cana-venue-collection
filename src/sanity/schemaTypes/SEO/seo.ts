@@ -187,6 +187,31 @@ export default defineType({
                 return "Must be valid JSON"
               }
             }),
+          initialValue: `{
+"@context": "https://schema.org",
+"@type": "Organization",
+"name": "",
+"description": "",
+"url": "",
+"logo": "",
+"contactPoint": {
+"@type": "ContactPoint",
+"telephone": "",
+"contactType": "customer service",
+"availableLanguage": [
+  "en",
+  "es"
+  ]
+},
+"address": {
+  "@type": "PostalAddress",
+  "addressLocality": "Punta Cana",
+  "addressCountry": "DO"
+},
+"sameAs": [
+  ""
+  ]
+}`,
         }),
         defineField({
           name: "es",
@@ -204,6 +229,31 @@ export default defineType({
                 return "Must be valid JSON"
               }
             }),
+          initialValue: `{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "description": "",
+  "url": "",
+  "logo": "",
+  "contactPoint": {
+  "@type": "ContactPoint",
+  "telephone": "",
+  "contactType": "customer service",
+  "availableLanguage": [
+    "en",
+    "es"
+    ]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Punta Cana",
+    "addressCountry": "DO"
+  },
+  "sameAs": [
+    ""
+    ]
+  }`,
         }),
       ],
     }),

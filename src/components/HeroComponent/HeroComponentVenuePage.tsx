@@ -74,7 +74,10 @@ const HeroComponentVenuePage = ({
     onSearch(value) // Real-time search as user types
   }
 
-  const handleFilterChange = (filterType: keyof FilterOptions, value: string) => {
+  const handleFilterChange = (
+    filterType: keyof FilterOptions,
+    value: string,
+  ) => {
     const newFilters = { ...filters, [filterType]: value }
     setFilters(newFilters)
     onFiltersChange(newFilters)
@@ -175,11 +178,11 @@ const HeroComponentVenuePage = ({
                 </label>
                 <select
                   value={filters.location}
-                  onChange={(e) => handleFilterChange("location", e.target.value)}
+                  onChange={e => handleFilterChange("location", e.target.value)}
                   className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
                 >
                   <option value="">All Locations</option>
-                  {filterOptions.locations.map((location) => (
+                  {filterOptions.locations.map(location => (
                     <option key={location} value={location}>
                       {location}
                     </option>
@@ -194,11 +197,11 @@ const HeroComponentVenuePage = ({
                 </label>
                 <select
                   value={filters.type}
-                  onChange={(e) => handleFilterChange("type", e.target.value)}
+                  onChange={e => handleFilterChange("type", e.target.value)}
                   className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
                 >
                   <option value="">All Types</option>
-                  {filterOptions.types.map((type) => (
+                  {filterOptions.types.map(type => (
                     <option key={type} value={type}>
                       {type}
                     </option>
@@ -213,11 +216,11 @@ const HeroComponentVenuePage = ({
                 </label>
                 <select
                   value={filters.capacity}
-                  onChange={(e) => handleFilterChange("capacity", e.target.value)}
+                  onChange={e => handleFilterChange("capacity", e.target.value)}
                   className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
                 >
                   <option value="">Any Capacity</option>
-                  {filterOptions.capacityRanges.map((range) => (
+                  {filterOptions.capacityRanges.map(range => (
                     <option key={range} value={range}>
                       {range}
                     </option>
@@ -232,11 +235,11 @@ const HeroComponentVenuePage = ({
                 </label>
                 <select
                   value={filters.budget}
-                  onChange={(e) => handleFilterChange("budget", e.target.value)}
+                  onChange={e => handleFilterChange("budget", e.target.value)}
                   className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
                 >
                   <option value="">Any Budget</option>
-                  {filterOptions.budgetRanges.map((range) => (
+                  {filterOptions.budgetRanges.map(range => (
                     <option key={range} value={range}>
                       {range}
                     </option>

@@ -1,6 +1,6 @@
 import VenueListingContent from "@/components/VenueComponents/VenueListingContent"
 import { getIndividualVenues } from "@/sanity/queries/IndividualVenues/IndividualVenues"
-import { getPageSeo } from "@/sanity/queries/SEO/seo"
+import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getVenuePage } from "@/sanity/queries/VenuePage/VenuePage"
 
 export default async function Venues({
@@ -11,15 +11,26 @@ export default async function Venues({
   const { locale } = await params
   const venuePage = await getVenuePage()
   const individualVenues = await getIndividualVenues()
+  const structuredData = await getStructuredData("venues")
 
   return (
-    <div className="min-h-screen">
-      <VenueListingContent
-        venuePage={venuePage}
-        individualVenues={individualVenues}
-        locale={locale}
-      />
-    </div>
+    <>
+      {structuredData?.seo?.structuredData[locale] && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: structuredData.seo.structuredData[locale],
+          }}
+        />
+      )}
+      <div className="min-h-screen">
+        <VenueListingContent
+          venuePage={venuePage}
+          individualVenues={individualVenues}
+          locale={locale}
+        />
+      </div>
+    </>
   )
 }
 

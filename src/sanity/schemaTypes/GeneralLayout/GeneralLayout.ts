@@ -30,6 +30,11 @@ export default defineType({
       name: "telephone",
       title: "Telephone",
       type: "string",
+      validation: Rule =>
+        Rule.required()
+          .regex(/^\d+$/, "Telephone number must contain only digits")
+          .min(11)
+          .max(11),
     }),
     defineField({
       name: "socialLinks",

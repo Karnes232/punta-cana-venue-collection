@@ -31,32 +31,36 @@ const VenueListingContent = ({
 
   // Generate filter options from venue data
   const filterOptions = useMemo(() => {
-    const locations = [...new Set(individualVenues.map(venue => venue.location))].sort()
-    
-    const types = [...new Set(
-      individualVenues.flatMap(venue => 
-        venue.type.map(t => t.title[locale as keyof typeof t.title] || t.title.en)
-      )
-    )].sort()
-    
+    const locations = [
+      ...new Set(individualVenues.map(venue => venue.location)),
+    ].sort()
+
+    const types = [
+      ...new Set(
+        individualVenues.flatMap(venue =>
+          venue.type.map(
+            t => t.title[locale as keyof typeof t.title] || t.title.en,
+          ),
+        ),
+      ),
+    ].sort()
+
     // Generate capacity ranges based on actual data
-    const capacities = individualVenues.map(venue => venue.capacityCocktail).sort((a, b) => a - b)
-    const capacityRanges = [
-      "Up to 50",
-      "51-100", 
-      "101-200",
-      "201-500",
-      "500+"
-    ]
-    
+    const capacities = individualVenues
+      .map(venue => venue.capacityCocktail)
+      .sort((a, b) => a - b)
+    const capacityRanges = ["Up to 50", "51-100", "101-200", "201-500", "500+"]
+
     // Generate budget ranges based on actual data
-    const budgets = individualVenues.map(venue => venue.startingFrom).sort((a, b) => a - b)
+    const budgets = individualVenues
+      .map(venue => venue.startingFrom)
+      .sort((a, b) => a - b)
     const budgetRanges = [
       "Under $1,000",
       "$1,000 - $2,500",
-      "$2,500 - $5,000", 
+      "$2,500 - $5,000",
       "$5,000 - $10,000",
-      "$10,000+"
+      "$10,000+",
     ]
 
     return {
@@ -74,7 +78,8 @@ const VenueListingContent = ({
     // Apply search filter
     if (searchTerm.trim()) {
       filtered = filtered.filter(venue => {
-        const title = venue.title[locale as keyof typeof venue.title] || venue.title.en
+        const title =
+          venue.title[locale as keyof typeof venue.title] || venue.title.en
         return title.toLowerCase().includes(searchTerm.toLowerCase())
       })
     }
@@ -86,11 +91,12 @@ const VenueListingContent = ({
 
     // Apply type filter
     if (filters.type) {
-      filtered = filtered.filter(venue => 
+      filtered = filtered.filter(venue =>
         venue.type.some(t => {
-          const typeTitle = t.title[locale as keyof typeof t.title] || t.title.en
+          const typeTitle =
+            t.title[locale as keyof typeof t.title] || t.title.en
           return typeTitle === filters.type
-        })
+        }),
       )
     }
 
@@ -164,16 +170,12 @@ const VenueListingContent = ({
           <div className="mb-6 text-center">
             <p className="text-gray-600">
               {filteredVenues.length === 0
-                ? `No venues found${
-                    searchTerm ? ` for "${searchTerm}"` : ""
-                  }${
+                ? `No venues found${searchTerm ? ` for "${searchTerm}"` : ""}${
                     hasActiveFilters ? " with selected filters" : ""
                   }`
                 : `Found ${filteredVenues.length} venue${
                     filteredVenues.length === 1 ? "" : "s"
-                  }${
-                    searchTerm ? ` for "${searchTerm}"` : ""
-                  }${
+                  }${searchTerm ? ` for "${searchTerm}"` : ""}${
                     hasActiveFilters ? " with selected filters" : ""
                   }`}
             </p>

@@ -1,7 +1,26 @@
-import { getPageSeo } from "@/sanity/queries/SEO/seo"
+import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
-export default function Privacy() {
-  return <div className="min-h-screen">Privacy</div>
+export default async function Privacy({
+  params,
+}: {
+  params: Promise<{ locale: "en" | "es" }>
+}) {
+  const { locale } = await params
+  const structuredData = await getStructuredData("privacy-policy")
+
+  return (
+    <>
+      {structuredData?.seo?.structuredData[locale] && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: structuredData.seo.structuredData[locale],
+          }}
+        />
+      )}
+      <div className="min-h-screen">Privacy</div>
+    </>
+  )
 }
 
 export async function generateMetadata({
@@ -12,7 +31,7 @@ export async function generateMetadata({
   }>
 }) {
   const { locale } = await params
-  const pageSeo = await getPageSeo("privacy")
+  const pageSeo = await getPageSeo("privacy-policy")
 
   if (!pageSeo) {
     return {}

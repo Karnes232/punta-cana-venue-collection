@@ -1,9 +1,11 @@
+import { formatPhoneNumber } from "@/lib/formatPhoneNumber"
 import { Mail, MapPin, Phone } from "lucide-react"
 import { useTranslations } from "next-intl"
 import React from "react"
 
 const ContactInfo = ({ companyInfo }: { companyInfo: any }) => {
   const t = useTranslations("Footer")
+  const formattedPhone = formatPhoneNumber(companyInfo.telephone)
   return (
     <div>
       <h3 className="text-golden font-semibold mb-6">Get in Touch</h3>
@@ -20,7 +22,7 @@ const ContactInfo = ({ companyInfo }: { companyInfo: any }) => {
             href={`tel:${companyInfo.telephone}`}
             className="text-ivory/80 text-sm"
           >
-            {companyInfo.telephone}
+            {formattedPhone}
           </a>
         </div>
         <div className="flex items-center space-x-3">
