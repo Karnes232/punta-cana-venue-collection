@@ -22,6 +22,14 @@ export const structure: StructureResolver = S =>
             .filter("_type == 'pageSeo'"),
         ),
       S.listItem()
+        .title("Legal Documents")
+        .child(
+          S.documentList()
+            .schemaType("legalDocuments")
+            .title("Legal Documents")
+            .filter("_type == 'legalDocuments'"),
+        ),
+      S.listItem()
         .title("Main Page")
         .child(
           S.document()

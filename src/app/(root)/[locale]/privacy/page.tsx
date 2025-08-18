@@ -1,4 +1,6 @@
+import { getLegalDocuments } from "@/sanity/queries/LegalDocuments/LegalDocuments"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
+import BlockContent from "@/components/BlockContent/BlockContent"
 
 export default async function Privacy({
   params,
@@ -7,6 +9,7 @@ export default async function Privacy({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("privacy-policy")
+  const legalDocuments = await getLegalDocuments("privacy-policy")
 
   return (
     <>
@@ -18,7 +21,11 @@ export default async function Privacy({
           }}
         />
       )}
-      <div className="min-h-screen">Privacy</div>
+      <div className="min-h-screen">
+        <div className="container px-5 max-w-7xl lg:px-0 lg:mx-auto">
+          <BlockContent content={legalDocuments.body} language={locale} />
+        </div>
+      </div>
     </>
   )
 }

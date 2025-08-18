@@ -7,7 +7,8 @@ import {
 import seo from "./SEO/seo"
 import generalLayout from "./GeneralLayout/GeneralLayout"
 import pageSeo from "./SEO/PageSeo"
-
+// Legal Documents
+import legalDocuments from "./LegalDocuments/LegalDocuments"
 // Main Page
 import mainPage from "./MainPage/MainPage"
 
@@ -30,6 +31,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     pageSeo,
     seo,
     generalLayout,
+    // Legal Documents
+    legalDocuments,
+    
     // Main Page
     mainPage,
     // Venue Page

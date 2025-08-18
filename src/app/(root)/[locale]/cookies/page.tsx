@@ -1,3 +1,5 @@
+import BlockContent from "@/components/BlockContent/BlockContent"
+import { getLegalDocuments } from "@/sanity/queries/LegalDocuments/LegalDocuments"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 export default async function Cookies({
@@ -7,6 +9,7 @@ export default async function Cookies({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("cookie-policy")
+  const legalDocuments = await getLegalDocuments("cookie-policy")
 
   return (
     <>
@@ -18,7 +21,11 @@ export default async function Cookies({
           }}
         />
       )}
-      <div className="min-h-screen">Cookies</div>
+      <div className="min-h-screen ">
+        <div className="container px-5 max-w-7xl lg:px-0 lg:mx-auto">
+          <BlockContent content={legalDocuments.body} language={locale} />
+        </div>
+      </div>
     </>
   )
 }
