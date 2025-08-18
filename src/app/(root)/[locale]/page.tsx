@@ -5,6 +5,8 @@ import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import VenueOfDay from "@/components/VenueComponents/VenueOfDay"
 import { getTypeVenue } from "@/sanity/queries/MainPage/MainPage"
 import TypeVenue from "@/components/VenueComponents/TypeVenue"
+import { getIndividualVenuesMapDetails } from "@/sanity/queries/IndividualVenues/IndividualVenues"
+import MapSection from "@/components/MapComponents/MapSection"
 
 interface PageProps {
   params: Promise<{
@@ -17,6 +19,16 @@ export default async function Home({ params }: PageProps) {
   const mainPage = await getMainPage()
   const typeVenue = await getTypeVenue()
   const structuredData = await getStructuredData("home")
+  const individualVenuesMapDetails = await getIndividualVenuesMapDetails()
+
+  const venues = individualVenuesMapDetails.map((venue) => ({
+    id: venue.slug.current,
+    name: venue.title[locale],
+    position: [venue.map.latitude, venue.map.longitude] as [number, number],
+    image: venue.heroImage,
+    href: `/venues/${venue.slug.current}`,
+  }))
+  
 
   return (
     <>
@@ -43,6 +55,11 @@ export default async function Home({ params }: PageProps) {
 
           <div className="lg:w-1/2">
             <TypeVenue typeVenue={typeVenue} locale={locale} />
+          </div>
+        </div>
+        <div className="max-w-7xl h-96 mx-auto flex flex-col lg:flex-row gap-4 z-0" >
+          <div className="w-full h-full rounded-2xl overflow-hidden">
+            <MapSection venues={venues} />
           </div>
         </div>
       </section>

@@ -68,7 +68,7 @@ export default function SimpleMap({
   }, []);
 
   const points = useMemo(() => venues.map((v) => v.position), [venues]);
-  const center = points[0] ?? ([-33.865, 151.209] as [number, number]); // fallback
+  const center = points[0] ?? ([18.577542, -68.368463] as [number, number]); // fallback
 
   if (!ready || !icon) return null; // render nothing until client is ready
 
@@ -76,7 +76,7 @@ export default function SimpleMap({
     <MapContainer
       center={center}
       zoom={initialZoom}
-      style={{ height, width: "100%" }}
+      style={{ height, width: "100%", zIndex: 0 }}
       scrollWheelZoom
     >
       <TileLayer

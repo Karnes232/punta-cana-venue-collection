@@ -257,7 +257,9 @@ export interface IndividualVenuePage {
     latitude: number
     longitude: number
   }
-  slug: string
+  slug: {
+    current: string
+  }
   location: string
   type: {
     title: {
@@ -290,5 +292,49 @@ export async function getIndividualVenuePage(
       slug,
     },
   )
+  return data
+}
+
+export const individualVenuesMapDetailsQuery = `*[_type == "individualVenue"] {
+title {
+        en,
+        es
+    },
+    heroImage {
+        asset -> {
+            url,
+            metadata {
+                dimensions {
+                    width,
+                    height
+                }
+            }
+        },
+        alt
+    },
+  map {
+    latitude,
+    longitude
+  },
+  slug,
+}`
+
+export interface IndividualVenuesMapDetails {
+  title: {
+    en: string
+    es: string
+  }
+  heroImage: HeroImage
+  map: {
+    latitude: number
+    longitude: number
+  }
+  slug: {
+    current: string
+  }
+}
+
+export async function getIndividualVenuesMapDetails(): Promise<IndividualVenuesMapDetails[]> {
+  const data = await client.fetch<IndividualVenuesMapDetails[]>(individualVenuesMapDetailsQuery)
   return data
 }

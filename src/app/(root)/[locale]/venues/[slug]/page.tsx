@@ -29,7 +29,6 @@ export default async function VenueIndividual({
   const { locale, slug } = await params
   const structuredData = await getIndividualVenueSchema(slug)
   const pageData = await getIndividualVenuePage(slug)
-  console.log(pageData)
 
   const venues = [
     {
@@ -42,8 +41,6 @@ export default async function VenueIndividual({
       //  href: `/venues/${slug}`,
       image: pageData.heroImage,
     },
-    // { id: "2", name: "Garden Villa", position: [18.5671, -68.3805] as [number, number], href: "/venues/garden-villa" },
-    // { id: "3", name: "Resort Hall", position: [18.555, -68.3655] as [number, number], href: "/venues/resort-hall" },
   ]
 
   return (
