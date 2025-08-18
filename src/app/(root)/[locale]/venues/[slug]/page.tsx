@@ -1,7 +1,8 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
 import HeroComponentIndividualVenue from "@/components/HeroComponent/HeroComponentIndividualVenue"
-import ClientOnly from "@/components/MapComponents/ClientOnly"
-import SimpleMap from "@/components/MapComponents/SimpleMap"
+//import ClientOnly from "@/components/MapComponents/ClientOnly"
+import MapSection from "@/components/MapComponents/MapSection"
+//import SimpleMap from "@/components/MapComponents/SimpleMap"
 import IndividualVenuePhotoGrid from "@/components/VenueComponents/IndividualVenuePhotoGrid"
 import {
   getIndividualVenuePage,
@@ -73,9 +74,9 @@ export default async function VenueIndividual({
         </div>
         <div className="w-full h-96 lg:h-[416px] xl:h-[500px] lg:w-2/5 z-0 px-4 lg:pl-0 lg:mt-4 ">
           <div className="w-full h-full rounded-2xl overflow-hidden">
-            <ClientOnly>
-              <SimpleMap venues={venues} />
-            </ClientOnly>
+            {/* <ClientOnly> */}
+              <MapSection venues={venues} />
+            {/* </ClientOnly> */}
           </div>
         </div>
       </div>
