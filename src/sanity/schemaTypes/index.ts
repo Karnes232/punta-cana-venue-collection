@@ -33,7 +33,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     generalLayout,
     // Legal Documents
     legalDocuments,
-    
+
     // Main Page
     mainPage,
     // Venue Page

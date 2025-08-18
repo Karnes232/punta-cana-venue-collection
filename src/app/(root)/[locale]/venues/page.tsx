@@ -13,15 +13,25 @@ export default async function Venues({
 }) {
   const { locale } = await params
   const searchParamsData = await searchParams
-  
+
   // Extract initial filter values from URL parameters
   const initialFilters = {
-    location: typeof searchParamsData.location === 'string' ? searchParamsData.location : '',
-    type: typeof searchParamsData.type === 'string' ? searchParamsData.type : '',
-    capacity: typeof searchParamsData.capacity === 'string' ? searchParamsData.capacity : '',
-    budget: typeof searchParamsData.budget === 'string' ? searchParamsData.budget : '',
+    location:
+      typeof searchParamsData.location === "string"
+        ? searchParamsData.location
+        : "",
+    type:
+      typeof searchParamsData.type === "string" ? searchParamsData.type : "",
+    capacity:
+      typeof searchParamsData.capacity === "string"
+        ? searchParamsData.capacity
+        : "",
+    budget:
+      typeof searchParamsData.budget === "string"
+        ? searchParamsData.budget
+        : "",
   }
-  
+
   const venuePage = await getVenuePage()
   const individualVenues = await getIndividualVenues()
   const typeVenue = await getTypeVenue()

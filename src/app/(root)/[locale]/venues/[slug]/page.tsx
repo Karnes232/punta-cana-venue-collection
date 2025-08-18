@@ -1,5 +1,7 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
 import HeroComponentIndividualVenue from "@/components/HeroComponent/HeroComponentIndividualVenue"
+import ClientOnly from "@/components/MapComponents/ClientOnly"
+import SimpleMap from "@/components/MapComponents/SimpleMap"
 import IndividualVenuePhotoGrid from "@/components/VenueComponents/IndividualVenuePhotoGrid"
 import {
   getIndividualVenuePage,
@@ -26,7 +28,23 @@ export default async function VenueIndividual({
   const { locale, slug } = await params
   const structuredData = await getIndividualVenueSchema(slug)
   const pageData = await getIndividualVenuePage(slug)
-  console.log(pageData.description[locale])
+  console.log(pageData)
+
+  const venues = [
+    {
+      id: "1",
+      name: pageData.title[locale],
+      position: [pageData.map.latitude, pageData.map.longitude] as [
+        number,
+        number,
+      ],
+      //  href: `/venues/${slug}`,
+      image: pageData.heroImage,
+    },
+    // { id: "2", name: "Garden Villa", position: [18.5671, -68.3805] as [number, number], href: "/venues/garden-villa" },
+    // { id: "3", name: "Resort Hall", position: [18.555, -68.3655] as [number, number], href: "/venues/resort-hall" },
+  ]
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -53,8 +71,12 @@ export default async function VenueIndividual({
             <BlockContent content={pageData.description} language={locale} />
           </div>
         </div>
-        <div className="w-full lg:w-2/5">
-          {/* <p>{pageData.description[locale]}</p> */}
+        <div className="w-full h-96 lg:h-[416px] xl:h-[500px] lg:w-2/5 z-0 px-4 lg:pl-0 lg:mt-4 ">
+          <div className="w-full h-full rounded-2xl overflow-hidden">
+            <ClientOnly>
+              <SimpleMap venues={venues} />
+            </ClientOnly>
+          </div>
         </div>
       </div>
     </>

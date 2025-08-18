@@ -38,9 +38,6 @@ export default defineType({
         },
       ],
     }),
-
-    defineField({ name: "description", type: "localizedBlock" }),
-
     defineField({
       name: "location",
       type: "string",
@@ -55,6 +52,18 @@ export default defineType({
         ],
       },
     }),
+    defineField({
+      name: "map",
+      type: "object",
+      fields: [
+        defineField({ name: "latitude", type: "number" }),
+        defineField({ name: "longitude", type: "number" }),
+      ],
+      description: "The map coordinates of the venue. https://www.latlong.net/",
+    }),
+
+    defineField({ name: "description", type: "localizedBlock" }),
+
     // defineField({ name: 'location', type: 'reference', to: [{ type: 'location' }], validation: r => r.required() }),
     // defineField({ name: 'geo', type: 'geopoint' }),
 

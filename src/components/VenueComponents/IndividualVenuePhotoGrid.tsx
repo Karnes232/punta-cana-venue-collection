@@ -38,10 +38,13 @@ const IndividualVenuePhotoGrid = ({ gallery }: { gallery: any }) => {
 
   return (
     <div className="w-full max-w-6xl mx-auto p-4">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 h-auto lg:h-[500px]">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 h-auto lg:h-[400px] xl:h-[500px]">
         {/* Main large photo - takes up 2 columns on large screens */}
         <div className="lg:col-span-2 group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500">
-          <div className="relative w-full h-64 sm:h-80 lg:h-full bg-gray-100">
+          <div
+            className="relative w-full h-64 sm:h-80 lg:h-full bg-gray-100"
+            onClick={() => handlePhotoClick(0)}
+          >
             <Image
               width={gallery[0].asset.metadata.dimensions.width}
               height={gallery[0].asset.metadata.dimensions.height}
@@ -76,7 +79,10 @@ const IndividualVenuePhotoGrid = ({ gallery }: { gallery: any }) => {
                 key={actualIndex}
                 className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-500"
               >
-                <div className="relative w-full h-32 sm:h-36 lg:h-[240px] bg-gray-100">
+                <div
+                  className="relative w-full h-32 sm:h-36 lg:h-[200px] xl:h-[240px] bg-gray-100"
+                  onClick={() => handlePhotoClick(actualIndex)}
+                >
                   <Image
                     width={photo.asset.metadata.dimensions.width}
                     height={photo.asset.metadata.dimensions.height}
@@ -195,7 +201,10 @@ function NextJsImage({
     : rect.height
 
   return (
-    <div style={{ position: "relative", width, height }}>
+    <div
+      className="rounded-2xl xl:rounded-4xl overflow-hidden"
+      style={{ position: "relative", width, height }}
+    >
       <Image
         fill
         alt={slide.alt || ""}

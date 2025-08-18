@@ -46,8 +46,9 @@ const VenueListingContent = ({
 
     const types = [
       ...new Set(
-        typeVenue.flatMap(venue =>
-          venue.title[locale as keyof typeof venue.title] || venue.title.en,
+        typeVenue.flatMap(
+          venue =>
+            venue.title[locale as keyof typeof venue.title] || venue.title.en,
         ),
       ),
     ].sort()

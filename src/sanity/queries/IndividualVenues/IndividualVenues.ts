@@ -206,6 +206,10 @@ export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.cu
         },
         alt
     },
+    map {
+        latitude,
+        longitude
+    },
     slug,
     location,
     type[]->{
@@ -249,6 +253,10 @@ export interface IndividualVenuePage {
     }
     alt: string
   }[]
+  map: {
+    latitude: number
+    longitude: number
+  }
   slug: string
   location: string
   type: {

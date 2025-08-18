@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 @theme {
   --color-golden: #d4af37;
@@ -40,4 +41,13 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+.leaflet-popup-content {
+  width: 250px !important; /* default is auto */
+  max-width: 400px !important; /* let it expand */
+}
+
+.leaflet-control-attribution.leaflet-control {
+  display: none !important;
 }
