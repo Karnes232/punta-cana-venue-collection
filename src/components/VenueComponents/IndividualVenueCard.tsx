@@ -89,14 +89,14 @@ const IndividualVenueCard = ({
         </div>
 
         {/* Price Badge */}
-        <div className="absolute top-4 right-4">
+        {/* <div className="absolute top-4 right-4">
           <div className="bg-white/95 backdrop-blur-sm text-charcoal px-3 py-1 rounded-full text-sm font-semibold flex items-center space-x-1">
             <DollarSign size={14} />
             <span>
               {t("from")} {startingFrom}
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Content Section */}

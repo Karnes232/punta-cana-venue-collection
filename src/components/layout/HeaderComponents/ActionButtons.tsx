@@ -23,7 +23,7 @@ const ActionButtons = ({
     >
       <Search size={20} />
     </button> */}
-      <div className="hidden xl:flex ">
+      <div className="hidden md:flex lg:hidden xl:flex ">
         <LanguageSwitcher color="charcoal" />
       </div>
 

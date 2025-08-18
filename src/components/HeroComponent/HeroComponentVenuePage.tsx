@@ -171,7 +171,7 @@ const HeroComponentVenuePage = ({
         {/* Filter Dropdowns */}
         {showFilters && (
           <div className="w-full max-w-4xl bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Location Filter */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -230,7 +230,7 @@ const HeroComponentVenuePage = ({
               </div>
 
               {/* Budget Filter */}
-              <div>
+              {/* <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   {t("budget")}
                 </label>
@@ -246,7 +246,7 @@ const HeroComponentVenuePage = ({
                     </option>
                   ))}
                 </select>
-              </div>
+              </div> */}
             </div>
 
             {/* Clear Filters Button */}
