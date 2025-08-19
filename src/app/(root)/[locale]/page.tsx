@@ -7,6 +7,7 @@ import { getTypeVenue } from "@/sanity/queries/MainPage/MainPage"
 import TypeVenue from "@/components/VenueComponents/TypeVenue"
 import { getIndividualVenuesMapDetails } from "@/sanity/queries/IndividualVenues/IndividualVenues"
 import MapSection from "@/components/MapComponents/MapSection"
+import BlockContent from "@/components/BlockContent/BlockContent"
 
 interface PageProps {
   params: Promise<{
@@ -21,14 +22,13 @@ export default async function Home({ params }: PageProps) {
   const structuredData = await getStructuredData("home")
   const individualVenuesMapDetails = await getIndividualVenuesMapDetails()
 
-  const venues = individualVenuesMapDetails.map((venue) => ({
+  const venues = individualVenuesMapDetails.map(venue => ({
     id: venue.slug.current,
     name: venue.title[locale],
     position: [venue.map.latitude, venue.map.longitude] as [number, number],
     image: venue.heroImage,
     href: `/venues/${venue.slug.current}`,
   }))
-  
 
   return (
     <>
@@ -57,9 +57,12 @@ export default async function Home({ params }: PageProps) {
             <TypeVenue typeVenue={typeVenue} locale={locale} />
           </div>
         </div>
-        <div className="max-w-7xl h-96 mx-auto flex flex-col lg:flex-row gap-4 z-0" >
-          <div className="w-full h-full rounded-2xl overflow-hidden">
-            <MapSection venues={venues} />
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row-reverse gap-4 z-0 px-4 mt-4">
+          <div className="w-full h-96 lg:h-auto lg:ml-4 xl:w-1/2 rounded-2xl overflow-hidden">
+            <MapSection venues={venues} height={400} />
+          </div>
+          <div className="w-full xl:w-1/2 h-full rounded-2xl overflow-hidden">
+            <BlockContent content={mainPage.introduction} language={locale} />
           </div>
         </div>
       </section>

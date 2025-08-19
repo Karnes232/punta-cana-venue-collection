@@ -334,7 +334,11 @@ export interface IndividualVenuesMapDetails {
   }
 }
 
-export async function getIndividualVenuesMapDetails(): Promise<IndividualVenuesMapDetails[]> {
-  const data = await client.fetch<IndividualVenuesMapDetails[]>(individualVenuesMapDetailsQuery)
+export async function getIndividualVenuesMapDetails(): Promise<
+  IndividualVenuesMapDetails[]
+> {
+  const data = await client.fetch<IndividualVenuesMapDetails[]>(
+    individualVenuesMapDetailsQuery,
+  )
   return data
 }

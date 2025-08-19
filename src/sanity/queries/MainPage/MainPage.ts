@@ -6,6 +6,11 @@ interface MainPage {
     es: string
   }
   heroImage: HeroImage
+  introduction: {
+    _type: string
+    en: any[]
+    es: any[]
+  }
   venueOfTheDay: {
     title: {
       en: string
@@ -63,6 +68,11 @@ export const mainPageQuery = `*[_type == "mainPage"][0] {
             }
         },
         alt
+    },
+    introduction {
+        _type,
+        en,
+        es
     },
     venueOfTheDay -> {
         title {

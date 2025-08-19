@@ -33,6 +33,11 @@ export default defineType({
       type: "reference",
       to: [{ type: "individualVenue" }],
     }),
+    defineField({
+      name: "introduction",
+      title: "Introduction to Company",
+      type: "localizedBlock",
+    }),
   ],
   preview: {
     select: {

@@ -72,7 +72,7 @@ export default async function VenueIndividual({
         <div className="w-full h-96 lg:h-[416px] xl:h-[500px] lg:w-2/5 z-0 px-4 lg:pl-0 lg:mt-4 ">
           <div className="w-full h-full rounded-2xl overflow-hidden">
             {/* <ClientOnly> */}
-              <MapSection venues={venues} />
+            <MapSection venues={venues} />
             {/* </ClientOnly> */}
           </div>
         </div>
