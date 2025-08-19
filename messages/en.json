@@ -24,6 +24,10 @@
     "dominicanRepublic": "Dominican Republic",
     "officeHours": "Office Hours"
   },
+  "hero": {
+    "searchVenues": "Search Venues...",
+    "noVenuesFound": "No venues found"
+  },
   "Home": {
     "venueOfTheDay": "Venue of the Day",
     "today": "Today",

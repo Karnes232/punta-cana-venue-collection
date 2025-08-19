@@ -30,6 +30,12 @@ export default async function Home({ params }: PageProps) {
     href: `/venues/${venue.slug.current}`,
   }))
 
+  // Transform venues for search functionality
+  const searchVenues = individualVenuesMapDetails.map(venue => ({
+    title: venue.title,
+    slug: venue.slug,
+  }))
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -44,6 +50,8 @@ export default async function Home({ params }: PageProps) {
         <HeroComponent
           heroImage={mainPage.heroImage}
           heroTitle={mainPage.title[locale]}
+          venues={searchVenues}
+          locale={locale}
         />
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4">
           <div className="w-full lg:w-1/2">
