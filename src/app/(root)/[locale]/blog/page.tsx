@@ -1,3 +1,6 @@
+import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
+import { getBlogCategories } from "@/sanity/queries/Blog/BlogCategory"
+import { getBlogHeader } from "@/sanity/queries/Blog/BlogHeader"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 export default async function Blog({
@@ -7,7 +10,9 @@ export default async function Blog({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("blog")
-
+  const blogHeader = await getBlogHeader()
+  const blogCategories = await getBlogCategories()
+  console.log(blogCategories)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -18,7 +23,7 @@ export default async function Blog({
           }}
         />
       )}
-      <div className="min-h-screen">Blog</div>
+      <HeroComponentBlog heroImage={blogHeader.heroImage} heroTitle={blogHeader.title[locale]} />
     </>
   )
 }

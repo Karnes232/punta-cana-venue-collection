@@ -74,4 +74,26 @@ export const structure: StructureResolver = S =>
                 ),
             ]),
         ),
+      S.listItem()
+        .title("Blog")
+        .child(
+          S.list()
+            .title("Blog")
+            .items([
+              S.listItem()
+                .title("Blog Category")
+                .child(
+                  S.documentList()
+                    .title("Blog Category")
+                    .filter("_type == 'blogCategory'"),
+                ),
+              S.listItem()
+                .title("Blog Header")
+                .child(
+                  S.documentList()
+                    .title("Blog Header")
+                    .filter("_type == 'blogHeader'"),
+                ),
+            ]),
+        ),
     ])

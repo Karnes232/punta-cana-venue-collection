@@ -21,6 +21,10 @@ import amenity from "./Venues/amenity"
 import location from "./Venues/location"
 import typeVenue from "./Venues/typeVenue"
 
+// Blog
+import blogHeader from "./Blog/BlogHeader"
+import blogCategory from "./Blog/blogCategory"
+
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     // Localized
@@ -43,5 +47,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     amenity,
     location,
     typeVenue,
+
+    // Blog
+    blogHeader,
+    blogCategory,
   ],
 }
