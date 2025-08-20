@@ -73,5 +73,14 @@
     "noPhotosAvailable": "No photos available",
     "viewAllPhotos": "View All Photos",
     "photos": "photo"
+  },
+  "Blog": {
+    "search": "Search",
+    "category": "Category",
+    "all": "All",
+    "noResults": "No results found",
+    "featured": "Featured",
+   "readFullArticle": "Read Full Article",
+   "minRead": "min read"
   }
 }

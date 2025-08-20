@@ -23,7 +23,8 @@ import typeVenue from "./Venues/typeVenue"
 
 // Blog
 import blogHeader from "./Blog/BlogHeader"
-import blogCategory from "./Blog/blogCategory"
+import blogCategory from "./Blog/BlogCategory"
+import blogPost from "./Blog/BlogPost"
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -51,5 +52,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     // Blog
     blogHeader,
     blogCategory,
+    blogPost,
   ],
 }

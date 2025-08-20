@@ -94,6 +94,13 @@ export const structure: StructureResolver = S =>
                     .title("Blog Header")
                     .filter("_type == 'blogHeader'"),
                 ),
+              S.listItem()
+                .title("Blog Post")
+                .child(
+                  S.documentList()
+                    .title("Blog Post")
+                    .filter("_type == 'blogPost'"),
+                ),
             ]),
         ),
     ])
