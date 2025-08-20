@@ -3,30 +3,29 @@ import { HeroImage } from "../MainPage/MainPage"
 import { BlogCategory } from "./BlogCategory"
 
 export interface BlogPostMainPage {
-    _id: string
-    title: {
-        en: string
-        es: string
-    }
-    description: {
-        en: string
-        es: string
-    }
-    readTime: number
-    featured: boolean
-    tags: {
-        en: string[]
-        es: string[]
-    }
-    slug: {
-        current: string
-    }
-    categories: BlogCategory[]
-    venueName: string
-    mainImage: HeroImage
-    publishedAt: string
+  _id: string
+  title: {
+    en: string
+    es: string
+  }
+  description: {
+    en: string
+    es: string
+  }
+  readTime: number
+  featured: boolean
+  tags: {
+    en: string[]
+    es: string[]
+  }
+  slug: {
+    current: string
+  }
+  categories: BlogCategory[]
+  venueName: string
+  mainImage: HeroImage
+  publishedAt: string
 }
-
 
 export const allBlogPostsQuery = `*[_type == "blogPost"] {
     _id,
@@ -74,6 +73,6 @@ export const allBlogPostsQuery = `*[_type == "blogPost"] {
 }`
 
 export async function getAllBlogPosts(): Promise<BlogPostMainPage[]> {
-    const data = await client.fetch<BlogPostMainPage[]>(allBlogPostsQuery)
-    return data
+  const data = await client.fetch<BlogPostMainPage[]>(allBlogPostsQuery)
+  return data
 }

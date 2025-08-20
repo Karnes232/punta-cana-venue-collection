@@ -18,7 +18,6 @@ function AutoFit({ points }: { points: [number, number][] }) {
   const map = useMap()
   useEffect(() => {
     if (!points.length) return
-
     ;(async () => {
       const L = await import("leaflet")
       if (points.length === 1) {

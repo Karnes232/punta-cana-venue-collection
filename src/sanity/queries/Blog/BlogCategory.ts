@@ -8,13 +8,13 @@ export const blogCategoryQuery = `*[_type == "blogCategory"] {
 }`
 
 export interface BlogCategory {
-    title: {
-        en: string
-        es: string
-    }
+  title: {
+    en: string
+    es: string
+  }
 }
 
 export async function getBlogCategories(): Promise<BlogCategory[]> {
-    const data = await client.fetch<BlogCategory[]>(blogCategoryQuery)
-    return data
+  const data = await client.fetch<BlogCategory[]>(blogCategoryQuery)
+  return data
 }

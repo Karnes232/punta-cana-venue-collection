@@ -80,7 +80,8 @@
     "all": "All",
     "noResults": "No results found",
     "featured": "Featured",
-   "readFullArticle": "Read Full Article",
-   "minRead": "min read"
+    "readFullArticle": "Read Full Article",
+    "minRead": "min read",
+    "readMore": "Read More"
   }
 }

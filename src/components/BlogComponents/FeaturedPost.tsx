@@ -1,13 +1,29 @@
-import { BlogPostMainPage } from '@/sanity/queries/Blog/BlogPost'
-import { ArrowRight, Calendar, Clock } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import { BlogPostMainPage } from "@/sanity/queries/Blog/BlogPost"
+import { ArrowRight, Calendar, Clock } from "lucide-react"
+import { useTranslations } from "next-intl"
+import Image from "next/image"
+import Link from "next/link"
+import React from "react"
 
-const FeaturedPost = ({ post, locale }: { post: BlogPostMainPage, locale: 'en' | 'es' }) => {
-    const t = useTranslations("Blog")
-    const { title, description, tags, readTime, mainImage, slug, categories, venueName, publishedAt } = post
+const FeaturedPost = ({
+  post,
+  locale,
+}: {
+  post: BlogPostMainPage
+  locale: "en" | "es"
+}) => {
+  const t = useTranslations("Blog")
+  const {
+    title,
+    description,
+    tags,
+    readTime,
+    mainImage,
+    slug,
+    categories,
+    venueName,
+    publishedAt,
+  } = post
 
   return (
     <div className="relative bg-white rounded-xl shadow-lg overflow-hidden mb-12">
@@ -63,7 +79,7 @@ const FeaturedPost = ({ post, locale }: { post: BlogPostMainPage, locale: 'en' |
           </div>
           <Link
             href={`/blog/${slug.current}`}
-            className="inline-flex items-center bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-6 py-3 rounded-lg font-medium hover:from-orange-600 hover:to-yellow-600 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+            className="inline-flex items-center bg-gradient-to-r from-golden/70  to-golden text-white px-6 py-3 rounded-lg font-medium hover:bg-golden/90 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
           >
             {t("readFullArticle")}
             <ArrowRight className="ml-2 h-4 w-4" />

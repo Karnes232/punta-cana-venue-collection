@@ -21,14 +21,14 @@ export const blogHeaderQuery = `*[_type == "blogHeader"][0] {
 }`
 
 export interface BlogHeader {
-    title: {
-        en: string
-        es: string
-    }
-    heroImage: HeroImage
+  title: {
+    en: string
+    es: string
+  }
+  heroImage: HeroImage
 }
 
 export async function getBlogHeader(): Promise<BlogHeader> {
-    const data = await client.fetch<BlogHeader>(blogHeaderQuery)
-    return data
+  const data = await client.fetch<BlogHeader>(blogHeaderQuery)
+  return data
 }

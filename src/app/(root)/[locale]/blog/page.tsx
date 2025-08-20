@@ -26,8 +26,15 @@ export default async function Blog({
           }}
         />
       )}
-      <HeroComponentBlog heroImage={blogHeader.heroImage} heroTitle={blogHeader.title[locale]} />
-      <BlogContent categories={blogCategories} blogPosts={blogPosts} locale={locale} />
+      <HeroComponentBlog
+        heroImage={blogHeader.heroImage}
+        heroTitle={blogHeader.title[locale]}
+      />
+      <BlogContent
+        categories={blogCategories}
+        blogPosts={blogPosts}
+        locale={locale}
+      />
     </>
   )
 }
