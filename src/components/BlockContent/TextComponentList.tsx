@@ -22,25 +22,11 @@ const TextComponentList: React.FC<TextComponentListProps> = ({
       <div className="flex flex-col justify-center max-w-5xl mx-5 lg:p-2 xl:mx-auto">
         {listType === "bullet" ? (
           <ul className={`list-disc pl-6 space-y-2 ${ListClassName}`}>
-            {items.map((item, index) => (
-              <li
-                key={index}
-                className={`${playfairDisplay.className} text-gray-700 dark:text-white`}
-              >
-                {item}
-              </li>
-            ))}
+            {items}
           </ul>
         ) : (
           <ol className={`list-decimal pl-6 space-y-2 ${ListClassName}`}>
-            {items.map((item, index) => (
-              <li
-                key={index}
-                className={`${playfairDisplay.className} text-gray-700 dark:text-white`}
-              >
-                {item}
-              </li>
-            ))}
+            {items}
           </ol>
         )}
       </div>
