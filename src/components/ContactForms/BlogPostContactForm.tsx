@@ -36,14 +36,21 @@ const BlogPostContactForm = ({
     setIsSubmitting(true)
 
     try {
-      // Here you would integrate with your form handling service
-      // For example: Netlify Forms, Formspree, or your own API
-      const response = await fetch("/__forms.html", {
+      // Create FormData for Netlify
+      const formDataToSend = new FormData()
+      formDataToSend.append("form-name", "blogPost")
+      formDataToSend.append("name", formData.name)
+      formDataToSend.append("email", formData.email)
+      formDataToSend.append("phone", formData.phone)
+      formDataToSend.append("venue", formData.venue)
+
+      // Submit to Netlify
+      const response = await fetch("/", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify(formData),
+        body: new URLSearchParams(formDataToSend as any),
       })
 
       if (response.ok) {
@@ -55,6 +62,8 @@ const BlogPostContactForm = ({
           phone: "",
           venue: venueName,
         })
+      } else {
+        console.error("Form submission failed:", response.status)
       }
     } catch (error) {
       console.error("Error submitting form:", error)
