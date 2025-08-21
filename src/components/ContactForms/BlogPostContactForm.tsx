@@ -14,6 +14,7 @@ const BlogPostContactForm = ({
 }: BlogPostContactFormProps) => {
   const t = useTranslations("Contact")
   const [formData, setFormData] = useState({
+    "form-name": "blogPost",
     name: "",
     email: "",
     phone: "",
@@ -37,7 +38,7 @@ const BlogPostContactForm = ({
     try {
       // Here you would integrate with your form handling service
       // For example: Netlify Forms, Formspree, or your own API
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/__forms.html", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,6 +49,7 @@ const BlogPostContactForm = ({
       if (response.ok) {
         setIsSubmitted(true)
         setFormData({
+          "form-name": "blogPost",
           name: "",
           email: "",
           phone: "",
