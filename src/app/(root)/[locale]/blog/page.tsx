@@ -15,7 +15,7 @@ export default async function Blog({
   const blogHeader = await getBlogHeader()
   const blogCategories = await getBlogCategories()
   const blogPosts = await getAllBlogPosts()
-  console.log(blogPosts)
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (

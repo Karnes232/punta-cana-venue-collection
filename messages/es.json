@@ -82,6 +82,21 @@
     "featured": "Destacado",
     "readFullArticle": "Leer Artículo Completo",
     "minRead": "min de lectura",
-    "readMore": "Leer Más"
+    "readMore": "Leer Más",
+    "backToBlog": "Volver al Blog"
+  },
+  "Contact": {
+    "contactTitle": "¿Te interesa este venue?",
+    "contactDescription": "Completa el formulario y te ayudaremos a planificar tu evento perfecto.",
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "namePlaceholder": "Tu nombre completo",
+    "emailPlaceholder": "tu@email.com",
+    "phonePlaceholder": "Tu número de teléfono",
+    "sendMessage": "Enviar mensaje",
+    "sending": "Enviando...",
+    "thankYou": "¡Gracias por contactarnos!",
+    "responseMessage": "Nos pondremos en contacto contigo muy pronto para ayudarte con tu evento en"
   }
 }

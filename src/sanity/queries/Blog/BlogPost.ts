@@ -76,3 +76,87 @@ export async function getAllBlogPosts(): Promise<BlogPostMainPage[]> {
   const data = await client.fetch<BlogPostMainPage[]>(allBlogPostsQuery)
   return data
 }
+
+export interface BlogPost {
+  _id: string
+  title: {
+    en: string
+    es: string
+  }
+  description: {
+    en: string
+    es: string
+  }
+  tags: {
+    en: string[]
+    es: string[]
+  }
+  readTime: number
+  featured: boolean
+  slug: {
+    current: string
+  }
+  categories: BlogCategory[]
+  venueName: string
+  mainImage: HeroImage
+  publishedAt: string
+  body: {
+    en: string
+    es: string
+  }
+}
+
+export const getBlogPostBySlugQuery = `*[_type == "blogPost" && slug.current == $slug][0] {
+    _id,
+    title {
+        en,
+        es
+    },
+    description {
+        en,
+        es
+    },
+    tags{
+        en,
+        es
+    },
+    readTime,
+    featured,
+    tags {
+        en,
+        es
+    },
+    slug {
+        current
+    },
+    categories[]-> {
+        title {
+            en,
+            es
+        }
+    },
+    publishedAt,
+    venueName,
+    mainImage {
+        asset -> {
+            url,
+            metadata {
+                dimensions {
+                    width,
+                    height
+                }
+            }
+        },
+        alt
+    },
+    body {
+        en,
+        es
+    }
+
+}`
+
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost> {
+  const data = await client.fetch<BlogPost>(getBlogPostBySlugQuery, { slug })
+  return data
+}

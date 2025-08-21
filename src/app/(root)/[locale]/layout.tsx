@@ -139,7 +139,7 @@ export default async function LocaleLayout({
           messages={messages}
           key={locale}
         >
-          <div className="min-h-screen flex flex-col overflow-x-hidden">
+          <div className="min-h-screen flex flex-col">
             <Navbar
               logo={logo.logo.asset.url}
               email={companyInfo.email}
