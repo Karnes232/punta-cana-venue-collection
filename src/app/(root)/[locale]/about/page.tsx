@@ -1,3 +1,4 @@
+import AboutCard from "@/components/AboutPageComponents/AboutCard"
 import BlockContent from "@/components/BlockContent/BlockContent"
 import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
 import { getAboutPage } from "@/sanity/queries/AboutPage/AboutPage"
@@ -26,9 +27,14 @@ export default async function About({
         heroImage={aboutPage.heroImage}
         heroTitle={aboutPage.title[locale]}
       />
-      <div className="max-w-7xl mx-auto flex flex-col 2xl:grid 2xl:grid-cols-[1fr_24rem] 2xl:items-start gap-8">
-        <div>
+      <div className="max-w-7xl mx-auto flex flex-col gap-8">
+        <div className='mx-5'>
           <BlockContent content={aboutPage.paragraph1} language={locale as "en" | "es"} />
+        </div>
+        <div className='flex flex-col md:flex-row gap-4 xl:gap-0 xl:justify-between xl:w-full max-w-5xl mx-auto'>
+          {aboutPage.aboutCards.map((card) => (
+            <AboutCard key={card.title[locale]} title={card.title[locale]} description={card.description} icon={card.icon} locale={locale}/>
+          ))}
         </div>
       </div>
     </>

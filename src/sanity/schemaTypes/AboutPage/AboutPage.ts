@@ -35,6 +35,13 @@ export default defineType({
         type: "localizedBlock",
         validation: Rule => Rule.required(),
       }),
+      defineField({
+        name: "aboutCards",
+        title: "About Cards",
+        type: "array",
+        of: [{ type: "reference", to: [{ type: "aboutCards" }] }],
+        validation: Rule => Rule.max(3).required(),
+      }),
     ],
   preview: {
     select: {

@@ -22,6 +22,18 @@ export const aboutPageQuery = `*[_type == "aboutPage"][0] {
         _type,
         en,
         es
+    },
+    aboutCards[]->{
+        title {
+            en,
+            es
+        },
+        description {
+            _type,
+            en,
+            es
+        },
+        icon
     }
 }`
 
@@ -36,6 +48,18 @@ export interface AboutPage {
         en: any[]
         es: any[]
     }
+    aboutCards: {
+        title: {
+            en: string
+            es: string
+        }
+        description: {
+            _type: string
+            en: any[]
+            es: any[]
+        }
+        icon: string
+    }[]
 }
 
 export async function getAboutPage(): Promise<AboutPage> {

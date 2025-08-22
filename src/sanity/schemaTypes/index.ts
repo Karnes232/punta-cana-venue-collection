@@ -14,6 +14,7 @@ import mainPage from "./MainPage/MainPage"
 
 // About Page
 import aboutPage from "./AboutPage/AboutPage"
+import aboutCards from "./AboutPage/AboutCards"
 
 // Venue Page
 import venuePage from "./VenuePage/VenuePage"
@@ -54,6 +55,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 
     // About Page
     aboutPage,
+    aboutCards,
 
     // Blog
     blogHeader,

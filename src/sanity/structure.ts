@@ -77,10 +77,25 @@ export const structure: StructureResolver = S =>
       S.listItem()
         .title("About Page")
         .child(
-          S.document()
-            .schemaType("aboutPage")
+          S.list()
             .title("About Page")
-            .documentId("aboutPage"),
+            .items([
+              S.listItem()
+                .title("About Page")
+                .child(
+                  S.document()
+                    .schemaType("aboutPage")
+                    .title("About Page")
+                    .documentId("aboutPage"),
+                ),
+              S.listItem()
+                .title("About Cards")
+                .child(
+                  S.documentList()
+                    .title("About Cards")
+                    .filter("_type == 'aboutCards'"),
+                ),
+            ]),
         ),
       S.listItem()
         .title("Blog")
