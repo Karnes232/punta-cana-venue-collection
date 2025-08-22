@@ -11,6 +11,7 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "localizedString",
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "heroImage",
@@ -26,6 +27,7 @@ export default defineType({
           type: "string",
         }),
       ],
+      validation: Rule => Rule.required(),
     }),
   ],
   preview: {

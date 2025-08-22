@@ -9,6 +9,7 @@ export default defineType({
       name: "title",
       title: "Title",
       type: "localizedString",
+      validation: Rule => Rule.required(),
     }),
   ],
   preview: {

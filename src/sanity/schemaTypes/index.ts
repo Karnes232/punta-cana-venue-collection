@@ -12,6 +12,9 @@ import legalDocuments from "./LegalDocuments/LegalDocuments"
 // Main Page
 import mainPage from "./MainPage/MainPage"
 
+// About Page
+import aboutPage from "./AboutPage/AboutPage"
+
 // Venue Page
 import venuePage from "./VenuePage/VenuePage"
 
@@ -48,6 +51,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     amenity,
     location,
     typeVenue,
+
+    // About Page
+    aboutPage,
 
     // Blog
     blogHeader,

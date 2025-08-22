@@ -23,6 +23,7 @@ export default defineType({
       type: "image",
       options: { hotspot: true },
       fields: [{ name: "alt", type: "localizedString", title: "Alt text" }],
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "gallery",
@@ -37,6 +38,7 @@ export default defineType({
           ],
         },
       ],
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "location",
@@ -51,6 +53,7 @@ export default defineType({
           "Bayahíbe",
         ],
       },
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "map",
@@ -60,9 +63,10 @@ export default defineType({
         defineField({ name: "longitude", type: "number" }),
       ],
       description: "The map coordinates of the venue. https://www.latlong.net/",
+      validation: Rule => Rule.required(),
     }),
 
-    defineField({ name: "description", type: "localizedBlock" }),
+    defineField({ name: "description", type: "localizedBlock", validation: Rule => Rule.required() }),
 
     // defineField({ name: 'location', type: 'reference', to: [{ type: 'location' }], validation: r => r.required() }),
     // defineField({ name: 'geo', type: 'geopoint' }),
@@ -71,9 +75,10 @@ export default defineType({
       name: "type",
       type: "array",
       of: [{ type: "reference", to: [{ type: "typeVenue" }] }],
+      validation: Rule => Rule.required(),
     }),
-    defineField({ name: "capacitySeated", type: "number" }),
-    defineField({ name: "capacityCocktail", type: "number" }),
+    defineField({ name: "capacitySeated", type: "number", validation: Rule => Rule.required() }),
+    defineField({ name: "capacityCocktail", type: "number", validation: Rule => Rule.required() }),
 
     defineField({
       name: "startingFrom",
@@ -86,6 +91,7 @@ export default defineType({
       name: "amenities",
       type: "array",
       of: [{ type: "reference", to: [{ type: "amenity" }] }],
+      validation: Rule => Rule.required(),
     }),
     // defineField({ name: 'collections', type: 'array', of: [{ type: 'reference', to: [{ type: 'collection' }] }] }),
 

@@ -1,3 +1,6 @@
+import BlockContent from "@/components/BlockContent/BlockContent"
+import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
+import { getAboutPage } from "@/sanity/queries/AboutPage/AboutPage"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 export default async function About({
@@ -7,6 +10,8 @@ export default async function About({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("about")
+  const aboutPage = await getAboutPage()
+  console.log(aboutPage)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -17,7 +22,15 @@ export default async function About({
           }}
         />
       )}
-      <div className="min-h-screen">About</div>
+      <HeroComponentBlog
+        heroImage={aboutPage.heroImage}
+        heroTitle={aboutPage.title[locale]}
+      />
+      <div className="max-w-7xl mx-auto flex flex-col 2xl:grid 2xl:grid-cols-[1fr_24rem] 2xl:items-start gap-8">
+        <div>
+          <BlockContent content={aboutPage.paragraph1} language={locale as "en" | "es"} />
+        </div>
+      </div>
     </>
   )
 }

@@ -36,6 +36,7 @@ export default defineType({
       type: "boolean",
       description: "Set to true to mark this post as featured",
       initialValue: false,
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: "tags",
