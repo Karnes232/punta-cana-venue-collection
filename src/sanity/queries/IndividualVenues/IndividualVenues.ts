@@ -229,7 +229,8 @@ export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.cu
         title {
             en,
             es
-        }
+        },
+        icon
     },
     startingFrom,
 }
@@ -279,6 +280,7 @@ export interface IndividualVenuePage {
       en: string
       es: string
     }
+    icon: string
   }[]
   startingFrom: number
 }

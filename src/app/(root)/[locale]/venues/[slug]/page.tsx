@@ -1,5 +1,6 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
 import HeroComponentIndividualVenue from "@/components/HeroComponent/HeroComponentIndividualVenue"
+import AmenitiesSection from "@/components/VenueComponents/AmenitiesSection"
 //import ClientOnly from "@/components/MapComponents/ClientOnly"
 import MapSection from "@/components/MapComponents/MapSection"
 //import SimpleMap from "@/components/MapComponents/SimpleMap"
@@ -29,7 +30,7 @@ export default async function VenueIndividual({
   const { locale, slug } = await params
   const structuredData = await getIndividualVenueSchema(slug)
   const pageData = await getIndividualVenuePage(slug)
-
+  console.log(pageData.amenities)
   const venues = [
     {
       id: "1",
@@ -69,11 +70,14 @@ export default async function VenueIndividual({
             <BlockContent content={pageData.description} language={locale} />
           </div>
         </div>
-        <div className="w-full h-96 lg:h-[416px] xl:h-[500px] lg:w-2/5 z-0 px-4 lg:pl-0 lg:mt-4 ">
-          <div className="w-full h-full rounded-2xl overflow-hidden">
+        <div className="w-full flex flex-col  lg:w-2/5 z-0 px-4 lg:pl-0 lg:mt-4 gap-4">
+          <div className="w-full rounded-2xl overflow-hidden h-96 lg:h-[416px] xl:h-[500px]">
             {/* <ClientOnly> */}
             <MapSection venues={venues} />
             {/* </ClientOnly> */}
+          </div>
+          <div className="flex flex-col max-w-5xl mx-5 lg:p-2 lg:mx-auto mt-5 ">
+            <AmenitiesSection amenities={pageData.amenities} locale={locale} />
           </div>
         </div>
       </div>

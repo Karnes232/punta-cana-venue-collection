@@ -23,22 +23,22 @@ export const contactPageQuery = `*[_type == "contactPage"][0] {
         en,
         es
     }
-}`  
+}`
 
 export interface ContactPage {
-    title: {
-        en: string
-        es: string
-    }
-    heroImage: HeroImage
-    paragraph1: {
-        _type: string
-        en: any[]
-        es: any[]
-    }
+  title: {
+    en: string
+    es: string
+  }
+  heroImage: HeroImage
+  paragraph1: {
+    _type: string
+    en: any[]
+    es: any[]
+  }
 }
 
 export async function getContactPage(): Promise<ContactPage> {
-    const page = await client.fetch(contactPageQuery)
-    return page
+  const page = await client.fetch(contactPageQuery)
+  return page
 }

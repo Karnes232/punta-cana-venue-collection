@@ -23,7 +23,7 @@ export default async function Contact({
           }}
         />
       )}
-     <HeroComponentBlog
+      <HeroComponentBlog
         heroImage={contactPage.heroImage}
         heroTitle={contactPage.title[locale]}
       />

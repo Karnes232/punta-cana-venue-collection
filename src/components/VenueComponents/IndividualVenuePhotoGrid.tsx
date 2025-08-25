@@ -42,7 +42,7 @@ const IndividualVenuePhotoGrid = ({ gallery }: { gallery: any }) => {
         {/* Main large photo - takes up 2 columns on large screens */}
         <div className="lg:col-span-2 group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500">
           <div
-            className="relative w-full h-64 sm:h-80 lg:h-full bg-gray-100"
+            className="relative w-full h-64 sm:h-80 md:h-96 lg:h-full bg-gray-100"
             onClick={() => handlePhotoClick(0)}
           >
             <Image
@@ -80,7 +80,7 @@ const IndividualVenuePhotoGrid = ({ gallery }: { gallery: any }) => {
                 className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-500"
               >
                 <div
-                  className="relative w-full h-32 sm:h-36 lg:h-[200px] xl:h-[240px] bg-gray-100"
+                  className="relative w-full h-32 sm:h-36 md:h-48 lg:h-[200px] xl:h-[240px] bg-gray-100"
                   onClick={() => handlePhotoClick(actualIndex)}
                 >
                   <Image
