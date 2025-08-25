@@ -37,6 +37,9 @@
     "typeVenue": "Type Venue",
     "exploreVenues": "Explore Venues"
   },
+  "AboutPage": {
+    "clientAdvantages": "Client Advantages"
+  },
   "venueListing": {
     "search": "Search",
     "location": "Location",

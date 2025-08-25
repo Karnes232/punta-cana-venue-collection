@@ -66,7 +66,11 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
 
-    defineField({ name: "description", type: "localizedBlock", validation: Rule => Rule.required() }),
+    defineField({
+      name: "description",
+      type: "localizedBlock",
+      validation: Rule => Rule.required(),
+    }),
 
     // defineField({ name: 'location', type: 'reference', to: [{ type: 'location' }], validation: r => r.required() }),
     // defineField({ name: 'geo', type: 'geopoint' }),
@@ -77,8 +81,16 @@ export default defineType({
       of: [{ type: "reference", to: [{ type: "typeVenue" }] }],
       validation: Rule => Rule.required(),
     }),
-    defineField({ name: "capacitySeated", type: "number", validation: Rule => Rule.required() }),
-    defineField({ name: "capacityCocktail", type: "number", validation: Rule => Rule.required() }),
+    defineField({
+      name: "capacitySeated",
+      type: "number",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "capacityCocktail",
+      type: "number",
+      validation: Rule => Rule.required(),
+    }),
 
     defineField({
       name: "startingFrom",

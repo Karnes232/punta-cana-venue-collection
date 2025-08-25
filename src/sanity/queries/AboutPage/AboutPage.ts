@@ -23,6 +23,11 @@ export const aboutPageQuery = `*[_type == "aboutPage"][0] {
         en,
         es
     },
+    paragraph2 {
+        _type,
+        en,
+        es
+    },
     aboutCards[]->{
         title {
             en,
@@ -34,35 +39,63 @@ export const aboutPageQuery = `*[_type == "aboutPage"][0] {
             es
         },
         icon
-    }
+    },
+    flatRateText {
+        en,
+        es
+    },
+    flatRate,
+    flatRateButtonText {
+        en,
+        es
+    },
+    ClientAdvantages[]
 }`
 
 export interface AboutPage {
+  title: {
+    en: string
+    es: string
+  }
+  heroImage: HeroImage
+  paragraph1: {
+    _type: string
+    en: any[]
+    es: any[]
+  }
+  paragraph2: {
+    _type: string
+    en: any[]
+    es: any[]
+  }
+  aboutCards: {
     title: {
-        en: string
-        es: string
+      en: string
+      es: string
     }
-    heroImage: HeroImage
-    paragraph1: {
-        _type: string
-        en: any[]
-        es: any[]
+    description: {
+      _type: string
+      en: any[]
+      es: any[]
     }
-    aboutCards: {
-        title: {
-            en: string
-            es: string
-        }
-        description: {
-            _type: string
-            en: any[]
-            es: any[]
-        }
-        icon: string
-    }[]
+    icon: string
+  }[]
+  flatRateText: {
+    en: string
+    es: string
+  }
+  flatRate: number
+  flatRateButtonText: {
+    en: string
+    es: string
+  }
+  ClientAdvantages: {
+    en: string
+    es: string
+  }[]
 }
 
 export async function getAboutPage(): Promise<AboutPage> {
-    const data = await client.fetch<AboutPage>(aboutPageQuery)
-    return data
+  const data = await client.fetch<AboutPage>(aboutPageQuery)
+  return data
 }

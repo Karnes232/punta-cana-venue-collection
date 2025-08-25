@@ -1,11 +1,11 @@
-'use client'
-import React, { useEffect } from 'react';
-import * as CookieConsent from 'vanilla-cookieconsent';
-import pluginConfig from './CookieConsentConfig';
-import "vanilla-cookieconsent/dist/cookieconsent.css";
+"use client"
+import React, { useEffect } from "react"
+import * as CookieConsent from "vanilla-cookieconsent"
+import pluginConfig from "./CookieConsentConfig"
+import "vanilla-cookieconsent/dist/cookieconsent.css"
 
 interface CookieConsentComponentProps {
-  locale: string;
+  locale: string
 }
 
 const CookieConsentComponent = ({ locale }: CookieConsentComponentProps) => {
@@ -16,20 +16,23 @@ const CookieConsentComponent = ({ locale }: CookieConsentComponentProps) => {
       language: {
         ...pluginConfig.language,
         default: locale,
-      }
-    };
-    
-    // Run cookie consent with the updated config
-    CookieConsent.run(configWithLocale);
-  }, [locale]); // Re-run when locale changes
+      },
+    }
 
-  const linkText = locale === 'es' ? 'Mostrar preferencias de cookies' : 'Show Cookie Preferences';
+    // Run cookie consent with the updated config
+    CookieConsent.run(configWithLocale)
+  }, [locale]) // Re-run when locale changes
+
+  const linkText =
+    locale === "es"
+      ? "Mostrar preferencias de cookies"
+      : "Show Cookie Preferences"
 
   return (
     <a href="#" onClick={CookieConsent.showPreferences}>
       {linkText}
     </a>
-  );
-};
+  )
+}
 
-export default CookieConsentComponent;
+export default CookieConsentComponent

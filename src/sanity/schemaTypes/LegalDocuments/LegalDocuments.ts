@@ -20,6 +20,10 @@ export default defineType({
       },
       validation: Rule => Rule.required(),
     }),
-    defineField({ name: "body", type: "localizedBlock", validation: Rule => Rule.required() }),
+    defineField({
+      name: "body",
+      type: "localizedBlock",
+      validation: Rule => Rule.required(),
+    }),
   ],
 })

@@ -1,4 +1,6 @@
 import AboutCard from "@/components/AboutPageComponents/AboutCard"
+import ClientAdvantagesComponent from "@/components/AboutPageComponents/ClientAdvantagesComponent"
+import FlatRateComponent from "@/components/AboutPageComponents/FlatRateComponent"
 import BlockContent from "@/components/BlockContent/BlockContent"
 import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
 import { getAboutPage } from "@/sanity/queries/AboutPage/AboutPage"
@@ -28,14 +30,44 @@ export default async function About({
         heroTitle={aboutPage.title[locale]}
       />
       <div className="max-w-7xl mx-auto flex flex-col gap-8">
-        <div className='mx-5'>
-          <BlockContent content={aboutPage.paragraph1} language={locale as "en" | "es"} />
+        <div className="mx-5">
+          <BlockContent
+            content={aboutPage.paragraph1}
+            language={locale as "en" | "es"}
+          />
         </div>
-        <div className='flex flex-col md:flex-row gap-4 xl:gap-0 xl:justify-between xl:w-full max-w-5xl mx-auto'>
-          {aboutPage.aboutCards.map((card) => (
-            <AboutCard key={card.title[locale]} title={card.title[locale]} description={card.description} icon={card.icon} locale={locale}/>
+        <div className="flex flex-col md:flex-row gap-4 xl:gap-0 xl:justify-between xl:w-full max-w-5xl mx-auto lg:my-10">
+          {aboutPage.aboutCards.map(card => (
+            <div key={card.title[locale]} className="flex-1">
+              <AboutCard
+                title={card.title[locale]}
+                description={card.description}
+                icon={card.icon}
+                locale={locale}
+              />
+            </div>
           ))}
         </div>
+        <div className="flex flex-col-reverse md:flex-row gap-10 xl:gap-0 xl:justify-between xl:w-full max-w-5xl mx-auto mb-10 lg:mb-20">
+          <FlatRateComponent
+            flatRateText={aboutPage.flatRateText[locale]}
+            flatRate={aboutPage.flatRate}
+            flatRateButtonText={aboutPage.flatRateButtonText[locale]}
+          />
+          <ClientAdvantagesComponent
+            clientAdvantages={aboutPage.ClientAdvantages.map(
+              advantage => advantage[locale],
+            )}
+          />
+        </div>
+        {aboutPage.paragraph2 && (
+          <div className="mx-5">
+            <BlockContent
+              content={aboutPage.paragraph2}
+              language={locale as "en" | "es"}
+            />
+          </div>
+        )}
       </div>
     </>
   )
