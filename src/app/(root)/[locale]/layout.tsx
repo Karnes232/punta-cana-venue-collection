@@ -14,6 +14,7 @@ import {
   getCompanyInfo,
   getLogo,
 } from "@/sanity/queries/GeneralLayout/GeneralLayout"
+import CookieConsentComponent from "@/components/CookieConsentComponents/CookieConsentComponent"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -150,6 +151,7 @@ export default async function LocaleLayout({
             <Footer companyInfo={companyInfo} logo={logo.logo.asset.url} />
           </div>
         </NextIntlClientProvider>
+        <CookieConsentComponent key={locale} locale={locale} />
       </body>
     </html>
   )
