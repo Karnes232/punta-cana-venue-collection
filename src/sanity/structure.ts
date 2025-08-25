@@ -126,4 +126,12 @@ export const structure: StructureResolver = S =>
                 ),
             ]),
         ),
+      S.listItem()
+        .title("Contact Page")
+        .child(
+          S.document()
+            .schemaType("contactPage")
+            .title("Contact Page")
+            .documentId("contactPage"),
+        ),
     ])

@@ -100,6 +100,9 @@
     "sendMessage": "Enviar mensaje",
     "sending": "Enviando...",
     "thankYou": "¡Gracias por contactarnos!",
-    "responseMessage": "Nos pondremos en contacto contigo muy pronto para ayudarte con tu evento en"
+    "responseMessage": "Nos pondremos en contacto contigo muy pronto para ayudarte con tu evento en",
+    "responseMessageContactPage": "Nos pondremos en contacto contigo muy pronto para ayudarte con tu evento.",
+    "message": "Mensaje",
+    "messagePlaceholder": "Tu mensaje"
   }
 }

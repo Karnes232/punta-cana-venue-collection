@@ -1,3 +1,7 @@
+import BlockContent from "@/components/BlockContent/BlockContent"
+import ContactPageForm from "@/components/ContactForms/ContactPageForm"
+import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
+import { getContactPage } from "@/sanity/queries/ContactPage/ContactPage"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
 export default async function Contact({
@@ -7,6 +11,7 @@ export default async function Contact({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("contact")
+  const contactPage = await getContactPage()
 
   return (
     <>
@@ -18,7 +23,21 @@ export default async function Contact({
           }}
         />
       )}
-      <div className="min-h-screen">Contact</div>
+     <HeroComponentBlog
+        heroImage={contactPage.heroImage}
+        heroTitle={contactPage.title[locale]}
+      />
+      <div className="max-w-7xl mx-auto flex flex-col gap-8 mt-5">
+        {contactPage.paragraph1 && (
+          <div className="mx-5">
+            <BlockContent
+              content={contactPage.paragraph1}
+              language={locale as "en" | "es"}
+            />
+          </div>
+        )}
+        <ContactPageForm />
+      </div>
     </>
   )
 }

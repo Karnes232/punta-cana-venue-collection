@@ -63,7 +63,7 @@ export interface AboutPage {
     en: any[]
     es: any[]
   }
-  paragraph2: {
+  paragraph2?: {
     _type: string
     en: any[]
     es: any[]

@@ -30,6 +30,9 @@ import blogHeader from "./Blog/BlogHeader"
 import blogCategory from "./Blog/BlogCategory"
 import blogPost from "./Blog/BlogPost"
 
+// Contact Page
+import contactPage from "./ContactPage/ContactPage"
+
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     // Localized
@@ -61,5 +64,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     blogHeader,
     blogCategory,
     blogPost,
+
+    // Contact Page
+    contactPage,
   ],
 }
