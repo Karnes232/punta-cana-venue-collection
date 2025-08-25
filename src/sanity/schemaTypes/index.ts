@@ -24,7 +24,7 @@ import individualVenue from "./Venues/IndividualVenue"
 import amenity from "./Venues/amenity"
 import location from "./Venues/location"
 import typeVenue from "./Venues/typeVenue"
-
+import eventType from "./Venues/EventType"
 // Blog
 import blogHeader from "./Blog/BlogHeader"
 import blogCategory from "./Blog/BlogCategory"
@@ -55,7 +55,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     amenity,
     location,
     typeVenue,
-
+    eventType,
     // About Page
     aboutPage,
     aboutCards,

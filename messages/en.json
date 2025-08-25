@@ -75,7 +75,15 @@
     "about": "About This Venue",
     "noPhotosAvailable": "No photos available",
     "viewAllPhotos": "View All Photos",
-    "photos": "photo"
+    "photos": "photo",
+    "totalSpace": "Total Space",
+    "squareMeters": "m²",
+    "squareFeet": "ft²",
+    "capacity": "Capacity",
+    "guests": "guests",
+    "eventTypes": "Event Types",
+    "reviews": "Reviews",
+    "totalReviews": "reviews"
   },
   "Blog": {
     "search": "Search",

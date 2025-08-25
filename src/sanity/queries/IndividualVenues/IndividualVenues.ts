@@ -233,6 +233,14 @@ export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.cu
         icon
     },
     startingFrom,
+    eventTypes[]->{
+        title {
+            en,
+            es
+        },
+        icon
+    },
+    totalSpace
 }
 `
 
@@ -283,6 +291,14 @@ export interface IndividualVenuePage {
     icon: string
   }[]
   startingFrom: number
+  eventTypes: {
+    title: {
+      en: string
+      es: string
+    }
+    icon: string
+  }[]
+  totalSpace: number
 }
 
 export async function getIndividualVenuePage(

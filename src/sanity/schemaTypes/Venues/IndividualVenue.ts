@@ -82,6 +82,12 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: 'totalSpace',
+      type: 'number',
+      description: 'Total space in square meters',
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
       name: "capacitySeated",
       type: "number",
       validation: Rule => Rule.required(),
@@ -105,6 +111,13 @@ export default defineType({
       of: [{ type: "reference", to: [{ type: "amenity" }] }],
       validation: Rule => Rule.required(),
     }),
+    defineField({
+      name: "eventTypes",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "eventType" }] }],
+      validation: Rule => Rule.required(),
+    }),
+   
     // defineField({ name: 'collections', type: 'array', of: [{ type: 'reference', to: [{ type: 'collection' }] }] }),
 
     // defineField({ name: 'downloadables', type: 'array', of: [{ type: 'file' }] }),
