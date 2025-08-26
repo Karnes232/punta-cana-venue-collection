@@ -9,6 +9,8 @@ import { X } from "lucide-react"
 import Recommend from "./Recommend"
 import RateVenue from "./RateVenue"
 import { useTranslations } from "next-intl"
+import ShareYourStory from "./ShareYourStory"
+import ImageUploadComponent from "./ImageUploadComponent"
 
 const WriteReview = ({
   page,
@@ -60,11 +62,11 @@ const WriteReview = ({
             </DialogTitle>
             <Recommend formData={formData} setFormData={setFormData} />
             <RateVenue formData={formData} setFormData={setFormData} />
-            {/* <ShareYourStory formData={formData} setFormData={setFormData} /> */}
-            {/* <ImageUploadComponent
+            <ShareYourStory formData={formData} setFormData={setFormData} />
+            <ImageUploadComponent
               formData={formData}
               setFormData={setFormData}
-            /> */}
+            />
             {/* <SubmitReview formData={formData} /> */}
           </DialogPanel>
         </div>

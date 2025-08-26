@@ -82,7 +82,6 @@
     "capacity": "Capacidad",
     "guests": "invitados",
     "eventTypes": "Tipos de Eventos"
-   
   },
   "RateVenue": {
     "reviews": "Reseñas",
@@ -100,7 +99,19 @@
     "responsiveness": "Responsividad",
     "professionalism": "Profesionalismo",
     "value": "Valor",
-    "flexibility": "Flexibilidad"
+    "flexibility": "Flexibilidad",
+    "shareYourStory": "Comparte tu historia!",
+    "createTitle": "Crea un título para tu reseña",
+    "shareYourStoryPlaceholder": "¿Cómo fue tu experiencia? ¡Nos encantaría escuchar tus pensamientos!",
+    "addPhotos": "Añadir fotos a tu reseña",
+    "optional": "Opcional",
+    "clickToUpload": "Haz clic para subir",
+    "or": "o",
+    "dragAndDrop": "arrastrar y soltar",
+    "svgPngJpgGif": "SVG, PNG, JPG o GIF",
+    "images": "imágenes",
+    "uploadedImages": "Fotos Subidas",
+    "upTo": "hasta"
   },
   "Blog": {
     "search": "Buscar",
