@@ -122,15 +122,6 @@ export default async function LocaleLayout({
       {/* <GoogleTagManager gtmId="GTM-KGLHKQW" />
       <GoogleAnalytics gaId="G-6MJLJ90SSM" />
       <GoogleAnalytics gaId="G-JDL6KCYRYD" /> */}
-      <head>
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        {/* <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(generateStructuredData()),
-          }}
-        /> */}
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
