@@ -10,7 +10,7 @@ const RateVenue = ({
   formData: any
   setFormData: any
 }) => {
-  const t = useTranslations("individualVenueListing")
+  const t = useTranslations("RateVenue")
   return (
     <>
       <Description className="text-center">
@@ -19,39 +19,39 @@ const RateVenue = ({
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col lg:flex-row lg:gap-10">
           <IndividualStarRating
-            title="Quality of service"
+            title={t("qualityOfService")}
             formTitle="qualityOfService"
             formData={formData}
             setFormData={setFormData}
           />
-          {/* <IndividualStarRating
-            title="Responsiveness"
+          <IndividualStarRating
+            title={t("responsiveness")}
             formTitle="responsiveness"
             formData={formData}
             setFormData={setFormData}
-          /> */}
+          />
         </div>
         <div className="flex flex-col lg:flex-row lg:gap-10">
-          {/* <IndividualStarRating
-            title="Professionalism"
+          <IndividualStarRating
+            title={t("professionalism")}
             formTitle="professionalism"
             formData={formData}
             setFormData={setFormData}
-          /> */}
-          {/* <IndividualStarRating
-            title="Value"
+          />
+          <IndividualStarRating
+            title={t("value")}
             formTitle="value"
             formData={formData}
             setFormData={setFormData}
-          /> */}
+          />
         </div>
         <div className="flex flex-col lg:flex-row lg:gap-10">
-          {/* <IndividualStarRating
-            title="Flexibility"
+          <IndividualStarRating
+            title={t("flexibility")}
             formTitle="flexibility"
             formData={formData}
             setFormData={setFormData}
-          /> */}
+          />
         </div>
       </div>
     </>

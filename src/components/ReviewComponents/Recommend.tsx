@@ -10,7 +10,7 @@ const Recommend = ({
   formData: any
   setFormData: any
 }) => {
-  const t = useTranslations("individualVenueListing")
+  const t = useTranslations("RateVenue")
   const handleRecommend = () => {
     setFormData({
       ...formData,

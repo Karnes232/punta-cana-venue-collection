@@ -17,7 +17,7 @@ const WriteReview = ({
   page: string
   pageName: string
 }) => {
-  const t = useTranslations("individualVenueListing")
+  const t = useTranslations("RateVenue")
   const [isOpen, setIsOpen] = useState(false)
   const [formData, setFormData] = useState({
     page: page,

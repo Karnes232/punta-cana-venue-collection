@@ -14,7 +14,7 @@ const StarRating = ({
   overAllRating: number
   pageName: string
 }) => {
-  const t = useTranslations("individualVenueListing")
+  const t = useTranslations("RateVenue")
   let rating = 0
 
   if (isNaN(overAllRating)) {

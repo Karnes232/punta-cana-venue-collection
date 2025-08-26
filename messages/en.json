@@ -81,7 +81,10 @@
     "squareFeet": "ft²",
     "capacity": "Capacity",
     "guests": "guests",
-    "eventTypes": "Event Types",
+    "eventTypes": "Event Types"
+    
+  },
+  "RateVenue": {
     "reviews": "Reviews",
     "totalReviews": "reviews",
     "excellent": "Excellent",
@@ -92,7 +95,12 @@
     "disappointing": "Disappointing",
     "recommend": "Would you recommend this venue?",
     "howWasYourExperience": "How was your experience?",
-    "writeReview": "Write a review"
+    "writeReview": "Write a review",
+    "qualityOfService": "Quality of Service",
+    "responsiveness": "Responsiveness",
+    "professionalism": "Professionalism",
+    "value": "Value",
+    "flexibility": "Flexibility"
   },
   "Blog": {
     "search": "Search",
