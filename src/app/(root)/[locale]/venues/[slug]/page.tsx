@@ -185,6 +185,7 @@ import {
 } from "@/sanity/queries/IndividualVenues/IndividualVenues"
 import { getTranslations } from "next-intl/server"
 import { Cormorant_Garamond } from "next/font/google"
+import ReviewComponent from "@/components/ReviewComponents/ReviewComponent"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -203,7 +204,7 @@ export default async function VenueIndividual({
   const { locale, slug } = await params
   const structuredData = await getIndividualVenueSchema(slug)
   const pageData = await getIndividualVenuePage(slug)
-  console.log(pageData)
+
   const venues = [
     {
       id: "1",
@@ -244,7 +245,7 @@ export default async function VenueIndividual({
             </h2>
             <BlockContent content={pageData.description} language={locale} />
           </div>
-         
+         <ReviewComponent page={pageData.slug.current} pageName={pageData.title[locale]} />
 
           {/* Reviews Section - Full width in left column */}
           {/* {pageData.reviews && pageData.reviews.length > 0 && (

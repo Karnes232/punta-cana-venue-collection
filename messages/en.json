@@ -83,7 +83,16 @@
     "guests": "guests",
     "eventTypes": "Event Types",
     "reviews": "Reviews",
-    "totalReviews": "reviews"
+    "totalReviews": "reviews",
+    "excellent": "Excellent",
+    "veryGood": "Very Good",
+    "aboveAverage": "Above Average",
+    "average": "Average",
+    "needsImprovement": "Needs Improvement",
+    "disappointing": "Disappointing",
+    "recommend": "Would you recommend this venue?",
+    "howWasYourExperience": "How was your experience?",
+    "writeReview": "Write a review"
   },
   "Blog": {
     "search": "Search",

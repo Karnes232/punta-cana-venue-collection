@@ -83,7 +83,16 @@
     "guests": "invitados",
     "eventTypes": "Tipos de Eventos",
     "reviews": "Reseñas",
-    "totalReviews": "reseñas"
+    "totalReviews": "reseñas",
+    "excellent": "Excelente",
+    "veryGood": "Muy Bueno",
+    "aboveAverage": "Por encima de la media",
+    "average": "Media",
+    "needsImprovement": "Necesita mejorar",
+    "disappointing": "Desilusionante",
+    "recommend": "¿Recomendarías este venue?",
+    "howWasYourExperience": "¿Cómo fue tu experiencia?",
+    "writeReview": "Escribir una reseña"
   },
   "Blog": {
     "search": "Buscar",
