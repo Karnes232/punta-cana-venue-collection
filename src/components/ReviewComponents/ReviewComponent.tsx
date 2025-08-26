@@ -1,5 +1,6 @@
 import React from "react"
 import StarRating from "./StarRating"
+import ProgressBars from "./ProgressBars"
 
 const ReviewComponent = ({
   page,
@@ -25,13 +26,13 @@ const ReviewComponent = ({
           overAllRating={overAllRating}
           pageName={pageName}
         />
-        {/* <ProgressBars
+        <ProgressBars
           qualityOfServiceAvg={qualityOfServiceAvg}
           responsivenessAvg={responsivenessAvg}
           professionalismAvg={professionalismAvg}
           valueAvg={valueAvg}
           flexibilityAvg={flexibilityAvg}
-        /> */}
+        />
       </div>
     </>
   )
