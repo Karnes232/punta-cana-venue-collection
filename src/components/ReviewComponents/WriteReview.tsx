@@ -1,34 +1,40 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   Description,
   Dialog,
   DialogPanel,
   DialogTitle,
-} from "@headlessui/react";
-import { X } from "lucide-react";
-import Recommend from "./Recommend";
-import RateVenue from "./RateVenue";
-import { useTranslations } from "next-intl";
+} from "@headlessui/react"
+import { X } from "lucide-react"
+import Recommend from "./Recommend"
+import RateVenue from "./RateVenue"
+import { useTranslations } from "next-intl"
 
-const WriteReview = ({page, pageName}: {page: string, pageName: string}) => {
-    const t = useTranslations("individualVenueListing")
-    const [isOpen, setIsOpen] = useState(false);
-    const [formData, setFormData] = useState({
-        page: page,
-        recommend: "",
-        qualityOfService: 0,
-        responsiveness: 0,
-        professionalism: 0,
-        value: 0,
-        flexibility: 0,
-        title: "",
-        description: "",
-        Images: [],
-      });
-    
+const WriteReview = ({
+  page,
+  pageName,
+}: {
+  page: string
+  pageName: string
+}) => {
+  const t = useTranslations("individualVenueListing")
+  const [isOpen, setIsOpen] = useState(false)
+  const [formData, setFormData] = useState({
+    page: page,
+    recommend: "",
+    qualityOfService: 0,
+    responsiveness: 0,
+    professionalism: 0,
+    value: 0,
+    flexibility: 0,
+    title: "",
+    description: "",
+    Images: [],
+  })
+
   return (
     <>
-     <button
+      <button
         onClick={() => setIsOpen(true)}
         className="rounded-lg px-6 py-2 bg-gradient-to-br from-golden/50 to-golden/90 text-charcoal hover:bg-golden/90 transition-colors font-medium"
       >

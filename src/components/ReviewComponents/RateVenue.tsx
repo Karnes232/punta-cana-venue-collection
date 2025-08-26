@@ -1,9 +1,16 @@
-import { Description } from '@headlessui/react';
-import { useTranslations } from 'next-intl';
-import React from 'react'
+import { Description } from "@headlessui/react"
+import { useTranslations } from "next-intl"
+import React from "react"
+import IndividualStarRating from "./IndividualStarRating"
 
-const RateVenue = ({ formData, setFormData}: {formData: any, setFormData: any}) => {
-    const t = useTranslations("individualVenueListing")
+const RateVenue = ({
+  formData,
+  setFormData,
+}: {
+  formData: any
+  setFormData: any
+}) => {
+  const t = useTranslations("individualVenueListing")
   return (
     <>
       <Description className="text-center">
@@ -11,12 +18,12 @@ const RateVenue = ({ formData, setFormData}: {formData: any, setFormData: any}) 
       </Description>
       <div className="flex flex-col justify-center items-center">
         <div className="flex flex-col lg:flex-row lg:gap-10">
-          {/* <IndividualStarRating
+          <IndividualStarRating
             title="Quality of service"
             formTitle="qualityOfService"
             formData={formData}
             setFormData={setFormData}
-          /> */}
+          />
           {/* <IndividualStarRating
             title="Responsiveness"
             formTitle="responsiveness"

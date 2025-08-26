@@ -1,19 +1,19 @@
 import React from "react"
 import { Cormorant_Garamond } from "next/font/google"
 import { useTranslations } from "next-intl"
-import { 
-  Heart, 
-  PartyPopper, 
-  Briefcase, 
-  GraduationCap, 
-  Gift, 
-  Music, 
+import {
+  Heart,
+  PartyPopper,
+  Briefcase,
+  GraduationCap,
+  Gift,
+  Music,
   Calendar,
   Users,
   Crown,
   Cake,
   Camera,
-  Star
+  Star,
 } from "lucide-react"
 
 const coromantGaramond = Cormorant_Garamond({
@@ -34,7 +34,10 @@ interface EventTypesSectionProps {
   locale?: "en" | "es"
 }
 
-const EventTypesSection = ({ eventTypes, locale = "en" }: EventTypesSectionProps) => {
+const EventTypesSection = ({
+  eventTypes,
+  locale = "en",
+}: EventTypesSectionProps) => {
   const t = useTranslations("individualVenueListing")
 
   // Dynamic icon mapping
@@ -50,7 +53,7 @@ const EventTypesSection = ({ eventTypes, locale = "en" }: EventTypesSectionProps
     Crown,
     Cake,
     Camera,
-    Star
+    Star,
   }
 
   if (!eventTypes || eventTypes.length === 0) {
@@ -62,10 +65,7 @@ const EventTypesSection = ({ eventTypes, locale = "en" }: EventTypesSectionProps
       {/* Header */}
       <div className="flex items-center gap-3">
         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center">
-          <Calendar
-            className="w-4 h-4 text-purple-600"
-            strokeWidth={2}
-          />
+          <Calendar className="w-4 h-4 text-purple-600" strokeWidth={2} />
         </div>
         <h3
           className={`${coromantGaramond.className} text-2xl font-semibold text-gray-800`}
@@ -91,7 +91,9 @@ const EventTypesSection = ({ eventTypes, locale = "en" }: EventTypesSectionProps
                   strokeWidth={1.5}
                 />
               </div>
-              <span className="text-gray-700 font-medium text-base">{title}</span>
+              <span className="text-gray-700 font-medium text-base">
+                {title}
+              </span>
             </div>
           )
         })}

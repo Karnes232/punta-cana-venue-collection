@@ -97,13 +97,13 @@ const AmenitiesSection = ({
     Sparkles,
     Scissors,
     BookOpenCheck,
-    Accessibility
+    Accessibility,
   }
 
   if (!amenities || amenities.length === 0) {
     return null
   }
- 
+
   return (
     <div className="space-y-6">
       {/* Header with elegant styling matching the design */}

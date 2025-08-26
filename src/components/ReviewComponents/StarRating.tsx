@@ -1,33 +1,41 @@
 "use client"
-import { useTranslations } from 'next-intl';
-import React from 'react'
-import ReactStars from "react-stars";
-import WriteReview from './WriteReview';
+import { useTranslations } from "next-intl"
+import React from "react"
+import ReactStars from "react-stars"
+import WriteReview from "./WriteReview"
 // import WriteReview from "./WriteReview";
 
-const StarRating = ({page, overAllRating, pageName}: {page: string, overAllRating: number, pageName: string}) => {
-    const t = useTranslations("individualVenueListing")
-    let rating = 0;
+const StarRating = ({
+  page,
+  overAllRating,
+  pageName,
+}: {
+  page: string
+  overAllRating: number
+  pageName: string
+}) => {
+  const t = useTranslations("individualVenueListing")
+  let rating = 0
 
   if (isNaN(overAllRating)) {
-    rating = 4.8;
+    rating = 4.8
   } else {
-    rating = overAllRating;
+    rating = overAllRating
   }
 
-  let ratingWord = "";
+  let ratingWord = ""
   if (rating > 4.5) {
-    ratingWord = t("excellent");
+    ratingWord = t("excellent")
   } else if (rating > 4) {
-    ratingWord = t("veryGood");
+    ratingWord = t("veryGood")
   } else if (rating > 3.5) {
-    ratingWord = t("aboveAverage");
+    ratingWord = t("aboveAverage")
   } else if (rating > 2.5) {
-    ratingWord = t("average");
+    ratingWord = t("average")
   } else if (rating > 1.5) {
-    ratingWord = t("needsImprovement");
+    ratingWord = t("needsImprovement")
   } else {
-    ratingWord = t("disappointing");
+    ratingWord = t("disappointing")
   }
 
   return (
