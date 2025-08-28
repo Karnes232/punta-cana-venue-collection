@@ -4,8 +4,9 @@ import { Cormorant_Garamond } from "next/font/google"
 import { MapPin, Users, Star, DollarSign } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import React from "react"
+import React, { useState } from "react"
 import { useTranslations } from "next-intl"
+import { useFavorites } from '@/customHooks/useFavoritesHook'
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -31,8 +32,16 @@ const IndividualVenueCard = ({
   } = venue
   const t = useTranslations("venueListing")
 
+  // Use the favorites hook for consistent state management
+  const { isFavorited, toggleFavorite, isAtMaxCapacity, remainingSlots, error, clearError } = useFavorites()
+  const [isLoading, setIsLoading] = useState(false)
+  const [showError, setShowError] = useState(false)
+
   // Get localized title
   const localizedTitle = title[locale as keyof typeof title] || title.en
+
+  // Check if this venue is favorited
+  const isFavoritedStatus = isFavorited(slug.current)
 
   // Get localized types
   const localizedTypes =
@@ -42,6 +51,36 @@ const IndividualVenueCard = ({
 
   // Get first few amenities for display
   const displayAmenities = amenities.slice(0, 3)
+
+  // Handle star click with the hook
+  const handleStarClick = async (e: React.MouseEvent) => {
+    e.preventDefault() // Prevent any parent link navigation
+    e.stopPropagation()
+    
+    // Clear any existing error
+    clearError()
+    setShowError(false)
+    
+    // If trying to add but already at max capacity
+    if (!isFavoritedStatus && isAtMaxCapacity) {
+      setShowError(true)
+      setTimeout(() => setShowError(false), 4000) // Hide error after 4 seconds
+      return
+    }
+    
+    setIsLoading(true)
+    
+    try {
+      await toggleFavorite(slug.current, localizedTitle)
+      console.log(`Venue ${isFavoritedStatus ? 'removed from' : 'added to'} favorites:`, localizedTitle)
+    } catch (error) {
+      console.error('Failed to update favorite status:', error)
+      setShowError(true)
+      setTimeout(() => setShowError(false), 4000)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <div className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
@@ -101,12 +140,53 @@ const IndividualVenueCard = ({
 
       {/* Content Section */}
       <div className="p-6">
-        {/* Title */}
-        <h3
-          className={`${coromantGaramond.className} text-xl font-semibold text-charcoal mb-2 line-clamp-2`}
-        >
-          {localizedTitle}
-        </h3>
+        {/* Title with Star */}
+        <div className="flex items-start justify-between mb-2 relative">
+          <h3
+            className={`${coromantGaramond.className} text-xl font-semibold text-charcoal line-clamp-2 flex-1 pr-3`}
+          >
+            {localizedTitle}
+          </h3>
+          <button
+            onClick={handleStarClick}
+            disabled={isLoading || (!isFavoritedStatus && isAtMaxCapacity)}
+            className={`flex-shrink-0 p-1 rounded-full transition-colors duration-200 group disabled:opacity-50 disabled:cursor-not-allowed ${
+              isFavoritedStatus 
+                ? 'hover:bg-golden/10' 
+                : isAtMaxCapacity 
+                  ? 'bg-gray-100 cursor-not-allowed'
+                  : 'hover:bg-gray-100'
+            } ${showError ? 'animate-pulse bg-red-50' : ''}`}
+            aria-label={isFavoritedStatus ? "Remove from favorites" : "Add to favorites"}
+            title={
+              !isFavoritedStatus && isAtMaxCapacity 
+                ? `Maximum of 5 favorites reached. Remove a favorite first.`
+                : isFavoritedStatus 
+                  ? 'Remove from favorites' 
+                  : `Add to favorites (${remainingSlots} slots remaining)`
+            }
+          >
+            <Star
+              size={24}
+              className={`transition-all duration-200 ${
+                isFavoritedStatus
+                  ? "fill-golden text-golden"
+                  : isAtMaxCapacity
+                    ? "text-gray-400"
+                    : "text-gray-400 hover:text-golden group-hover:scale-110"
+              } ${isLoading ? 'animate-pulse' : ''}`}
+            />
+          </button>
+          
+          {/* Error tooltip for card */}
+          {showError && (error || (!isFavoritedStatus && isAtMaxCapacity)) && (
+            <div className="absolute top-full right-0 mt-1 p-2 bg-red-50 border border-red-200 rounded-lg shadow-lg z-50 min-w-48">
+              <p className="text-xs text-red-700">
+                {error || 'Max 5 favorites reached. Remove one first.'}
+              </p>
+            </div>
+          )}
+        </div>
 
         {/* Location */}
         <div className="flex items-center space-x-2 text-slate-600 mb-3">
@@ -155,12 +235,19 @@ const IndividualVenueCard = ({
         )}
 
         {/* View Details Button */}
+        <div className="flex gap-4 justify-center">
+          <button className="block w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md">
+          {t("interested")}
+          </button>
+            
+       
         <Link
           href={`/venues/${slug.current}`}
           className="block w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md"
         >
           {t("viewDetails")}
         </Link>
+        </div>
       </div>
     </div>
   )

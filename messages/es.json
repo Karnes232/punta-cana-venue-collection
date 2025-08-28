@@ -69,6 +69,7 @@
     "guests": "invitados",
     "amenities": "Amenidades",
     "more": "más",
+    "interested": "Interesado",
     "viewDetails": "Ver Detalles"
   },
   "individualVenueListing": {
@@ -84,6 +85,7 @@
     "eventTypes": "Tipos de Eventos",
     "viewVideos": "Ver Videos",
     "location": "Ubicación"
+    
   },
   "RateVenue": {
     "reviews": "Reseñas",
