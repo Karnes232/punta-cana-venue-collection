@@ -111,7 +111,10 @@
     "svgPngJpgGif": "SVG, PNG, JPG o GIF",
     "images": "imágenes",
     "uploadedImages": "Fotos Subidas",
-    "upTo": "hasta"
+    "upTo": "hasta",
+    "signInToPublishYourReview": "Inicia sesión para publicar tu reseña",
+    "signInWithGoogle": "Inicia sesión con Google",
+    "formRequiredToBeFilled": "Formulario Requerido para ser Llenado"
   },
   "Blog": {
     "search": "Buscar",

@@ -61,12 +61,12 @@ const VenueSpaceInfo = ({
       },
       maxGuests: capacitySeated,
     },
-  ]
+  ]  
 
   return (
     <div className="space-y-6">
       {/* Total Space Section */}
-      <div className="bg-white  rounded-lg p-6">
+      <div className="bg-white  rounded-lg">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
             <Ruler className="w-4 h-4 text-blue-600" strokeWidth={2} />
@@ -99,7 +99,7 @@ const VenueSpaceInfo = ({
       </div>
 
       {/* Capacity Section */}
-      <div className="bg-white/60 rounded-lg p-6">
+      <div className="bg-white/60 rounded-lg">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center">
             <Users className="w-4 h-4 text-green-600" strokeWidth={2} />
