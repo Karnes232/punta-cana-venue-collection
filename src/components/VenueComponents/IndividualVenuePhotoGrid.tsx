@@ -1,7 +1,9 @@
 "use client"
+
 import Image from "next/image"
 import React, { useState } from "react"
 import { Lightbox } from "yet-another-react-lightbox"
+import Video from "yet-another-react-lightbox/plugins/video"
 import {
   isImageFitCover,
   isImageSlide,
@@ -11,7 +13,33 @@ import {
 import "yet-another-react-lightbox/styles.css"
 import { useTranslations } from "next-intl"
 
-const IndividualVenuePhotoGrid = ({ gallery }: { gallery: any }) => {
+type SanityImage = {
+  alt?: string
+  asset: {
+    url: string
+    mimeType?: string
+    metadata: {
+      dimensions: { width: number; height: number }
+      lqip?: string
+    }
+  }
+}
+
+const mimeFromUrl = (url: string) => {
+  const ext = url.split("?")[0].split("#")[0].split(".").pop()?.toLowerCase()
+  if (ext === "mp4") return "video/mp4"
+  if (ext === "webm") return "video/webm"
+  if (ext === "ogv" || ext === "ogg") return "video/ogg"
+  return "video/mp4"
+}
+
+const IndividualVenuePhotoGrid = ({
+  gallery,
+  videoGallery,
+}: {
+  gallery: SanityImage[]
+  videoGallery?: string[]
+}) => {
   const t = useTranslations("individualVenueListing")
   const [open, setOpen] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -36,10 +64,32 @@ const IndividualVenuePhotoGrid = ({ gallery }: { gallery: any }) => {
     )
   }
 
+  // Build slides: images first, then videos (if any)
+  const imageSlides = gallery.map((photo) => ({
+    src: photo.asset.url,
+    alt: photo.alt || "Venue photo",
+    width: photo.asset.metadata.dimensions.width,
+    height: photo.asset.metadata.dimensions.height,
+    blurDataURL: photo.asset.metadata?.lqip,
+  }))
+
+  const videoSlides =
+    Array.isArray(videoGallery)
+      ? videoGallery.map((url) => ({
+          type: "video" as const,
+          width: 1920,
+          height: 1080,
+          // poster: "/optional-poster.jpg",
+          sources: [{ src: url, type: mimeFromUrl(url) }],
+        }))
+      : []
+
+  const slides = [...imageSlides, ...videoSlides]
+
   return (
     <div className="w-full max-w-6xl mx-auto p-4">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 h-auto lg:h-[400px] xl:h-[500px]">
-        {/* Main large photo - takes up 2 columns on large screens */}
+        {/* Main large photo */}
         <div className="lg:col-span-2 group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500">
           <div
             className="relative w-full h-64 sm:h-80 md:h-96 lg:h-full bg-gray-100"
@@ -57,10 +107,7 @@ const IndividualVenuePhotoGrid = ({ gallery }: { gallery: any }) => {
               onLoad={() => handleImageLoad(0)}
               priority
             />
-            {/* Hover overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
-
-            {/* Photo counter badge */}
             <div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
               {gallery.length} {t("photos")}
               {gallery.length !== 1 ? "s" : ""}
@@ -68,9 +115,9 @@ const IndividualVenuePhotoGrid = ({ gallery }: { gallery: any }) => {
           </div>
         </div>
 
-        {/* Right side photos grid */}
+        {/* Right-side grid */}
         <div className="lg:col-span-2 grid grid-cols-2 gap-4">
-          {gallery.slice(1, 5).map((photo: any, index: number) => {
+          {gallery.slice(1, 5).map((photo, index) => {
             const actualIndex = index + 1
             const isLastVisible = actualIndex === 4 && gallery.length > 5
 
@@ -94,11 +141,7 @@ const IndividualVenuePhotoGrid = ({ gallery }: { gallery: any }) => {
                     onClick={() => handlePhotoClick(actualIndex)}
                     onLoad={() => handleImageLoad(actualIndex)}
                   />
-
-                  {/* Hover overlay */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
-
-                  {/* "View More" overlay for last photo */}
                   {isLastVisible && (
                     <div
                       className="absolute inset-0 flex flex-col items-center justify-center text-white cursor-pointer group-hover:bg-black/20 transition-all duration-300"
@@ -119,7 +162,7 @@ const IndividualVenuePhotoGrid = ({ gallery }: { gallery: any }) => {
             )
           })}
 
-          {/* Fill empty spaces if less than 4 additional photos */}
+          {/* Fillers if less than 5 total images */}
           {gallery.length <= 4 &&
             Array.from({ length: 4 - (gallery.length - 1) }).map((_, index) => (
               <div
@@ -130,30 +173,42 @@ const IndividualVenuePhotoGrid = ({ gallery }: { gallery: any }) => {
         </div>
       </div>
 
-      {/* Enhanced Lightbox */}
+      {/* Lightbox (images + videos) */}
       <Lightbox
         open={open}
         close={() => setOpen(false)}
-        slides={gallery.map((photo: any) => ({
-          src: photo.asset.url,
-          alt: photo.alt || "Venue photo",
-          width: photo.asset.metadata.dimensions.width,
-          height: photo.asset.metadata.dimensions.height,
-        }))}
-        render={{
-          slide: NextJsImage,
-        }}
         index={currentIndex}
+        plugins={[Video]}
+        slides={slides}
+        render={{ slide: NextJsImage }} // Only renders for image slides; video plugin handles videos
         controller={{ closeOnBackdropClick: true }}
-        carousel={{
-          finite: false,
-          preload: 2,
-        }}
-        animation={{
-          fade: 300,
-          swipe: 500,
+        carousel={{ finite: false, preload: 2 }}
+        animation={{ fade: 300, swipe: 500 }}
+        video={{
+          controls: true,
+          playsInline: true,
+          preload: "metadata",
+          autoPlay: true,
+          muted: true, // required if you enable autoplay
+          loop: true,
         }}
       />
+
+      {/* Optional: button to open the first video directly */}
+      {Array.isArray(videoGallery) && videoGallery.length > 0 && (
+        <div className="mt-4">
+          <button
+            className="px-4 py-2 rounded-xl bg-gradient-to-br from-golden/50 to-golden/90 text-charcoal hover:bg-golden transition-colors cursor-pointer"
+            onClick={() => {
+              // First video index is after all images
+              setCurrentIndex(imageSlides.length)
+              setOpen(true)
+            }}
+          >
+            {t("viewVideos")}
+          </button>
+        </div>
+      )}
     </div>
   )
 }
@@ -183,21 +238,17 @@ function NextJsImage({
   } = useLightboxProps()
 
   const { currentIndex } = useLightboxState()
-
   const cover = isImageSlide(slide) && isImageFitCover(slide, imageFit)
 
+  // Let the Video plugin render non-image slides
   if (!isNextJsImage(slide)) return undefined
 
   const width = !cover
-    ? Math.round(
-        Math.min(rect.width, (rect.height / slide.height) * slide.width),
-      )
+    ? Math.round(Math.min(rect.width, (rect.height / slide.height) * slide.width))
     : rect.width
 
   const height = !cover
-    ? Math.round(
-        Math.min(rect.height, (rect.width / slide.width) * slide.height),
-      )
+    ? Math.round(Math.min(rect.height, (rect.width / slide.width) * slide.height))
     : rect.height
 
   return (
@@ -217,9 +268,7 @@ function NextJsImage({
           cursor: click ? "pointer" : undefined,
         }}
         sizes={`${Math.ceil((width / window.innerWidth) * 100)}vw`}
-        onClick={
-          offset === 0 ? () => click?.({ index: currentIndex }) : undefined
-        }
+        onClick={offset === 0 ? () => click?.({ index: currentIndex }) : undefined}
       />
     </div>
   )

@@ -197,6 +197,7 @@ export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.cu
     gallery[] {
         asset -> {
             url,
+            mimeType,
             metadata {
                 dimensions {
                     width,
@@ -206,6 +207,7 @@ export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.cu
         },
         alt
     },
+    videoGallery[],
     map {
         latitude,
         longitude
@@ -219,6 +221,11 @@ export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.cu
         }
     },
     description {
+        _type,
+        en,
+        es
+    },
+    description2 {
         _type,
         en,
         es
@@ -253,6 +260,7 @@ export interface IndividualVenuePage {
   gallery: {
     asset: {
       url: string
+      mimeType: string
       metadata: {
         dimensions: {
           width: number
@@ -262,6 +270,7 @@ export interface IndividualVenuePage {
     }
     alt: string
   }[]
+  videoGallery: string[]
   map: {
     latitude: number
     longitude: number
@@ -277,6 +286,11 @@ export interface IndividualVenuePage {
     }
   }[]
   description: {
+    _type: string
+    en: any[]
+    es: any[]
+  }
+  description2: {
     _type: string
     en: any[]
     es: any[]

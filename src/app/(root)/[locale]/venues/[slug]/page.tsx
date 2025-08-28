@@ -13,6 +13,7 @@ import {
 } from "@/sanity/queries/IndividualVenues/IndividualVenues"
 import { getTranslations } from "next-intl/server"
 import { Cormorant_Garamond } from "next/font/google"
+import BlockContentIndividualVenuePage from "@/components/BlockContent/BlockContentIndividualVenuePage"
 
 
 const coromantGaramond = Cormorant_Garamond({
@@ -32,18 +33,7 @@ export default async function VenueIndividual({
   const { locale, slug } = await params
   const structuredData = await getIndividualVenueSchema(slug)
   const pageData = await getIndividualVenuePage(slug)
-
-  const venues = [
-    {
-      id: "1",
-      name: pageData.title[locale],
-      position: [pageData.map.latitude, pageData.map.longitude] as [
-        number,
-        number,
-      ],
-      image: pageData.heroImage,
-    },
-  ]
+  console.log(pageData)
 
   return (
     <>
@@ -55,16 +45,20 @@ export default async function VenueIndividual({
           }}
         />
       )}
+      {pageData.heroImage && (
       <HeroComponentIndividualVenue
         heroImage={pageData.heroImage}
-        heroTitle={pageData.title[locale]}
-      />
+          heroTitle={pageData.title[locale]}
+        />
+      )}
 
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 mt-8 px-4 lg:px-0">
         {/* Left Column - Main Content */}
         <div className="w-full lg:w-3/5 flex flex-col gap-8">
           {/* Photo Gallery */}
-          <IndividualVenuePhotoGrid gallery={pageData.gallery} />
+          {pageData.gallery && (
+            <IndividualVenuePhotoGrid gallery={pageData.gallery} videoGallery={pageData.videoGallery} />
+          )}
 
           {/* Description */}
           <div className="flex flex-col max-w-5xl mx-5 lg:p-2 lg:mx-auto">
@@ -73,7 +67,9 @@ export default async function VenueIndividual({
             >
               {t("about")}
             </h2>
-            <BlockContent content={pageData.description} language={locale} />
+            {pageData.description && (
+              <BlockContent content={pageData.description} language={locale} />
+            )}
           </div>
     
         </div>
@@ -112,7 +108,13 @@ export default async function VenueIndividual({
             <AmenitiesSection amenities={pageData.amenities} locale={locale} />
           </div>
         </div>
+        
       </div>
+      {pageData.description2 && (
+          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 mt-8 px-4 lg:px-0">
+            <BlockContentIndividualVenuePage content={pageData.description2} language={locale} />
+          </div>
+        )}
     </>
   )
 }

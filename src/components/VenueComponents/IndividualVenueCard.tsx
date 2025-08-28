@@ -131,7 +131,7 @@ const IndividualVenueCard = ({
                 {t("amenities")}
               </span>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 h-7 overflow-hidden">
               {displayAmenities.map((amenity, index) => {
                 const amenityTitle =
                   amenity.title[locale as keyof typeof amenity.title] ||
@@ -139,7 +139,7 @@ const IndividualVenueCard = ({
                 return (
                   <span
                     key={index}
-                    className="bg-ivory text-charcoal px-2 py-1 rounded-md text-xs font-medium"
+                    className="bg-ivory h-6 text-charcoal px-2 py-1 rounded-md text-xs font-medium"
                   >
                     {amenityTitle}
                   </span>

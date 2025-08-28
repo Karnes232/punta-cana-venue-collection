@@ -41,6 +41,11 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: "videoGallery",
+      type: "array",
+      of: [{ type: "url" }],
+    }),
+    defineField({
       name: "location",
       type: "string",
       options: {
@@ -68,6 +73,11 @@ export default defineType({
 
     defineField({
       name: "description",
+      type: "localizedBlock",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "description2",
       type: "localizedBlock",
       validation: Rule => Rule.required(),
     }),

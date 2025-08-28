@@ -81,7 +81,8 @@
     "squareFeet": "ft²",
     "capacity": "Capacidad",
     "guests": "invitados",
-    "eventTypes": "Tipos de Eventos"
+    "eventTypes": "Tipos de Eventos",
+    "viewVideos": "Ver Videos"
   },
   "RateVenue": {
     "reviews": "Reseñas",
