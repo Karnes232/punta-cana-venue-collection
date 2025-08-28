@@ -110,7 +110,7 @@ const AmenitiesSection = ({
       <div className="flex items-center gap-3">
         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-100 to-yellow-50 flex items-center justify-center">
           <Star
-            className="w-4 h-4 text-amber-600"
+            className="w-4 h-4 text-yellow-600"
             strokeWidth={2}
             fill="currentColor"
           />
@@ -133,10 +133,10 @@ const AmenitiesSection = ({
               key={index}
               className="flex items-center gap-3 p-3 rounded-lg bg-white/60 border border-gray-100 hover:bg-white hover:shadow-sm transition-all duration-200"
             >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-100 to-yellow-50 flex items-center justify-center flex-shrink-0">
                 {IconComponent ? (
                   <IconComponent
-                    className="w-4 h-4 text-gray-600"
+                    className="w-4 h-4 text-yellow-600"
                     strokeWidth={1.5}
                   />
                 ) : (

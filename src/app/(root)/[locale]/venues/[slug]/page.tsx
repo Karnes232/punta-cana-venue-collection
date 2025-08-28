@@ -14,6 +14,7 @@ import {
 import { getTranslations } from "next-intl/server"
 import { Cormorant_Garamond } from "next/font/google"
 import BlockContentIndividualVenuePage from "@/components/BlockContent/BlockContentIndividualVenuePage"
+import Location from "@/components/VenueComponents/Location"
 
 
 const coromantGaramond = Cormorant_Garamond({
@@ -77,6 +78,11 @@ export default async function VenueIndividual({
         {/* Right Column - Sidebar */}
         <div className="w-full flex flex-col lg:w-2/5 z-0 lg:mt-4 gap-6">
           {/* Map */}
+          {pageData.location && (
+            <div className="flex flex-col lg:w-full max-w-5xl mx-5 lg:p-2 lg:mx-auto">
+              <Location location={pageData.location}/>
+            </div>
+          )}
           {/* <div className="w-full rounded-2xl overflow-hidden h-96 lg:h-[416px] xl:h-[500px]">
             <MapSection venues={venues} />
           </div> */}

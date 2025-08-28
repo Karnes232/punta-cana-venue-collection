@@ -82,7 +82,8 @@
     "capacity": "Capacidad",
     "guests": "invitados",
     "eventTypes": "Tipos de Eventos",
-    "viewVideos": "Ver Videos"
+    "viewVideos": "Ver Videos",
+    "location": "Ubicación"
   },
   "RateVenue": {
     "reviews": "Reseñas",

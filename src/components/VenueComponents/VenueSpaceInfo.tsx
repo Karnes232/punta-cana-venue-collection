@@ -68,8 +68,8 @@ const VenueSpaceInfo = ({
       {/* Total Space Section */}
       <div className="bg-white  rounded-lg">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
-            <Ruler className="w-4 h-4 text-blue-600" strokeWidth={2} />
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-200 to-cyan-100 flex items-center justify-center">
+            <Ruler className="w-4 h-4 text-cyan-700" strokeWidth={2} />
           </div>
           <h3
             className={`${coromantGaramond.className} text-2xl font-semibold text-gray-800`}
