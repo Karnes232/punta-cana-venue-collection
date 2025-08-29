@@ -8,6 +8,7 @@ import TypeVenue from "@/components/VenueComponents/TypeVenue"
 import { getIndividualVenuesMapDetails } from "@/sanity/queries/IndividualVenues/IndividualVenues"
 import MapSection from "@/components/MapComponents/MapSection"
 import BlockContent from "@/components/BlockContent/BlockContent"
+import MainPageContent from "@/components/MainPageComponents/MainPageContent"
 
 interface PageProps {
   params: Promise<{
@@ -36,6 +37,36 @@ export default async function Home({ params }: PageProps) {
     slug: venue.slug,
   }))
 
+  const popupVenues = individualVenuesMapDetails.map(venue => ({
+    title: venue.title,
+    slug: venue.slug,
+  }))
+
+  // const [isSticky, setIsSticky] = useState(false);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollY = window.scrollY; // Get current scroll position
+
+  //     // Define the scroll position at which the button should become sticky
+  //     const triggerPosition = 500; // Adjust this value based on your page layout
+
+  //     // Set the sticky state based on scroll position
+  //     if (scrollY > triggerPosition) {
+  //       setIsSticky(true);
+  //     } else {
+  //       setIsSticky(false);
+  //     }
+  //   };
+
+  //   // Add the scroll event listener
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   // Clean up the event listener when the component unmounts
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -46,13 +77,22 @@ export default async function Home({ params }: PageProps) {
           }}
         />
       )}
-      <section className="">
+      <MainPageContent
+        mainPage={mainPage}
+        locale={locale}
+        typeVenue={typeVenue}
+        searchVenues={searchVenues}
+        venues={venues}
+        popupVenues={popupVenues}
+      />
+      {/* <section className="">
         <HeroComponent
           heroImage={mainPage.heroImage}
           heroTitle={mainPage.title[locale]}
           venues={searchVenues}
           locale={locale}
         />
+        
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4">
           <div className="w-full lg:w-1/2">
             <VenueOfDay
@@ -73,7 +113,7 @@ export default async function Home({ params }: PageProps) {
             <BlockContent content={mainPage.introduction} language={locale} />
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   )
 }
