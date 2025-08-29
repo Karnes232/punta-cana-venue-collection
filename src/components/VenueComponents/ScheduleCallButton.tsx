@@ -1,9 +1,12 @@
 "use client"
+import { useTranslations } from 'next-intl';
 import React, { useState, useEffect } from 'react'
 import { PopupModal } from "react-calendly";
+import { CalendlyUrls } from '@/sanity/queries/GeneralLayout/GeneralLayout';
 
-const ScheduleCallButton = () => {
+const ScheduleCallButton = ({ locale, calendlyUrls }: { locale: string, calendlyUrls: any }) => {
     const [isOpen, setIsOpen] = useState(false)
+    const t = useTranslations("individualVenueListing")
 
   const pageSettings = {
         backgroundColor: 'ffffff',
@@ -29,16 +32,18 @@ const ScheduleCallButton = () => {
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
+
+  const calendlyUrl = locale === 'es' ? calendlyUrls.spanishUrl : calendlyUrls.englishUrl
   return (
     <div id='schedule-call-button' className="relative z-[9999] flex-1">
         <button
         onClick={() => setIsOpen(true)}
         className="w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm"
       >
-        Schedule a Call
+        {t("scheduleCall")}
       </button>
       <PopupModal
-          url="https://calendly.com/karnes-james/new-meeting"
+          url={calendlyUrl}
           onModalClose={() => setIsOpen(false)}
           open={isOpen}
           pageSettings={pageSettings}

@@ -50,3 +50,22 @@ export async function getCompanyInfo(): Promise<CompanyInfo> {
   const companyInfo = await client.fetch<CompanyInfo>(companyInfoQuery)
   return companyInfo
 }
+
+export const calendlyUrlsQuery = `*[_type == "generalLayout"][0] {
+  calendlyUrls {
+    englishUrl,
+    spanishUrl
+  }
+}`
+
+export interface CalendlyUrls { 
+  calendlyUrls: {
+    englishUrl: string
+    spanishUrl: string
+  }
+}
+
+export async function getCalendlyUrls(): Promise<CalendlyUrls> {
+  const calendlyUrls = await client.fetch<CalendlyUrls>(calendlyUrlsQuery)
+  return calendlyUrls
+}

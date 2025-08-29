@@ -86,7 +86,9 @@
     "viewVideos": "Ver Videos",
     "location": "Ubicación",
     "interested": "Interesado",
-    "scheduleCall": "Programar Llamada"
+    "scheduleCall": "Programar Llamada",
+    "saveThisVenue": "Guardar Este Venue",
+    "addFavorites": "Agregar a tus favoritos para un acceso fácil más adelante"
   },
   "favorites": {
     "favorites": "Favoritos",
@@ -94,8 +96,9 @@
     "addFavorite": "Agregar a favoritos",
     "removeFavorite": "Eliminar de favoritos"
   },
-  "individualVenueForm": {
-    "interested": "Interesado"
+  "c": {
+    "interested": "Interesado",
+    "scheduleCall": "Programar Llamada"
   },
   "RateVenue": {
     "reviews": "Reseñas",

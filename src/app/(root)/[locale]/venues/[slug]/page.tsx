@@ -18,6 +18,7 @@ import Location from "@/components/VenueComponents/Location"
 import VenueFavoriteButton from "@/components/VenueComponents/VenueFavoriteButton"
 import IndividualVenueForm from "@/components/VenueComponents/IndividualVenueForm"
 import ScheduleCallButton from "@/components/VenueComponents/ScheduleCallButton"
+import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -36,7 +37,8 @@ export default async function VenueIndividual({
   const { locale, slug } = await params
   const structuredData = await getIndividualVenueSchema(slug)
   const pageData = await getIndividualVenuePage(slug)
-
+  const calendlyUrls = await getCalendlyUrls()
+  console.log(calendlyUrls.calendlyUrls)
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -100,10 +102,10 @@ export default async function VenueIndividual({
                   <h3
                     className={`${coromantGaramond.className} text-xl font-semibold text-charcoal`}
                   >
-                    Save This Venue
+                    {t("saveThisVenue")}
                   </h3>
                   <p className="text-slate-600 text-sm">
-                    Add to your favorites for easy access later
+                    {t("addFavorites")}
                   </p>
                 </div>
                 <VenueFavoriteButton
@@ -116,7 +118,7 @@ export default async function VenueIndividual({
               {/* Additional actions can go here */}
               <div className="flex gap-3">
                 <IndividualVenueForm venueName={pageData.title[locale]} className="flex-1 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm"/>
-                <ScheduleCallButton />
+                <ScheduleCallButton locale={locale} calendlyUrls={calendlyUrls.calendlyUrls} />
       
               </div>
             </div>

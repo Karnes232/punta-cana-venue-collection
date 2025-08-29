@@ -79,6 +79,23 @@ export default defineType({
       ],
       validation: Rule => Rule.required(),
     }),
+    defineField({
+      name: "calendlyUrls",
+      title: "Calendly URLs",
+      type: "object",
+      fields: [
+        defineField({
+          name: "englishUrl",
+          title: "English URL",
+          type: "string",
+        }),
+        defineField({
+          name: "spanishUrl",
+          title: "Spanish URL",
+          type: "string",
+        }),
+      ],
+    }),
   ],
   preview: {
     select: {

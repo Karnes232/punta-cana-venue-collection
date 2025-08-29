@@ -6,7 +6,7 @@ import { X } from "lucide-react"
 import IndividualVenueContactForm from "../ContactForms/IndividualVenueContactForm"
 
 const IndividualVenueForm = ({ venueName, className }: { venueName: string, className: string }) => {
-  const t = useTranslations("individualVenueForm")
+  const t = useTranslations("individualVenueListing")
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [mounted, setMounted] = useState(false)
