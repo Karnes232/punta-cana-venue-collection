@@ -58,7 +58,7 @@ export const calendlyUrlsQuery = `*[_type == "generalLayout"][0] {
   }
 }`
 
-export interface CalendlyUrls { 
+export interface CalendlyUrls {
   calendlyUrls: {
     englishUrl: string
     spanishUrl: string

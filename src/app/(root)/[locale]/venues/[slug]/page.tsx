@@ -104,9 +104,7 @@ export default async function VenueIndividual({
                   >
                     {t("saveThisVenue")}
                   </h3>
-                  <p className="text-slate-600 text-sm">
-                    {t("addFavorites")}
-                  </p>
+                  <p className="text-slate-600 text-sm">{t("addFavorites")}</p>
                 </div>
                 <VenueFavoriteButton
                   venueId={slug}
@@ -117,9 +115,14 @@ export default async function VenueIndividual({
 
               {/* Additional actions can go here */}
               <div className="flex gap-3">
-                <IndividualVenueForm venueName={pageData.title[locale]} className="flex-1 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm"/>
-                <ScheduleCallButton locale={locale} calendlyUrls={calendlyUrls.calendlyUrls} />
-      
+                <IndividualVenueForm
+                  venueName={pageData.title[locale]}
+                  className="flex-1 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm"
+                />
+                <ScheduleCallButton
+                  locale={locale}
+                  calendlyUrls={calendlyUrls.calendlyUrls}
+                />
               </div>
             </div>
           </div>

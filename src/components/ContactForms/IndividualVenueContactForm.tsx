@@ -1,8 +1,17 @@
-'use client'
+"use client"
 
-import React, { useState } from 'react'
-import { useTranslations } from 'next-intl'
-import { Send, Calendar, User, Mail, Phone, MessageSquare, Heart } from 'lucide-react'
+import React, { useState } from "react"
+import { useTranslations } from "next-intl"
+import {
+  Send,
+  Calendar,
+  User,
+  Mail,
+  Phone,
+  MessageSquare,
+  Heart,
+} from "lucide-react"
+import { set } from "sanity"
 
 interface FormData {
   name: string
@@ -23,39 +32,41 @@ interface IndividualVenueContactFormProps {
 const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
   formData,
   setFormData,
-  onClose
+  onClose,
 }) => {
-  const t = useTranslations('individualVenueForm')
+  const t = useTranslations("individualVenueForm")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [errors, setErrors] = useState<Partial<FormData>>({})
 
   // Common event types - you can customize these based on your needs
   const eventTypes = [
-    { value: 'wedding', label: 'Wedding' },
-    { value: 'corporate', label: 'Corporate Event' },
-    { value: 'birthday', label: 'Birthday Party' },
-    { value: 'anniversary', label: 'Anniversary' },
-    { value: 'graduation', label: 'Graduation' },
-    { value: 'baby-shower', label: 'Baby Shower' },
-    { value: 'quinceañera', label: 'Quinceañera' },
-    { value: 'other', label: 'Other' }
+    { value: "wedding", label: t("wedding") },
+    { value: "corporate", label: t("corporateEvent") },
+    { value: "birthday", label: t("birthdayParty") },
+    { value: "anniversary", label: t("anniversary") },
+    { value: "graduation", label: t("graduation") },
+    { value: "baby-shower", label: t("babyShower") },
+    { value: "quinceañera", label: t("quinceañera") },
+    { value: "other", label: t("other") },
   ]
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target
     setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }))
-    
+
     // Clear error for this field when user starts typing
     if (errors[name as keyof FormData]) {
       setErrors(prev => ({
         ...prev,
-        [name]: ''
+        [name]: "",
       }))
     }
   }
@@ -64,25 +75,25 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
     const newErrors: Partial<FormData> = {}
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required'
+      newErrors.name = t("nameIsRequired")
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required'
+      newErrors.email = t("emailIsRequired")
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address'
+      newErrors.email = t("pleaseEnterAValidEmailAddress")
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required'
+      newErrors.phone = t("phoneNumberIsRequired")
     }
 
     if (!formData.eventType) {
-      newErrors.eventType = 'Please select an event type'
+      newErrors.eventType = t("pleaseSelectAnEventType")
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Please tell us more about your event'
+      newErrors.message = t("pleaseTellUsMoreAboutYourEvent")
     }
 
     setErrors(newErrors)
@@ -91,7 +102,7 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateForm()) {
       return
     }
@@ -109,35 +120,36 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
       formDataToSend.append("estimatedDate", formData.estimatedDate)
       formDataToSend.append("message", formData.message)
 
-         // Submit to Netlify
-         const response = await fetch("/__forms.html", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: new URLSearchParams(formDataToSend as any),
-        })
-   
-      if (response.ok) {
-      setIsSubmitted(true)
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        eventType: '',
-        estimatedDate: '',
-        message: '',
-        venue: formData.venue, // Keep venue name
+      // Submit to Netlify
+      const response = await fetch("/__forms.html", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formDataToSend as any),
       })
-      if (onClose) {
-        onClose()
-      }
-    } else {
-      console.error("Form submission failed:", response.status)
-    }
 
+      if (response.ok) {
+        setIsSubmitted(true)
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          eventType: "",
+          estimatedDate: "",
+          message: "",
+          venue: formData.venue, // Keep venue name
+        })
+        setTimeout(() => {
+          if (onClose) {
+            onClose()
+          }
+        }, 4000)
+      } else {
+        console.error("Form submission failed:", response.status)
+      }
     } catch (error) {
-      console.error('Form submission error:', error)
+      console.error("Form submission error:", error)
       // Handle error - you might want to show an error message
     } finally {
       setIsSubmitting(false)
@@ -154,10 +166,11 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           </div>
         </div>
         <h3 className="text-xl font-semibold text-charcoal mb-2">
-          Message Sent Successfully!
+          {t("messageSentSuccessfully")}
         </h3>
         <p className="text-slate-600 text-sm">
-          Thank you for your interest in {formData.venue}. We'll get back to you within 24 hours.
+          {t("thankYouForYourInterest")} {formData.venue}.{" "}
+          {t("weWillGetBackToYouWithin24Hours")}
         </p>
       </div>
     )
@@ -167,9 +180,12 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Name Field */}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-charcoal mb-1">
+        <label
+          htmlFor="name"
+          className="block text-sm font-medium text-charcoal mb-1"
+        >
           <User size={14} className="inline mr-1" />
-          Full Name *
+          {t("fullName")} *
         </label>
         <input
           type="text"
@@ -178,9 +194,9 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           value={formData.name}
           onChange={handleInputChange}
           className={`w-full px-3 py-2 border rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden ${
-            errors.name ? 'border-red-300' : 'border-gray-300'
+            errors.name ? "border-red-300" : "border-gray-300"
           }`}
-          placeholder="Enter your full name"
+          placeholder={t("enterFullName")}
         />
         {errors.name && (
           <p className="text-red-500 text-xs mt-1">{errors.name}</p>
@@ -189,9 +205,12 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
 
       {/* Email Field */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-charcoal mb-1">
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-charcoal mb-1"
+        >
           <Mail size={14} className="inline mr-1" />
-          Email Address *
+          {t("emailAddress")} *
         </label>
         <input
           type="email"
@@ -200,9 +219,9 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           value={formData.email}
           onChange={handleInputChange}
           className={`w-full px-3 py-2 border rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden ${
-            errors.email ? 'border-red-300' : 'border-gray-300'
+            errors.email ? "border-red-300" : "border-gray-300"
           }`}
-          placeholder="your.email@example.com"
+          placeholder={t("enterEmailPlaceholder")}
         />
         {errors.email && (
           <p className="text-red-500 text-xs mt-1">{errors.email}</p>
@@ -211,9 +230,12 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
 
       {/* Phone Field */}
       <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-charcoal mb-1">
+        <label
+          htmlFor="phone"
+          className="block text-sm font-medium text-charcoal mb-1"
+        >
           <Phone size={14} className="inline mr-1" />
-          Phone Number *
+          {t("phoneNumber")} *
         </label>
         <input
           type="tel"
@@ -222,7 +244,7 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           value={formData.phone}
           onChange={handleInputChange}
           className={`w-full px-3 py-2 border rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden ${
-            errors.phone ? 'border-red-300' : 'border-gray-300'
+            errors.phone ? "border-red-300" : "border-gray-300"
           }`}
           placeholder="(555) 123-4567"
         />
@@ -233,9 +255,12 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
 
       {/* Event Type Field */}
       <div>
-        <label htmlFor="eventType" className="block text-sm font-medium text-charcoal mb-1">
+        <label
+          htmlFor="eventType"
+          className="block text-sm font-medium text-charcoal mb-1"
+        >
           <Heart size={14} className="inline mr-1" />
-          Event Type *
+          {t("eventType")} *
         </label>
         <select
           id="eventType"
@@ -243,11 +268,11 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           value={formData.eventType}
           onChange={handleInputChange}
           className={`w-full px-3 py-2 border rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden ${
-            errors.eventType ? 'border-red-300' : 'border-gray-300'
+            errors.eventType ? "border-red-300" : "border-gray-300"
           }`}
         >
-          <option value="">Select event type</option>
-          {eventTypes.map((type) => (
+          <option value="">{t("selectEventType")}</option>
+          {eventTypes.map(type => (
             <option key={type.value} value={type.value}>
               {type.label}
             </option>
@@ -260,9 +285,12 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
 
       {/* Date Field */}
       <div>
-        <label htmlFor="estimatedDate" className="block text-sm font-medium text-charcoal mb-1">
+        <label
+          htmlFor="estimatedDate"
+          className="block text-sm font-medium text-charcoal mb-1"
+        >
           <Calendar size={14} className="inline mr-1" />
-          Estimated Event Date
+          {t("estimatedEventDate")}
         </label>
         <input
           type="date"
@@ -271,15 +299,18 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           value={formData.estimatedDate}
           onChange={handleInputChange}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
-          min={new Date().toISOString().split('T')[0]}
+          min={new Date().toISOString().split("T")[0]}
         />
       </div>
 
       {/* Message Field */}
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-charcoal mb-1">
+        <label
+          htmlFor="message"
+          className="block text-sm font-medium text-charcoal mb-1"
+        >
           <MessageSquare size={14} className="inline mr-1" />
-          Tell us about your event *
+          {t("tellUsAboutYourEvent")} *
         </label>
         <textarea
           id="message"
@@ -288,9 +319,9 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           onChange={handleInputChange}
           rows={4}
           className={`w-full px-3 py-2 border rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden resize-none ${
-            errors.message ? 'border-red-300' : 'border-gray-300'
+            errors.message ? "border-red-300" : "border-gray-300"
           }`}
-          placeholder="Please share details about your event: guest count, specific requirements, budget range, or any questions you have about this venue."
+          placeholder={t("enterMessagePlaceholder")}
         />
         {errors.message && (
           <p className="text-red-500 text-xs mt-1">{errors.message}</p>
@@ -307,12 +338,12 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           {isSubmitting ? (
             <>
               <div className="animate-spin rounded-full h-4 w-4 border-2 border-charcoal border-t-transparent" />
-              Sending...
+              {t("sending")}
             </>
           ) : (
             <>
               <Send size={16} />
-              Send Inquiry
+              {t("sendInquiry")}
             </>
           )}
         </button>
@@ -320,7 +351,7 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
 
       {/* Privacy Note */}
       <p className="text-xs text-slate-500 text-center pt-2">
-        Your information is secure and will only be shared with the venue representative.
+        {t("privacyNote")}
       </p>
     </form>
   )
