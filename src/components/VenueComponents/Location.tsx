@@ -1,17 +1,17 @@
-import { MapPin } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-import { Cormorant_Garamond } from 'next/font/google'
-import React from 'react'
+import { MapPin } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { Cormorant_Garamond } from "next/font/google"
+import React from "react"
 
 const coromantGaramond = Cormorant_Garamond({
-    subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
-  })
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+})
 const Location = ({ location }: { location: string }) => {
-    const t = useTranslations("individualVenueListing")
+  const t = useTranslations("individualVenueListing")
   return (
     <div className="space-y-6">
-        <div className="bg-white  rounded-lg">
+      <div className="bg-white  rounded-lg">
         <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-100 to-cyan-50 flex items-center justify-center">
             <MapPin className="w-4 h-4 text-cyan-600" strokeWidth={2} />
@@ -29,9 +29,7 @@ const Location = ({ location }: { location: string }) => {
           </div>
         </div>
       </div>
-        
-        
-        </div>
+    </div>
   )
 }
 

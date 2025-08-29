@@ -65,7 +65,7 @@ const IndividualVenuePhotoGrid = ({
   }
 
   // Build slides: images first, then videos (if any)
-  const imageSlides = gallery.map((photo) => ({
+  const imageSlides = gallery.map(photo => ({
     src: photo.asset.url,
     alt: photo.alt || "Venue photo",
     width: photo.asset.metadata.dimensions.width,
@@ -73,16 +73,15 @@ const IndividualVenuePhotoGrid = ({
     blurDataURL: photo.asset.metadata?.lqip,
   }))
 
-  const videoSlides =
-    Array.isArray(videoGallery)
-      ? videoGallery.map((url) => ({
-          type: "video" as const,
-          width: 1920,
-          height: 1080,
-          // poster: "/optional-poster.jpg",
-          sources: [{ src: url, type: mimeFromUrl(url) }],
-        }))
-      : []
+  const videoSlides = Array.isArray(videoGallery)
+    ? videoGallery.map(url => ({
+        type: "video" as const,
+        width: 1920,
+        height: 1080,
+        // poster: "/optional-poster.jpg",
+        sources: [{ src: url, type: mimeFromUrl(url) }],
+      }))
+    : []
 
   const slides = [...imageSlides, ...videoSlides]
 
@@ -244,11 +243,15 @@ function NextJsImage({
   if (!isNextJsImage(slide)) return undefined
 
   const width = !cover
-    ? Math.round(Math.min(rect.width, (rect.height / slide.height) * slide.width))
+    ? Math.round(
+        Math.min(rect.width, (rect.height / slide.height) * slide.width),
+      )
     : rect.width
 
   const height = !cover
-    ? Math.round(Math.min(rect.height, (rect.width / slide.width) * slide.height))
+    ? Math.round(
+        Math.min(rect.height, (rect.width / slide.width) * slide.height),
+      )
     : rect.height
 
   return (
@@ -268,7 +271,9 @@ function NextJsImage({
           cursor: click ? "pointer" : undefined,
         }}
         sizes={`${Math.ceil((width / window.innerWidth) * 100)}vw`}
-        onClick={offset === 0 ? () => click?.({ index: currentIndex }) : undefined}
+        onClick={
+          offset === 0 ? () => click?.({ index: currentIndex }) : undefined
+        }
       />
     </div>
   )

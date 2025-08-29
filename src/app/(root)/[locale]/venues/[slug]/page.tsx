@@ -16,7 +16,7 @@ import { Cormorant_Garamond } from "next/font/google"
 import BlockContentIndividualVenuePage from "@/components/BlockContent/BlockContentIndividualVenuePage"
 import Location from "@/components/VenueComponents/Location"
 import VenueFavoriteButton from "@/components/VenueComponents/VenueFavoriteButton"
-
+import IndividualVenueForm from "@/components/VenueComponents/IndividualVenueForm"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -35,7 +35,6 @@ export default async function VenueIndividual({
   const { locale, slug } = await params
   const structuredData = await getIndividualVenueSchema(slug)
   const pageData = await getIndividualVenuePage(slug)
-  console.log(pageData)
 
   return (
     <>
@@ -49,31 +48,33 @@ export default async function VenueIndividual({
       )}
       {pageData.heroImage && (
         <div className="relative">
-        {pageData.heroImage && (
-          <HeroComponentIndividualVenue
-            heroImage={pageData.heroImage}
-            heroTitle={pageData.title[locale]}
-          />
-        )}
-        
-        {/* Floating Favorite Button */}
-        <div className="absolute top-4 right-4 z-10">
-          <VenueFavoriteButton
-            venueId={slug}
-            venueName={pageData.title[locale]}
-            size="large"
-          />
+          {pageData.heroImage && (
+            <HeroComponentIndividualVenue
+              heroImage={pageData.heroImage}
+              heroTitle={pageData.title[locale]}
+            />
+          )}
+
+          {/* Floating Favorite Button */}
+          <div className="absolute top-4 right-4 z-10">
+            <VenueFavoriteButton
+              venueId={slug}
+              venueName={pageData.title[locale]}
+              size="large"
+            />
+          </div>
         </div>
-      </div>
       )}
-      
 
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 mt-8 px-4 lg:px-0">
         {/* Left Column - Main Content */}
         <div className="w-full lg:w-3/5 flex flex-col gap-8">
           {/* Photo Gallery */}
           {pageData.gallery && (
-            <IndividualVenuePhotoGrid gallery={pageData.gallery} videoGallery={pageData.videoGallery} />
+            <IndividualVenuePhotoGrid
+              gallery={pageData.gallery}
+              videoGallery={pageData.videoGallery}
+            />
           )}
 
           {/* Description */}
@@ -87,16 +88,17 @@ export default async function VenueIndividual({
               <BlockContent content={pageData.description} language={locale} />
             )}
           </div>
-    
         </div>
 
         {/* Right Column - Sidebar */}
         <div className="w-full flex flex-col lg:w-2/5 z-0 lg:mt-4 gap-6">
-        <div className="flex flex-col lg:w-full max-w-5xl mx-5 lg:p-2 lg:mx-auto">
+          <div className="flex flex-col lg:w-full max-w-5xl mx-5 lg:p-2 lg:mx-auto">
             <div className="bg-gradient-to-br from-ivory to-white border border-golden/20 rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className={`${coromantGaramond.className} text-xl font-semibold text-charcoal`}>
+                  <h3
+                    className={`${coromantGaramond.className} text-xl font-semibold text-charcoal`}
+                  >
                     Save This Venue
                   </h3>
                   <p className="text-slate-600 text-sm">
@@ -109,14 +111,12 @@ export default async function VenueIndividual({
                   size="large"
                 />
               </div>
-              
+
               {/* Additional actions can go here */}
               <div className="flex gap-3">
-                <button className="flex-1 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm">
-                  Request Quote
-                </button>
+                <IndividualVenueForm venueName={pageData.title[locale]} />
                 <button className="flex-1 bg-white border border-golden/30 hover:border-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm">
-                  Contact Venue
+                  {t("scheduleCall")}
                 </button>
               </div>
             </div>
@@ -124,7 +124,7 @@ export default async function VenueIndividual({
           {/* Map */}
           {pageData.location && (
             <div className="flex flex-col lg:w-full max-w-5xl mx-5 lg:p-2 lg:mx-auto">
-              <Location location={pageData.location}/>
+              <Location location={pageData.location} />
             </div>
           )}
           {/* <div className="w-full rounded-2xl overflow-hidden h-96 lg:h-[416px] xl:h-[500px]">
@@ -158,13 +158,15 @@ export default async function VenueIndividual({
             <AmenitiesSection amenities={pageData.amenities} locale={locale} />
           </div>
         </div>
-        
       </div>
       {pageData.description2 && (
-          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 mt-8 px-4 lg:px-0">
-            <BlockContentIndividualVenuePage content={pageData.description2} language={locale} />
-          </div>
-        )}
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 mt-8 px-4 lg:px-0">
+          <BlockContentIndividualVenuePage
+            content={pageData.description2}
+            language={locale}
+          />
+        </div>
+      )}
     </>
   )
 }

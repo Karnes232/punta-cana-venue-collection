@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from "react"
 
 interface FavoriteVenue {
   id: string
@@ -18,39 +18,42 @@ const notifySubscribers = () => {
 }
 
 const loadFavoritesFromStorage = () => {
-  if (typeof window === 'undefined') return
+  if (typeof window === "undefined") return
 
   try {
-    const storedFavorites = localStorage.getItem('venueFavorites')
-    const storedVenueDetails = localStorage.getItem('venueFavoriteDetails')
-    
+    const storedFavorites = localStorage.getItem("venueFavorites")
+    const storedVenueDetails = localStorage.getItem("venueFavoriteDetails")
+
     if (storedFavorites) {
       globalFavorites = JSON.parse(storedFavorites)
     }
-    
+
     if (storedVenueDetails) {
       globalFavoriteVenues = JSON.parse(storedVenueDetails)
     }
   } catch (error) {
-    console.error('Failed to load favorites:', error)
+    console.error("Failed to load favorites:", error)
   }
 }
 
-const saveFavoritesToStorage = (favorites: string[], favoriteVenues: FavoriteVenue[]) => {
-  if (typeof window === 'undefined') return
+const saveFavoritesToStorage = (
+  favorites: string[],
+  favoriteVenues: FavoriteVenue[],
+) => {
+  if (typeof window === "undefined") return
 
   try {
-    localStorage.setItem('venueFavorites', JSON.stringify(favorites))
-    localStorage.setItem('venueFavoriteDetails', JSON.stringify(favoriteVenues))
-    
+    localStorage.setItem("venueFavorites", JSON.stringify(favorites))
+    localStorage.setItem("venueFavoriteDetails", JSON.stringify(favoriteVenues))
+
     // Update global state
     globalFavorites = favorites
     globalFavoriteVenues = favoriteVenues
-    
+
     // Notify all subscribers
     notifySubscribers()
   } catch (error) {
-    console.error('Failed to save favorites:', error)
+    console.error("Failed to save favorites:", error)
   }
 }
 
@@ -59,7 +62,7 @@ export const useFavorites = () => {
   const [favoriteVenues, setFavoriteVenues] = useState<FavoriteVenue[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  
+
   const MAX_FAVORITES = 5
 
   // Subscribe to global state changes
@@ -68,7 +71,7 @@ export const useFavorites = () => {
     if (globalFavorites.length === 0) {
       loadFavoritesFromStorage()
     }
-    
+
     setFavorites([...globalFavorites])
     setFavoriteVenues([...globalFavoriteVenues])
     setIsLoading(false)
@@ -87,45 +90,50 @@ export const useFavorites = () => {
   }, [])
 
   // Add venue to favorites
-  const addFavorite = useCallback(async (venueId: string, venueName: string) => {
-    setError(null)
-    
-    if (globalFavorites.includes(venueId)) return
+  const addFavorite = useCallback(
+    async (venueId: string, venueName: string) => {
+      setError(null)
 
-    // Check if adding would exceed the limit
-    if (globalFavorites.length >= MAX_FAVORITES) {
-      const errorMessage = `You can only favorite up to ${MAX_FAVORITES} venues. Please remove a favorite before adding a new one.`
-      setError(errorMessage)
-      throw new Error(errorMessage)
-    }
+      if (globalFavorites.includes(venueId)) return
 
-    const newFavorite: FavoriteVenue = {
-      id: venueId,
-      name: venueName,
-      addedAt: new Date().toISOString()
-    }
+      // Check if adding would exceed the limit
+      if (globalFavorites.length >= MAX_FAVORITES) {
+        const errorMessage = `You can only favorite up to ${MAX_FAVORITES} venues. Please remove a favorite before adding a new one.`
+        setError(errorMessage)
+        throw new Error(errorMessage)
+      }
 
-    const newFavorites = [...globalFavorites, venueId]
-    const newVenueDetails = [...globalFavoriteVenues, newFavorite]
+      const newFavorite: FavoriteVenue = {
+        id: venueId,
+        name: venueName,
+        addedAt: new Date().toISOString(),
+      }
 
-    saveFavoritesToStorage(newFavorites, newVenueDetails)
+      const newFavorites = [...globalFavorites, venueId]
+      const newVenueDetails = [...globalFavoriteVenues, newFavorite]
 
-    // Here you would typically make an API call
-    // try {
-    //   await addFavoriteAPI(venueId)
-    // } catch (error) {
-    //   // Revert on error
-    //   saveFavoritesToStorage(globalFavorites, globalFavoriteVenues)
-    //   throw error
-    // }
-  }, [])
+      saveFavoritesToStorage(newFavorites, newVenueDetails)
+
+      // Here you would typically make an API call
+      // try {
+      //   await addFavoriteAPI(venueId)
+      // } catch (error) {
+      //   // Revert on error
+      //   saveFavoritesToStorage(globalFavorites, globalFavoriteVenues)
+      //   throw error
+      // }
+    },
+    [],
+  )
 
   // Remove venue from favorites
   const removeFavorite = useCallback(async (venueId: string) => {
     setError(null)
-    
+
     const newFavorites = globalFavorites.filter(id => id !== venueId)
-    const newVenueDetails = globalFavoriteVenues.filter(venue => venue.id !== venueId)
+    const newVenueDetails = globalFavoriteVenues.filter(
+      venue => venue.id !== venueId,
+    )
 
     saveFavoritesToStorage(newFavorites, newVenueDetails)
 
@@ -140,18 +148,24 @@ export const useFavorites = () => {
   }, [])
 
   // Toggle favorite status
-  const toggleFavorite = useCallback(async (venueId: string, venueName: string) => {
-    if (globalFavorites.includes(venueId)) {
-      await removeFavorite(venueId)
-    } else {
-      await addFavorite(venueId, venueName)
-    }
-  }, [addFavorite, removeFavorite])
+  const toggleFavorite = useCallback(
+    async (venueId: string, venueName: string) => {
+      if (globalFavorites.includes(venueId)) {
+        await removeFavorite(venueId)
+      } else {
+        await addFavorite(venueId, venueName)
+      }
+    },
+    [addFavorite, removeFavorite],
+  )
 
   // Check if venue is favorited
-  const isFavorited = useCallback((venueId: string) => {
-    return globalFavorites.includes(venueId)
-  }, [favorites]) // Keep dependency on favorites to trigger re-renders
+  const isFavorited = useCallback(
+    (venueId: string) => {
+      return globalFavorites.includes(venueId)
+    },
+    [favorites],
+  ) // Keep dependency on favorites to trigger re-renders
 
   // Get favorite count
   const favoriteCount = favorites.length
@@ -170,7 +184,7 @@ export const useFavorites = () => {
   // Clear all favorites
   const clearFavorites = useCallback(async () => {
     setError(null)
-    
+
     saveFavoritesToStorage([], [])
 
     // Here you would typically make an API call

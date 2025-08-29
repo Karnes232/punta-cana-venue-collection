@@ -65,7 +65,10 @@ const components = {
   block: {
     // normal: ({ children }: any) => <p className="mb-4">{children}</p>,
     normal: ({ children }: any) => (
-      <TextComponentParagraphIndividualVenuePage paragraph={children} ParagraphClassName="mb-4" />
+      <TextComponentParagraphIndividualVenuePage
+        paragraph={children}
+        ParagraphClassName="mb-4"
+      />
     ),
     h1: ({ children }: any) => (
       <TextComponentHeading
@@ -128,7 +131,10 @@ const components = {
   },
 }
 
-const BlockContentIndividualVenuePage: React.FC<Props> = ({ content, language = "en" }) => {
+const BlockContentIndividualVenuePage: React.FC<Props> = ({
+  content,
+  language = "en",
+}) => {
   if (!content || !content[language]) {
     return null
   }

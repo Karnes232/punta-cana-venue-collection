@@ -84,8 +84,18 @@
     "guests": "invitados",
     "eventTypes": "Tipos de Eventos",
     "viewVideos": "Ver Videos",
-    "location": "Ubicación"
-    
+    "location": "Ubicación",
+    "interested": "Interesado",
+    "scheduleCall": "Programar Llamada"
+  },
+  "favorites": {
+    "favorites": "Favoritos",
+    "noFavorites": "No hay favoritos aún",
+    "addFavorite": "Agregar a favoritos",
+    "removeFavorite": "Eliminar de favoritos"
+  },
+  "individualVenueForm": {
+    "interested": "Interesado"
   },
   "RateVenue": {
     "reviews": "Reseñas",

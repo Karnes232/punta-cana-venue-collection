@@ -61,7 +61,7 @@ const VenueSpaceInfo = ({
       },
       maxGuests: capacitySeated,
     },
-  ]  
+  ]
 
   return (
     <div className="space-y-6">
