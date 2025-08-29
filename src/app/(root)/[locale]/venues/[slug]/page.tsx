@@ -114,7 +114,7 @@ export default async function VenueIndividual({
 
               {/* Additional actions can go here */}
               <div className="flex gap-3">
-                <IndividualVenueForm venueName={pageData.title[locale]} />
+                <IndividualVenueForm venueName={pageData.title[locale]} className="flex-1 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm"/>
                 <button className="flex-1 bg-white border border-golden/30 hover:border-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm">
                   {t("scheduleCall")}
                 </button>

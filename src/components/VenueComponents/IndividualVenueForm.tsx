@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl"
 import { X } from "lucide-react"
 import IndividualVenueContactForm from "../ContactForms/IndividualVenueContactForm"
 
-const IndividualVenueForm = ({ venueName }: { venueName: string }) => {
+const IndividualVenueForm = ({ venueName, className }: { venueName: string, className: string }) => {
   const t = useTranslations("individualVenueForm")
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
@@ -34,7 +34,7 @@ const IndividualVenueForm = ({ venueName }: { venueName: string }) => {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="flex-1 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm"
+        className={className}
       >
         {t("interested")}
       </button>

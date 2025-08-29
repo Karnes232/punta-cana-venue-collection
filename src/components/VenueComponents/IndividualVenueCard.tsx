@@ -7,6 +7,7 @@ import Link from "next/link"
 import React, { useState } from "react"
 import { useTranslations } from "next-intl"
 import { useFavorites } from "@/customHooks/useFavoritesHook"
+import IndividualVenueForm from "./IndividualVenueForm"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -248,9 +249,8 @@ const IndividualVenueCard = ({
 
         {/* View Details Button */}
         <div className="flex gap-4 justify-center">
-          <button className="block w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md">
-            {t("interested")}
-          </button>
+
+          <IndividualVenueForm venueName={localizedTitle} className="block w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md"/>
 
           <Link
             href={`/venues/${slug.current}`}
