@@ -32,7 +32,7 @@ const ContactPageForm = () => {
     try {
       // Create FormData for Netlify
       const formDataToSend = new FormData()
-      formDataToSend.append("form-name", "blogPost")
+      formDataToSend.append("form-name", "contactPage")
       formDataToSend.append("name", formData.name)
       formDataToSend.append("email", formData.email)
       formDataToSend.append("phone", formData.phone)
