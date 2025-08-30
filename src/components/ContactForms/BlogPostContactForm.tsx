@@ -82,9 +82,9 @@ const BlogPostContactForm = ({
       setIsSubmitting(false)
     }
   }
-  console.log(formData)
+
   const submitForm = async () => {
-    console.log(isFormValid())
+    
     if (!isFormValid()) {
       return
     }

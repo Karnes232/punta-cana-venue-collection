@@ -22,7 +22,7 @@ const ServiceDescription = ({
         </p>
         <div className="space-y-3 sm:space-y-4">
           {servicesItems.map((item: any, index: number) => (
-            <div className="flex items-start gap-3 sm:gap-4">
+            <div className="flex items-start gap-3 sm:gap-4" key={index}>
               <div className="w-7 h-7 sm:w-8 sm:h-8 bg-golden rounded-full flex items-center justify-center text-white font-semibold text-sm sm:text-base flex-shrink-0">
                 {index + 1}
               </div>

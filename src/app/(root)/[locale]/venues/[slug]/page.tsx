@@ -38,7 +38,7 @@ export default async function VenueIndividual({
   const structuredData = await getIndividualVenueSchema(slug)
   const pageData = await getIndividualVenuePage(slug)
   const calendlyUrls = await getCalendlyUrls()
-  console.log(calendlyUrls.calendlyUrls)
+
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
