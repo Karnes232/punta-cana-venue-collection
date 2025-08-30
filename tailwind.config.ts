@@ -10,6 +10,7 @@ const config = {
     "./src/app/**/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: false, // Disable dark mode completely
   safelist: [
     // Gradient from classes
     "from-orange-400",

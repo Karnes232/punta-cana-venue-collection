@@ -118,7 +118,13 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale} className={`${crimsonPro.variable}`}>
+    <html lang={locale} className={`${crimsonPro.variable} light`} style={{ colorScheme: "light" }}>
+      <head>
+        <meta name="color-scheme" content="light" />
+        <meta name="supported-color-schemes" content="light" />
+        <meta name="theme-color" content="#ffffff" />
+
+      </head>
       {/* <GoogleTagManager gtmId="GTM-KGLHKQW" />
       <GoogleAnalytics gaId="G-6MJLJ90SSM" />
       <GoogleAnalytics gaId="G-JDL6KCYRYD" /> */}
