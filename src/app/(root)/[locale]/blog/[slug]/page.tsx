@@ -3,6 +3,7 @@ import BlogPostHeader from "@/components/BlogComponents/BlogPostHeader"
 import BlogPostContactForm from "@/components/ContactForms/BlogPostContactForm"
 import { getBlogPostBySlug } from "@/sanity/queries/Blog/BlogPost"
 import { getBlogSeo, getBlogSeoSchema } from "@/sanity/queries/Blog/BlogSeo"
+import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 
 interface PageProps {
   params: Promise<{
@@ -16,6 +17,7 @@ export default async function BlogPost({ params }: PageProps) {
 
   const post = await getBlogPostBySlug(slug)
   const seoSchema = await getBlogSeoSchema(slug)
+  const calendlyUrls = await getCalendlyUrls()
 
   return (
     <section>
@@ -37,6 +39,7 @@ export default async function BlogPost({ params }: PageProps) {
           <BlogPostContactForm
             venueName={post.venueName}
             locale={locale as "en" | "es"}
+            calendlyUrls={calendlyUrls.calendlyUrls}
           />
         </div>
       </div>

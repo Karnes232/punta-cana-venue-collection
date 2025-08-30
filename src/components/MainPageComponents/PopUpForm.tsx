@@ -83,7 +83,7 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues, calen
     formDataToSend.append("eventType", formData.eventType)
     formDataToSend.append("estimatedDate", formData.estimatedDate)
     formDataToSend.append("venueOfInterest", formData.venueOfInterest)
-    console.log(formDataToSend)
+
     const response = await fetch("/__forms.html", {
       method: "POST",
       headers: {

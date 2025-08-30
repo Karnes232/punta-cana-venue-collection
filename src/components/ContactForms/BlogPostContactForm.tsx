@@ -1,16 +1,18 @@
 "use client"
 import React, { useState } from "react"
-import { Send, User, Mail, Phone, MapPin } from "lucide-react"
+import { Send, User, Mail, Phone, MapPin, Calendar } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 interface BlogPostContactFormProps {
   venueName: string
   locale: string
+  calendlyUrls: any
 }
 
 const BlogPostContactForm = ({
   venueName,
   locale,
+  calendlyUrls,
 }: BlogPostContactFormProps) => {
   const t = useTranslations("Contact")
   const [formData, setFormData] = useState({
@@ -31,8 +33,20 @@ const BlogPostContactForm = ({
     }))
   }
 
+  const isFormValid = () => {
+    return formData.name.trim() !== '' &&
+           formData.email.trim() !== '' &&
+           formData.phone.trim() !== ''
+
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    console.log(e)
+    if (!isFormValid()) {
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
@@ -184,11 +198,21 @@ const BlogPostContactForm = ({
           <input type="hidden" name="venue" value={formData.venue} />
 
           {/* Submit Button */}
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-4">
+          <a 
+                    href={locale === 'en' ? calendlyUrls.englishUrl : calendlyUrls.spanishUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-golden/70 to-golden/90 text-charcoal rounded-lg hover:bg-blue-700 transition-colors"
+                    onClick={handleSubmit}
+                  >
+                    <Calendar size={20} className="mr-2" />
+                    {locale === 'en' ? 'Open Calendly' : 'Abrir Calendly'}
+                  </a>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-golden/70 to-golden/90 text-slate-800 font-medium rounded-lg hover:bg-golden/90 focus:ring-2 focus:ring-golden focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-golden/70 to-golden/90 text-charcoal font-medium rounded-lg hover:bg-golden/90 focus:ring-2 focus:ring-golden focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isSubmitting ? (
                 <>
