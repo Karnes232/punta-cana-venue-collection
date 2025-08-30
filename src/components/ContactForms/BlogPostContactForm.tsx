@@ -42,10 +42,7 @@ const BlogPostContactForm = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(e)
-    if (!isFormValid()) {
-      return
-    }
+     
 
     setIsSubmitting(true)
 
@@ -85,6 +82,32 @@ const BlogPostContactForm = ({
       setIsSubmitting(false)
     }
   }
+console.log(formData)
+  const submitForm = async () => {
+    console.log(isFormValid())
+    if (!isFormValid()) {
+      return
+    }
+    const formDataToSend = new FormData()
+      formDataToSend.append("form-name", "blogPost")
+      formDataToSend.append("name", formData.name)
+      formDataToSend.append("email", formData.email)
+      formDataToSend.append("phone", formData.phone)
+      formDataToSend.append("venue", formData.venue)
+
+      const response = await fetch("/__forms.html", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formDataToSend as any),
+      })
+      if (response.ok) {
+        setIsSubmitted(true)
+      } else {
+        console.error("Form submission failed:", response.status)
+      }
+  }
 
   if (isSubmitted) {
     return (
@@ -93,6 +116,7 @@ const BlogPostContactForm = ({
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Send className="h-8 w-8 text-green-600" />
           </div>
+          
           <h3 className="text-2xl font-bold text-green-800 mb-2">
             {t("thankYou")}
           </h3>
@@ -100,6 +124,7 @@ const BlogPostContactForm = ({
             {t("responseMessage")} {venueName}.
           </p>
         </div>
+        
       </div>
     )
   }
@@ -198,17 +223,25 @@ const BlogPostContactForm = ({
           <input type="hidden" name="venue" value={formData.venue} />
 
           {/* Submit Button */}
-          <div className="flex justify-end gap-4">
+          <div className="flex 2xl:flex-col justify-end gap-4">
+            {isFormValid() ? (
           <a 
                     href={locale === 'en' ? calendlyUrls.englishUrl : calendlyUrls.spanishUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-golden/70 to-golden/90 text-charcoal rounded-lg hover:bg-blue-700 transition-colors"
-                    onClick={handleSubmit}
+                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-golden/70 to-golden/90 text-charcoal font-medium rounded-lg hover:bg-golden/90 focus:ring-2 focus:ring-golden focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    onClick={submitForm}
                   >
                     <Calendar size={20} className="mr-2" />
                     {locale === 'en' ? 'Open Calendly' : 'Abrir Calendly'}
                   </a>
+            ) : (
+              <button
+                type="submit"
+                disabled={true}
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-golden/70 to-golden/90 text-charcoal font-medium rounded-lg hover:bg-golden/90 focus:ring-2 focus:ring-golden focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >{t("fillForm")}</button>)}
+               
             <button
               type="submit"
               disabled={isSubmitting}

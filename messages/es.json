@@ -189,7 +189,8 @@
     "responseMessage": "Nos pondremos en contacto contigo muy pronto para ayudarte con tu evento en",
     "responseMessageContactPage": "Nos pondremos en contacto contigo muy pronto para ayudarte con tu evento.",
     "message": "Mensaje",
-    "messagePlaceholder": "Tu mensaje"
+    "messagePlaceholder": "Tu mensaje",
+    "fillForm": "Completa el Formulario Primero"
   },
   "PopUpForm": {
     "scheduleCall": "Programar una llamada con uno de nuestros asesores",
