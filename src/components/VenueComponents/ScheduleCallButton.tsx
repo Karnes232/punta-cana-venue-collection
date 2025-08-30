@@ -44,7 +44,7 @@ const ScheduleCallButton = ({
   const calendlyUrl =
     locale === "es" ? calendlyUrls.spanishUrl : calendlyUrls.englishUrl
   return (
-    <div id="schedule-call-button" className="relative z-[9999] flex-1">
+    <div id="schedule-call-button" className="relative z-[9998] flex-1">
       <button
         onClick={() => setIsOpen(true)}
         className="w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm"

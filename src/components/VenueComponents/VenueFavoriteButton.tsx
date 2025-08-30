@@ -1,9 +1,18 @@
 "use client"
 
 import React, { useState } from "react"
-import { Star, Heart } from "lucide-react"
+import { Star, Heart, AlertCircle } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useFavorites } from "@/customHooks/useFavoritesHook"
+
+// Add shake animation styles
+const shakeAnimation = `
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+  }
+`
 
 interface VenueFavoriteButtonProps {
   venueId: string
@@ -24,6 +33,7 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [showError, setShowError] = useState(false)
+  const [showMaxCapacityTooltip, setShowMaxCapacityTooltip] = useState(false)
   const {
     isFavorited,
     toggleFavorite,
@@ -62,13 +72,21 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
     e.preventDefault()
     e.stopPropagation()
 
-    // Clear any existing error
+    // Clear any existing error and tooltip
     clearError()
     setShowError(false)
+    setShowMaxCapacityTooltip(false)
 
     // If trying to add but already at max capacity
     if (!isFavoritedStatus && isAtMaxCapacity) {
       setShowError(true)
+      // Add a subtle shake animation effect
+      const button = e.currentTarget as HTMLButtonElement
+      button.style.animation = 'shake 0.5s ease-in-out'
+      setTimeout(() => {
+        button.style.animation = ''
+      }, 500)
+      
       setTimeout(() => setShowError(false), 4000) // Hide error after 4 seconds
       return
     }
@@ -105,7 +123,7 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
       isFavoritedStatus
         ? "bg-golden/10 hover:bg-golden/20 text-golden"
         : isAtMaxCapacity
-          ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+          ? "bg-gray-100 text-gray-400 cursor-not-allowed hover:bg-gray-200"
           : "bg-white/90 hover:bg-white text-gray-600 hover:text-golden"
     }
     backdrop-blur-sm
@@ -131,11 +149,14 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
   if (showLabel) {
     return (
       <div className="relative">
+        <style dangerouslySetInnerHTML={{ __html: shakeAnimation }} />
         <div className="flex items-center gap-3">
           <button
             onClick={handleFavoriteToggle}
-            disabled={isLoading || (!isFavoritedStatus && isAtMaxCapacity)}
+            // disabled={isLoading || (!isFavoritedStatus && isAtMaxCapacity)}
             className={buttonClasses}
+            onMouseEnter={() => !isFavoritedStatus && isAtMaxCapacity && setShowMaxCapacityTooltip(true)}
+            onMouseLeave={() => setShowMaxCapacityTooltip(false)}
             aria-label={
               isFavoritedStatus
                 ? `Remove ${venueName} from favorites`
@@ -167,11 +188,36 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
 
         {/* Error tooltip */}
         {showError && (error || (!isFavoritedStatus && isAtMaxCapacity)) && (
-          <div className="absolute top-full left-0 mt-2 p-2 bg-red-50 border border-red-200 rounded-lg shadow-lg z-50 min-w-64">
-            <p className="text-xs text-red-700">
-              {error ||
-                "Maximum of 5 favorites reached. Please remove a favorite first."}
-            </p>
+          <div className="absolute top-full left-0 mt-2 p-3 bg-red-50 border border-red-300 rounded-lg shadow-lg z-50 min-w-64 animate-in fade-in duration-200">
+            <div className="flex items-start gap-2">
+              <AlertCircle size={16} className="text-red-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="text-xs font-medium text-red-800 mb-1">
+                  Cannot Add to Favorites
+                </p>
+                <p className="text-xs text-red-700">
+                  {error ||
+                    "Maximum of 5 favorites reached. Please remove a favorite first."}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Max Capacity Tooltip */}
+        {showMaxCapacityTooltip && !isFavoritedStatus && isAtMaxCapacity && (
+          <div className="absolute top-full left-0 mt-2 p-3 bg-amber-50 border border-amber-200 rounded-lg shadow-lg z-50 min-w-64">
+            <div className="flex items-start gap-2">
+              <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="text-xs font-medium text-amber-800 mb-1">
+                  Maximum Favorites Reached
+                </p>
+                <p className="text-xs text-amber-700">
+                  You have reached the maximum of 5 favorite venues. Please remove a favorite before adding a new one.
+                </p>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -180,10 +226,13 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
 
   return (
     <div className="relative">
+      <style dangerouslySetInnerHTML={{ __html: shakeAnimation }} />
       <button
         onClick={handleFavoriteToggle}
-        disabled={isLoading || (!isFavoritedStatus && isAtMaxCapacity)}
+        //disabled={isLoading || (!isFavoritedStatus && isAtMaxCapacity)}
         className={buttonClasses}
+        onMouseEnter={() => !isFavoritedStatus && isAtMaxCapacity && setShowMaxCapacityTooltip(true)}
+        onMouseLeave={() => setShowMaxCapacityTooltip(false)}
         aria-label={
           isFavoritedStatus
             ? `Remove ${venueName} from favorites`
@@ -202,10 +251,35 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
 
       {/* Error tooltip */}
       {showError && (error || (!isFavoritedStatus && isAtMaxCapacity)) && (
-        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 p-2 bg-red-50 border border-red-200 rounded-lg shadow-lg z-50 min-w-48">
-          <p className="text-xs text-red-700 text-center">
-            {error || "Max 5 favorites reached. Remove one first."}
-          </p>
+        <div className="absolute top-full -left-10 transform -translate-x-1/2 mt-2 p-3 bg-red-50 border border-red-300 rounded-lg shadow-lg z-[9999] min-w-48 animate-in fade-in duration-200">
+          <div className="flex items-start gap-2">
+            <AlertCircle size={14} className="text-red-600 mt-0.5 flex-shrink-0" />
+            <div>
+              <p className="text-xs font-medium text-red-800 mb-1">
+                Cannot Add to Favorites
+              </p>
+              <p className="text-xs text-red-700 text-center">
+                {error || "Max 5 favorites reached. Remove one first."}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Max Capacity Tooltip */}
+      {showMaxCapacityTooltip && !isFavoritedStatus && isAtMaxCapacity && (
+        <div className="absolute top-full -left-10 transform -translate-x-1/2 mt-2 p-3 bg-amber-50 border border-amber-200 rounded-lg shadow-lg z-[9999] min-w-48">
+          <div className="flex items-start gap-2">
+            <AlertCircle size={14} className="text-amber-600 mt-0.5 flex-shrink-0" />
+            <div>
+              <p className="text-xs font-medium text-amber-800 mb-1">
+                Maximum Favorites Reached
+              </p>
+              <p className="text-xs text-amber-700 text-center">
+                You have reached the maximum of 5 favorite venues. Please remove a favorite before adding a new one.
+              </p>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -160,7 +160,7 @@ const IndividualVenueCard = ({
           </h3>
           <button
             onClick={handleStarClick}
-            disabled={isLoading || (!isFavoritedStatus && isAtMaxCapacity)}
+            //disabled={isLoading || (!isFavoritedStatus && isAtMaxCapacity)}
             className={`flex-shrink-0 p-1 rounded-full transition-colors duration-200 group disabled:opacity-50 disabled:cursor-not-allowed ${
               isFavoritedStatus
                 ? "hover:bg-golden/10"
