@@ -44,7 +44,6 @@ export default async function Home({ params }: PageProps) {
     slug: venue.slug,
   }))
 
-
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -64,7 +63,6 @@ export default async function Home({ params }: PageProps) {
         popupVenues={popupVenues}
         calendlyUrls={calendlyUrls.calendlyUrls}
       />
-   
     </>
   )
 }

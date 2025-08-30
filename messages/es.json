@@ -94,7 +94,12 @@
     "favorites": "Favoritos",
     "noFavorites": "No hay favoritos aún",
     "addFavorite": "Agregar a favoritos",
-    "removeFavorite": "Eliminar de favoritos"
+    "removeFavorite": "Eliminar de favoritos",
+    "clearAll": "Limpiar Todo",
+    "browseVenues": "Explorar Venues",
+    "startExploring": "Comienza a explorar venues y agrégalos a tus favoritos para un acceso fácil",
+    "addedOn": "Agregado el",
+    "view": "Ver"
   },
   "individualVenueForm": {
     "interested": "Interesado",
@@ -211,5 +216,10 @@
     "other": "Otro",
     "fillForm": "Completa el Formulario Primero",
     "scheduleCallButton": "Programar Llamada"
+  },
+  "venueInspection": {
+    "inspectionList": "Lista de Inspección",
+    "manageSelectedVenues": "Gestiona tus venues seleccionados",
+    "venues": "venues"
   }
 }

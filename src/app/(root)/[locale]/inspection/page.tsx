@@ -1,4 +1,9 @@
+import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
+import ServiceDescription from "@/components/VenueInspectionComponents/ServiceDescription"
+import Header from "@/components/VenueInspectionComponents/Header"
+import FavoritesList from "@/components/VenueInspectionComponents/FavoritesList"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
+import { getVenueInspectionPage } from "@/sanity/queries/VenueInspection/VenueInspectionPage"
 
 export default async function Inspection({
   params,
@@ -7,6 +12,7 @@ export default async function Inspection({
 }) {
   const { locale } = await params
   const structuredData = await getStructuredData("inspection")
+  const venueInspectionPage = await getVenueInspectionPage()
 
   return (
     <>
@@ -18,7 +24,31 @@ export default async function Inspection({
           }}
         />
       )}
-      <div className="min-h-screen">Inspection</div>
+      <HeroComponentBlog
+        heroImage={venueInspectionPage.heroImage}
+        heroTitle={venueInspectionPage.title[locale]}
+      />
+      <Header />
+      <div className="min-h-screen bg-ivory">
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main content area */}
+            <ServiceDescription
+              servicesTitle={venueInspectionPage.servicesTitle[locale]}
+              servicesDescription={
+                venueInspectionPage.servicesDescription[locale]
+              }
+              servicesItems={venueInspectionPage.servicesItems}
+              locale={locale}
+            />
+
+            {/* Sidebar with favorites */}
+            <div className="lg:col-span-1">
+              <FavoritesList locale={locale} />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

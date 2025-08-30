@@ -94,7 +94,12 @@
     "favorites": "Favorites",
     "noFavorites": "No favorites yet",
     "addFavorite": "Add to favorites",
-    "removeFavorite": "Remove from favorites"
+    "removeFavorite": "Remove from favorites",
+    "clearAll": "Clear All",
+    "browseVenues": "Browse Venues",
+    "startExploring": "Start exploring venues and add them to your favorites for easy access",
+    "addedOn": "Added",
+    "view": "View"
   },
   "individualVenueForm": {
     "interested": "Interested",
@@ -211,6 +216,10 @@
     "other": "Other",
     "fillForm": "Fill Form First",
     "scheduleCallButton": "Schedule Call"
-
+  },
+  "venueInspection": {
+    "inspectionList": "Inspection List",
+    "manageSelectedVenues": "Manage Selected Venues",
+    "venues": "venues"
   }
 }

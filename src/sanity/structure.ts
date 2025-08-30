@@ -38,6 +38,14 @@ export const structure: StructureResolver = S =>
             .documentId("mainPage"),
         ),
       S.listItem()
+        .title("Venue Inspection Page")
+        .child(
+          S.document()
+            .schemaType("venueInspectionPage")
+            .title("Venue Inspection Page")
+            .documentId("venueInspectionPage"),
+        ),
+      S.listItem()
         .title("Venue Page")
         .child(
           S.document()

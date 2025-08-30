@@ -11,6 +11,8 @@ import pageSeo from "./SEO/PageSeo"
 import legalDocuments from "./LegalDocuments/LegalDocuments"
 // Main Page
 import mainPage from "./MainPage/MainPage"
+// Venue Inspection Page
+import venueInspectionPage from "./VenueInspection/VenueInspectionPage"
 
 // About Page
 import aboutPage from "./AboutPage/AboutPage"
@@ -56,6 +58,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     location,
     typeVenue,
     eventType,
+
+    //Venue Inspection
+    venueInspectionPage,
+
     // About Page
     aboutPage,
     aboutCards,

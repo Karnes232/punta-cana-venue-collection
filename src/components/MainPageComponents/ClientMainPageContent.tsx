@@ -9,11 +9,13 @@ import dynamic from "next/dynamic"
 // Only dynamically import components that might cause browser API issues
 const MapSection = dynamic(() => import("../MapComponents/MapSection"), {
   ssr: false,
-  loading: () => <div className="w-full h-96 bg-gray-200 animate-pulse rounded-2xl" />
+  loading: () => (
+    <div className="w-full h-96 bg-gray-200 animate-pulse rounded-2xl" />
+  ),
 })
 
 const PopUpForm = dynamic(() => import("./PopUpForm"), {
-  ssr: false
+  ssr: false,
 })
 
 interface ClientMainPageContentProps {
@@ -26,20 +28,30 @@ interface ClientMainPageContentProps {
   calendlyUrls: any
 }
 
-export default function ClientMainPageContent(props: ClientMainPageContentProps) {
-  const { mainPage, locale, typeVenue, searchVenues, venues, popupVenues, calendlyUrls } = props
+export default function ClientMainPageContent(
+  props: ClientMainPageContentProps,
+) {
+  const {
+    mainPage,
+    locale,
+    typeVenue,
+    searchVenues,
+    venues,
+    popupVenues,
+    calendlyUrls,
+  } = props
   const [popUpReady, setPopUpReady] = useState(false)
   const [hasShown, setHasShown] = useState(false)
 
   useEffect(() => {
     // Check if we're in the browser environment
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return
 
     const handleScroll = () => {
-      const popupShown = sessionStorage.getItem('scheduleCallPopupShown');
+      const popupShown = sessionStorage.getItem("scheduleCallPopupShown")
       if (popupShown) {
-        setHasShown(true);
-        return;
+        setHasShown(true)
+        return
       }
       const scrollY = window.scrollY // Get current scroll position
 
@@ -49,8 +61,8 @@ export default function ClientMainPageContent(props: ClientMainPageContentProps)
       // Set the sticky state based on scroll position
       if (scrollY > triggerPosition) {
         setPopUpReady(true)
-        sessionStorage.setItem('scheduleCallPopupShown', 'true');
-      } 
+        sessionStorage.setItem("scheduleCallPopupShown", "true")
+      }
     }
 
     // Add the scroll event listener
@@ -65,13 +77,13 @@ export default function ClientMainPageContent(props: ClientMainPageContentProps)
   // Timer-based popup trigger
   useEffect(() => {
     // Only run setTimeout in browser environment
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return
 
     const timer = setTimeout(() => {
-      const popupShown = sessionStorage.getItem('scheduleCallPopupShown');
+      const popupShown = sessionStorage.getItem("scheduleCallPopupShown")
       if (!popupShown) {
         setPopUpReady(true)
-        sessionStorage.setItem('scheduleCallPopupShown', 'true')
+        sessionStorage.setItem("scheduleCallPopupShown", "true")
       }
     }, 8000)
 
@@ -81,11 +93,11 @@ export default function ClientMainPageContent(props: ClientMainPageContentProps)
 
   return (
     <section className="">
-      <PopUpForm 
-        popUpReady={popUpReady} 
-        setPopUpReady={setPopUpReady} 
-        className="bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md" 
-        locale={locale} 
+      <PopUpForm
+        popUpReady={popUpReady}
+        setPopUpReady={setPopUpReady}
+        className="bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md"
+        locale={locale}
         venues={popupVenues}
         calendlyUrls={calendlyUrls}
       />

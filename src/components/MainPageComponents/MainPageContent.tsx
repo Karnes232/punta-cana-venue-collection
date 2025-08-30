@@ -24,17 +24,17 @@ const MainPageContent = ({
   calendlyUrls: any
 }) => {
   const [popUpReady, setPopUpReady] = useState(false)
-  const [hasShown, setHasShown] = useState(false);
+  const [hasShown, setHasShown] = useState(false)
   useEffect(() => {
     // Check if we're in the browser environment
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return
 
     const handleScroll = () => {
-        const popupShown = sessionStorage.getItem('scheduleCallPopupShown');
-    if (popupShown) {
-      setHasShown(true);
-      return;
-    }
+      const popupShown = sessionStorage.getItem("scheduleCallPopupShown")
+      if (popupShown) {
+        setHasShown(true)
+        return
+      }
       const scrollY = window.scrollY // Get current scroll position
 
       // Define the scroll position at which the button should become sticky
@@ -43,8 +43,8 @@ const MainPageContent = ({
       // Set the sticky state based on scroll position
       if (scrollY > triggerPosition) {
         setPopUpReady(true)
-        sessionStorage.setItem('scheduleCallPopupShown', 'true');
-      } 
+        sessionStorage.setItem("scheduleCallPopupShown", "true")
+      }
     }
 
     // Add the scroll event listener
@@ -59,13 +59,13 @@ const MainPageContent = ({
   // Timer-based popup trigger
   useEffect(() => {
     // Only run setTimeout in browser environment
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return
 
     const timer = setTimeout(() => {
-      const popupShown = sessionStorage.getItem('scheduleCallPopupShown');
+      const popupShown = sessionStorage.getItem("scheduleCallPopupShown")
       if (!popupShown) {
         setPopUpReady(true)
-        sessionStorage.setItem('scheduleCallPopupShown', 'true')
+        sessionStorage.setItem("scheduleCallPopupShown", "true")
       }
     }, 8000)
 
@@ -73,11 +73,16 @@ const MainPageContent = ({
     return () => clearTimeout(timer)
   }, [])
 
-  
-
   return (
     <section className="">
-      <PopUpForm popUpReady={popUpReady} setPopUpReady={setPopUpReady} className="bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md" locale={locale} venues={popupVenues} calendlyUrls={calendlyUrls}/>
+      <PopUpForm
+        popUpReady={popUpReady}
+        setPopUpReady={setPopUpReady}
+        className="bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md"
+        locale={locale}
+        venues={popupVenues}
+        calendlyUrls={calendlyUrls}
+      />
       <HeroComponent
         heroImage={mainPage.heroImage}
         heroTitle={mainPage.title[locale]}
