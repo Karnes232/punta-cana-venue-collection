@@ -8,11 +8,7 @@ import TypeVenue from "@/components/VenueComponents/TypeVenue"
 import { getIndividualVenuesMapDetails } from "@/sanity/queries/IndividualVenues/IndividualVenues"
 import MapSection from "@/components/MapComponents/MapSection"
 import BlockContent from "@/components/BlockContent/BlockContent"
-import dynamic from "next/dynamic"
-
-const MainPageContent = dynamic(() => import("@/components/MainPageComponents/MainPageContent"), {
-  ssr: false
-})
+import ClientMainPageContent from "@/components/MainPageComponents/ClientMainPageContent"
 
 interface PageProps {
   params: Promise<{
@@ -81,7 +77,7 @@ export default async function Home({ params }: PageProps) {
           }}
         />
       )}
-      <MainPageContent
+      <ClientMainPageContent
         mainPage={mainPage}
         locale={locale}
         typeVenue={typeVenue}
