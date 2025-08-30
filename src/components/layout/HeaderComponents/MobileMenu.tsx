@@ -21,7 +21,7 @@ const MobileMenu = ({
     { href: "/blog", label: t("blog") },
     { href: "/about", label: t("about") },
     { href: "/contact", label: t("contact") },
-    { href: "/book-inspection", label: t("bookInspection") },
+    // { href: "/book-inspection", label: t("bookInspection") },
   ]
   return (
     <>

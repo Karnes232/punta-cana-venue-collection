@@ -12,7 +12,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 py-3 sm:py-4">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center space-x-3 min-w-0 flex-1">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-golden/50 to-golden/90 rounded-full flex items-center justify-center flex-shrink-0">
               <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
             <div className="min-w-0 flex-1">
@@ -26,7 +26,7 @@ const Header = () => {
           </div>
 
           <div className="flex items-center flex-shrink-0">
-            <div className="bg-amber-100 text-amber-800 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-semibold text-sm sm:text-base">
+            <div className="bg-gradient-to-br from-golden/70 to-golden/90 text-charcoal px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-light text-sm sm:text-base">
               <span className="hidden sm:inline">
                 {favoriteCount}/{maxFavorites} {t("venues")}
               </span>
