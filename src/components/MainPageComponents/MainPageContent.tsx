@@ -13,6 +13,7 @@ const MainPageContent = ({
   searchVenues,
   venues,
   popupVenues,
+  calendlyUrls,
 }: {
   mainPage: any
   locale: "en" | "es"
@@ -20,6 +21,7 @@ const MainPageContent = ({
   searchVenues: any
   venues: any
   popupVenues: any
+  calendlyUrls: any
 }) => {
   const [popUpReady, setPopUpReady] = useState(false)
   const [hasShown, setHasShown] = useState(false);
@@ -75,7 +77,7 @@ const MainPageContent = ({
 
   return (
     <section className="">
-      <PopUpForm popUpReady={popUpReady} setPopUpReady={setPopUpReady} className="bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md" locale={locale} venues={popupVenues}/>
+      <PopUpForm popUpReady={popUpReady} setPopUpReady={setPopUpReady} className="bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md" locale={locale} venues={popupVenues} calendlyUrls={calendlyUrls}/>
       <HeroComponent
         heroImage={mainPage.heroImage}
         heroTitle={mainPage.title[locale]}

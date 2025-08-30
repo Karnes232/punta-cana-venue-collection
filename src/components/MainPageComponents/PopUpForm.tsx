@@ -14,7 +14,7 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues, calen
     estimatedDate: '',
     venueOfInterest: ''
   });
-console.log(calendlyUrls)
+
   const eventTypes = [
     { value: "wedding", label: t("wedding") },
     { value: "corporate", label: t("corporateEvent") },
