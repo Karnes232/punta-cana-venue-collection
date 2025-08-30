@@ -53,17 +53,23 @@ const MainPageContent = ({
       window.removeEventListener("scroll", handleScroll)
     }
   }, [])
- 
+
+  // Timer-based popup trigger
+  useEffect(() => {
     // Only run setTimeout in browser environment
-    if (typeof window !== 'undefined') {
-      setTimeout(() => {
-          const popupShown = sessionStorage.getItem('scheduleCallPopupShown');
-          if (!popupShown) {
-            setPopUpReady(true)
-            sessionStorage.setItem('scheduleCallPopupShown', 'true')
-          }
-          }, 8000)
-    }
+    if (typeof window === 'undefined') return;
+
+    const timer = setTimeout(() => {
+      const popupShown = sessionStorage.getItem('scheduleCallPopupShown');
+      if (!popupShown) {
+        setPopUpReady(true)
+        sessionStorage.setItem('scheduleCallPopupShown', 'true')
+      }
+    }, 8000)
+
+    // Clean up the timer
+    return () => clearTimeout(timer)
+  }, [])
 
   
 
