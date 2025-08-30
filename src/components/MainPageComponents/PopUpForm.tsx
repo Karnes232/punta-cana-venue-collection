@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { X, Calendar, Phone, Mail, User, MapPin, Clock } from 'lucide-react';
 import { IndividualVenue } from '@/sanity/queries/IndividualVenues/IndividualVenues';
+import { useTranslations } from 'next-intl';
 
-const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { popUpReady: boolean, setPopUpReady: (value: boolean) => void, className: string, locale: 'en' | 'es', venues: IndividualVenue[] }) => {
+const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues, calendlyUrls }: { popUpReady: boolean, setPopUpReady: (value: boolean) => void, className: string, locale: 'en' | 'es', venues: IndividualVenue[], calendlyUrls: any }) => {
+  const t = useTranslations("PopUpForm")
   const [showCalendly, setShowCalendly] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -12,6 +14,16 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
     estimatedDate: '',
     venueOfInterest: ''
   });
+console.log(calendlyUrls)
+  const eventTypes = [
+    { value: "wedding", label: t("wedding") },
+    { value: "corporate", label: t("corporateEvent") },
+    { value: "birthday", label: t("birthdayParty") },
+    { value: "anniversary", label: t("anniversary") },
+    { value: "baby-shower", label: t("babyShower") },
+    { value: "quinceañera", label: t("quinceañera") },
+    { value: "other", label: t("other") },
+  ]
 
   // Handle escape key to close modal
   useEffect(() => {
@@ -56,6 +68,47 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
            formData.estimatedDate !== '';
   };
 
+  const handleScheduleCall = () => {
+    if (isFormValid()) {
+      setShowCalendly(true);
+    }
+  };
+
+  const submitForm = async () => {
+    const formDataToSend = new FormData()
+    formDataToSend.append("form-name", "popUpForm")
+    formDataToSend.append("name", formData.name)
+    formDataToSend.append("email", formData.email)
+    formDataToSend.append("phone", formData.phone)
+    formDataToSend.append("eventType", formData.eventType)
+    formDataToSend.append("estimatedDate", formData.estimatedDate)
+    formDataToSend.append("venueOfInterest", formData.venueOfInterest)
+    console.log(formDataToSend)
+    const response = await fetch("/__forms.html", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(formDataToSend as any),
+    })
+    if (response.ok) {
+      console.log("Form submitted successfully")
+      
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        eventType: "",
+        estimatedDate: "",
+        venueOfInterest: "",
+      })
+      setShowCalendly(false)
+      setPopUpReady(false)
+    } else {
+      console.error("Form submission failed:", response.status)
+    }
+  }
+
 
   return (
     <div 
@@ -76,9 +129,9 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
               </button>
               <div className="flex items-center gap-3 mb-2">
                 <Calendar className="text-charcoal" size={28} />
-                <h2 className="text-2xl font-bold">Schedule a call with one of our advisors</h2>
+                <h2 className="text-2xl font-bold">{t("scheduleCall")}</h2>
               </div>
-              <p className="text-charcoal">Click the link below to schedule your consultation with one of our venue specialists.</p>
+              <p className="text-charcoal">{t("clickLink")}</p>
             </div>
 
             {/* Form */}
@@ -87,14 +140,14 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   <User size={16} className="inline mr-2" />
-                  Name
+                  {t("name")}
                 </label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  placeholder="Name"
+                  placeholder={t("name")}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
@@ -103,14 +156,14 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   <Mail size={16} className="inline mr-2" />
-                  Email
+                  {t("email")}
                 </label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  placeholder="Email"
+                  placeholder={t("email")}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
@@ -119,14 +172,14 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   <Phone size={16} className="inline mr-2" />
-                  Phone
+                  {t("phone")}
                 </label>
                 <input
                   type="tel"
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  placeholder="Phone"
+                  placeholder={t("phone")}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 />
               </div>
@@ -135,26 +188,26 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   <Calendar size={16} className="inline mr-2" />
-                  Event Type
+                  {t("eventType")}
                 </label>
-                {/* <select
+                <select
                   name="eventType"
                   value={formData.eventType}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 >
-                  <option value="">{t.placeholders.eventType}</option>
-                  {t.eventTypes.map((type, index) => (
-                    <option key={index} value={type}>{type}</option>
+                  <option value="">{t("eventType")}</option>
+                  {eventTypes.map((type, index) => (
+                    <option key={index} value={type.value}>{type.label}</option>
                   ))}
-                </select> */}
+                </select>
               </div>
 
               {/* Estimated Date */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   <Clock size={16} className="inline mr-2" />
-                  Estimated Date
+                  {t("estimatedDate")}
                 </label>
                 <input
                   type="date"
@@ -170,7 +223,7 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     <MapPin size={16} className="inline mr-2" />
-                    Venue of Interest
+                    {t("venueOfInterest")}
                   </label>
                   <select
                     name="venueOfInterest"
@@ -178,7 +231,7 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   >
-                    <option value="">Venue of Interest</option>
+                    <option value="">{t("venueOfInterest")}</option>
                     {venues.map((venue, index) => (
                       <option key={index} value={venue.slug.current}>
                         {venue.title[locale]}
@@ -190,7 +243,7 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
 
               {/* Action Button */}
               <div className="pt-4">
-                {/* <button
+                <button
                   onClick={handleScheduleCall}
                   disabled={!isFormValid()}
                   className={`w-full py-4 px-6 rounded-lg font-semibold text-lg transition-all ${
@@ -200,8 +253,8 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
                   }`}
                 >
                   <Calendar size={20} className="inline mr-2" />
-                  {isFormValid() ? t.scheduleCall : t.fillForm}
-                </button> */}
+                  {isFormValid() ? t("scheduleCallButton") : t("fillForm")}
+                </button>
               </div>
             </div>
           </>
@@ -218,7 +271,7 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
               </button>
               <div className="p-4">
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-                  <h3 className="font-semibold text-blue-800 mb-2">📅 Schedule a call with one of our advisors</h3>
+                  <h3 className="font-semibold text-blue-800 mb-2">📅 {t("scheduleCall")}</h3>
                   <p className="text-sm text-blue-600">
                     {locale === 'en' 
                       ? 'Click the link below to schedule your consultation with one of our venue specialists.'
@@ -240,10 +293,11 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
                     }
                   </p>
                   <a 
-                    href="https://calendly.com/your-link" 
+                    href={locale === 'en' ? calendlyUrls.englishUrl : calendlyUrls.spanishUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    onClick={submitForm}
                   >
                     <Calendar size={20} className="mr-2" />
                     {locale === 'en' ? 'Open Calendly' : 'Abrir Calendly'}
@@ -256,13 +310,13 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
                     {locale === 'en' ? 'Your Information:' : 'Tu Información:'}
                   </h4>
                   <div className="text-sm text-gray-600 space-y-1">
-                      <p><strong>Name:</strong> {formData.name}</p>
-                    <p><strong>Email:</strong> {formData.email}</p>
-                    <p><strong>Phone:</strong> {formData.phone}</p>
-                    <p><strong>Event Type:</strong> {formData.eventType}</p>
-                    <p><strong>Estimated Date:</strong> {formData.estimatedDate}</p>
+                      <p><strong>{t('name')}:</strong> {formData.name}</p>
+                    <p><strong>{t("email")}:</strong> {formData.email}</p>
+                    <p><strong>{t("phone")}:</strong> {formData.phone}</p>
+                    <p><strong>{t("eventType")}:</strong> {eventTypes.find(type => type.value === formData.eventType)?.label || formData.eventType}</p>
+                    <p><strong>{t("estimatedDate")}:</strong> {formData.estimatedDate}</p>
                     {formData.venueOfInterest && (
-                      <p><strong>Venue of Interest:</strong> {
+                      <p><strong>{t("venueOfInterest")}:</strong> {
                         venues.find(v => v.slug.current === formData.venueOfInterest)?.title[locale] || formData.venueOfInterest
                       }</p>
                     )}

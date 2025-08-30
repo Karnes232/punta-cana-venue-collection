@@ -190,5 +190,25 @@
     "responseMessageContactPage": "Nos pondremos en contacto contigo muy pronto para ayudarte con tu evento.",
     "message": "Mensaje",
     "messagePlaceholder": "Tu mensaje"
+  },
+  "PopUpForm": {
+    "scheduleCall": "Programar una llamada con uno de nuestros asesores",
+    "clickLink": "Haz clic en el enlace de abajo para agendar tu consulta con uno de nuestros especialistas en venues.",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "eventType": "Tipo de Evento",
+    "estimatedDate": "Fecha Estimada",
+    "venueOfInterest": "Venue de Interés",
+    "wedding": "Boda",
+    "corporateEvent": "Evento Corporativo",
+    "birthdayParty": "Fiesta de Cumpleaños",
+    "anniversary": "Aniversario",
+    "graduation": "Graduación",
+    "babyShower": "Fiesta de Bebé",
+    "quinceañera": "Quinceañera",
+    "other": "Otro",
+    "fillForm": "Completa el Formulario Primero",
+    "scheduleCallButton": "Programar Llamada"
   }
 }

@@ -9,6 +9,7 @@ import { getIndividualVenuesMapDetails } from "@/sanity/queries/IndividualVenues
 import MapSection from "@/components/MapComponents/MapSection"
 import BlockContent from "@/components/BlockContent/BlockContent"
 import ClientMainPageContent from "@/components/MainPageComponents/ClientMainPageContent"
+import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 
 interface PageProps {
   params: Promise<{
@@ -22,6 +23,7 @@ export default async function Home({ params }: PageProps) {
   const typeVenue = await getTypeVenue()
   const structuredData = await getStructuredData("home")
   const individualVenuesMapDetails = await getIndividualVenuesMapDetails()
+  const calendlyUrls = await getCalendlyUrls()
 
   const venues = individualVenuesMapDetails.map(venue => ({
     id: venue.slug.current,
@@ -42,30 +44,6 @@ export default async function Home({ params }: PageProps) {
     slug: venue.slug,
   }))
 
-  // const [isSticky, setIsSticky] = useState(false);
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const scrollY = window.scrollY; // Get current scroll position
-
-  //     // Define the scroll position at which the button should become sticky
-  //     const triggerPosition = 500; // Adjust this value based on your page layout
-
-  //     // Set the sticky state based on scroll position
-  //     if (scrollY > triggerPosition) {
-  //       setIsSticky(true);
-  //     } else {
-  //       setIsSticky(false);
-  //     }
-  //   };
-
-  //   // Add the scroll event listener
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   // Clean up the event listener when the component unmounts
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
 
   return (
     <>
@@ -84,36 +62,9 @@ export default async function Home({ params }: PageProps) {
         searchVenues={searchVenues}
         venues={venues}
         popupVenues={popupVenues}
+        calendlyUrls={calendlyUrls.calendlyUrls}
       />
-      {/* <section className="">
-        <HeroComponent
-          heroImage={mainPage.heroImage}
-          heroTitle={mainPage.title[locale]}
-          venues={searchVenues}
-          locale={locale}
-        />
-        
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4">
-          <div className="w-full lg:w-1/2">
-            <VenueOfDay
-              venueOfTheDay={mainPage.venueOfTheDay}
-              locale={locale}
-            />
-          </div>
-
-          <div className="lg:w-1/2">
-            <TypeVenue typeVenue={typeVenue} locale={locale} />
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row-reverse gap-4 z-0 px-4 mt-4">
-          <div className="w-full h-96 lg:h-auto lg:ml-4 xl:w-1/2 rounded-2xl overflow-hidden">
-            <MapSection venues={venues} height={400} />
-          </div>
-          <div className="w-full xl:w-1/2 h-full rounded-2xl overflow-hidden">
-            <BlockContent content={mainPage.introduction} language={locale} />
-          </div>
-        </div>
-      </section> */}
+   
     </>
   )
 }

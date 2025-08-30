@@ -23,10 +23,11 @@ interface ClientMainPageContentProps {
   searchVenues: any
   venues: any
   popupVenues: any
+  calendlyUrls: any
 }
 
 export default function ClientMainPageContent(props: ClientMainPageContentProps) {
-  const { mainPage, locale, typeVenue, searchVenues, venues, popupVenues } = props
+  const { mainPage, locale, typeVenue, searchVenues, venues, popupVenues, calendlyUrls } = props
   const [popUpReady, setPopUpReady] = useState(false)
   const [hasShown, setHasShown] = useState(false)
 
@@ -86,6 +87,7 @@ export default function ClientMainPageContent(props: ClientMainPageContentProps)
         className="bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md" 
         locale={locale} 
         venues={popupVenues}
+        calendlyUrls={calendlyUrls}
       />
       <HeroComponent
         heroImage={mainPage.heroImage}

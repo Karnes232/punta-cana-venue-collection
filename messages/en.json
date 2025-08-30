@@ -190,5 +190,26 @@
     "responseMessageContactPage": "We will get back to you soon to help you plan your perfect event.",
     "message": "Message",
     "messagePlaceholder": "Your message"
+  },
+  "PopUpForm": {
+    "scheduleCall": "Schedule a call with one of our advisors",
+    "clickLink": "Click the link below to schedule your consultation with one of our venue specialists.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "eventType": "Event Type",
+    "estimatedDate": "Estimated Date",
+    "venueOfInterest": "Venue of Interest",
+    "wedding": "Wedding",
+    "corporateEvent": "Corporate Event",
+    "birthdayParty": "Birthday Party",
+    "anniversary": "Anniversary",
+    "graduation": "Graduation",
+    "babyShower": "Baby Shower",
+    "quinceañera": "Quinceañera",
+    "other": "Other",
+    "fillForm": "Fill Form First",
+    "scheduleCallButton": "Schedule Call"
+
   }
 }
