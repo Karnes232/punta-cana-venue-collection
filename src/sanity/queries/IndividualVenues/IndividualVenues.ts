@@ -1,7 +1,7 @@
 import { client } from "@/sanity/lib/client"
 import { HeroImage } from "../MainPage/MainPage"
 
-export const individualVenuesQuery = `*[_type == "individualVenue"] {
+export const individualVenuesQuery = `*[_type == "individualVenue" && displayed == true] {
     title {
         en,
         es
@@ -327,7 +327,7 @@ export async function getIndividualVenuePage(
   return data
 }
 
-export const individualVenuesMapDetailsQuery = `*[_type == "individualVenue"] {
+export const individualVenuesMapDetailsQuery = `*[_type == "individualVenue" && displayed == true] {
 title {
         en,
         es

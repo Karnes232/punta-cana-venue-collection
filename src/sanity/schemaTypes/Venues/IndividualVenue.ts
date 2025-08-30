@@ -33,12 +33,13 @@ export default defineType({
           type: "image",
           options: { hotspot: true },
           fields: [
-            { name: "alt", type: "localizedString", title: "Alt text" },
+            { name: "alt", type: "localizedString", title: "Alt text", validation: Rule => Rule.required() },
             { name: "caption", type: "localizedString", title: "Caption" },
           ],
         },
       ],
-      validation: Rule => Rule.required(),
+      description: "The gallery of images of the venue. Minimum 5 images.",
+      validation: Rule => Rule.required().min(5),
     }),
     defineField({
       name: "videoGallery",
@@ -79,7 +80,6 @@ export default defineType({
     defineField({
       name: "description2",
       type: "localizedBlock",
-      validation: Rule => Rule.required(),
     }),
 
     // defineField({ name: 'location', type: 'reference', to: [{ type: 'location' }], validation: r => r.required() }),
@@ -134,6 +134,12 @@ export default defineType({
     //defineField({ name: 'availabilityNote', type: 'localizedText' }),
 
     defineField({ name: "seo", type: "seo" }),
+    defineField({
+      name: 'displayed',
+      type: 'boolean',
+      initialValue: true,
+      validation: Rule => Rule.required(),
+    })
   ],
   preview: {
     select: {
