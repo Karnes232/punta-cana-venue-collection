@@ -13,7 +13,32 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
     venueOfInterest: ''
   });
 
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && popUpReady) {
+        setPopUpReady(false);
+      }
+    };
 
+    if (popUpReady) {
+      document.addEventListener('keydown', handleEscape);
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [popUpReady, setPopUpReady]);
+
+  // Handle click outside to close modal
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      setPopUpReady(false);
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -33,7 +58,10 @@ const PopUpForm = ({ popUpReady, setPopUpReady, className, locale, venues }: { p
 
 
   return (
-    <div className={` fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 ${popUpReady ? "opacity-100" : "opacity-0"} transition-opacity duration-300 ease-in-out`}>
+    <div 
+      className={`fixed inset-0 bg-black/50 bg-opacity-50 z-50 flex items-center justify-center p-4 ${popUpReady ? "opacity-100" : "opacity-0 pointer-events-none"} transition-opacity duration-300 ease-in-out`}
+      onClick={handleBackdropClick}
+    >
       <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {!showCalendly ? (
           <>
