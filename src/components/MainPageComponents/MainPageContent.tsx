@@ -24,6 +24,9 @@ const MainPageContent = ({
   const [popUpReady, setPopUpReady] = useState(false)
   const [hasShown, setHasShown] = useState(false);
   useEffect(() => {
+    // Check if we're in the browser environment
+    if (typeof window === 'undefined') return;
+
     const handleScroll = () => {
         const popupShown = sessionStorage.getItem('scheduleCallPopupShown');
     if (popupShown) {
@@ -51,13 +54,16 @@ const MainPageContent = ({
     }
   }, [])
  
-    setTimeout(() => {
-        const popupShown = sessionStorage.getItem('scheduleCallPopupShown');
-        if (!popupShown) {
-          setPopUpReady(true)
-          sessionStorage.setItem('scheduleCallPopupShown', 'true')
-        }
-        }, 8000)
+    // Only run setTimeout in browser environment
+    if (typeof window !== 'undefined') {
+      setTimeout(() => {
+          const popupShown = sessionStorage.getItem('scheduleCallPopupShown');
+          if (!popupShown) {
+            setPopUpReady(true)
+            sessionStorage.setItem('scheduleCallPopupShown', 'true')
+          }
+          }, 8000)
+    }
 
   
 
