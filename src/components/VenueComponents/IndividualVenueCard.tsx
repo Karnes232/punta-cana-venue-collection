@@ -169,14 +169,14 @@ const IndividualVenueCard = ({
                   : "hover:bg-gray-100"
             } ${showError ? "animate-pulse bg-red-50" : ""}`}
             aria-label={
-              isFavoritedStatus ? "Remove from favorites" : "Add to favorites"
+              isFavoritedStatus ? t("removeFromFavorites") : t("addToFavorites")
             }
             title={
               !isFavoritedStatus && isAtMaxCapacity
-                ? `Maximum of 5 favorites reached. Remove a favorite first.`
+                ? t("maximumFavoritesReached")
                 : isFavoritedStatus
-                  ? "Remove from favorites"
-                  : `Add to favorites (${remainingSlots} slots remaining)`
+                  ? t("removeFromFavorites")
+                  : `${t('addToFavorites')} (${remainingSlots} ${t('slotsRemaining')})`
             }
           >
             <Star
@@ -195,7 +195,7 @@ const IndividualVenueCard = ({
           {showError && (error || (!isFavoritedStatus && isAtMaxCapacity)) && (
             <div className="absolute top-full right-0 mt-1 p-2 bg-red-50 border border-red-200 rounded-lg shadow-lg z-50 min-w-48">
               <p className="text-xs text-red-700">
-                {error || "Max 5 favorites reached. Remove one first."}
+                {error || t("maxFavoritesReached")}
               </p>
             </div>
           )}

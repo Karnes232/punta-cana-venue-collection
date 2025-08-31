@@ -70,7 +70,12 @@
     "amenities": "Amenidades",
     "more": "más",
     "interested": "Interesado",
-    "viewDetails": "Ver Detalles"
+    "viewDetails": "Ver Detalles",
+    "addToFavorites": "Agregar a favoritos",
+    "removeFromFavorites": "Eliminar de favoritos",
+    "maximumFavoritesReached": "Máximo de 5 favoritos alcanzado",
+    "maxFavoritesReached": "Máximo de 5 favoritos alcanzado",
+    "slotsRemaining": "slots restantes"
   },
   "individualVenueListing": {
     "about": "Acerca de Este Venue",
@@ -99,7 +104,19 @@
     "browseVenues": "Explorar Venues",
     "startExploring": "Comienza a explorar venues y agrégalos a tus favoritos para un acceso fácil",
     "addedOn": "Agregado el",
-    "view": "Ver"
+    "view": "Ver",
+    "saved": "Guardado",
+    "save": "Guardar",
+    "slot": "slot",
+    "left": "left",
+    "slots": "slots",
+    "slotsRemaining": "slots restantes",
+    "cannotAddToFavorites": "No se puede agregar a favoritos",
+    "maxFavoritesReached": "Máximo de 5 favoritos alcanzado",
+    "removeOneFirst": "Eliminar uno primero",
+    "maximumFavoritesReached": "Máximo de 5 favoritos alcanzado",
+    "maxFavoritesReachedRemoveOneFirst": "Máximo de 5 favoritos alcanzado. Eliminar uno primero",
+    "maxFavoritesReachedVenues": "Has alcanzado el máximo de 5 venues favoritos. Por favor, elimina uno antes de agregar uno nuevo."
   },
   "individualVenueForm": {
     "interested": "Interesado",

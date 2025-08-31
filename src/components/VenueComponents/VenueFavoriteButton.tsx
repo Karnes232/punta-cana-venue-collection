@@ -159,28 +159,28 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
             onMouseLeave={() => setShowMaxCapacityTooltip(false)}
             aria-label={
               isFavoritedStatus
-                ? `Remove ${venueName} from favorites`
-                : `Add ${venueName} to favorites`
+                ? t("removeFromFavorites")
+                : t("addToFavorites")
             }
             title={
               !isFavoritedStatus && isAtMaxCapacity
-                ? `Maximum of 5 favorites reached. Remove a favorite first.`
+                ? t("maximumFavoritesReached")
                 : isFavoritedStatus
-                  ? "Remove from favorites"
-                  : `Add to favorites (${remainingSlots} slots remaining)`
+                  ? t("removeFromFavorites")
+                  : `${t('addToFavorites')} (${remainingSlots} ${t('slotsRemaining')})`
             }
           >
             <IconComponent size={config.iconSize} className={iconClasses} />
           </button>
           <div className="flex flex-col">
             <span className={`${config.textClass} font-medium text-charcoal`}>
-              {isFavoritedStatus ? "Saved" : "Save"}
+              {isFavoritedStatus ? t("saved") : t("save")}
             </span>
             {!isFavoritedStatus &&
               remainingSlots <= 2 &&
               remainingSlots > 0 && (
                 <span className="text-xs text-amber-600">
-                  {remainingSlots} slot{remainingSlots !== 1 ? "s" : ""} left
+                  {remainingSlots} {t('slot', { count: remainingSlots })} {t('left')}
                 </span>
               )}
           </div>
@@ -193,7 +193,7 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
               <AlertCircle size={16} className="text-red-600 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="text-xs font-medium text-red-800 mb-1">
-                  Cannot Add to Favorites
+                  {t("cannotAddToFavorites")}
                 </p>
                 <p className="text-xs text-red-700">
                   {error ||
@@ -211,10 +211,10 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
               <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="text-xs font-medium text-amber-800 mb-1">
-                  Maximum Favorites Reached
+                  {t("maximumFavoritesReached")}
                 </p>
                 <p className="text-xs text-amber-700">
-                  You have reached the maximum of 5 favorite venues. Please remove a favorite before adding a new one.
+                  {t("maxFavoritesReachedVenues")}
                 </p>
               </div>
             </div>
@@ -255,11 +255,11 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
           <div className="flex items-start gap-2">
             <AlertCircle size={14} className="text-red-600 mt-0.5 flex-shrink-0" />
             <div>
-              <p className="text-xs font-medium text-red-800 mb-1">
-                Cannot Add to Favorites
+              <p className="text-xs font-medium text-red-800 text-center mb-2">
+                {t("cannotAddToFavorites")}
               </p>
               <p className="text-xs text-red-700 text-center">
-                {error || "Max 5 favorites reached. Remove one first."}
+                {error || t("maxFavoritesReachedRemoveOneFirst")}
               </p>
             </div>
           </div>
@@ -273,10 +273,10 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
             <AlertCircle size={14} className="text-amber-600 mt-0.5 flex-shrink-0" />
             <div>
               <p className="text-xs font-medium text-amber-800 mb-1">
-                Maximum Favorites Reached
+                {t("maximumFavoritesReached")}
               </p>
               <p className="text-xs text-amber-700 text-center">
-                You have reached the maximum of 5 favorite venues. Please remove a favorite before adding a new one.
+                {t("maxFavoritesReachedVenues")}
               </p>
             </div>
           </div>
