@@ -2,6 +2,7 @@ import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
 import ServiceDescription from "@/components/VenueInspectionComponents/ServiceDescription"
 import Header from "@/components/VenueInspectionComponents/Header"
 import FavoritesList from "@/components/VenueInspectionComponents/FavoritesList"
+import InspectionForm from "@/components/VenueInspectionComponents/InspectionForm"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getVenueInspectionPage } from "@/sanity/queries/VenueInspection/VenueInspectionPage"
 
@@ -33,19 +34,27 @@ export default async function Inspection({
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main content area */}
-            <ServiceDescription
-              servicesTitle={venueInspectionPage.servicesTitle[locale]}
-              servicesDescription={
-                venueInspectionPage.servicesDescription[locale]
-              }
-              servicesItems={venueInspectionPage.servicesItems}
-              locale={locale}
-            />
+            <div className="lg:col-span-2 space-y-8">
+              <ServiceDescription
+                servicesTitle={venueInspectionPage.servicesTitle[locale]}
+                servicesDescription={
+                  venueInspectionPage.servicesDescription[locale]
+                }
+                servicesItems={venueInspectionPage.servicesItems}
+                locale={locale}
+              />
+              
+              {/* Inspection Form */}
+              
+            </div>
 
             {/* Sidebar with favorites */}
             <div className="lg:col-span-1">
               <FavoritesList locale={locale} />
             </div>
+          </div>
+          <div className="flex justify-center mt-5">
+          <InspectionForm locale={locale} />
           </div>
         </div>
       </div>
