@@ -25,6 +25,14 @@ const FavoritesList: React.FC<FavoritesListProps> = ({
     useFavorites()
   const t = useTranslations("favorites")
 
+  // Define main areas
+  const mainAreas = ["Cap Cana", "Punta Cana", "Bávaro"]
+  
+  // Count venues outside main areas
+  const venuesOutsideMainArea = favoriteVenues.filter(
+    venue => venue.location && !mainAreas.includes(venue.location)
+  ).length
+
   const handleRemoveFavorite = async (venueId: string) => {
     try {
       await removeFavorite(venueId)
@@ -42,7 +50,7 @@ const FavoritesList: React.FC<FavoritesListProps> = ({
       }
     }
   }
-
+  console.log(favoriteVenues)
   if (isLoading) {
     return (
       <div className={`bg-white rounded-2xl p-6 shadow-sm ${className}`}>
@@ -60,7 +68,7 @@ const FavoritesList: React.FC<FavoritesListProps> = ({
 
   return (
     <div className={`bg-white rounded-2xl p-6 shadow-sm ${className}`}>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Star className="w-6 h-6 text-golden fill-golden" />
           <h2
@@ -79,6 +87,20 @@ const FavoritesList: React.FC<FavoritesListProps> = ({
           </button>
         )}
       </div>
+      
+      {venuesOutsideMainArea > 0 && (
+        <div className="mb-6 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+          <div className="flex items-center gap-2 text-amber-800">
+            <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+            <p className="text-sm font-medium">
+              {venuesOutsideMainArea} venue{venuesOutsideMainArea > 1 ? 's' : ''} {t('outsideMainArea')}
+            </p>
+          </div>
+          <p className="text-sm text-amber-700 mt-1">
+            {t('outsideMainAreaAdditionalCosts')}
+          </p>
+        </div>
+      )}
 
       {favoriteVenues.length === 0 ? (
         <div className="text-center py-8">
@@ -101,10 +123,16 @@ const FavoritesList: React.FC<FavoritesListProps> = ({
               className="flex items-center justify-between p-4 bg-gradient-to-br from-ivory to-white rounded-xl border border-golden/20 hover:shadow-md transition-all duration-300"
             >
               <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
+                <div className="flex items-center gap-2 mb-2">
                   <Star className="w-4 h-4 text-golden fill-golden" />
                   <h3 className="font-medium text-charcoal">{venue.name}</h3>
                 </div>
+                {venue.location && (
+                  <div className="flex items-center gap-1 text-sm text-gray-500 mb-1">
+                    <MapPin size={12} />
+                    <span>{venue.location}</span>
+                  </div>
+                )}
                 <p className="text-sm text-gray-500">
                   {t("addedOn")} {new Date(venue.addedAt).toLocaleDateString()}
                 </p>

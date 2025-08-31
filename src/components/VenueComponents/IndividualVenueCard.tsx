@@ -79,7 +79,7 @@ const IndividualVenueCard = ({
     setIsLoading(true)
 
     try {
-      await toggleFavorite(slug.current, localizedTitle)
+      await toggleFavorite(slug.current, localizedTitle, location)
       console.log(
         `Venue ${isFavoritedStatus ? "removed from" : "added to"} favorites:`,
         localizedTitle,

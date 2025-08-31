@@ -63,6 +63,7 @@ export default async function VenueIndividual({
             <VenueFavoriteButton
               venueId={slug}
               venueName={pageData.title[locale]}
+              location={pageData.location}
               size="large"
             />
           </div>
@@ -108,7 +109,8 @@ export default async function VenueIndividual({
                 </div>
                 <VenueFavoriteButton
                   venueId={slug}
-                  venueName={pageData.title[locale]}
+                  venueName={pageData.title[locale]}  
+                  location={pageData.location}
                   size="large"
                 />
               </div>

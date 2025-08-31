@@ -17,6 +17,7 @@ const shakeAnimation = `
 interface VenueFavoriteButtonProps {
   venueId: string
   venueName: string
+  location?: string
   size?: "small" | "medium" | "large"
   showLabel?: boolean
   variant?: "star" | "heart"
@@ -26,6 +27,7 @@ interface VenueFavoriteButtonProps {
 const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
   venueId,
   venueName,
+  location,
   size = "medium",
   showLabel = false,
   variant = "star",
@@ -94,7 +96,7 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
     setIsLoading(true)
 
     try {
-      await toggleFavorite(venueId, venueName)
+      await toggleFavorite(venueId, venueName, location)
       console.log(
         `${isFavoritedStatus ? "Removed" : "Added"} "${venueName}" ${isFavoritedStatus ? "from" : "to"} favorites`,
       )

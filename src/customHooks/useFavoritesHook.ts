@@ -6,6 +6,7 @@ interface FavoriteVenue {
   id: string
   name: string
   addedAt: string
+  location?: string // e.g., "Punta Cana", "Cap Cana", etc.
 }
 
 // Create a global state manager
@@ -91,7 +92,11 @@ export const useFavorites = () => {
 
   // Add venue to favorites
   const addFavorite = useCallback(
-    async (venueId: string, venueName: string) => {
+    async (
+      venueId: string, 
+      venueName: string, 
+      location?: string
+    ) => {
       setError(null)
 
       if (globalFavorites.includes(venueId)) return
@@ -107,6 +112,7 @@ export const useFavorites = () => {
         id: venueId,
         name: venueName,
         addedAt: new Date().toISOString(),
+        location,
       }
 
       const newFavorites = [...globalFavorites, venueId]
@@ -149,11 +155,15 @@ export const useFavorites = () => {
 
   // Toggle favorite status
   const toggleFavorite = useCallback(
-    async (venueId: string, venueName: string) => {
+    async (
+      venueId: string, 
+      venueName: string, 
+      location?: string
+    ) => {
       if (globalFavorites.includes(venueId)) {
         await removeFavorite(venueId)
       } else {
-        await addFavorite(venueId, venueName)
+        await addFavorite(venueId, venueName, location)
       }
     },
     [addFavorite, removeFavorite],
@@ -195,6 +205,24 @@ export const useFavorites = () => {
     // }
   }, [])
 
+  // Get favorite venues by location
+  const getFavoritesByLocation = useCallback((location: string) => {
+    return favoriteVenues.filter(venue => venue.location === location)
+  }, [favoriteVenues])
+
+  // Get all unique locations from favorites
+  const getFavoriteLocations = useCallback(() => {
+    const locations = favoriteVenues
+      .map(venue => venue.location)
+      .filter((location): location is string => location !== undefined)
+    return [...new Set(locations)]
+  }, [favoriteVenues])
+
+  // Get favorite venues with coordinates
+  const getFavoritesWithLocation = useCallback(() => {
+    return favoriteVenues.filter(venue => venue.location)
+  }, [favoriteVenues])
+
   return {
     favorites,
     favoriteVenues,
@@ -210,6 +238,9 @@ export const useFavorites = () => {
     remainingSlots,
     clearError,
     clearFavorites,
+    getFavoritesByLocation,
+    getFavoriteLocations,
+    getFavoritesWithLocation,
   }
 }
 

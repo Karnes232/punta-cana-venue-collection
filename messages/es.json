@@ -116,7 +116,9 @@
     "removeOneFirst": "Eliminar uno primero",
     "maximumFavoritesReached": "Máximo de 5 favoritos alcanzado",
     "maxFavoritesReachedRemoveOneFirst": "Máximo de 5 favoritos alcanzado. Eliminar uno primero",
-    "maxFavoritesReachedVenues": "Has alcanzado el máximo de 5 venues favoritos. Por favor, elimina uno antes de agregar uno nuevo."
+    "maxFavoritesReachedVenues": "Has alcanzado el máximo de 5 venues favoritos. Por favor, elimina uno antes de agregar uno nuevo.",
+    "outsideMainAreaAdditionalCosts": "Estos venues tendrán costos adicionales ya que están ubicados fuera del área de Punta Cana.",
+    "outsideMainArea": "fuera del área principal"
   },
   "individualVenueForm": {
     "interested": "Interesado",
