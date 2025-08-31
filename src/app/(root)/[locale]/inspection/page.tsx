@@ -5,6 +5,7 @@ import FavoritesList from "@/components/VenueInspectionComponents/FavoritesList"
 import InspectionForm from "@/components/VenueInspectionComponents/InspectionForm"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getVenueInspectionPage } from "@/sanity/queries/VenueInspection/VenueInspectionPage"
+import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 
 export default async function Inspection({
   params,
@@ -14,7 +15,7 @@ export default async function Inspection({
   const { locale } = await params
   const structuredData = await getStructuredData("inspection")
   const venueInspectionPage = await getVenueInspectionPage()
-
+  const calendlyUrls = await getCalendlyUrls()
   return (
     <>
       {structuredData?.seo?.structuredData[locale] && (
@@ -54,7 +55,7 @@ export default async function Inspection({
             </div>
           </div>
           <div className="flex justify-center mt-5">
-          <InspectionForm locale={locale} />
+          <InspectionForm locale={locale} calendlyUrls={calendlyUrls.calendlyUrls} />
           </div>
         </div>
       </div>

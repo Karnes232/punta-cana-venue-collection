@@ -300,6 +300,8 @@
     "minVenuesRequired": "Por favor selecciona al menos 3 venues",
     "maxVenuesExceeded": "Máximo 5 venues permitidos",
     "additionalCostsTitle": "Aviso de Costos Adicionales",
-    "additionalCostsMessage": "{count} venue{count, plural, one {} other {s}} seleccionado{count, plural, one {} other {s}} {count, plural, one {está} other {están}} fuera del área principal (Punta Cana, Cap Cana, Bávaro). Estos venues tendrán costos adicionales de inspección."
+    "additionalCostsMessage": "{count} venue{count, plural, one {} other {s}} seleccionado{count, plural, one {} other {s}} {count, plural, one {está} other {están}} fuera del área principal (Punta Cana, Cap Cana, Bávaro). Estos venues tendrán costos adicionales de inspección.",
+    "outsideMainArea": "fuera del área principal",
+    "outsideMainAreaAdditionalCosts": "Estos venues tendrán costos adicionales ya que están ubicados fuera del área de Punta Cana."
   }
 }

@@ -17,6 +17,7 @@ import {
 import { useTranslations } from "next-intl"
 import { useFavorites } from "@/customHooks/useFavoritesHook"
 import { Cormorant_Garamond } from "next/font/google"
+import ScheduleCall from "./ScheduleCall"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -25,9 +26,10 @@ const coromantGaramond = Cormorant_Garamond({
 
 interface InspectionFormProps {
   locale: string
+  calendlyUrls: any
 }
 
-const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
+const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls }) => {
   const t = useTranslations("inspectionForm")
   const { favoriteVenues } = useFavorites()
   
@@ -499,7 +501,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
 
         {/* Submit Button */}
         <div className="flex justify-end pt-4">
-          <button
+          {/* <button
             type="submit"
             disabled={isSubmitting}
             className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-golden/70 to-golden/90 text-slate-800 font-medium rounded-lg hover:bg-golden/90 focus:ring-2 focus:ring-golden focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -515,7 +517,8 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
                 {t("submitInspection")}
               </>
             )}
-          </button>
+          </button> */}
+          <ScheduleCall locale={locale} calendlyUrls={calendlyUrls} handleSubmit={() => handleSubmit({} as React.FormEvent)} validateForm={validateForm} formData={formData} favoriteVenues={favoriteVenues} />
         </div>
       </form>
     </div>
