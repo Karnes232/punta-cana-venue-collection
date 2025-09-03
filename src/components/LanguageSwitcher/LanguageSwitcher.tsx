@@ -47,11 +47,18 @@ export default function LanguageSwitcher({
     onDropdownToggle?.(false)
 
     try {
-      // Use push instead of replace for better language switching
-      await router.push(pathname, { locale: newLocale })
+      // For Netlify hosting, we need to use a different approach
+      // since middleware doesn't work on static hosting
+      const currentPath = pathname.replace(`/${safeLocale}`, '') || '/'
+      const cleanPath = currentPath === '/' ? '' : currentPath
+      
+      // Store the language preference in localStorage
+      localStorage.setItem('preferredLanguage', newLocale)
+      
+      // Use window.location for Netlify compatibility
+      window.location.href = `/${newLocale}${cleanPath}`
     } catch (error) {
       console.error("Language switch error:", error)
-    } finally {
       setIsLoading(false)
     }
   }
@@ -80,6 +87,16 @@ export default function LanguageSwitcher({
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [onDropdownToggle])
+
+  // Check for preferred language in localStorage on mount
+  useEffect(() => {
+    const preferredLanguage = localStorage.getItem('preferredLanguage')
+    if (preferredLanguage && preferredLanguage !== safeLocale && languages.includes(preferredLanguage)) {
+      const currentPath = pathname.replace(`/${safeLocale}`, '') || '/'
+      const cleanPath = currentPath === '/' ? '' : currentPath
+      window.location.href = `/${preferredLanguage}${cleanPath}`
+    }
+  }, [safeLocale, pathname])
 
   const currentLangOption =
     languageOptions.find(lang => lang.code === safeLocale) || languageOptions[0]
