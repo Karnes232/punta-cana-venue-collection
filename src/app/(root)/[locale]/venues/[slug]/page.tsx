@@ -19,6 +19,8 @@ import VenueFavoriteButton from "@/components/VenueComponents/VenueFavoriteButto
 import IndividualVenueForm from "@/components/VenueComponents/IndividualVenueForm"
 import ScheduleCallButton from "@/components/VenueComponents/ScheduleCallButton"
 import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
+import Link from "next/link"
+import { ArrowLeft } from "lucide-react"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -69,6 +71,18 @@ export default async function VenueIndividual({
           </div>
         </div>
       )}
+
+      {/* Back to Venues Button */}
+      <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-6">
+        <Link
+          href={`/${locale}/venues`}
+          className="inline-flex items-center gap-2 text-charcoal hover:text-golden transition-colors duration-200 font-medium"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          {t("backToAllVenues")}
+        </Link>
+      </div>
+
 
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 mt-8 px-4 lg:px-0">
         {/* Left Column - Main Content */}
@@ -174,6 +188,17 @@ export default async function VenueIndividual({
           />
         </div>
       )}
+
+      {/* Bottom Back to Venues Button */}
+      <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-8 mb-8 text-center">
+        <Link
+          href={`/${locale}/venues`}
+          className="inline-flex items-center gap-2 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-md"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          {t("backToAllVenues")}
+        </Link>
+      </div>
     </>
   )
 }

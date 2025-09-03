@@ -93,7 +93,8 @@
     "interested": "Interested",
     "scheduleCall": "Schedule Call",
     "saveThisVenue": "Save This Venue",
-    "addFavorites": "Add to your favorites for easy access later"
+    "addFavorites": "Add to your favorites for easy access later",
+    "backToAllVenues": "Back to All Venues"
   },
   "favorites": {
     "favorites": "Favorites",
@@ -118,7 +119,8 @@
     "maxFavoritesReachedRemoveOneFirst": "Max 5 favorites reached. Remove one first",
     "maxFavoritesReachedVenues": "You have reached the maximum of 5 favorite venues. Please remove a favorite before adding a new one.",
     "outsideMainAreaAdditionalCosts": "These venues will have additional costs as they are located outside the area of Punta Cana.",
-    "outsideMainArea": "outside main area"
+    "outsideMainArea": "outside main area",
+    "backToAllVenues": "Back to All Venues"
   },
   "individualVenueForm": {
     "interested": "Interested",
@@ -303,6 +305,5 @@
     "additionalCostsMessage": "{count} venue{count, plural, one {} other {s}} selected {count, plural, one {is} other {are}} outside the main area (Punta Cana, Cap Cana, Bávaro). These venues will have additional inspection costs.",
     "outsideMainArea": "outside the main area",
     "outsideMainAreaAdditionalCosts": "These venues will have additional costs as they are located outside the area of Punta Cana."
-
   }
 }
