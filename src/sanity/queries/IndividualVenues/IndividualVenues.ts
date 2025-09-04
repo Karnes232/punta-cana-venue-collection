@@ -374,3 +374,14 @@ export async function getIndividualVenuesMapDetails(): Promise<
   )
   return data
 }
+
+export const individualVenuesSlugsQuery = `*[_type == "individualVenue"] {
+  slug {
+    current
+  }
+}`
+
+export async function getIndividualVenuesSlugs(): Promise<{ slug: { current: string } }[]> {
+  const data = await client.fetch<{ slug: { current: string } }[]>(individualVenuesSlugsQuery)
+  return data
+}
