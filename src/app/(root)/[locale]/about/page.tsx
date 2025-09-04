@@ -87,9 +87,9 @@ export async function generateMetadata({
   }
   let canonicalUrl
   if (locale === "en") {
-    canonicalUrl = "https://www.venues.com/about"
+    canonicalUrl = "https://puntacanavenuecollection.com/about"
   } else {
-    canonicalUrl = "https://www.venues.com/es/about"
+    canonicalUrl = "https://puntacanavenuecollection.com/es/about"
   }
 
   return {

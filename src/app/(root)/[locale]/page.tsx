@@ -81,25 +81,32 @@ export async function generateMetadata({
     return {}
   }
 
+  let canonicalUrl
+  if (locale === "en") {
+    canonicalUrl = "https://puntacanavenuecollection.com"
+  } else {
+    canonicalUrl = "https://puntacanavenuecollection.com/es"
+  }
+
   return {
     title: pageSeo.seo.meta[locale].title,
     description: pageSeo.seo.meta[locale].description,
     keywords: pageSeo.seo.meta[locale].keywords.join(", "),
-    url: pageSeo.seo.canonicalUrl,
+    url: canonicalUrl,
     openGraph: {
       title: pageSeo.seo.openGraph[locale].title,
       description: pageSeo.seo.openGraph[locale].description,
       images: pageSeo.seo.openGraph.image.url,
       type: "website",
-      url: pageSeo.seo.canonicalUrl,
+      url: canonicalUrl,
     },
     robots: {
       index: !pageSeo.seo.noIndex,
       follow: !pageSeo.seo.noFollow,
     },
-    ...(pageSeo.seo.canonicalUrl && { canonical: pageSeo.seo.canonicalUrl }),
+    ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
-      canonical: pageSeo.seo.canonicalUrl,
+      canonical: canonicalUrl,
     },
   }
 }
