@@ -58,14 +58,14 @@ export const metadata: Metadata = {
     capable: true,
   },
   verification: {
-    google: "uDTOqd2dqdClXOBUBmAp9LAzWwGZA3xSeLqiHe",
+    // google: "uDTOqd2dqdClXOBUBmAp9LAzWwGZA3xSeLqiHe",
     // // yandex: ["YOUR_DATA"],
-    other: {
-      "google-site-verification": [
-        "z1ceKSK3JVrMz86jtW5n8_lXA88be1zGlh9Kb0lRamg",
-      ],
-      // "facebook-domain-verification": ["YOUR_DATA"],
-    },
+    // other: {
+    //   "google-site-verification": [
+    //     "z1ceKSK3JVrMz86jtW5n8_lXA88be1zGlh9Kb0lRamg",
+    //   ],
+    //   // "facebook-domain-verification": ["YOUR_DATA"],
+    // },
   },
   icons: {
     icon: [

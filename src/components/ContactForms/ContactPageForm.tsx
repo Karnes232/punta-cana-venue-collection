@@ -7,7 +7,7 @@ import BlockContent from "../BlockContent/BlockContent"
 const ContactPageForm = () => {
   const t = useTranslations("Contact")
   const [formData, setFormData] = useState({
-    "form-name": "blogPost",
+    "form-name": "contactPage",
     name: "",
     email: "",
     phone: "",
