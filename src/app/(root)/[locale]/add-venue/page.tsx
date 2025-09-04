@@ -1,17 +1,17 @@
 import BlockContent from "@/components/BlockContent/BlockContent"
-import ContactPageForm from "@/components/ContactForms/ContactPageForm"
+import AddVenueForm from "@/components/ContactForms/AddVenueForm"
 import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
-import { getContactPage } from "@/sanity/queries/ContactPage/ContactPage"
+import { getAddVenue } from "@/sanity/queries/AddVenue/AddVenue"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 
-export default async function Contact({
+export default async function AddVenue({
   params,
 }: {
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
-  const structuredData = await getStructuredData("contact")
-  const contactPage = await getContactPage()
+  const structuredData = await getStructuredData("add-venue")
+  const addVenue = await getAddVenue()
 
   return (
     <>
@@ -24,19 +24,19 @@ export default async function Contact({
         />
       )}
       <HeroComponentBlog
-        heroImage={contactPage.heroImage}
-        heroTitle={contactPage.title[locale]}
+        heroImage={addVenue.heroImage}
+        heroTitle={addVenue.title[locale]}
       />
       <div className="max-w-7xl mx-auto flex flex-col gap-8 mt-5">
-        {contactPage.paragraph1 && (
+        {addVenue.description && (
           <div className="mx-5">
             <BlockContent
-              content={contactPage.paragraph1}
+              content={addVenue.description}
               language={locale as "en" | "es"}
             />
           </div>
         )}
-        <ContactPageForm />
+        <AddVenueForm />
       </div>
     </>
   )
@@ -50,16 +50,16 @@ export async function generateMetadata({
   }>
 }) {
   const { locale } = await params
-  const pageSeo = await getPageSeo("contact")
+  const pageSeo = await getPageSeo("add-venue")
 
   if (!pageSeo) {
     return {}
   }
   let canonicalUrl
   if (locale === "en") {
-    canonicalUrl = "https://puntacanavenuecollection.com/contact"
+    canonicalUrl = "https://puntacanavenuecollection.com/add-venue"
   } else {
-    canonicalUrl = "https://puntacanavenuecollection.com/es/contact"
+    canonicalUrl = "https://puntacanavenuecollection.com/es/add-venue"
   }
 
   return {

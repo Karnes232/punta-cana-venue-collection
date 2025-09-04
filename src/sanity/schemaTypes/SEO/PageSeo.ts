@@ -17,6 +17,7 @@ export default defineType({
           { title: "Blog", value: "blog" },
           { title: "Contact", value: "contact" },
           { title: "About", value: "about" },
+          { title: "Add Venue", value: "add-venue" },
           { title: "Privacy Policy", value: "privacy-policy" },
           { title: "Terms of Service", value: "terms-of-service" },
           { title: "Cookie Policy", value: "cookie-policy" },

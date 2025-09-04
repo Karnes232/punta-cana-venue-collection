@@ -33,6 +33,12 @@ const QuickLinks = () => {
           {t("about")}
         </Link>
         <Link
+          href="/add-venue"
+          className="block text-ivory/80 hover:text-turquoise transition-colors"
+        >
+          {t("addVenue")}
+        </Link>
+        <Link
           href="/contact"
           className="block text-ivory/80 hover:text-turquoise transition-colors"
         >

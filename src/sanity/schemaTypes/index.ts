@@ -21,6 +21,9 @@ import aboutCards from "./AboutPage/AboutCards"
 // Venue Page
 import venuePage from "./VenuePage/VenuePage"
 
+// Add Venue
+import addVenue from "./AddVenue/AddVenue"
+
 // Venues
 import individualVenue from "./Venues/IndividualVenue"
 import amenity from "./Venues/amenity"
@@ -58,7 +61,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     location,
     typeVenue,
     eventType,
-
+    // Add Venue
+    addVenue,
     //Venue Inspection
     venueInspectionPage,
 
