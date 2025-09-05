@@ -18,7 +18,7 @@ export default async function BlogPost({ params }: PageProps) {
   const post = await getBlogPostBySlug(slug)
   const seoSchema = await getBlogSeoSchema(slug)
   const calendlyUrls = await getCalendlyUrls()
-
+console.log(post)
   return (
     <section>
       {seoSchema?.seo?.structuredData[locale] && (
@@ -31,17 +31,19 @@ export default async function BlogPost({ params }: PageProps) {
       )}
       <BlogPostHeader post={post} locale={locale as "en" | "es"} />
 
-      <div className="max-w-7xl mx-auto flex flex-col 2xl:grid 2xl:grid-cols-[1fr_24rem] 2xl:items-start gap-8">
+      <div className={`max-w-7xl mx-auto flex flex-col ${post.displayForm ? "2xl:grid 2xl:grid-cols-[1fr_24rem] 2xl:items-start gap-8" : ""}`}>
         <div>
-          <BlogPostContent body={post.body} locale={locale as "en" | "es"} />
+          <BlogPostContent body={post.body} locale={locale as "en" | "es"} displayForm={post.displayForm} />
         </div>
+        {post.displayForm && (
         <div className="2xl:sticky 2xl:top-24 h-fit">
           <BlogPostContactForm
             venueName={post.venueName}
             locale={locale as "en" | "es"}
-            calendlyUrls={calendlyUrls.calendlyUrls}
-          />
-        </div>
+              calendlyUrls={calendlyUrls.calendlyUrls}
+            />
+          </div>
+        )}
       </div>
     </section>
   )

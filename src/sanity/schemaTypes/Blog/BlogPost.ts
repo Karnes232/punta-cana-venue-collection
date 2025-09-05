@@ -12,6 +12,13 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
+      name: "displayForm",
+      title: "Display Form",
+      type: "boolean",
+      initialValue: false,
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "localizedString",

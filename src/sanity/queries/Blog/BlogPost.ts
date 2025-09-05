@@ -83,6 +83,7 @@ export interface BlogPost {
     en: string
     es: string
   }
+  displayForm: boolean
   description: {
     en: string
     es: string
@@ -112,6 +113,7 @@ export const getBlogPostBySlugQuery = `*[_type == "blogPost" && slug.current == 
         en,
         es
     },
+    displayForm,
     description {
         en,
         es
