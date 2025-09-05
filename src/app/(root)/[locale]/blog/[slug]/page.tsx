@@ -18,7 +18,7 @@ export default async function BlogPost({ params }: PageProps) {
   const post = await getBlogPostBySlug(slug)
   const seoSchema = await getBlogSeoSchema(slug)
   const calendlyUrls = await getCalendlyUrls()
-console.log(post)
+
   return (
     <section>
       {seoSchema?.seo?.structuredData[locale] && (
