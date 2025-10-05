@@ -59,6 +59,7 @@ export default defineType({
               type: "array",
               of: [{ type: "string" }],
               description: "Keywords relevant to this content (optional)",
+              validation: r => r.required(),
             }),
           ],
         }),
@@ -97,6 +98,7 @@ export default defineType({
               of: [{ type: "string" }],
               description:
                 "Palabras clave relevantes para este contenido (opcional)",
+              validation: r => r.required(),
             }),
           ],
         }),
