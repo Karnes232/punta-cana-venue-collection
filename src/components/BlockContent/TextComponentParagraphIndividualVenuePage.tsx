@@ -22,7 +22,7 @@ const TextComponentParagraphIndividualVenuePage = ({
     <div className="">
       <div className="flex flex-col justify-center max-w-7xl xl:mx-auto">
         <p
-          className={`${raleway.className} lg:text-lg text-gray-700 dark:text-white ${ParagraphClassName}`}
+          className={`${raleway.className} lg:text-lg text-gray-700  ${ParagraphClassName}`}
         >
           {paragraph}
         </p>
