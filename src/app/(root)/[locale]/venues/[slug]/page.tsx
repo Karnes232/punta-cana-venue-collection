@@ -144,7 +144,7 @@ export default async function VenueIndividual({
           {/* Map */}
           {pageData.location && (
             <div className="flex flex-col lg:w-full max-w-5xl mx-5 lg:p-2 lg:mx-auto">
-              <Location location={pageData.location} />
+              <Location location={pageData.location.location} />
             </div>
           )}
           {/* <div className="w-full rounded-2xl overflow-hidden h-96 lg:h-[416px] xl:h-[500px]">
