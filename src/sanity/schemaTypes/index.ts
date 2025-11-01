@@ -27,9 +27,10 @@ import addVenue from "./AddVenue/AddVenue"
 // Venues
 import individualVenue from "./Venues/IndividualVenue"
 import amenity from "./Venues/amenity"
-import location from "./Venues/location"
+// import location from "./Venues/location"
 import typeVenue from "./Venues/typeVenue"
 import eventType from "./Venues/EventType"
+import locationType from "./Venues/locationType"
 // Blog
 import blogHeader from "./Blog/BlogHeader"
 import blogCategory from "./Blog/BlogCategory"
@@ -58,9 +59,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     // Venues
     individualVenue,
     amenity,
-    location,
+    // location,
     typeVenue,
     eventType,
+    locationType,
     // Add Venue
     addVenue,
     //Venue Inspection

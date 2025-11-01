@@ -175,16 +175,16 @@ const AddVenueForm = () => {
           </div>
           <div className="relative">
             <House className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
-          <input
-            type="text"
-            id="venueName"
-            name="venueName"
-            value={formData.venueName}
-            onChange={handleInputChange}
-            required
-            className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors"
-            placeholder={t("venueNamePlaceholder")}
-          />
+            <input
+              type="text"
+              id="venueName"
+              name="venueName"
+              value={formData.venueName}
+              onChange={handleInputChange}
+              required
+              className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors"
+              placeholder={t("venueNamePlaceholder")}
+            />
           </div>
 
           {/* Venue Location Input */}
@@ -198,16 +198,16 @@ const AddVenueForm = () => {
           </div>
           <div className="relative">
             <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
-          <input
-            type="text"
-            id="venueLocation"
-            name="venueLocation"
-            value={formData.venueLocation}
-            onChange={handleInputChange}
-            required
-            className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors"
-            placeholder={t("venueLocationPlaceholder")}
-          />
+            <input
+              type="text"
+              id="venueLocation"
+              name="venueLocation"
+              value={formData.venueLocation}
+              onChange={handleInputChange}
+              required
+              className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors"
+              placeholder={t("venueLocationPlaceholder")}
+            />
           </div>
 
           {/* Message Input */}

@@ -169,7 +169,11 @@ export const allBlogPostsSlugsQuery = `*[_type == "blogPost"] {
     }
 }`
 
-export async function getAllBlogPostsSlugs(): Promise<{ slug: { current: string } }[]> {
-  const data = await client.fetch<{ slug: { current: string } }[]>(allBlogPostsSlugsQuery)
+export async function getAllBlogPostsSlugs(): Promise<
+  { slug: { current: string } }[]
+> {
+  const data = await client.fetch<{ slug: { current: string } }[]>(
+    allBlogPostsSlugsQuery,
+  )
   return data
 }

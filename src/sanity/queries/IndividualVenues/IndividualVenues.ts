@@ -19,7 +19,9 @@ export const individualVenuesQuery = `*[_type == "individualVenue" && displayed 
         alt
     },
     slug,
-    location,
+    location -> {
+        location
+    },
     type[]->{
         title {
             en,
@@ -45,7 +47,7 @@ export interface IndividualVenue {
   slug: {
     current: string
   }
-  location: string
+  location: { location: string }
   type: {
     title: {
       en: string
@@ -278,7 +280,7 @@ export interface IndividualVenuePage {
   slug: {
     current: string
   }
-  location: string
+  location: { location: string }
   type: {
     title: {
       en: string
@@ -381,7 +383,11 @@ export const individualVenuesSlugsQuery = `*[_type == "individualVenue"] {
   }
 }`
 
-export async function getIndividualVenuesSlugs(): Promise<{ slug: { current: string } }[]> {
-  const data = await client.fetch<{ slug: { current: string } }[]>(individualVenuesSlugsQuery)
+export async function getIndividualVenuesSlugs(): Promise<
+  { slug: { current: string } }[]
+> {
+  const data = await client.fetch<{ slug: { current: string } }[]>(
+    individualVenuesSlugsQuery,
+  )
   return data
 }

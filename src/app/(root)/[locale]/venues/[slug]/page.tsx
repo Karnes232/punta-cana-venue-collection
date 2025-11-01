@@ -83,7 +83,6 @@ export default async function VenueIndividual({
         </Link>
       </div>
 
-
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 mt-8 px-4 lg:px-0">
         {/* Left Column - Main Content */}
         <div className="w-full lg:w-3/5 flex flex-col gap-8">
@@ -123,7 +122,7 @@ export default async function VenueIndividual({
                 </div>
                 <VenueFavoriteButton
                   venueId={slug}
-                  venueName={pageData.title[locale]}  
+                  venueName={pageData.title[locale]}
                   location={pageData.location}
                   size="large"
                 />

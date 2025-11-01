@@ -92,11 +92,7 @@ export const useFavorites = () => {
 
   // Add venue to favorites
   const addFavorite = useCallback(
-    async (
-      venueId: string, 
-      venueName: string, 
-      location?: string
-    ) => {
+    async (venueId: string, venueName: string, location?: string) => {
       setError(null)
 
       if (globalFavorites.includes(venueId)) return
@@ -155,11 +151,7 @@ export const useFavorites = () => {
 
   // Toggle favorite status
   const toggleFavorite = useCallback(
-    async (
-      venueId: string, 
-      venueName: string, 
-      location?: string
-    ) => {
+    async (venueId: string, venueName: string, location?: string) => {
       if (globalFavorites.includes(venueId)) {
         await removeFavorite(venueId)
       } else {
@@ -206,9 +198,12 @@ export const useFavorites = () => {
   }, [])
 
   // Get favorite venues by location
-  const getFavoritesByLocation = useCallback((location: string) => {
-    return favoriteVenues.filter(venue => venue.location === location)
-  }, [favoriteVenues])
+  const getFavoritesByLocation = useCallback(
+    (location: string) => {
+      return favoriteVenues.filter(venue => venue.location === location)
+    },
+    [favoriteVenues],
+  )
 
   // Get all unique locations from favorites
   const getFavoriteLocations = useCallback(() => {

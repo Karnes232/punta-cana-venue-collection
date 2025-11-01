@@ -84,11 +84,11 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
       setShowError(true)
       // Add a subtle shake animation effect
       const button = e.currentTarget as HTMLButtonElement
-      button.style.animation = 'shake 0.5s ease-in-out'
+      button.style.animation = "shake 0.5s ease-in-out"
       setTimeout(() => {
-        button.style.animation = ''
+        button.style.animation = ""
       }, 500)
-      
+
       setTimeout(() => setShowError(false), 4000) // Hide error after 4 seconds
       return
     }
@@ -157,19 +157,21 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
             onClick={handleFavoriteToggle}
             // disabled={isLoading || (!isFavoritedStatus && isAtMaxCapacity)}
             className={buttonClasses}
-            onMouseEnter={() => !isFavoritedStatus && isAtMaxCapacity && setShowMaxCapacityTooltip(true)}
+            onMouseEnter={() =>
+              !isFavoritedStatus &&
+              isAtMaxCapacity &&
+              setShowMaxCapacityTooltip(true)
+            }
             onMouseLeave={() => setShowMaxCapacityTooltip(false)}
             aria-label={
-              isFavoritedStatus
-                ? t("removeFromFavorites")
-                : t("addToFavorites")
+              isFavoritedStatus ? t("removeFromFavorites") : t("addToFavorites")
             }
             title={
               !isFavoritedStatus && isAtMaxCapacity
                 ? t("maximumFavoritesReached")
                 : isFavoritedStatus
                   ? t("removeFromFavorites")
-                  : `${t('addToFavorites')} (${remainingSlots} ${t('slotsRemaining')})`
+                  : `${t("addToFavorites")} (${remainingSlots} ${t("slotsRemaining")})`
             }
           >
             <IconComponent size={config.iconSize} className={iconClasses} />
@@ -182,7 +184,8 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
               remainingSlots <= 2 &&
               remainingSlots > 0 && (
                 <span className="text-xs text-amber-600">
-                  {remainingSlots} {t('slot', { count: remainingSlots })} {t('left')}
+                  {remainingSlots} {t("slot", { count: remainingSlots })}{" "}
+                  {t("left")}
                 </span>
               )}
           </div>
@@ -192,7 +195,10 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
         {showError && (error || (!isFavoritedStatus && isAtMaxCapacity)) && (
           <div className="absolute top-full left-0 mt-2 p-3 bg-red-50 border border-red-300 rounded-lg shadow-lg z-50 min-w-64 animate-in fade-in duration-200">
             <div className="flex items-start gap-2">
-              <AlertCircle size={16} className="text-red-600 mt-0.5 flex-shrink-0" />
+              <AlertCircle
+                size={16}
+                className="text-red-600 mt-0.5 flex-shrink-0"
+              />
               <div>
                 <p className="text-xs font-medium text-red-800 mb-1">
                   {t("cannotAddToFavorites")}
@@ -210,7 +216,10 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
         {showMaxCapacityTooltip && !isFavoritedStatus && isAtMaxCapacity && (
           <div className="absolute top-full left-0 mt-2 p-3 bg-amber-50 border border-amber-200 rounded-lg shadow-lg z-50 min-w-64">
             <div className="flex items-start gap-2">
-              <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
+              <AlertCircle
+                size={16}
+                className="text-amber-600 mt-0.5 flex-shrink-0"
+              />
               <div>
                 <p className="text-xs font-medium text-amber-800 mb-1">
                   {t("maximumFavoritesReached")}
@@ -233,7 +242,11 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
         onClick={handleFavoriteToggle}
         //disabled={isLoading || (!isFavoritedStatus && isAtMaxCapacity)}
         className={buttonClasses}
-        onMouseEnter={() => !isFavoritedStatus && isAtMaxCapacity && setShowMaxCapacityTooltip(true)}
+        onMouseEnter={() =>
+          !isFavoritedStatus &&
+          isAtMaxCapacity &&
+          setShowMaxCapacityTooltip(true)
+        }
         onMouseLeave={() => setShowMaxCapacityTooltip(false)}
         aria-label={
           isFavoritedStatus
@@ -255,7 +268,10 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
       {showError && (error || (!isFavoritedStatus && isAtMaxCapacity)) && (
         <div className="absolute top-full -left-10 transform -translate-x-1/2 mt-2 p-3 bg-red-50 border border-red-300 rounded-lg shadow-lg z-[9999] min-w-48 animate-in fade-in duration-200">
           <div className="flex items-start gap-2">
-            <AlertCircle size={14} className="text-red-600 mt-0.5 flex-shrink-0" />
+            <AlertCircle
+              size={14}
+              className="text-red-600 mt-0.5 flex-shrink-0"
+            />
             <div>
               <p className="text-xs font-medium text-red-800 text-center mb-2">
                 {t("cannotAddToFavorites")}
@@ -272,7 +288,10 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
       {showMaxCapacityTooltip && !isFavoritedStatus && isAtMaxCapacity && (
         <div className="absolute top-full -left-10 transform -translate-x-1/2 mt-2 p-3 bg-amber-50 border border-amber-200 rounded-lg shadow-lg z-[9999] min-w-48">
           <div className="flex items-start gap-2">
-            <AlertCircle size={14} className="text-amber-600 mt-0.5 flex-shrink-0" />
+            <AlertCircle
+              size={14}
+              className="text-amber-600 mt-0.5 flex-shrink-0"
+            />
             <div>
               <p className="text-xs font-medium text-amber-800 mb-1">
                 {t("maximumFavoritesReached")}

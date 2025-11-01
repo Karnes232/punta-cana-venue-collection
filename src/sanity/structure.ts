@@ -60,6 +60,13 @@ export const structure: StructureResolver = S =>
             .title("Individual Venue")
             .items([
               S.listItem()
+                .title("Location Type")
+                .child(
+                  S.documentList()
+                    .title("Location Type")
+                    .filter("_type == 'locationType'"),
+                ),
+              S.listItem()
                 .title("Amenity")
                 .child(
                   S.documentList()

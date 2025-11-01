@@ -13,6 +13,11 @@ interface FilterOptions {
   budget: string
 }
 
+// Type for venue with location as string instead of { location: string }
+type VenueWithStringLocation = Omit<IndividualVenue, "location"> & {
+  location: string
+}
+
 const VenueListingContent = ({
   venuePage,
   individualVenues,
@@ -27,10 +32,16 @@ const VenueListingContent = ({
   initialFilters?: FilterOptions
 }) => {
   const t = useTranslations("venueListing")
+  const transformedVenues: VenueWithStringLocation[] = individualVenues.map(
+    venue => ({
+      ...venue,
+      location: venue.location.location,
+    }),
+  )
 
   const [searchTerm, setSearchTerm] = useState("")
   const [filters, setFilters] = useState<FilterOptions>(initialFilters)
-
+  console.log(searchTerm)
   // Apply initial filters when component mounts
   useEffect(() => {
     if (Object.values(initialFilters).some(filter => filter !== "")) {
@@ -41,7 +52,7 @@ const VenueListingContent = ({
   // Generate filter options from venue data
   const filterOptions = useMemo(() => {
     const locations = [
-      ...new Set(individualVenues.map(venue => venue.location)),
+      ...new Set(transformedVenues.map(venue => venue.location)),
     ].sort()
 
     const types = [
@@ -54,7 +65,7 @@ const VenueListingContent = ({
     ].sort()
 
     // Generate capacity ranges based on actual data
-    const capacities = individualVenues
+    const capacities = transformedVenues
       .map(venue => venue.capacityCocktail)
       .sort((a, b) => a - b)
     const capacityRanges = [
@@ -66,7 +77,7 @@ const VenueListingContent = ({
     ]
 
     // Generate budget ranges based on actual data
-    const budgets = individualVenues
+    const budgets = transformedVenues
       .map(venue => venue.startingFrom)
       .sort((a, b) => a - b)
     const budgetRanges = [
@@ -83,11 +94,11 @@ const VenueListingContent = ({
       capacityRanges,
       budgetRanges,
     }
-  }, [individualVenues, locale, t])
+  }, [transformedVenues, locale, t])
 
   // Filter venues based on search term and filters
   const filteredVenues = useMemo(() => {
-    let filtered = individualVenues
+    let filtered = transformedVenues
 
     // Apply search filter
     if (searchTerm.trim()) {
@@ -157,7 +168,7 @@ const VenueListingContent = ({
     }
 
     return filtered
-  }, [individualVenues, searchTerm, filters, locale, t])
+  }, [transformedVenues, searchTerm, filters, locale, t])
 
   const handleSearch = (term: string) => {
     setSearchTerm(term)

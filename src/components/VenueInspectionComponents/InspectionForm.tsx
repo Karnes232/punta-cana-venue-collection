@@ -1,18 +1,18 @@
 "use client"
 
 import React, { useState } from "react"
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  Calendar, 
-  Users, 
-  DollarSign, 
-  MapPin, 
+import {
+  User,
+  Mail,
+  Phone,
+  Calendar,
+  Users,
+  DollarSign,
+  MapPin,
   AlertTriangle,
   CheckCircle,
   Clock,
-  Star
+  Star,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useFavorites } from "@/customHooks/useFavoritesHook"
@@ -29,10 +29,13 @@ interface InspectionFormProps {
   calendlyUrls: any
 }
 
-const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls }) => {
+const InspectionForm: React.FC<InspectionFormProps> = ({
+  locale,
+  calendlyUrls,
+}) => {
   const t = useTranslations("inspectionForm")
   const { favoriteVenues } = useFavorites()
-  
+
   const [formData, setFormData] = useState({
     "form-name": "inspectionForm",
     name: "",
@@ -51,10 +54,10 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
 
   // Define main areas for additional costs calculation
   const mainAreas = ["Cap Cana", "Punta Cana", "Bávaro"]
-  
+
   // Count venues outside main areas
   const venuesOutsideMainArea = favoriteVenues.filter(
-    venue => venue.location && !mainAreas.includes(venue.location)
+    venue => venue.location && !mainAreas.includes(venue.location),
   ).length
 
   // Validation
@@ -103,24 +106,26 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
     return Object.keys(newErrors).length === 0
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
     const { name, value } = e.target
     setFormData(prev => ({
       ...prev,
       [name]: value,
     }))
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: "" }))
     }
   }
 
-
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateForm()) {
       return
     }
@@ -138,9 +143,11 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
       formDataToSend.append("estimatedDate", formData.estimatedDate)
       formDataToSend.append("numberOfGuests", formData.numberOfGuests)
       formDataToSend.append("approximateBudget", formData.approximateBudget)
-      formDataToSend.append("selectedVenues", favoriteVenues.map(venue => venue.id).join(", "))
+      formDataToSend.append(
+        "selectedVenues",
+        favoriteVenues.map(venue => venue.id).join(", "),
+      )
       formDataToSend.append("message", formData.message)
-      
 
       // Submit to Netlify
       const response = await fetch("/__forms.html", {
@@ -180,7 +187,9 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="h-8 w-8 text-green-600" />
         </div>
-        <h3 className={`${coromantGaramond.className} text-2xl font-semibold text-green-800 mb-2`}>
+        <h3
+          className={`${coromantGaramond.className} text-2xl font-semibold text-green-800 mb-2`}
+        >
           {t("thankYou")}
         </h3>
         <p className="text-green-700">{t("responseMessage")}</p>
@@ -191,7 +200,9 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
   return (
     <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
       <div className="bg-gradient-to-r from-golden/10 to-golden/5 p-6 border-b border-slate-200">
-        <h2 className={`${coromantGaramond.className} text-2xl font-semibold text-charcoal mb-2`}>
+        <h2
+          className={`${coromantGaramond.className} text-2xl font-semibold text-charcoal mb-2`}
+        >
           {t("formTitle")}
         </h2>
         <p className="text-slate-600">{t("formDescription")}</p>
@@ -200,14 +211,19 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
       <form onSubmit={handleSubmit} className="p-6 space-y-6">
         {/* Personal Information */}
         <div className="space-y-4">
-          <h3 className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}>
+          <h3
+            className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}
+          >
             <User className="w-5 h-5 text-golden" />
             {t("personalInformation")}
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-slate-700 mb-2"
+              >
                 {t("name")} *
               </label>
               <div className="relative">
@@ -219,16 +235,21 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
                   value={formData.name}
                   onChange={handleInputChange}
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
-                    errors.name ? 'border-red-300' : 'border-slate-300'
+                    errors.name ? "border-red-300" : "border-slate-300"
                   }`}
                   placeholder={t("namePlaceholder")}
                 />
               </div>
-              {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+              {errors.name && (
+                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+              )}
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-2">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-slate-700 mb-2"
+              >
                 {t("phone")} *
               </label>
               <div className="relative">
@@ -240,17 +261,22 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
                   value={formData.phone}
                   onChange={handleInputChange}
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
-                    errors.phone ? 'border-red-300' : 'border-slate-300'
+                    errors.phone ? "border-red-300" : "border-slate-300"
                   }`}
                   placeholder={t("phonePlaceholder")}
                 />
               </div>
-              {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+              )}
             </div>
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-slate-700 mb-2"
+            >
               {t("email")} *
             </label>
             <div className="relative">
@@ -262,25 +288,32 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
                 value={formData.email}
                 onChange={handleInputChange}
                 className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
-                  errors.email ? 'border-red-300' : 'border-slate-300'
+                  errors.email ? "border-red-300" : "border-slate-300"
                 }`}
                 placeholder={t("emailPlaceholder")}
               />
             </div>
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+            )}
           </div>
         </div>
 
         {/* Event Details */}
         <div className="space-y-4">
-          <h3 className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}>
+          <h3
+            className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}
+          >
             <Calendar className="w-5 h-5 text-golden" />
             {t("eventDetails")}
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="eventType" className="block text-sm font-medium text-slate-700 mb-2">
+              <label
+                htmlFor="eventType"
+                className="block text-sm font-medium text-slate-700 mb-2"
+              >
                 {t("eventType")} *
               </label>
               <select
@@ -289,7 +322,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
                 value={formData.eventType}
                 onChange={handleInputChange}
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
-                  errors.eventType ? 'border-red-300' : 'border-slate-300'
+                  errors.eventType ? "border-red-300" : "border-slate-300"
                 }`}
               >
                 <option value="">{t("selectEventType")}</option>
@@ -302,11 +335,16 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
                 <option value="quinceañera">{t("quinceañera")}</option>
                 <option value="other">{t("other")}</option>
               </select>
-              {errors.eventType && <p className="text-red-500 text-sm mt-1">{errors.eventType}</p>}
+              {errors.eventType && (
+                <p className="text-red-500 text-sm mt-1">{errors.eventType}</p>
+              )}
             </div>
 
             <div>
-              <label htmlFor="estimatedDate" className="block text-sm font-medium text-slate-700 mb-2">
+              <label
+                htmlFor="estimatedDate"
+                className="block text-sm font-medium text-slate-700 mb-2"
+              >
                 {t("estimatedDate")} *
               </label>
               <div className="relative">
@@ -318,17 +356,24 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
                   value={formData.estimatedDate}
                   onChange={handleInputChange}
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
-                    errors.estimatedDate ? 'border-red-300' : 'border-slate-300'
+                    errors.estimatedDate ? "border-red-300" : "border-slate-300"
                   }`}
                 />
               </div>
-              {errors.estimatedDate && <p className="text-red-500 text-sm mt-1">{errors.estimatedDate}</p>}
+              {errors.estimatedDate && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.estimatedDate}
+                </p>
+              )}
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="numberOfGuests" className="block text-sm font-medium text-slate-700 mb-2">
+              <label
+                htmlFor="numberOfGuests"
+                className="block text-sm font-medium text-slate-700 mb-2"
+              >
                 {t("numberOfGuests")} *
               </label>
               <div className="relative">
@@ -341,16 +386,25 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
                   onChange={handleInputChange}
                   min="1"
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
-                    errors.numberOfGuests ? 'border-red-300' : 'border-slate-300'
+                    errors.numberOfGuests
+                      ? "border-red-300"
+                      : "border-slate-300"
                   }`}
                   placeholder={t("guestsPlaceholder")}
                 />
               </div>
-              {errors.numberOfGuests && <p className="text-red-500 text-sm mt-1">{errors.numberOfGuests}</p>}
+              {errors.numberOfGuests && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.numberOfGuests}
+                </p>
+              )}
             </div>
 
             <div>
-              <label htmlFor="approximateBudget" className="block text-sm font-medium text-slate-700 mb-2">
+              <label
+                htmlFor="approximateBudget"
+                className="block text-sm font-medium text-slate-700 mb-2"
+              >
                 {t("approximateBudget")} *
               </label>
               <div className="relative">
@@ -361,7 +415,9 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
                   value={formData.approximateBudget}
                   onChange={handleInputChange}
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
-                    errors.approximateBudget ? 'border-red-300' : 'border-slate-300'
+                    errors.approximateBudget
+                      ? "border-red-300"
+                      : "border-slate-300"
                   }`}
                 >
                   <option value="">{t("selectBudget")}</option>
@@ -372,23 +428,31 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
                   <option value="10000Plus">{t("10000Plus")}</option>
                 </select>
               </div>
-              {errors.approximateBudget && <p className="text-red-500 text-sm mt-1">{errors.approximateBudget}</p>}
+              {errors.approximateBudget && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.approximateBudget}
+                </p>
+              )}
             </div>
           </div>
         </div>
 
         {/* Venue Selection */}
         <div className="space-y-4">
-          <h3 className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}>
+          <h3
+            className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}
+          >
             <Star className="w-5 h-5 text-golden" />
             {t("venueSelection")} ({favoriteVenues.length}/5)
           </h3>
-          
+
           {favoriteVenues.length === 0 ? (
             <div className="text-center py-8 bg-slate-50 rounded-lg">
               <Star className="w-12 h-12 text-slate-300 mx-auto mb-4" />
               <p className="text-slate-500 text-lg">{t("noFavorites")}</p>
-              <p className="text-slate-400 text-sm mt-2">{t("addVenuesFirst")}</p>
+              <p className="text-slate-400 text-sm mt-2">
+                {t("addVenuesFirst")}
+              </p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -402,7 +466,9 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
                       <div className="w-2 h-2 bg-white rounded-full"></div>
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-medium text-charcoal">{venue.name}</h4>
+                      <h4 className="font-medium text-charcoal">
+                        {venue.name}
+                      </h4>
                       {venue.location && (
                         <div className="flex items-center gap-1 text-sm text-slate-500 mt-1">
                           <MapPin size={12} />
@@ -415,9 +481,11 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
               ))}
             </div>
           )}
-          
-          {errors.venues && <p className="text-red-500 text-sm">{errors.venues}</p>}
-          
+
+          {errors.venues && (
+            <p className="text-red-500 text-sm">{errors.venues}</p>
+          )}
+
           <div className="text-sm text-slate-600">
             <p>{t("venueSelectionNote")}</p>
           </div>
@@ -429,9 +497,21 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
             <div className="flex items-start gap-3">
               <AlertTriangle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
               <div>
-                <h4 className="font-medium text-amber-800 mb-1">{t("additionalCostsTitle")}</h4>
+                <h4 className="font-medium text-amber-800 mb-1">
+                  {t("additionalCostsTitle")}
+                </h4>
                 <p className="text-sm text-amber-700">
-                  {venuesOutsideMainArea} venue{venuesOutsideMainArea > 1 ? 's' : ''} {locale === 'es' ? 'seleccionado' : 'selected'} {venuesOutsideMainArea > 1 ? (locale === 'es' ? 'están' : 'are') : (locale === 'es' ? 'está' : 'is')} {t('outsideMainArea')}. {t('outsideMainAreaAdditionalCosts')}
+                  {venuesOutsideMainArea} venue
+                  {venuesOutsideMainArea > 1 ? "s" : ""}{" "}
+                  {locale === "es" ? "seleccionado" : "selected"}{" "}
+                  {venuesOutsideMainArea > 1
+                    ? locale === "es"
+                      ? "están"
+                      : "are"
+                    : locale === "es"
+                      ? "está"
+                      : "is"}{" "}
+                  {t("outsideMainArea")}. {t("outsideMainAreaAdditionalCosts")}
                 </p>
               </div>
             </div>
@@ -440,11 +520,13 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
 
         {/* Call Scheduling */}
         <div className="space-y-4">
-          <h3 className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}>
+          <h3
+            className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}
+          >
             <Clock className="w-5 h-5 text-golden" />
             {t("scheduleCall")}
           </h3>
-          
+
           {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label htmlFor="preferredCallDate" className="block text-sm font-medium text-slate-700 mb-2">
@@ -481,11 +563,14 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
               </select>
             </div>
           </div>*/}
-        </div> 
+        </div>
 
         {/* Additional Message */}
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
+          <label
+            htmlFor="message"
+            className="block text-sm font-medium text-slate-700 mb-2"
+          >
             {t("additionalMessage")}
           </label>
           <textarea
@@ -518,7 +603,14 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale, calendlyUrls })
               </>
             )}
           </button> */}
-          <ScheduleCall locale={locale} calendlyUrls={calendlyUrls} handleSubmit={() => handleSubmit({} as React.FormEvent)} validateForm={validateForm} formData={formData} favoriteVenues={favoriteVenues} />
+          <ScheduleCall
+            locale={locale}
+            calendlyUrls={calendlyUrls}
+            handleSubmit={() => handleSubmit({} as React.FormEvent)}
+            validateForm={validateForm}
+            formData={formData}
+            favoriteVenues={favoriteVenues}
+          />
         </div>
       </form>
     </div>

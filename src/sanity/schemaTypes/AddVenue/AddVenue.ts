@@ -7,9 +7,21 @@ export default defineType({
   type: "document",
   icon: DocumentIcon,
   fields: [
-    defineField({ name: "title", type: "localizedString", validation: r => r.required() }),
-    defineField({ name: "heroImage", type: "image", validation: r => r.required() }),
-    defineField({ name: "description", type: "localizedBlock", validation: r => r.required() }),
+    defineField({
+      name: "title",
+      type: "localizedString",
+      validation: r => r.required(),
+    }),
+    defineField({
+      name: "heroImage",
+      type: "image",
+      validation: r => r.required(),
+    }),
+    defineField({
+      name: "description",
+      type: "localizedBlock",
+      validation: r => r.required(),
+    }),
   ],
   preview: {
     select: {

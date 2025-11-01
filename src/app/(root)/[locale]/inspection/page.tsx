@@ -44,9 +44,8 @@ export default async function Inspection({
                 servicesItems={venueInspectionPage.servicesItems}
                 locale={locale}
               />
-              
+
               {/* Inspection Form */}
-              
             </div>
 
             {/* Sidebar with favorites */}
@@ -55,7 +54,10 @@ export default async function Inspection({
             </div>
           </div>
           <div className="flex justify-center mt-5">
-          <InspectionForm locale={locale} calendlyUrls={calendlyUrls.calendlyUrls} />
+            <InspectionForm
+              locale={locale}
+              calendlyUrls={calendlyUrls.calendlyUrls}
+            />
           </div>
         </div>
       </div>

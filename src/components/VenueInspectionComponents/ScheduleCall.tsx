@@ -3,23 +3,22 @@ import { useTranslations } from "next-intl"
 import React, { useState, useEffect } from "react"
 import { useCalendlyEventListener, PopupModal } from "react-calendly"
 
-
 const ScheduleCall = ({
-    locale,
-    calendlyUrls,
-    handleSubmit,
-    validateForm,
-    formData,
-    favoriteVenues,
+  locale,
+  calendlyUrls,
+  handleSubmit,
+  validateForm,
+  formData,
+  favoriteVenues,
 }: {
-    locale: string
-    calendlyUrls: any
-    handleSubmit: () => void
-    validateForm: () => boolean
-    formData: any
-    favoriteVenues: any
+  locale: string
+  calendlyUrls: any
+  handleSubmit: () => void
+  validateForm: () => boolean
+  formData: any
+  favoriteVenues: any
 }) => {
-    const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const t = useTranslations("individualVenueListing")
 
   const pageSettings = {
@@ -50,38 +49,33 @@ const ScheduleCall = ({
   }, [isOpen])
 
   const handleClick = async () => {
-
     if (validateForm()) {
-        setIsOpen(true)   
+      setIsOpen(true)
     }
   }
-
-  
 
   const calendlyUrl =
     locale === "es" ? calendlyUrls.spanishUrl : calendlyUrls.englishUrl
 
-
   const prefill = {
-      email: formData?.email || "",
-      name: formData?.name || "",
-      customAnswers: {
-          a1: `Selected Venues: ${favoriteVenues?.map((venue: any) => venue.name).join(", ") || ""}
+    email: formData?.email || "",
+    name: formData?.name || "",
+    customAnswers: {
+      a1: `Selected Venues: ${favoriteVenues?.map((venue: any) => venue.name).join(", ") || ""}
 Phone: ${formData?.phone || ""}
 Event Type: ${formData?.eventType || ""}
 Estimated Date: ${formData?.estimatedDate || ""}
 Number of Guests: ${formData?.numberOfGuests || ""}
 Approximate Budget: ${formData?.approximateBudget || ""}
 Additional Message: ${formData?.message || ""}`,
-      },
+    },
   }
 
   useCalendlyEventListener({
-    onEventScheduled: (e) => {
-        handleSubmit()
+    onEventScheduled: e => {
+      handleSubmit()
     },
   })
-
 
   return (
     <div id="schedule-call-button" className="relative z-[9998] flex-1">
@@ -99,7 +93,6 @@ Additional Message: ${formData?.message || ""}`,
         prefill={prefill}
         rootElement={document.body}
       />
-
     </div>
   )
 }

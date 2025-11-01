@@ -33,7 +33,12 @@ export default defineType({
           type: "image",
           options: { hotspot: true },
           fields: [
-            { name: "alt", type: "localizedString", title: "Alt text", validation: Rule => Rule.required() },
+            {
+              name: "alt",
+              type: "localizedString",
+              title: "Alt text",
+              validation: Rule => Rule.required(),
+            },
             { name: "caption", type: "localizedString", title: "Caption" },
           ],
         },
@@ -48,19 +53,25 @@ export default defineType({
     }),
     defineField({
       name: "location",
-      type: "string",
-      options: {
-        list: [
-          "Punta Cana",
-          "Cap Cana",
-          "Bávaro",
-          "Uvero Alto",
-          "La Romana",
-          "Bayahíbe",
-        ],
-      },
+      type: "reference",
+      to: [{ type: "locationType" }],
       validation: Rule => Rule.required(),
     }),
+    // defineField({
+    //   name: "location",
+    //   type: "string",
+    //   options: {
+    //     list: [
+    //       "Punta Cana",
+    //       "Cap Cana",
+    //       "Bávaro",
+    //       "Uvero Alto",
+    //       "La Romana",
+    //       "Bayahíbe",
+    //     ],
+    //   },
+    //   validation: Rule => Rule.required(),
+    // }),
     defineField({
       name: "map",
       type: "object",
@@ -133,13 +144,17 @@ export default defineType({
     // defineField({ name: 'downloadables', type: 'array', of: [{ type: 'file' }] }),
     //defineField({ name: 'availabilityNote', type: 'localizedText' }),
 
-    defineField({ name: "seo", type: "seo" }),
     defineField({
-      name: 'displayed',
-      type: 'boolean',
+      name: "seo",
+      type: "seo",
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: "displayed",
+      type: "boolean",
       initialValue: true,
       validation: Rule => Rule.required(),
-    })
+    }),
   ],
   preview: {
     select: {

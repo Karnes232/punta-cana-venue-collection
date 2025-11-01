@@ -84,7 +84,6 @@ const BlogPostContactForm = ({
   }
 
   const submitForm = async () => {
-    
     if (!isFormValid()) {
       return
     }

@@ -27,10 +27,10 @@ const FavoritesList: React.FC<FavoritesListProps> = ({
 
   // Define main areas
   const mainAreas = ["Cap Cana", "Punta Cana", "Bávaro"]
-  
+
   // Count venues outside main areas
   const venuesOutsideMainArea = favoriteVenues.filter(
-    venue => venue.location && !mainAreas.includes(venue.location)
+    venue => venue.location && !mainAreas.includes(venue.location),
   ).length
 
   const handleRemoveFavorite = async (venueId: string) => {
@@ -87,17 +87,18 @@ const FavoritesList: React.FC<FavoritesListProps> = ({
           </button>
         )}
       </div>
-      
+
       {venuesOutsideMainArea > 0 && (
         <div className="mb-6 p-3 bg-amber-50 border border-amber-200 rounded-lg">
           <div className="flex items-center gap-2 text-amber-800">
             <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
             <p className="text-sm font-medium">
-              {venuesOutsideMainArea} venue{venuesOutsideMainArea > 1 ? 's' : ''} {t('outsideMainArea')}
+              {venuesOutsideMainArea} venue
+              {venuesOutsideMainArea > 1 ? "s" : ""} {t("outsideMainArea")}
             </p>
           </div>
           <p className="text-sm text-amber-700 mt-1">
-            {t('outsideMainAreaAdditionalCosts')}
+            {t("outsideMainAreaAdditionalCosts")}
           </p>
         </div>
       )}

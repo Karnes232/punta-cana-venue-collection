@@ -14,11 +14,16 @@ const coromantGaramond = Cormorant_Garamond({
   weight: ["400", "500", "600", "700"],
 })
 
+// Type for venue with location as string instead of { location: string }
+type VenueWithStringLocation = Omit<IndividualVenue, "location"> & {
+  location: string
+}
+
 const IndividualVenueCard = ({
   venue,
   locale,
 }: {
-  venue: IndividualVenue
+  venue: VenueWithStringLocation
   locale: string
 }) => {
   const {
@@ -176,7 +181,7 @@ const IndividualVenueCard = ({
                 ? t("maximumFavoritesReached")
                 : isFavoritedStatus
                   ? t("removeFromFavorites")
-                  : `${t('addToFavorites')} (${remainingSlots} ${t('slotsRemaining')})`
+                  : `${t("addToFavorites")} (${remainingSlots} ${t("slotsRemaining")})`
             }
           >
             <Star

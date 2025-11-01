@@ -60,7 +60,7 @@ const VenueOfDay = ({
                   </h3>
                   <div className="flex items-center text-sm text-charcoal/70 mt-1">
                     <MapPin size={14} className="mr-1 text-turquoise" />
-                    <span>{venueOfTheDay.location}</span>
+                    <span>{venueOfTheDay.location.location}</span>
                   </div>
                 </div>
                 <button className="text-charcoal/40 hover:text-turquoise transition-colors">

@@ -96,7 +96,9 @@ export const mainPageQuery = `*[_type == "mainPage"][0] {
             es
         },
         slug,
-        location,
+        location -> {
+            location
+        },
         type[0]->{
             title {
                 en,
