@@ -21,6 +21,7 @@ import ScheduleCallButton from "@/components/VenueComponents/ScheduleCallButton"
 import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import { notFound } from "next/navigation"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -40,6 +41,10 @@ export default async function VenueIndividual({
   const structuredData = await getIndividualVenueSchema(slug)
   const pageData = await getIndividualVenuePage(slug)
   const calendlyUrls = await getCalendlyUrls()
+
+  if (!pageData) {
+    return notFound()
+  }
 
   return (
     <>

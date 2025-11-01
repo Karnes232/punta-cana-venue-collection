@@ -99,6 +99,10 @@ const IndividualVenueCard = ({
   }
 
   return (
+    <Link
+            href={`/venues/${slug.current}`}
+            // className="block w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md"
+          >
     <div className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
       {/* Image Section */}
       <div className="relative h-64 overflow-hidden">
@@ -159,7 +163,7 @@ const IndividualVenueCard = ({
         {/* Title with Star */}
         <div className="flex items-start justify-between mb-2 relative">
           <h3
-            className={`${coromantGaramond.className} text-xl font-semibold text-charcoal line-clamp-2 flex-1 pr-3`}
+            className={`${coromantGaramond.className} text-xl h-14 font-semibold text-charcoal line-clamp-2 flex-1 pr-3`}
           >
             {localizedTitle}
           </h3>
@@ -252,22 +256,19 @@ const IndividualVenueCard = ({
           </div>
         )}
 
-        {/* View Details Button */}
+        {/* Action Buttons */}
         <div className="flex gap-4 justify-center">
           <IndividualVenueForm
             venueName={localizedTitle}
-            className="block w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md"
+            className="block w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md z-50"
           />
 
-          <Link
-            href={`/venues/${slug.current}`}
-            className="block w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md"
-          >
+          <div className="block w-full bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md">
             {t("viewDetails")}
-          </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </div></Link>
   )
 }
 
