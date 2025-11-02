@@ -55,6 +55,9 @@ export default defineType({
       name: "location",
       type: "reference",
       to: [{ type: "locationType" }],
+      options: {
+        disableNew: true,
+      },
       validation: Rule => Rule.required(),
     }),
     // defineField({
