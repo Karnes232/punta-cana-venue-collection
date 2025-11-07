@@ -19,6 +19,7 @@ export const structure: StructureResolver = S =>
           S.documentList()
             .schemaType("pageSeo")
             .title("Page SEO")
+            .apiVersion("v2025-02-19")
             .filter("_type == 'pageSeo'"),
         ),
       S.listItem()
@@ -27,6 +28,7 @@ export const structure: StructureResolver = S =>
           S.documentList()
             .schemaType("legalDocuments")
             .title("Legal Documents")
+            .apiVersion("v2025-02-19")
             .filter("_type == 'legalDocuments'"),
         ),
       S.listItem()
@@ -64,6 +66,7 @@ export const structure: StructureResolver = S =>
                 .child(
                   S.documentList()
                     .title("Location Type")
+                    .apiVersion("v2025-02-19")
                     .filter("_type == 'locationType'"),
                 ),
               S.listItem()
@@ -71,6 +74,7 @@ export const structure: StructureResolver = S =>
                 .child(
                   S.documentList()
                     .title("Amenity")
+                    .apiVersion("v2025-02-19")
                     .filter("_type == 'amenity'"),
                 ),
               S.listItem()
@@ -78,6 +82,7 @@ export const structure: StructureResolver = S =>
                 .child(
                   S.documentList()
                     .title("Event Type")
+                    .apiVersion("v2025-02-19")
                     .filter("_type == 'eventType'"),
                 ),
               S.listItem()
@@ -85,6 +90,7 @@ export const structure: StructureResolver = S =>
                 .child(
                   S.documentList()
                     .title("Type Venue")
+                    .apiVersion("v2025-02-19")
                     .filter("_type == 'typeVenue'"),
                 ),
               S.listItem()
@@ -92,6 +98,7 @@ export const structure: StructureResolver = S =>
                 .child(
                   S.documentList()
                     .title("Venue")
+                    .apiVersion("v2025-02-19")
                     .filter("_type == 'individualVenue'"),
                 ),
             ]),
@@ -115,6 +122,7 @@ export const structure: StructureResolver = S =>
                 .child(
                   S.documentList()
                     .title("About Cards")
+                    .apiVersion("v2025-02-19")
                     .filter("_type == 'aboutCards'"),
                 ),
             ]),
@@ -130,6 +138,7 @@ export const structure: StructureResolver = S =>
                 .child(
                   S.documentList()
                     .title("Blog Category")
+                    .apiVersion("v2025-02-19")
                     .filter("_type == 'blogCategory'"),
                 ),
               S.listItem()
@@ -137,6 +146,7 @@ export const structure: StructureResolver = S =>
                 .child(
                   S.documentList()
                     .title("Blog Header")
+                    .apiVersion("v2025-02-19")
                     .filter("_type == 'blogHeader'"),
                 ),
               S.listItem()
@@ -144,6 +154,7 @@ export const structure: StructureResolver = S =>
                 .child(
                   S.documentList()
                     .title("Blog Post")
+                    .apiVersion("v2025-02-19")
                     .filter("_type == 'blogPost'"),
                 ),
             ]),

@@ -2,6 +2,7 @@ import { client } from "@/sanity/lib/client"
 import { HeroImage } from "../MainPage/MainPage"
 
 export const individualVenuesQuery = `*[_type == "individualVenue" && displayed == true] {
+    venueName,
     title {
         en,
         es
@@ -39,6 +40,7 @@ export const individualVenuesQuery = `*[_type == "individualVenue" && displayed 
 }`
 
 export interface IndividualVenue {
+  venueName: string
   title: {
     en: string
     es: string
@@ -180,6 +182,7 @@ export async function getIndividualVenueSchema(
 
 export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.current == $slug][0]
 {
+  venueName,
   title {
         en,
         es
@@ -215,7 +218,9 @@ export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.cu
         longitude
     },
     slug,
-    location,
+    location -> {
+        location
+    },
     type[]->{
         title {
             en,
@@ -254,6 +259,7 @@ export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.cu
 `
 
 export interface IndividualVenuePage {
+  venueName: string
   title: {
     en: string
     es: string

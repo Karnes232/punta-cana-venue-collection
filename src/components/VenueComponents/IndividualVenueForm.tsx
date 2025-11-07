@@ -7,9 +7,11 @@ import IndividualVenueContactForm from "../ContactForms/IndividualVenueContactFo
 
 const IndividualVenueForm = ({
   venueName,
+  venueTitle,
   className,
 }: {
   venueName: string
+  venueTitle: string
   className: string
 }) => {
   const t = useTranslations("individualVenueListing")
@@ -24,6 +26,7 @@ const IndividualVenueForm = ({
     estimatedDate: "",
     message: "",
     venue: venueName,
+    venueTitle: venueTitle,
   })
 
   useEffect(() => {
@@ -70,7 +73,7 @@ const IndividualVenueForm = ({
         className={`bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative transform transition-all duration-1000 ease-out ${isAnimating ? "scale-100 opacity-100" : "scale-50 opacity-0"}`}
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-medium text-gray-900">{venueName}</h2>
+          <h2 className="text-lg font-medium text-gray-900">{venueTitle}</h2>
           <button
             onClick={() => setIsOpen(false)}
             className="text-gray-400 hover:text-gray-600 transition-colors duration-200"

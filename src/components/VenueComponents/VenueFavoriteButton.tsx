@@ -16,7 +16,7 @@ const shakeAnimation = `
 
 interface VenueFavoriteButtonProps {
   venueId: string
-  venueName: string
+  venueTitle: string
   location?: string
   size?: "small" | "medium" | "large"
   showLabel?: boolean
@@ -26,7 +26,7 @@ interface VenueFavoriteButtonProps {
 
 const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
   venueId,
-  venueName,
+  venueTitle,
   location,
   size = "medium",
   showLabel = false,
@@ -96,9 +96,9 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
     setIsLoading(true)
 
     try {
-      await toggleFavorite(venueId, venueName, location)
+      await toggleFavorite(venueId, venueTitle, location)
       console.log(
-        `${isFavoritedStatus ? "Removed" : "Added"} "${venueName}" ${isFavoritedStatus ? "from" : "to"} favorites`,
+        `${isFavoritedStatus ? "Removed" : "Added"} "${venueTitle}" ${isFavoritedStatus ? "from" : "to"} favorites`,
       )
     } catch (error) {
       console.error("Failed to update favorite status:", error)
@@ -250,8 +250,8 @@ const VenueFavoriteButton: React.FC<VenueFavoriteButtonProps> = ({
         onMouseLeave={() => setShowMaxCapacityTooltip(false)}
         aria-label={
           isFavoritedStatus
-            ? `Remove ${venueName} from favorites`
-            : `Add ${venueName} to favorites`
+            ? `Remove ${venueTitle} from favorites`
+            : `Add ${venueTitle} to favorites`
         }
         title={
           !isFavoritedStatus && isAtMaxCapacity

@@ -21,6 +21,7 @@ interface FormData {
   estimatedDate: string
   message: string
   venue: string
+  venueTitle: string
 }
 
 interface IndividualVenueContactFormProps {
@@ -139,6 +140,7 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           estimatedDate: "",
           message: "",
           venue: formData.venue, // Keep venue name
+          venueTitle: formData.venueTitle,
         })
         setTimeout(() => {
           if (onClose) {

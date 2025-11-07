@@ -9,6 +9,7 @@ const coromantGaramond = Cormorant_Garamond({
 })
 const Location = ({ location }: { location: string }) => {
   const t = useTranslations("individualVenueListing")
+
   return (
     <div className="space-y-6">
       <div className="bg-white  rounded-lg">

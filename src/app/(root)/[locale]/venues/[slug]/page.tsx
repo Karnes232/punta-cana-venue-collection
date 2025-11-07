@@ -69,7 +69,7 @@ export default async function VenueIndividual({
           <div className="absolute top-4 right-4 z-10">
             <VenueFavoriteButton
               venueId={slug}
-              venueName={pageData.title[locale]}
+              venueTitle={pageData.title[locale]}
               location={pageData.location.location}
               size="large"
             />
@@ -127,7 +127,7 @@ export default async function VenueIndividual({
                 </div>
                 <VenueFavoriteButton
                   venueId={slug}
-                  venueName={pageData.title[locale]}
+                  venueTitle={pageData.title[locale]}
                   location={pageData.location.location}
                   size="large"
                 />
@@ -136,7 +136,8 @@ export default async function VenueIndividual({
               {/* Additional actions can go here */}
               <div className="flex gap-3">
                 <IndividualVenueForm
-                  venueName={pageData.title[locale]}
+                  venueName={pageData.venueName}
+                  venueTitle={pageData.title[locale]}
                   className="flex-1 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm"
                 />
                 <ScheduleCallButton

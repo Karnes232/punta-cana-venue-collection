@@ -41,7 +41,7 @@ const VenueListingContent = ({
 
   const [searchTerm, setSearchTerm] = useState("")
   const [filters, setFilters] = useState<FilterOptions>(initialFilters)
-  console.log(searchTerm)
+
   // Apply initial filters when component mounts
   useEffect(() => {
     if (Object.values(initialFilters).some(filter => filter !== "")) {

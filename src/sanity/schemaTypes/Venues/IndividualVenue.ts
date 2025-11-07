@@ -6,6 +6,12 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
+      name: "venueName",
+      title: "Venue Name",
+      type: "string",
+      validation: r => r.required(),
+    }),
+    defineField({
       name: "title",
       type: "localizedString",
       validation: r => r.required(),
@@ -161,7 +167,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: "title.en",
+      title: "venueName",
       media: "heroImage",
     },
   },

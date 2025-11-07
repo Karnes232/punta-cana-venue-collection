@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from "react"
 interface FavoriteVenue {
   id: string
   name: string
+  venueName?: string
   addedAt: string
   location?: string // e.g., "Punta Cana", "Cap Cana", etc.
 }
@@ -92,7 +93,12 @@ export const useFavorites = () => {
 
   // Add venue to favorites
   const addFavorite = useCallback(
-    async (venueId: string, venueName: string, location?: string) => {
+    async (
+      venueId: string,
+      venueTitle: string,
+      location?: string,
+      venueName?: string,
+    ) => {
       setError(null)
 
       if (globalFavorites.includes(venueId)) return
@@ -106,7 +112,8 @@ export const useFavorites = () => {
 
       const newFavorite: FavoriteVenue = {
         id: venueId,
-        name: venueName,
+        name: venueTitle,
+        venueName: venueName,
         addedAt: new Date().toISOString(),
         location,
       }
@@ -151,11 +158,16 @@ export const useFavorites = () => {
 
   // Toggle favorite status
   const toggleFavorite = useCallback(
-    async (venueId: string, venueName: string, location?: string) => {
+    async (
+      venueId: string,
+      venueTitle: string,
+      location?: string,
+      venueName?: string,
+    ) => {
       if (globalFavorites.includes(venueId)) {
         await removeFavorite(venueId)
       } else {
-        await addFavorite(venueId, venueName, location)
+        await addFavorite(venueId, venueTitle, location, venueName)
       }
     },
     [addFavorite, removeFavorite],
