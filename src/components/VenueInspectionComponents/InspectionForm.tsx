@@ -35,7 +35,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
 }) => {
   const t = useTranslations("inspectionForm")
   const { favoriteVenues } = useFavorites()
-
+  console.log(favoriteVenues)
   const [formData, setFormData] = useState({
     "form-name": "inspectionForm",
     name: "",
@@ -145,7 +145,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
       formDataToSend.append("approximateBudget", formData.approximateBudget)
       formDataToSend.append(
         "selectedVenues",
-        favoriteVenues.map(venue => venue.id).join(", "),
+        favoriteVenues.map(venue => venue.venueName).join(", "),
       )
       formDataToSend.append("message", formData.message)
 

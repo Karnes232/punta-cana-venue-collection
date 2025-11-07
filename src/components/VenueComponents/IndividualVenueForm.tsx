@@ -28,7 +28,7 @@ const IndividualVenueForm = ({
     venue: venueName,
     venueTitle: venueTitle,
   })
-
+  console.log(formData)
   useEffect(() => {
     setMounted(true)
   }, [])
