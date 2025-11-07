@@ -35,7 +35,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
 }) => {
   const t = useTranslations("inspectionForm")
   const { favoriteVenues } = useFavorites()
-  console.log(favoriteVenues)
+
   const [formData, setFormData] = useState({
     "form-name": "inspectionForm",
     name: "",

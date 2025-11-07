@@ -50,7 +50,7 @@ const FavoritesList: React.FC<FavoritesListProps> = ({
       }
     }
   }
-  console.log(favoriteVenues)
+
   if (isLoading) {
     return (
       <div className={`bg-white rounded-2xl p-6 shadow-sm ${className}`}>
