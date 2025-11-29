@@ -16,9 +16,9 @@ const Header = () => {
               <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
             <div className="min-w-0 flex-1">
-              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 truncate">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 truncate">
                 {t("inspectionList")}
-              </h1>
+              </h2>
               <p className="text-sm sm:text-base text-gray-600 hidden sm:block">
                 {t("manageSelectedVenues")}
               </p>
