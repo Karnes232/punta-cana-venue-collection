@@ -76,25 +76,49 @@ export async function generateMetadata({
     canonicalUrl = `https://puntacanavenuecollection.com/es/blog/${slug}`
   }
 
-  return {
-    title: pageSeo.seo.meta[locale].title,
-    description: pageSeo.seo.meta[locale].description,
-    keywords: pageSeo.seo.meta[locale].keywords.join(", "),
-    url: canonicalUrl,
-    openGraph: {
-      title: pageSeo.seo.openGraph[locale].title || pageSeo.seo.meta[locale].title,
-      description: pageSeo.seo.openGraph[locale].description || pageSeo.seo.meta[locale].description,
-      images: pageSeo.seo.openGraph.image.url || "",
-      type: "website",
+  if (!pageSeo.seo.openGraph) {
+    return {
+      title: pageSeo.seo.meta[locale].title,
+      description: pageSeo.seo.meta[locale].description,
+      keywords: pageSeo.seo.meta[locale].keywords.join(", "),
       url: canonicalUrl,
-    },
-    robots: {
-      index: !pageSeo.seo.noIndex,
-      follow: !pageSeo.seo.noFollow,
-    },
-    ...(canonicalUrl && { canonical: canonicalUrl }),
-    alternates: {
-      canonical: canonicalUrl,
-    },
+      openGraph: {
+        title: pageSeo.seo.meta[locale].title,
+        description: pageSeo.seo.meta[locale].description,
+        images: "",
+        type: "website",
+        url: canonicalUrl,
+      },
+      robots: {
+        index: !pageSeo.seo.noIndex,
+        follow: !pageSeo.seo.noFollow,
+      },
+      ...(canonicalUrl && { canonical: canonicalUrl }),
+      alternates: {
+        canonical: canonicalUrl,
+      },
+    }
+  } else {
+    return {
+      title: pageSeo.seo.meta[locale].title,
+      description: pageSeo.seo.meta[locale].description,
+      keywords: pageSeo.seo.meta[locale].keywords.join(", "),
+      url: canonicalUrl,
+      openGraph: {
+        title: pageSeo.seo.openGraph[locale].title,
+        description: pageSeo.seo.openGraph[locale].description,
+        images: pageSeo.seo.openGraph.image.url || "",
+        type: "website",
+        url: canonicalUrl,
+      },
+      robots: {
+        index: !pageSeo.seo.noIndex,
+        follow: !pageSeo.seo.noFollow,
+      },
+      ...(canonicalUrl && { canonical: canonicalUrl }),
+      alternates: {
+        canonical: canonicalUrl,
+      },
+    }
   }
 }
