@@ -1,18 +1,22 @@
 "use client"
-import { useTranslations } from "next-intl"
-import React, { useState, useEffect } from "react"
-import { PopupModal } from "react-calendly"
-import { CalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 
-const ScheduleCallButton = ({
-  locale,
-  calendlyUrls,
-}: {
+import { useTranslations } from "next-intl"
+import React, { useEffect, useState } from "react"
+import { PopupModal } from "react-calendly"
+
+type Props = {
   locale: string
-  calendlyUrls: any
-}) => {
+  calendlyUrls: { englishUrl: string; spanishUrl: string }
+}
+
+export default function ScheduleCallButton({ locale, calendlyUrls }: Props) {
   const [isOpen, setIsOpen] = useState(false)
+  const [portalEl, setPortalEl] = useState<HTMLElement | null>(null)
   const t = useTranslations("individualVenueListing")
+
+  useEffect(() => {
+    setPortalEl(document.body)
+  }, [])
 
   const pageSettings = {
     backgroundColor: "ffffff",
@@ -23,26 +27,22 @@ const ScheduleCallButton = ({
     zIndex: 9999,
   }
 
-  // Force z-index on Calendly modal when it opens
+  // Optional: only run when open AND in browser (effect already is browser-only)
   useEffect(() => {
-    if (isOpen) {
-      const timer = setTimeout(() => {
-        const calendlyElements = document.querySelectorAll(
-          '[class*="calendly"]',
-        )
-        calendlyElements.forEach(element => {
-          if (element instanceof HTMLElement) {
-            element.style.zIndex = "9999"
-          }
-        })
-      }, 100)
+    if (!isOpen) return
 
-      return () => clearTimeout(timer)
-    }
+    const timer = window.setTimeout(() => {
+      const calendlyElements = document.querySelectorAll('[class*="calendly"]')
+      calendlyElements.forEach(el => {
+        if (el instanceof HTMLElement) el.style.zIndex = "9999"
+      })
+    }, 100)
+
+    return () => window.clearTimeout(timer)
   }, [isOpen])
 
-  const calendlyUrl =
-    locale === "es" ? calendlyUrls.spanishUrl : calendlyUrls.englishUrl
+  const calendlyUrl = locale === "es" ? calendlyUrls.spanishUrl : calendlyUrls.englishUrl
+
   return (
     <div id="schedule-call-button" className="relative z-[9998] flex-1">
       <button
@@ -51,17 +51,17 @@ const ScheduleCallButton = ({
       >
         {t("scheduleCall")}
       </button>
-      <PopupModal
-        url={calendlyUrl}
-        onModalClose={() => setIsOpen(false)}
-        open={isOpen}
-        pageSettings={pageSettings}
-        rootElement={document.body}
-      />
 
-      {/* <InlineWidget url="https://calendly.com/karnes-james/new-meeting" /> */}
+      {/* ✅ only render the modal once we have a browser root element */}
+      {portalEl ? (
+        <PopupModal
+          url={calendlyUrl}
+          onModalClose={() => setIsOpen(false)}
+          open={isOpen}
+          pageSettings={pageSettings}
+          rootElement={portalEl}
+        />
+      ) : null}
     </div>
   )
 }
-
-export default ScheduleCallButton
