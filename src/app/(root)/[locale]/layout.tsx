@@ -32,7 +32,8 @@ const crimsonPro = Crimson_Pro({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.puntacanavenues.com"),
+  metadataBase: new URL("https://puntacanavenuecollection.com"),
+  applicationName: "Punta Cana Venue Collection",
   openGraph: {
     siteName: "Punta Cana Venue Collection",
     type: "website",
@@ -46,48 +47,75 @@ export const metadata: Metadata = {
     "max-video-preview": -1,
     googleBot: "index, follow",
   },
-  // alternates: {
-  //   types: {
-  //     "application/rss+xml": "https://dminhvu.com/rss.xml"
-  //   }
-  // },
-  applicationName: "Punta Cana Venue Collection",
   appleWebApp: {
     title: "Punta Cana Venue Collection",
     statusBarStyle: "default",
     capable: true,
   },
-  verification: {
-    // google: "uDTOqd2dqdClXOBUBmAp9LAzWwGZA3xSeLqiHe",
-    // // yandex: ["YOUR_DATA"],
-    // other: {
-    //   "google-site-verification": [
-    //     "z1ceKSK3JVrMz86jtW5n8_lXA88be1zGlh9Kb0lRamg",
-    //   ],
-    //   // "facebook-domain-verification": ["YOUR_DATA"],
-    // },
-  },
   icons: {
-    icon: [
-      {
-        url: "../favicon.ico",
-        type: "image/x-icon",
-      },
-    ],
-    apple: [
-      {
-        url: "../favicon.ico",
-        type: "image/x-icon",
-      },
-    ],
-    shortcut: [
-      {
-        url: "../favicon.ico",
-        type: "image/x-icon",
-      },
-    ],
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico", // or "/favicon.ico"
   },
-}
+};
+
+// export const metadata: Metadata = {
+//   metadataBase: new URL("https://puntacanavenuecollection.com"),
+//   openGraph: {
+//     siteName: "Punta Cana Venue Collection",
+//     type: "website",
+//     locale: "en_US",
+//   },
+//   robots: {
+//     index: true,
+//     follow: true,
+//     "max-image-preview": "large",
+//     "max-snippet": -1,
+//     "max-video-preview": -1,
+//     googleBot: "index, follow",
+//   },
+//   // alternates: {
+//   //   types: {
+//   //     "application/rss+xml": "https://dminhvu.com/rss.xml"
+//   //   }
+//   // },
+//   applicationName: "Punta Cana Venue Collection",
+//   appleWebApp: {
+//     title: "Punta Cana Venue Collection",
+//     statusBarStyle: "default",
+//     capable: true,
+//   },
+//   verification: {
+//     // google: "uDTOqd2dqdClXOBUBmAp9LAzWwGZA3xSeLqiHe",
+//     // // yandex: ["YOUR_DATA"],
+//     // other: {
+//     //   "google-site-verification": [
+//     //     "z1ceKSK3JVrMz86jtW5n8_lXA88be1zGlh9Kb0lRamg",
+//     //   ],
+//     //   // "facebook-domain-verification": ["YOUR_DATA"],
+//     // },
+//   },
+//   icons: {
+//     icon: [
+//       {
+//         url: "../favicon.ico",
+//         type: "image/x-icon",
+//       },
+//     ],
+//     apple: [
+//       {
+//         url: "../favicon.ico",
+//         type: "image/x-icon",
+//       },
+//     ],
+//     shortcut: [
+//       {
+//         url: "../favicon.ico",
+//         type: "image/x-icon",
+//       },
+//     ],
+//   },
+// }
 
 // Add caching headers for better performance
 export async function generateStaticParams() {
