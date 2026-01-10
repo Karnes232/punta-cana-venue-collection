@@ -41,7 +41,8 @@ export default function ScheduleCallButton({ locale, calendlyUrls }: Props) {
     return () => window.clearTimeout(timer)
   }, [isOpen])
 
-  const calendlyUrl = locale === "es" ? calendlyUrls.spanishUrl : calendlyUrls.englishUrl
+  const calendlyUrl =
+    locale === "es" ? calendlyUrls.spanishUrl : calendlyUrls.englishUrl
 
   return (
     <div id="schedule-call-button" className="relative z-[9998] flex-1">

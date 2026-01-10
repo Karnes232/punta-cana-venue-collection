@@ -15,6 +15,7 @@ import {
   getLogo,
 } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import CookieConsentComponent from "@/components/CookieConsentComponents/CookieConsentComponent"
+import FloatingCtaButton from "@/components/FloatingCtaButton/FloatingCtaButton"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: "/favicon.ico", // or "/favicon.ico"
   },
-};
+}
 
 // export const metadata: Metadata = {
 //   metadataBase: new URL("https://puntacanavenuecollection.com"),
@@ -178,6 +179,11 @@ export default async function LocaleLayout({
             <main className="flex-1">{children}</main>
             <Footer companyInfo={companyInfo} logo={logo.logo.asset.url} />
           </div>
+          <FloatingCtaButton
+            telephone={companyInfo.telephone || "18295222900"}
+            email={companyInfo.email || "info@puntacanavenuecollection.com"}
+            locale={locale as "en" | "es"}
+          />
         </NextIntlClientProvider>
         <CookieConsentComponent key={locale} locale={locale} />
       </body>
