@@ -96,6 +96,8 @@ const BlogPostHeader = ({ post, locale }: { post: any; locale: string }) => {
             className="w-full h-64 md:h-96 2xl:h-[40rem] object-cover rounded-xl shadow-lg"
             width={1000}
             height={1000}
+            loading="lazy"
+            quality={80}
           />
         </div>
       </div>

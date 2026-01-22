@@ -104,7 +104,8 @@ const IndividualVenuePhotoGrid = ({
               }`}
               onClick={() => handlePhotoClick(0)}
               onLoad={() => handleImageLoad(0)}
-              priority
+              loading="lazy"
+              quality={80}
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
             <div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
@@ -139,6 +140,8 @@ const IndividualVenuePhotoGrid = ({
                     } ${imageLoaded[actualIndex] ? "opacity-100" : "opacity-0"}`}
                     onClick={() => handlePhotoClick(actualIndex)}
                     onLoad={() => handleImageLoad(actualIndex)}
+                    loading="lazy"
+                    quality={80}
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
                   {isLastVisible && (

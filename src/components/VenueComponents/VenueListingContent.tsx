@@ -4,8 +4,15 @@ import { useTranslations } from "next-intl"
 import HeroComponentVenuePage from "../HeroComponent/HeroComponentVenuePage"
 import { VenuePage } from "@/sanity/queries/VenuePage/VenuePage"
 import { IndividualVenue } from "@/sanity/queries/IndividualVenues/IndividualVenues"
-import IndividualVenueCard from "./IndividualVenueCard"
 import { TypeVenue as TypeVenueType } from "@/sanity/queries/MainPage/MainPage"
+import dynamic from "next/dynamic"
+
+// Dynamically import components to improve initial page load
+const IndividualVenueCard = dynamic(() => import("./IndividualVenueCard"), {
+  loading: () => (
+    <div className="w-full h-96 bg-gray-200 animate-pulse rounded-2xl" />
+  ),
+})
 interface FilterOptions {
   location: string
   type: string

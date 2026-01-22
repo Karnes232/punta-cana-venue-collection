@@ -35,6 +35,8 @@ const FeaturedPost = ({
             width={500}
             height={500}
             className="h-64 md:h-full w-full object-cover"
+            loading="lazy"
+            quality={80}
           />
         </div>
         <div className="md:w-1/2 p-8">

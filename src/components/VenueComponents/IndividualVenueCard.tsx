@@ -114,6 +114,8 @@ const IndividualVenueCard = ({
               width={heroImage.asset.metadata.dimensions.width}
               height={heroImage.asset.metadata.dimensions.height}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              loading="lazy"
+              quality={80}
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">

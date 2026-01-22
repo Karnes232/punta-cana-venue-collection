@@ -1,12 +1,34 @@
 "use client"
 import { BlogCategory } from "@/sanity/queries/Blog/BlogCategory"
 import React, { useState } from "react"
-import BlogFilters from "./BlogFilters"
 import { BlogPostMainPage } from "@/sanity/queries/Blog/BlogPost"
-import FeaturedPost from "./FeaturedPost"
-import Pagination from "./Pagination"
 import { useTranslations } from "next-intl"
-import BlogCard from "./BlogCard"
+import dynamic from "next/dynamic"
+
+// Dynamically import components to improve initial page load
+const BlogFilters = dynamic(() => import("./BlogFilters"), {
+  loading: () => (
+    <div className="w-full h-20 bg-gray-200 animate-pulse rounded-lg mb-8" />
+  ),
+})
+
+const FeaturedPost = dynamic(() => import("./FeaturedPost"), {
+  loading: () => (
+    <div className="w-full h-96 bg-gray-200 animate-pulse rounded-2xl mb-12" />
+  ),
+})
+
+const Pagination = dynamic(() => import("./Pagination"), {
+  loading: () => (
+    <div className="w-full h-12 bg-gray-200 animate-pulse rounded-lg" />
+  ),
+})
+
+const BlogCard = dynamic(() => import("./BlogCard"), {
+  loading: () => (
+    <div className="w-full h-80 bg-gray-200 animate-pulse rounded-2xl" />
+  ),
+})
 
 const BlogContent = ({
   categories,

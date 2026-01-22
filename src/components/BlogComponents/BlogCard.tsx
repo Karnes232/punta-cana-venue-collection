@@ -35,6 +35,8 @@ const BlogCard = ({
             width={500}
             height={500}
             className="w-full h-48 object-cover"
+            loading="lazy"
+            quality={80}
           />
           {post.categories[0] && (
             <div className="absolute top-4 left-4">
