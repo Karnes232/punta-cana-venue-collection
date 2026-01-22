@@ -33,9 +33,9 @@ const CompanyInfo = ({
           />
         </div>
         <div>
-          <h1 className="text-xl font-bold text-ivory">
+          <h3 className="text-xl font-bold text-ivory">
             {companyInfo.companyName.split(" ").slice(0, 2).join(" ")}
-          </h1>
+          </h3>
           <p className="text-sm text-ivory/70">
             {companyInfo.companyName.split(" ").slice(2, 4).join(" ")}
           </p>
