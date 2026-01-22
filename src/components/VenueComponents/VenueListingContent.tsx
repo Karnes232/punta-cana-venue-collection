@@ -94,7 +94,7 @@ const VenueListingContent = ({
       capacityRanges,
       budgetRanges,
     }
-  }, [transformedVenues, locale, t])
+  }, [transformedVenues, locale, t, typeVenue])
 
   // Filter venues based on search term and filters
   const filteredVenues = useMemo(() => {
@@ -168,7 +168,7 @@ const VenueListingContent = ({
     }
 
     return filtered
-  }, [transformedVenues, searchTerm, filters, locale, t, typeVenue])
+  }, [transformedVenues, searchTerm, filters, locale, t])
 
   const handleSearch = (term: string) => {
     setSearchTerm(term)

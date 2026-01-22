@@ -178,7 +178,7 @@ export const useFavorites = () => {
     (venueId: string) => {
       return globalFavorites.includes(venueId)
     },
-    [favorites],
+    [],
   ) // Keep dependency on favorites to trigger re-renders
 
   // Get favorite count
