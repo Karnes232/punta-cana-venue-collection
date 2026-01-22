@@ -5,7 +5,6 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts")
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-
     qualities: [65, 70, 75, 80, 85, 90, 95, 100],
     remotePatterns: [
       {

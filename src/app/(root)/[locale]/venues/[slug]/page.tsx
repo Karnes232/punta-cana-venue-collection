@@ -81,7 +81,7 @@ export default async function VenueIndividual({
       {/* Back to Venues Button */}
       <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-6">
         <Link
-          href={`/${locale}/venues`}
+          href={locale === "en" ? "/venues" : `/${locale}/venues`}
           className="inline-flex items-center gap-2 text-charcoal hover:text-golden transition-colors duration-200 font-medium"
         >
           <ArrowLeft className="w-5 h-5" />
@@ -198,7 +198,7 @@ export default async function VenueIndividual({
       {/* Bottom Back to Venues Button */}
       <div className="max-w-7xl mx-auto px-4 lg:px-0 mt-8 mb-8 text-center">
         <Link
-          href={`/${locale}/venues`}
+          href={locale === "en" ? "/venues" : `/${locale}/venues`}
           className="inline-flex items-center gap-2 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-md"
         >
           <ArrowLeft className="w-5 h-5" />

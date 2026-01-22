@@ -14,10 +14,7 @@ interface RelatedPostsCarouselProps {
   locale: "en" | "es"
 }
 
-const RelatedPostsCarousel = ({
-  posts,
-  locale,
-}: RelatedPostsCarouselProps) => {
+const RelatedPostsCarousel = ({ posts, locale }: RelatedPostsCarouselProps) => {
   const swiperRef = useRef<SwiperType | null>(null)
 
   if (posts.length === 0) return null
@@ -69,7 +66,7 @@ const RelatedPostsCarousel = ({
             spaceBetween: 32,
           },
         }}
-        onSwiper={(swiper) => {
+        onSwiper={swiper => {
           swiperRef.current = swiper
         }}
         pagination={{
@@ -79,7 +76,7 @@ const RelatedPostsCarousel = ({
         className="related-posts-swiper !pb-16"
         loop={posts.length > 4}
       >
-        {posts.map((post) => (
+        {posts.map(post => (
           <SwiperSlide key={post._id}>
             <div className="h-full">
               <RelatedPostCard post={post} locale={locale} />

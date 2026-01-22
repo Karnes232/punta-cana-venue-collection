@@ -21,11 +21,14 @@ const VenueOfDay = dynamic(() => import("../VenueComponents/VenueOfDay"), {
   ),
 })
 
-const TypeVenue = dynamic(() => import("@/components/VenueComponents/TypeVenue"), {
-  loading: () => (
-    <div className="w-full h-64 bg-gray-200 animate-pulse rounded-2xl" />
-  ),
-})
+const TypeVenue = dynamic(
+  () => import("@/components/VenueComponents/TypeVenue"),
+  {
+    loading: () => (
+      <div className="w-full h-64 bg-gray-200 animate-pulse rounded-2xl" />
+    ),
+  },
+)
 
 const BlockContent = dynamic(() => import("../BlockContent/BlockContent"), {
   loading: () => (

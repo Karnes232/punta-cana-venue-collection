@@ -12,11 +12,14 @@ const coromantGaramond = Cormorant_Garamond({
 })
 
 // Dynamically import components to improve initial page load
-const BlockContent = dynamic(() => import("@/components/BlockContent/BlockContent"), {
-  loading: () => (
-    <div className="w-full h-64 bg-gray-200 animate-pulse rounded-2xl" />
-  ),
-})
+const BlockContent = dynamic(
+  () => import("@/components/BlockContent/BlockContent"),
+  {
+    loading: () => (
+      <div className="w-full h-64 bg-gray-200 animate-pulse rounded-2xl" />
+    ),
+  },
+)
 
 const IndividualVenuePhotoGrid = dynamic(
   () => import("@/components/VenueComponents/IndividualVenuePhotoGrid"),
@@ -24,7 +27,7 @@ const IndividualVenuePhotoGrid = dynamic(
     loading: () => (
       <div className="w-full h-96 bg-gray-200 animate-pulse rounded-2xl" />
     ),
-  }
+  },
 )
 
 const AmenitiesSection = dynamic(
@@ -33,7 +36,7 @@ const AmenitiesSection = dynamic(
     loading: () => (
       <div className="w-full h-64 bg-gray-200 animate-pulse rounded-2xl" />
     ),
-  }
+  },
 )
 
 const VenueSpaceInfo = dynamic(
@@ -42,7 +45,7 @@ const VenueSpaceInfo = dynamic(
     loading: () => (
       <div className="w-full h-48 bg-gray-200 animate-pulse rounded-2xl" />
     ),
-  }
+  },
 )
 
 const EventTypesSection = dynamic(
@@ -51,14 +54,17 @@ const EventTypesSection = dynamic(
     loading: () => (
       <div className="w-full h-48 bg-gray-200 animate-pulse rounded-2xl" />
     ),
-  }
+  },
 )
 
-const Location = dynamic(() => import("@/components/VenueComponents/Location"), {
-  loading: () => (
-    <div className="w-full h-48 bg-gray-200 animate-pulse rounded-2xl" />
-  ),
-})
+const Location = dynamic(
+  () => import("@/components/VenueComponents/Location"),
+  {
+    loading: () => (
+      <div className="w-full h-48 bg-gray-200 animate-pulse rounded-2xl" />
+    ),
+  },
+)
 
 const IndividualVenueForm = dynamic(
   () => import("@/components/VenueComponents/IndividualVenueForm"),
@@ -66,7 +72,7 @@ const IndividualVenueForm = dynamic(
     loading: () => (
       <div className="w-full h-12 bg-gray-200 animate-pulse rounded-xl" />
     ),
-  }
+  },
 )
 
 const ScheduleCallButton = dynamic(
@@ -75,7 +81,7 @@ const ScheduleCallButton = dynamic(
     loading: () => (
       <div className="w-full h-12 bg-gray-200 animate-pulse rounded-xl" />
     ),
-  }
+  },
 )
 
 const BlockContentIndividualVenuePage = dynamic(
@@ -84,7 +90,7 @@ const BlockContentIndividualVenuePage = dynamic(
     loading: () => (
       <div className="w-full h-64 bg-gray-200 animate-pulse rounded-2xl" />
     ),
-  }
+  },
 )
 
 interface IndividualVenueContentProps {

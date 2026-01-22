@@ -53,7 +53,9 @@ export default async function BlogPost({ params }: PageProps) {
               <h2 className="text-3xl font-bold text-slate-800 mb-10 text-center lg:text-left">
                 {locale === "en" ? "Related Posts" : "Artículos Relacionados"}
               </h2>
-              <div className={`${post.displayForm ? "max-w-4xl" : "max-w-7xl"} mx-auto`}>
+              <div
+                className={`${post.displayForm ? "max-w-4xl" : "max-w-7xl"} mx-auto`}
+              >
                 <RelatedPostsCarousel
                   posts={relatedPosts}
                   locale={locale as "en" | "es"}

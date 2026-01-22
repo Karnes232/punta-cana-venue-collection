@@ -23,7 +23,7 @@ const BlogPostHeader = ({ post, locale }: { post: any; locale: string }) => {
         {/* Back Button */}
         <div className="mb-6">
           <Link
-            href="/blog"
+            href={locale === "en" ? "/blog" : `/${locale}/blog`}
             className="inline-flex items-center text-slate-600 hover:text-orange-500 transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />

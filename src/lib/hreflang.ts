@@ -4,16 +4,16 @@
  */
 export function generateHreflangUrls(
   path: string,
-  baseUrl: string = "https://puntacanavenuecollection.com"
+  baseUrl: string = "https://puntacanavenuecollection.com",
 ): { en: string; es: string } {
   // Remove leading slash if present
   const cleanPath = path.startsWith("/") ? path.slice(1) : path
-  
+
   // For English, path without locale prefix
   const enPath = cleanPath
   // For Spanish, add /es prefix (avoid trailing slash when path is empty)
   const esPath = cleanPath ? `es/${cleanPath}` : "es"
-  
+
   return {
     en: enPath ? `${baseUrl}/${enPath}` : baseUrl,
     es: `${baseUrl}/${esPath}`,
@@ -26,10 +26,10 @@ export function generateHreflangUrls(
 export function generateHreflangAlternates(
   currentLocale: "en" | "es",
   path: string,
-  baseUrl: string = "https://puntacanavenuecollection.com"
+  baseUrl: string = "https://puntacanavenuecollection.com",
 ) {
   const urls = generateHreflangUrls(path, baseUrl)
-  
+
   return {
     languages: {
       en: urls.en,

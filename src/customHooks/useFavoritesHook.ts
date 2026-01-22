@@ -174,12 +174,9 @@ export const useFavorites = () => {
   )
 
   // Check if venue is favorited
-  const isFavorited = useCallback(
-    (venueId: string) => {
-      return globalFavorites.includes(venueId)
-    },
-    [],
-  ) // Keep dependency on favorites to trigger re-renders
+  const isFavorited = useCallback((venueId: string) => {
+    return globalFavorites.includes(venueId)
+  }, []) // Keep dependency on favorites to trigger re-renders
 
   // Get favorite count
   const favoriteCount = favorites.length
