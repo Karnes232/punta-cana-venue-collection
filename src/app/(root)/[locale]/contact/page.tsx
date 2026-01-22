@@ -3,6 +3,7 @@ import ContactPageForm from "@/components/ContactForms/ContactPageForm"
 import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
 import { getContactPage } from "@/sanity/queries/ContactPage/ContactPage"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
+import { generateHreflangAlternates } from "@/lib/hreflang"
 
 export default async function Contact({
   params,
@@ -81,6 +82,7 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      ...generateHreflangAlternates(locale, "contact"),
     },
   }
 }

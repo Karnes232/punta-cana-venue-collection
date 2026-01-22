@@ -3,6 +3,7 @@ import { getIndividualVenues } from "@/sanity/queries/IndividualVenues/Individua
 import { getTypeVenue } from "@/sanity/queries/MainPage/MainPage"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getVenuePage } from "@/sanity/queries/VenuePage/VenuePage"
+import { generateHreflangAlternates } from "@/lib/hreflang"
 
 export default async function Venues({
   params,
@@ -99,6 +100,7 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      ...generateHreflangAlternates(locale, "venues"),
     },
   }
 }

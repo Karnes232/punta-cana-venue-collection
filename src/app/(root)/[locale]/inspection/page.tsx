@@ -6,6 +6,7 @@ import InspectionForm from "@/components/VenueInspectionComponents/InspectionFor
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getVenueInspectionPage } from "@/sanity/queries/VenueInspection/VenueInspectionPage"
 import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
+import { generateHreflangAlternates } from "@/lib/hreflang"
 
 export default async function Inspection({
   params,
@@ -104,6 +105,7 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      ...generateHreflangAlternates(locale, "inspection"),
     },
   }
 }

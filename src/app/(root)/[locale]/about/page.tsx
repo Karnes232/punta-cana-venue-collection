@@ -5,6 +5,7 @@ import BlockContent from "@/components/BlockContent/BlockContent"
 import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
 import { getAboutPage } from "@/sanity/queries/AboutPage/AboutPage"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
+import { generateHreflangAlternates } from "@/lib/hreflang"
 
 export default async function About({
   params,
@@ -111,6 +112,7 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      ...generateHreflangAlternates(locale, "about"),
     },
   }
 }

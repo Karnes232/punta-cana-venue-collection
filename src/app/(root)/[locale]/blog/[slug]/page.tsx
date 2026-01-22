@@ -4,6 +4,7 @@ import BlogPostContactForm from "@/components/ContactForms/BlogPostContactForm"
 import { getBlogPostBySlug } from "@/sanity/queries/Blog/BlogPost"
 import { getBlogSeo, getBlogSeoSchema } from "@/sanity/queries/Blog/BlogSeo"
 import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
+import { generateHreflangAlternates } from "@/lib/hreflang"
 
 interface PageProps {
   params: Promise<{
@@ -96,6 +97,7 @@ export async function generateMetadata({
       ...(canonicalUrl && { canonical: canonicalUrl }),
       alternates: {
         canonical: canonicalUrl,
+        ...generateHreflangAlternates(locale, `blog/${slug}`),
       },
     }
   } else {
@@ -118,6 +120,7 @@ export async function generateMetadata({
       ...(canonicalUrl && { canonical: canonicalUrl }),
       alternates: {
         canonical: canonicalUrl,
+        ...generateHreflangAlternates(locale, `blog/${slug}`),
       },
     }
   }

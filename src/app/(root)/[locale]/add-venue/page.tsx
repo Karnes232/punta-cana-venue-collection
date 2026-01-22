@@ -3,6 +3,7 @@ import AddVenueForm from "@/components/ContactForms/AddVenueForm"
 import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
 import { getAddVenue } from "@/sanity/queries/AddVenue/AddVenue"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
+import { generateHreflangAlternates } from "@/lib/hreflang"
 
 export default async function AddVenue({
   params,
@@ -81,6 +82,7 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      ...generateHreflangAlternates(locale, "add-venue"),
     },
   }
 }

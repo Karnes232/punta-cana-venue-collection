@@ -4,6 +4,7 @@ import { getTypeVenue } from "@/sanity/queries/MainPage/MainPage"
 import { getIndividualVenuesMapDetails } from "@/sanity/queries/IndividualVenues/IndividualVenues"
 import ClientMainPageContent from "@/components/MainPageComponents/ClientMainPageContent"
 import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
+import { generateHreflangAlternates } from "@/lib/hreflang"
 
 interface PageProps {
   params: Promise<{
@@ -101,6 +102,7 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      ...generateHreflangAlternates(locale, ""),
     },
   }
 }

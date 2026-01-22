@@ -4,6 +4,7 @@ import { getBlogCategories } from "@/sanity/queries/Blog/BlogCategory"
 import { getBlogHeader } from "@/sanity/queries/Blog/BlogHeader"
 import { getAllBlogPosts } from "@/sanity/queries/Blog/BlogPost"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
+import { generateHreflangAlternates } from "@/lib/hreflang"
 
 export default async function Blog({
   params,
@@ -78,6 +79,7 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      ...generateHreflangAlternates(locale, "blog"),
     },
   }
 }

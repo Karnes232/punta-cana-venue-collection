@@ -22,6 +22,7 @@ import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { notFound } from "next/navigation"
+import { generateHreflangAlternates } from "@/lib/hreflang"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -256,6 +257,7 @@ export async function generateMetadata({
     ...(canonicalUrl && { canonical: canonicalUrl }),
     alternates: {
       canonical: canonicalUrl,
+      ...generateHreflangAlternates(locale, `venues/${slug}`),
     },
   }
 }
