@@ -1,12 +1,9 @@
 "use client"
 import React, { useEffect, useState } from "react"
-import BlockContent from "../BlockContent/BlockContent"
 import HeroComponent from "../HeroComponent/HeroComponent"
-import VenueOfDay from "../VenueComponents/VenueOfDay"
-import TypeVenue from "@/components/VenueComponents/TypeVenue"
 import dynamic from "next/dynamic"
 
-// Only dynamically import components that might cause browser API issues
+// Dynamically import components to improve initial page load
 const MapSection = dynamic(() => import("../MapComponents/MapSection"), {
   ssr: false,
   loading: () => (
@@ -16,6 +13,24 @@ const MapSection = dynamic(() => import("../MapComponents/MapSection"), {
 
 const PopUpForm = dynamic(() => import("./PopUpForm"), {
   ssr: false,
+})
+
+const VenueOfDay = dynamic(() => import("../VenueComponents/VenueOfDay"), {
+  loading: () => (
+    <div className="w-full h-64 bg-gray-200 animate-pulse rounded-2xl" />
+  ),
+})
+
+const TypeVenue = dynamic(() => import("@/components/VenueComponents/TypeVenue"), {
+  loading: () => (
+    <div className="w-full h-64 bg-gray-200 animate-pulse rounded-2xl" />
+  ),
+})
+
+const BlockContent = dynamic(() => import("../BlockContent/BlockContent"), {
+  loading: () => (
+    <div className="w-full h-64 bg-gray-200 animate-pulse rounded-2xl" />
+  ),
 })
 
 interface ClientMainPageContentProps {

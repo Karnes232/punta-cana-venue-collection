@@ -1,13 +1,7 @@
-import Image from "next/image"
 import { getMainPage } from "@/sanity/queries/MainPage/MainPage"
-import HeroComponent from "@/components/HeroComponent/HeroComponent"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
-import VenueOfDay from "@/components/VenueComponents/VenueOfDay"
 import { getTypeVenue } from "@/sanity/queries/MainPage/MainPage"
-import TypeVenue from "@/components/VenueComponents/TypeVenue"
 import { getIndividualVenuesMapDetails } from "@/sanity/queries/IndividualVenues/IndividualVenues"
-import MapSection from "@/components/MapComponents/MapSection"
-import BlockContent from "@/components/BlockContent/BlockContent"
 import ClientMainPageContent from "@/components/MainPageComponents/ClientMainPageContent"
 import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 

@@ -41,6 +41,8 @@ const VenueOfDay = ({
                   venueOfTheDay.heroImage.asset.metadata.dimensions.height
                 }
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                loading="lazy"
+                quality={80}
               />
               <div className="absolute top-3 left-3">
                 <span className="bg-golden text-charcoal px-2 py-1 rounded-full text-xs font-semibold">

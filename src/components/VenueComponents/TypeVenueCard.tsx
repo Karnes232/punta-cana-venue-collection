@@ -34,6 +34,8 @@ const TypeVenueCard = ({
               src={imageUrl}
               alt={type.image?.alt || title}
               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              loading="lazy"
+              quality={80}
             />
           ) : (
             <div className="h-full w-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
