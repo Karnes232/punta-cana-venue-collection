@@ -97,6 +97,7 @@ export interface BlogPost {
   slug: {
     current: string
   }
+  categoryIds?: string[]
   categories: BlogCategory[]
   venueName: string
   mainImage: HeroImage
@@ -131,7 +132,9 @@ export const getBlogPostBySlugQuery = `*[_type == "blogPost" && slug.current == 
     slug {
         current
     },
+    "categoryIds": categories[]._ref,
     categories[]-> {
+        _id,
         title {
             en,
             es
@@ -174,6 +177,66 @@ export async function getAllBlogPostsSlugs(): Promise<
 > {
   const data = await client.fetch<{ slug: { current: string } }[]>(
     allBlogPostsSlugsQuery,
+  )
+  return data
+}
+
+export const getRelatedBlogPostsQuery = `*[_type == "blogPost" && slug.current != $currentSlug && count((categories[]._ref)[@ in $categoryIds]) > 0] | order(publishedAt desc) [0...$limit] {
+    _id,
+    title {
+        en,
+        es
+    },
+    description {
+        en,
+        es
+    },
+    tags{
+        en,
+        es
+    },
+    readTime,
+    featured,
+    slug {
+        current
+    },
+    categories[]-> {
+        title {
+            en,
+            es
+        }
+    },
+    publishedAt,
+    venueName,
+    mainImage {
+        asset -> {
+            url,
+            metadata {
+                dimensions {
+                    width,
+                    height
+                }
+            }
+        },
+        alt
+    }
+}`
+
+export async function getRelatedBlogPosts(
+  categoryIds: string[],
+  currentSlug: string,
+  limit: number = 3,
+): Promise<BlogPostMainPage[]> {
+  if (!categoryIds || categoryIds.length === 0) {
+    return []
+  }
+  const data = await client.fetch<BlogPostMainPage[]>(
+    getRelatedBlogPostsQuery,
+    {
+      categoryIds,
+      currentSlug,
+      limit,
+    },
   )
   return data
 }

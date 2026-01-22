@@ -1,7 +1,11 @@
 import BlogPostContent from "@/components/BlogComponents/BlogPostContent"
 import BlogPostHeader from "@/components/BlogComponents/BlogPostHeader"
 import BlogPostContactForm from "@/components/ContactForms/BlogPostContactForm"
-import { getBlogPostBySlug } from "@/sanity/queries/Blog/BlogPost"
+import RelatedPostsCarousel from "@/components/BlogComponents/RelatedPostsCarousel"
+import {
+  getBlogPostBySlug,
+  getRelatedBlogPosts,
+} from "@/sanity/queries/Blog/BlogPost"
 import { getBlogSeo, getBlogSeoSchema } from "@/sanity/queries/Blog/BlogSeo"
 import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import { generateHreflangAlternates } from "@/lib/hreflang"
@@ -19,6 +23,9 @@ export default async function BlogPost({ params }: PageProps) {
   const post = await getBlogPostBySlug(slug)
   const seoSchema = await getBlogSeoSchema(slug)
   const calendlyUrls = await getCalendlyUrls()
+  const relatedPosts = post.categoryIds
+    ? await getRelatedBlogPosts(post.categoryIds, slug, 100)
+    : []
 
   return (
     <section>
@@ -41,6 +48,19 @@ export default async function BlogPost({ params }: PageProps) {
             locale={locale as "en" | "es"}
             displayForm={post.displayForm}
           />
+          {relatedPosts.length > 0 && (
+            <div className="mt-16 px-4 sm:px-6 lg:px-8">
+              <h2 className="text-3xl font-bold text-slate-800 mb-10 text-center lg:text-left">
+                {locale === "en" ? "Related Posts" : "Artículos Relacionados"}
+              </h2>
+              <div className={`${post.displayForm ? "max-w-4xl" : "max-w-7xl"} mx-auto`}>
+                <RelatedPostsCarousel
+                  posts={relatedPosts}
+                  locale={locale as "en" | "es"}
+                />
+              </div>
+            </div>
+          )}
         </div>
         {post.displayForm && (
           <div className="2xl:sticky 2xl:top-24 h-fit">

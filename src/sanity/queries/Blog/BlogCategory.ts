@@ -8,6 +8,7 @@ export const blogCategoryQuery = `*[_type == "blogCategory"] {
 }`
 
 export interface BlogCategory {
+  _id?: string
   title: {
     en: string
     es: string
