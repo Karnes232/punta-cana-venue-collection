@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl"
 import Link from "next/link"
+import Image from "next/image"
 import React from "react"
 
 const BottomBar = ({ companyName }: { companyName: string }) => {
@@ -40,10 +41,13 @@ const BottomBar = ({ companyName }: { companyName: string }) => {
               href="https://dr-webstudio.com"
               className="flex items-center gap-1 hover:text-orange-500 cursor-pointer"
             >
-              <img
+              <Image
                 src="https://cdn.sanity.io/images/6r8ro1r9/production/81a1e4e2b8efbeb881d9ef9dd1624377bcd2f6d0-512x487.png"
                 alt="DR Web Studio"
+                width={17}
+                height={16}
                 className="h-4"
+                loading="lazy"
               />
               DR Web Studio
             </a>

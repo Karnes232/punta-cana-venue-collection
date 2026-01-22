@@ -168,7 +168,7 @@ const VenueListingContent = ({
     }
 
     return filtered
-  }, [transformedVenues, searchTerm, filters, locale, t])
+  }, [transformedVenues, searchTerm, filters, locale, t, typeVenue])
 
   const handleSearch = (term: string) => {
     setSearchTerm(term)
