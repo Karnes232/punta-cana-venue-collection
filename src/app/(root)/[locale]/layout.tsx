@@ -153,6 +153,7 @@ export default async function LocaleLayout({
       style={{ colorScheme: "light" }}
     >
       <head>
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="jUgv0m/1x2mKK6MXEmO29g" async></script>
         <meta name="color-scheme" content="light" />
         <meta name="supported-color-schemes" content="light" />
         <meta name="theme-color" content="#ffffff" />
