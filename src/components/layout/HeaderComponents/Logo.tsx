@@ -8,7 +8,7 @@ const Logo = ({ logo }: { logo: string }) => {
         <Image src={logo} alt="Logo" width={64} height={64} />
       </div>
       <div>
-        <h3 className="text-xl font-bold text-charcoal">Punta Cana</h3>
+        <span className="block text-xl font-bold text-charcoal">Punta Cana</span>
         <p className="text-sm text-charcoal/70">Venue Collection</p>
       </div>
     </div>

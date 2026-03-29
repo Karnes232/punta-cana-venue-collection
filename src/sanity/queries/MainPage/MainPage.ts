@@ -89,7 +89,10 @@ export const mainPageQuery = `*[_type == "mainPage"][0] {
                     }
                 }
             },
-            alt
+            alt {
+                en,
+                es
+            }
         },
         teaser {
             en,

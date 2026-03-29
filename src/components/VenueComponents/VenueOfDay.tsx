@@ -35,7 +35,7 @@ const VenueOfDay = ({
             <div className="md:col-span-2 relative h-64 md:h-auto">
               <Image
                 src={venueOfTheDay.heroImage.asset.url}
-                alt={venueOfTheDay.heroImage.alt}
+                alt={venueOfTheDay.heroImage.alt[locale]}
                 width={venueOfTheDay.heroImage.asset.metadata.dimensions.width}
                 height={
                   venueOfTheDay.heroImage.asset.metadata.dimensions.height

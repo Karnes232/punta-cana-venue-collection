@@ -73,7 +73,7 @@ export default defineType({
               title: "Meta Title",
               type: "string",
               description:
-                "Título para la pestaña del navegador y resultados de búsqueda (50-60 caracteres recomendados)",
+                "Título para la pestaña y resultados (50–60 caracteres). Incluya la frase principal de búsqueda (destino + oferta), no solo la marca, salvo que el SERP deba ser solo marca.",
               validation: Rule =>
                 Rule.max(60).warning(
                   "Los títulos meta más largos de 60 caracteres pueden aparecer truncados",
