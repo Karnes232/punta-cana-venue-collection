@@ -2,7 +2,7 @@ import { getMainPage } from "@/sanity/queries/MainPage/MainPage"
 import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
 import { getTypeVenue } from "@/sanity/queries/MainPage/MainPage"
 import { getIndividualVenuesMapDetails } from "@/sanity/queries/IndividualVenues/IndividualVenues"
-import ClientMainPageContent from "@/components/MainPageComponents/ClientMainPageContent"
+import MainPageContent from "@/components/MainPageComponents/MainPageContent"
 import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import { generateHreflangAlternates } from "@/lib/hreflang"
 
@@ -49,7 +49,7 @@ export default async function Home({ params }: PageProps) {
           }}
         />
       )}
-      <ClientMainPageContent
+      <MainPageContent
         mainPage={mainPage}
         locale={locale}
         typeVenue={typeVenue}

@@ -1,11 +1,7 @@
 import React from "react"
 
-import { Cormorant_Garamond } from "next/font/google"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
+const headingBase =
+  "font-hero-display text-gray-700 my-5 2xl:mb-2 2xl:mt-10"
 
 const TextComponentHeading = ({
   heading,
@@ -18,45 +14,45 @@ const TextComponentHeading = ({
 }) => {
   return (
     <div className="">
-      <div className="flex flex-col justify-center max-w-5xl xl:mx-auto">
+      <div className="flex max-w-5xl flex-col justify-center xl:mx-auto">
         {headingNumber === "h1" && (
           <h1
-            className={`${coromantGaramond.className} text-gray-700  my-5 2xl:mb-2 2xl:mt-10 text-3xl md:text-4xl ${HeadingClassName}`}
+            className={`${headingBase} text-3xl md:text-4xl ${HeadingClassName}`}
           >
             {heading}
           </h1>
         )}
         {headingNumber === "h2" && (
           <h2
-            className={`${coromantGaramond.className}  text-gray-700  my-5 2xl:mb-2 2xl:mt-10 text-2xl md:text-3xl ${HeadingClassName}`}
+            className={`${headingBase} text-2xl md:text-3xl ${HeadingClassName}`}
           >
             {heading}
           </h2>
         )}
         {headingNumber === "h3" && (
           <h3
-            className={`${coromantGaramond.className}  text-gray-700  my-5 2xl:mb-2 2xl:mt-10 text-2xl md:text-3xl  ${HeadingClassName}`}
+            className={`${headingBase} text-2xl md:text-3xl ${HeadingClassName}`}
           >
             {heading}
           </h3>
         )}
         {headingNumber === "h4" && (
           <h4
-            className={`${coromantGaramond.className}  text-gray-700  my-5 2xl:mb-2 2xl:mt-10 text-xl md:text-2xl ${HeadingClassName}`}
+            className={`${headingBase} text-xl md:text-2xl ${HeadingClassName}`}
           >
             {heading}
           </h4>
         )}
         {headingNumber === "h5" && (
           <h5
-            className={`${coromantGaramond.className}  text-gray-700  my-5 2xl:mb-2 2xl:mt-10 text-xl md:text-2xl  ${HeadingClassName}`}
+            className={`${headingBase} text-xl md:text-2xl ${HeadingClassName}`}
           >
             {heading}
           </h5>
         )}
         {headingNumber === "h6" && (
           <h6
-            className={`${coromantGaramond.className}  text-gray-700  my-5 2xl:mb-2 2xl:mt-10 text-lg md:text-xl  ${HeadingClassName}`}
+            className={`${headingBase} text-lg md:text-xl ${HeadingClassName}`}
           >
             {heading}
           </h6>

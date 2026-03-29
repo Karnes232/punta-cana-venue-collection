@@ -11,6 +11,10 @@
   --font-crimson-pro: var(--font-crimson-pro), serif;
 }
 
+.font-hero-display {
+  font-family: var(--font-cormorant-garamond), ui-serif, Georgia, serif;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

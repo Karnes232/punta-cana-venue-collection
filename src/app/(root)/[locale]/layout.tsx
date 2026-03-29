@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono, Crimson_Pro } from "next/font/google"
+import Script from "next/script"
+import { Cormorant_Garamond, Geist, Geist_Mono, Crimson_Pro } from "next/font/google"
 import "../../globals.css"
 
 //import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google"
@@ -30,6 +31,13 @@ const crimsonPro = Crimson_Pro({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-crimson-pro",
+})
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-cormorant-garamond",
 })
 
 export const metadata: Metadata = {
@@ -149,15 +157,11 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${crimsonPro.variable} light`}
+      className={`${crimsonPro.variable} ${cormorantGaramond.variable} light`}
       style={{ colorScheme: "light" }}
     >
       <head>
-        <script
-          src="https://analytics.ahrefs.com/analytics.js"
-          data-key="jUgv0m/1x2mKK6MXEmO29g"
-          async
-        ></script>
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
         <meta name="color-scheme" content="light" />
         <meta name="supported-color-schemes" content="light" />
         <meta name="theme-color" content="#ffffff" />
@@ -168,7 +172,11 @@ export default async function LocaleLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {" "}
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          strategy="lazyOnload"
+          data-key="jUgv0m/1x2mKK6MXEmO29g"
+        />
         <NextIntlClientProvider
           locale={locale}
           messages={messages}

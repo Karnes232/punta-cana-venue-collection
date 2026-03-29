@@ -1,15 +1,9 @@
 import { TypeVenue as TypeVenueType } from "@/sanity/queries/MainPage/MainPage"
-import { Cormorant_Garamond } from "next/font/google"
 import React from "react"
 import TypeVenueCard from "./TypeVenueCard"
 import { useTranslations } from "next-intl"
 import { ArrowRight, Search } from "lucide-react"
 import Link from "next/link"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 const TypeVenue = ({
   typeVenue,
@@ -22,9 +16,7 @@ const TypeVenue = ({
   return (
     <div className="bg-white">
       <div className="max-w-4xl mx-auto px-4 lg:py-8">
-        <h2
-          className={`${coromantGaramond.className} text-2xl lg:text-4xl font-bold text-charcoal mb-6 text-center lg:text-left`}
-        >
+        <h2 className="font-hero-display mb-6 text-center text-2xl font-bold text-charcoal lg:text-left lg:text-4xl">
           {t("typeVenue")}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">

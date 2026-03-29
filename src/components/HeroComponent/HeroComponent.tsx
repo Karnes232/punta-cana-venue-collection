@@ -1,27 +1,11 @@
 "use client"
+
 import React, { useState, useEffect } from "react"
-import { getImageProps } from "next/image"
+import Image from "next/image"
 import { HeroImage } from "@/sanity/queries/MainPage/MainPage"
-import { Cormorant_Garamond } from "next/font/google"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { Search, X } from "lucide-react"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
-
-function getBackgroundImage(srcSet = "") {
-  const imageSet = srcSet
-    .split(", ")
-    .map(str => {
-      const [url, dpi] = str.split(" ")
-      return `url("${url}") ${dpi}`
-    })
-    .join(", ")
-  return `image-set(${imageSet})`
-}
 
 interface Venue {
   title: {
@@ -49,17 +33,11 @@ const HeroComponent = ({
   const [showResults, setShowResults] = useState(false)
   const [filteredVenues, setFilteredVenues] = useState<Venue[]>([])
 
-  const {
-    props: { srcSet },
-  } = getImageProps({
-    alt: heroImage.alt,
-    width: 1000,
-    height: 1000,
-    src: heroImage.asset.url,
-  })
-  const backgroundImage = getBackgroundImage(srcSet)
+  const altText =
+    typeof heroImage.alt === "string" && heroImage.alt.trim()
+      ? heroImage.alt
+      : heroTitle
 
-  // Filter venues based on search term
   useEffect(() => {
     if (searchTerm.trim()) {
       const filtered = venues.filter(venue => {
@@ -89,61 +67,62 @@ const HeroComponent = ({
   }
 
   return (
-    <main
-      className="w-full h-[75vh] relative"
-      style={{
-        backgroundImage,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/0 z-5"></div>
+    <section className="relative w-full h-[75vh] overflow-hidden">
+      <div className="absolute inset-0">
+        <Image
+          src={heroImage.asset.url}
+          alt={altText}
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          quality={85}
+          className="object-cover object-center"
+        />
+      </div>
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold z-10 text-center px-4">
-        <h1
-          className={`${coromantGaramond.className} font-bold text-5xl md:text-7xl text-shadow-lg max-w-4xs md:max-w-lg mb-8`}
-        >
+      <div className="absolute inset-0 bg-black/0 z-[5]" aria-hidden />
+
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center font-bold text-white">
+        <h1 className="font-hero-display mb-8 max-w-4xs text-5xl font-bold text-shadow-lg md:max-w-lg md:text-7xl">
           {heroTitle}
         </h1>
 
-        {/* Search Bar */}
-        <div className="w-full max-w-md relative">
+        <div className="relative w-full max-w-md">
           <div className="relative">
             <input
               type="text"
               value={searchTerm}
               onChange={handleSearchChange}
               placeholder={t("searchVenues")}
-              className="w-full px-6 py-4 text-lg text-gray-900 bg-white/95 backdrop-blur-sm rounded-full shadow-lg border-2 border-white/20 focus:outline-none focus:ring-4 focus:ring-white/30 focus:border-white transition-all duration-300 placeholder-gray-500"
+              className="w-full rounded-full border-2 border-white/20 bg-white/95 px-6 py-4 text-lg text-gray-900 shadow-lg backdrop-blur-sm transition-all duration-300 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-4 focus:ring-white/30"
             />
-            <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
+            <div className="absolute right-2 top-1/2 flex -translate-y-1/2 transform items-center gap-2">
               {searchTerm && (
                 <button
+                  type="button"
                   onClick={clearSearch}
-                  className="p-2 text-gray-500 hover:text-gray-700 transition-colors duration-200"
+                  className="p-2 text-gray-500 transition-colors duration-200 hover:text-gray-700"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="h-5 w-5" />
                 </button>
               )}
               <div className="p-2 text-gray-500">
-                <Search className="w-5 h-5" />
+                <Search className="h-5 w-5" />
               </div>
             </div>
           </div>
 
-          {/* Search Results Dropdown */}
           {showResults && filteredVenues.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 max-h-64 overflow-y-auto z-20">
-              {filteredVenues.map((venue, index) => {
+            <div className="absolute left-0 right-0 top-full z-20 mt-2 max-h-64 overflow-y-auto rounded-2xl border border-white/20 bg-white/95 shadow-xl backdrop-blur-sm">
+              {filteredVenues.map(venue => {
                 const title = venue.title[locale] || venue.title.en
                 return (
                   <Link
                     key={venue.slug.current}
                     href={`/venues/${venue.slug.current}`}
                     onClick={handleVenueClick}
-                    className="block px-6 py-4 text-left text-gray-900 hover:bg-white/50 transition-colors duration-200 border-b border-gray-200 last:border-b-0 first:rounded-t-2xl last:rounded-b-2xl"
+                    className="block border-b border-gray-200 px-6 py-4 text-left text-gray-900 transition-colors duration-200 first:rounded-t-2xl last:rounded-b-2xl last:border-b-0 hover:bg-white/50"
                   >
                     <div className="font-medium">{title}</div>
                   </Link>
@@ -152,17 +131,16 @@ const HeroComponent = ({
             </div>
           )}
 
-          {/* No Results Message */}
           {showResults && searchTerm.trim() && filteredVenues.length === 0 && (
-            <div className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-4 z-20">
-              <div className="text-gray-500 text-center">
+            <div className="absolute left-0 right-0 top-full z-20 mt-2 rounded-2xl border border-white/20 bg-white/95 p-4 shadow-xl backdrop-blur-sm">
+              <div className="text-center text-gray-500">
                 {t("noVenuesFound")}
               </div>
             </div>
           )}
         </div>
       </div>
-    </main>
+    </section>
   )
 }
 

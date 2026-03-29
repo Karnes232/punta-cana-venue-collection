@@ -1,14 +1,8 @@
 import { Heart, MapPin } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 const VenueOfDay = ({
   venueOfTheDay,
@@ -22,9 +16,7 @@ const VenueOfDay = ({
     <div className="bg-white">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
-        <h2
-          className={`${coromantGaramond.className} text-2xl lg:text-4xl font-bold text-charcoal mb-6 text-center lg:text-left`}
-        >
+        <h2 className="font-hero-display mb-6 text-center text-2xl font-bold text-charcoal lg:text-left lg:text-4xl">
           {t("venueOfTheDay")}
         </h2>
 
@@ -55,9 +47,7 @@ const VenueOfDay = ({
             <div className="md:col-span-3 p-6">
               <div className="flex justify-between items-start mb-3">
                 <div>
-                  <h3
-                    className={`${coromantGaramond.className} text-xl font-bold text-charcoal`}
-                  >
+                  <h3 className="font-hero-display text-xl font-bold text-charcoal">
                     {venueOfTheDay.title[locale]}
                   </h3>
                   <div className="flex items-center text-sm text-charcoal/70 mt-1">

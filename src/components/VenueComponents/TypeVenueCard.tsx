@@ -1,14 +1,7 @@
 import { TypeVenue } from "@/sanity/queries/MainPage/MainPage"
-import { urlFor } from "@/sanity/lib/image"
 import React from "react"
 import Image from "next/image"
-import { Cormorant_Garamond } from "next/font/google"
 import Link from "next/link"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 const TypeVenueCard = ({
   type,
@@ -61,9 +54,7 @@ const TypeVenueCard = ({
 
         {/* Title */}
         <div className="absolute bottom-0 left-0 right-0 p-4">
-          <h3
-            className={`${coromantGaramond.className} text-white text-lg lg:text-2xl font-semibold leading-tight`}
-          >
+          <h3 className="font-hero-display text-lg font-semibold leading-tight text-white lg:text-2xl">
             {title}
           </h3>
         </div>
