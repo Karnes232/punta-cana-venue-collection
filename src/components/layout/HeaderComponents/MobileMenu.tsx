@@ -1,7 +1,6 @@
 "use client"
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher"
-import { Calendar } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import Link from "next/link"
 import React, { useState } from "react"
 
@@ -14,14 +13,16 @@ const MobileMenu = ({
 }) => {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false)
   const t = useTranslations("Navbar")
+  const locale = useLocale()
+  const prefix = locale === "es" ? "/es" : ""
   const navItems = [
-    { href: "/", label: t("home") },
-    { href: "/venues", label: t("venues") },
-    { href: "/inspection", label: t("venueInspection") },
-    { href: "/blog", label: t("blog") },
-    { href: "/about", label: t("about") },
-    { href: "/contact", label: t("contact") },
-    // { href: "/book-inspection", label: t("bookInspection") },
+    { href: `${prefix}/venues`, label: t("venues") },
+    { href: `${prefix}/corporate-venues`, label: t("corporate") },
+    { href: `${prefix}/inspection`, label: t("siteInspections") },
+    { href: `${prefix}/blog`, label: t("guides") },
+    { href: `${prefix}/about`, label: t("about") },
+    { href: `${prefix}/contact`, label: t("contact") },
+    { href: `${prefix}/corporate-venues#venue-proposal`, label: t("requestVenueProposal") },
   ]
   return (
     <>

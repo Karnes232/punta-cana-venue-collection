@@ -1,47 +1,26 @@
 import Link from "next/link"
 import React from "react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 const DesktopNav = () => {
   const t = useTranslations("Navbar")
+  const locale = useLocale()
+  const prefix = locale === "es" ? "/es" : ""
+  const links = [
+    ["/venues", t("venues")],
+    ["/corporate-venues", t("corporate")],
+    ["/inspection", t("siteInspections")],
+    ["/blog", t("guides")],
+    ["/about", t("about")],
+    ["/contact", t("contact")],
+  ]
   return (
-    <div className="hidden lg:flex items-center space-x-3 xl:space-x-8">
-      <Link
-        href="/"
-        className="text-charcoal hover:text-turquoise transition-colors font-medium"
-      >
-        {t("home")}
-      </Link>
-      <Link
-        href="/venues"
-        className="text-charcoal hover:text-turquoise transition-colors font-medium"
-      >
-        {t("venues")}
-      </Link>
-      <Link
-        href="/inspection"
-        className="text-charcoal hover:text-turquoise transition-colors font-medium"
-      >
-        {t("venueInspection")}
-      </Link>
-      <Link
-        href="/blog"
-        className="text-charcoal hover:text-turquoise transition-colors font-medium"
-      >
-        {t("blog")}
-      </Link>
-      <Link
-        href="/about"
-        className="text-charcoal hover:text-turquoise transition-colors font-medium"
-      >
-        {t("about")}
-      </Link>
-      <Link
-        href="/contact"
-        className="text-charcoal hover:text-turquoise transition-colors font-medium"
-      >
-        {t("contact")}
-      </Link>
+    <div className="hidden items-center space-x-3 lg:flex xl:space-x-6">
+      {links.map(([href, label]) => (
+        <Link key={href} href={`${prefix}${href}`} className="font-medium text-charcoal transition-colors hover:text-turquoise">
+          {label}
+        </Link>
+      ))}
     </div>
   )
 }

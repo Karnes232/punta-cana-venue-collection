@@ -9,15 +9,12 @@ import {
   Users,
   DollarSign,
   MapPin,
-  AlertTriangle,
   CheckCircle,
-  Clock,
   Star,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useFavorites } from "@/customHooks/useFavoritesHook"
 import { Cormorant_Garamond } from "next/font/google"
-import ScheduleCall from "./ScheduleCall"
 
 const coromantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -26,13 +23,9 @@ const coromantGaramond = Cormorant_Garamond({
 
 interface InspectionFormProps {
   locale: string
-  calendlyUrls: any
 }
 
-const InspectionForm: React.FC<InspectionFormProps> = ({
-  locale,
-  calendlyUrls,
-}) => {
+const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
   const t = useTranslations("inspectionForm")
   const { favoriteVenues } = useFavorites()
 
@@ -50,15 +43,8 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
-
-  // Define main areas for additional costs calculation
-  const mainAreas = ["Cap Cana", "Punta Cana", "Bávaro"]
-
-  // Count venues outside main areas
-  const venuesOutsideMainArea = favoriteVenues.filter(
-    venue => venue.location && !mainAreas.includes(venue.location),
-  ).length
 
   // Validation
   const validateForm = () => {
@@ -76,6 +62,8 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
 
     if (!formData.phone.trim()) {
       newErrors.phone = t("phoneRequired")
+    } else if (!/^\+[1-9][0-9\s().-]{7,19}$/.test(formData.phone.trim())) {
+      newErrors.phone = t("phoneInvalid")
     }
 
     if (!formData.eventType) {
@@ -94,7 +82,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
       newErrors.approximateBudget = t("budgetRequired")
     }
 
-    if (favoriteVenues.length < 3) {
+    if (favoriteVenues.length < 1) {
       newErrors.venues = t("minVenuesRequired")
     }
 
@@ -131,6 +119,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
     }
 
     setIsSubmitting(true)
+    setSubmitError(false)
 
     try {
       // Create FormData for Netlify
@@ -145,7 +134,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
       formDataToSend.append("approximateBudget", formData.approximateBudget)
       formDataToSend.append(
         "selectedVenues",
-        favoriteVenues.map(venue => venue.venueName).join(", "),
+        favoriteVenues.map(venue => venue.name).join(", "),
       )
       formDataToSend.append("message", formData.message)
 
@@ -172,9 +161,11 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
           message: "",
         })
       } else {
+        setSubmitError(true)
         console.error("Form submission failed:", response.status)
       }
     } catch (error) {
+      setSubmitError(true)
       console.error("Error submitting form:", error)
     } finally {
       setIsSubmitting(false)
@@ -264,6 +255,8 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
                     errors.phone ? "border-red-300" : "border-slate-300"
                   }`}
                   placeholder={t("phonePlaceholder")}
+                  pattern="^\+[1-9][0-9\s().-]{7,19}$"
+                  title={t("phoneInvalid")}
                 />
               </div>
               {errors.phone && (
@@ -326,13 +319,14 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
                 }`}
               >
                 <option value="">{t("selectEventType")}</option>
-                <option value="wedding">{t("wedding")}</option>
                 <option value="corporateEvent">{t("corporateEvent")}</option>
-                <option value="birthdayParty">{t("birthdayParty")}</option>
-                <option value="anniversary">{t("anniversary")}</option>
-                <option value="graduation">{t("graduation")}</option>
-                <option value="babyShower">{t("babyShower")}</option>
-                <option value="quinceañera">{t("quinceañera")}</option>
+                <option value="conferenceMeeting">
+                  {t("conferenceMeeting")}
+                </option>
+                <option value="incentiveProgram">
+                  {t("incentiveProgram")}
+                </option>
+                <option value="wedding">{t("wedding")}</option>
                 <option value="other">{t("other")}</option>
               </select>
               {errors.eventType && (
@@ -491,80 +485,6 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
           </div>
         </div>
 
-        {/* Additional Costs Notice */}
-        {venuesOutsideMainArea > 0 && (
-          <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
-              <div>
-                <h4 className="font-medium text-amber-800 mb-1">
-                  {t("additionalCostsTitle")}
-                </h4>
-                <p className="text-sm text-amber-700">
-                  {venuesOutsideMainArea} venue
-                  {venuesOutsideMainArea > 1 ? "s" : ""}{" "}
-                  {locale === "es" ? "seleccionado" : "selected"}{" "}
-                  {venuesOutsideMainArea > 1
-                    ? locale === "es"
-                      ? "están"
-                      : "are"
-                    : locale === "es"
-                      ? "está"
-                      : "is"}{" "}
-                  {t("outsideMainArea")}. {t("outsideMainAreaAdditionalCosts")}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Call Scheduling */}
-        <div className="space-y-4">
-          <h3
-            className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}
-          >
-            <Clock className="w-5 h-5 text-golden" />
-            {t("scheduleCall")}
-          </h3>
-
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="preferredCallDate" className="block text-sm font-medium text-slate-700 mb-2">
-                {t("preferredCallDate")}
-              </label>
-              <div className="relative">
-                <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
-                <input
-                  type="date"
-                  id="preferredCallDate"
-                  name="preferredCallDate"
-                  value={formData.preferredCallDate}
-                  onChange={handleInputChange}
-                  className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="preferredCallTime" className="block text-sm font-medium text-slate-700 mb-2">
-                {t("preferredCallTime")}
-              </label>
-              <select
-                id="preferredCallTime"
-                name="preferredCallTime"
-                value={formData.preferredCallTime}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors"
-              >
-                <option value="">{t("selectTime")}</option>
-                <option value="morning">{t("morning")}</option>
-                <option value="afternoon">{t("afternoon")}</option>
-                <option value="evening">{t("evening")}</option>
-              </select>
-            </div>
-          </div>*/}
-        </div>
-
         {/* Additional Message */}
         <div>
           <label
@@ -584,9 +504,17 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
           />
         </div>
 
+        {submitError && (
+          <p role="alert" className="text-sm text-red-600">
+            {locale === "es"
+              ? "No pudimos enviar la solicitud. Inténtalo de nuevo o escríbenos por WhatsApp."
+              : "We could not send your request. Please try again or contact us on WhatsApp."}
+          </p>
+        )}
+
         {/* Submit Button */}
         <div className="flex justify-end pt-4">
-          {/* <button
+          <button
             type="submit"
             disabled={isSubmitting}
             className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-golden/70 to-golden/90 text-slate-800 font-medium rounded-lg hover:bg-golden/90 focus:ring-2 focus:ring-golden focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -602,15 +530,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({
                 {t("submitInspection")}
               </>
             )}
-          </button> */}
-          <ScheduleCall
-            locale={locale}
-            calendlyUrls={calendlyUrls}
-            handleSubmit={() => handleSubmit({} as React.FormEvent)}
-            validateForm={validateForm}
-            formData={formData}
-            favoriteVenues={favoriteVenues}
-          />
+          </button>
         </div>
       </form>
     </div>

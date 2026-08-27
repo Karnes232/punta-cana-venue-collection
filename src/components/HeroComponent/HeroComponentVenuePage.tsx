@@ -1,24 +1,10 @@
+"use client"
+
 import React, { useState } from "react"
-import { getImageProps } from "next/image"
+import Image from "next/image"
 import { HeroImage } from "@/sanity/queries/MainPage/MainPage"
-import { Cormorant_Garamond } from "next/font/google"
+import { Search, SlidersHorizontal, X } from "lucide-react"
 import { useTranslations } from "next-intl"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
-
-function getBackgroundImage(srcSet = "") {
-  const imageSet = srcSet
-    .split(", ")
-    .map(str => {
-      const [url, dpi] = str.split(" ")
-      return `url("${url}") ${dpi}`
-    })
-    .join(", ")
-  return `image-set(${imageSet})`
-}
 
 interface FilterOptions {
   location: string
@@ -35,7 +21,7 @@ const HeroComponentVenuePage = ({
   filterOptions,
   initialFilters = { location: "", type: "", capacity: "", budget: "" },
 }: {
-  heroImage: HeroImage
+  heroImage?: HeroImage | null
   heroTitle: string
   onSearch: (searchTerm: string) => void
   onFiltersChange: (filters: FilterOptions) => void
@@ -51,37 +37,21 @@ const HeroComponentVenuePage = ({
   const [searchTerm, setSearchTerm] = useState("")
   const [filters, setFilters] = useState<FilterOptions>(initialFilters)
   const [showFilters, setShowFilters] = useState(
-    Object.values(initialFilters).some(value => value !== ""),
+    Object.values(initialFilters).some(Boolean),
   )
 
-  const {
-    props: { srcSet },
-  } = getImageProps({
-    alt: heroImage.alt,
-    width: 1000,
-    height: 1000,
-    src: heroImage.asset.url,
-  })
-  const backgroundImage = getBackgroundImage(srcSet)
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSearch = (event: React.FormEvent) => {
+    event.preventDefault()
     onSearch(searchTerm)
-  }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setSearchTerm(value)
-    onSearch(value) // Real-time search as user types
   }
 
   const handleFilterChange = (
     filterType: keyof FilterOptions,
     value: string,
   ) => {
-    const newFilters = { ...filters, [filterType]: value }
-    setFilters(newFilters)
-    onFiltersChange(newFilters)
+    const updatedFilters = { ...filters, [filterType]: value }
+    setFilters(updatedFilters)
+    onFiltersChange(updatedFilters)
   }
 
   const clearAllFilters = () => {
@@ -96,172 +66,155 @@ const HeroComponentVenuePage = ({
   }
 
   return (
-    <main
-      className="w-full h-[85vh] md:h-[75vh] lg:h-[40rem] relative"
-      style={{
-        backgroundImage,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/40 z-5"></div>
+    <div className="bg-slate-950">
+      <section className="relative isolate min-h-[32rem] overflow-hidden sm:min-h-[36rem] lg:min-h-[40rem]">
+        {heroImage?.asset?.url ? (
+          <Image
+            src={heroImage.asset.url}
+            alt={heroImage.alt || heroTitle}
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            quality={75}
+            className="-z-20 object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 -z-20 bg-gradient-to-br from-slate-900 via-slate-800 to-turquoise" />
+        )}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-950/55 via-slate-950/62 to-slate-950/88" />
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold z-10 text-center px-4">
-        <h1
-          className={`${coromantGaramond.className} font-bold text-5xl md:text-7xl text-shadow-lg max-w-4xs md:max-w-lg mb-8`}
-        >
-          {heroTitle}
-        </h1>
+        <div className="mx-auto flex min-h-[32rem] w-full max-w-7xl flex-col items-center justify-center px-4 pb-12 pt-28 text-center text-white sm:min-h-[36rem] sm:px-6 lg:min-h-[40rem] lg:px-8">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-golden sm:text-sm">
+            {t("heroEyebrow")}
+          </p>
+          <h1 className="font-hero-display max-w-4xl text-4xl font-semibold leading-[1.05] text-balance sm:text-5xl lg:text-7xl">
+            {heroTitle}
+          </h1>
+          <p className="mt-5 max-w-2xl text-base font-normal leading-7 text-white/85 sm:text-lg">
+            {t("heroSubtitle")}
+          </p>
 
-        {/* Search Bar */}
-        <form onSubmit={handleSearch} className="w-full max-w-md mb-4">
-          <div className="relative">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleInputChange}
-              placeholder={t("search")}
-              className="w-full px-6 py-4 text-lg text-gray-900 bg-white/95 backdrop-blur-sm rounded-full shadow-lg border-2 border-white/20 focus:outline-none focus:ring-4 focus:ring-white/30 focus:border-white transition-all duration-300 placeholder-gray-500"
-            />
-            <button
-              type="submit"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-white p-3 rounded-full transition-colors duration-200 shadow-lg"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </button>
-          </div>
-        </form>
-
-        {/* Filter Toggle Button */}
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className="mb-4 px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white border border-white/30 hover:bg-white/30 transition-all duration-200 flex items-center gap-2"
-        >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+          <form
+            onSubmit={handleSearch}
+            className="mt-8 w-full max-w-2xl"
+            role="search"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z"
-            />
-          </svg>
-          {t("filters")}
-        </button>
-
-        {/* Filter Dropdowns */}
-        {showFilters && (
-          <div className="w-full max-w-4xl bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Location Filter */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  {t("location")}
-                </label>
-                <select
-                  value={filters.location}
-                  onChange={e => handleFilterChange("location", e.target.value)}
-                  className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
-                >
-                  <option value="">{t("allLocations")}</option>
-                  {filterOptions.locations.map(location => (
-                    <option key={location} value={location}>
-                      {location}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Type Filter */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  {t("type")}
-                </label>
-                <select
-                  value={filters.type}
-                  onChange={e => handleFilterChange("type", e.target.value)}
-                  className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
-                >
-                  <option value="">{t("allTypes")}</option>
-                  {filterOptions.types.map(type => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Capacity Filter */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  {t("capacity")}
-                </label>
-                <select
-                  value={filters.capacity}
-                  onChange={e => handleFilterChange("capacity", e.target.value)}
-                  className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
-                >
-                  <option value="">{t("anyCapacity")}</option>
-                  {filterOptions.capacityRanges.map(range => (
-                    <option key={range} value={range}>
-                      {range}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Budget Filter */}
-              {/* <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  {t("budget")}
-                </label>
-                <select
-                  value={filters.budget}
-                  onChange={e => handleFilterChange("budget", e.target.value)}
-                  className="w-full px-4 py-2 text-gray-900 bg-white/80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
-                >
-                  <option value="">{t("anyBudget")}</option>
-                  {filterOptions.budgetRanges.map(range => (
-                    <option key={range} value={range}>
-                      {range}
-                    </option>
-                  ))}
-                </select>
-              </div> */}
+            <label htmlFor="venue-search" className="sr-only">
+              {t("searchAria")}
+            </label>
+            <div className="relative">
+              <input
+                id="venue-search"
+                type="search"
+                value={searchTerm}
+                onChange={event => {
+                  setSearchTerm(event.target.value)
+                  onSearch(event.target.value)
+                }}
+                placeholder={t("searchPlaceholder")}
+                autoComplete="off"
+                className="min-h-14 w-full rounded-2xl border border-white/30 bg-white px-5 pr-14 text-base font-normal text-slate-950 shadow-xl outline-none transition placeholder:text-slate-500 focus:border-golden focus:ring-4 focus:ring-golden/20"
+              />
+              <button
+                type="submit"
+                className="absolute right-2 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-xl bg-golden text-charcoal transition hover:brightness-95"
+                aria-label={t("searchAria")}
+              >
+                <Search size={20} aria-hidden="true" />
+              </button>
             </div>
+          </form>
 
-            {/* Clear Filters Button */}
+          <button
+            type="button"
+            onClick={() => setShowFilters(current => !current)}
+            className="mt-4 flex min-h-11 items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-2 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"
+            aria-expanded={showFilters}
+            aria-controls="venue-filters"
+          >
+            {showFilters ? <X size={18} /> : <SlidersHorizontal size={18} />}
+            {t("filters")}
+          </button>
+        </div>
+      </section>
+
+      {showFilters && (
+        <div
+          id="venue-filters"
+          className="border-t border-white/10 bg-slate-900"
+        >
+          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <FilterSelect
+                label={t("location")}
+                value={filters.location}
+                onChange={value => handleFilterChange("location", value)}
+                emptyLabel={t("allLocations")}
+                options={filterOptions.locations}
+              />
+              <FilterSelect
+                label={t("type")}
+                value={filters.type}
+                onChange={value => handleFilterChange("type", value)}
+                emptyLabel={t("allTypes")}
+                options={filterOptions.types}
+              />
+              <FilterSelect
+                label={t("capacity")}
+                value={filters.capacity}
+                onChange={value => handleFilterChange("capacity", value)}
+                emptyLabel={t("anyCapacity")}
+                options={filterOptions.capacityRanges}
+              />
+            </div>
             <div className="mt-4 text-center">
               <button
+                type="button"
                 onClick={clearAllFilters}
-                className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 underline transition-colors duration-200"
+                className="text-sm font-semibold text-white/80 underline decoration-golden underline-offset-4 transition hover:text-white"
               >
                 {t("clearAllFilters")}
               </button>
             </div>
           </div>
-        )}
-      </div>
-    </main>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function FilterSelect({
+  label,
+  value,
+  onChange,
+  emptyLabel,
+  options,
+}: {
+  label: string
+  value: string
+  onChange: (value: string) => void
+  emptyLabel: string
+  options: string[]
+}) {
+  return (
+    <label className="block text-left">
+      <span className="mb-2 block text-sm font-semibold text-white">
+        {label}
+      </span>
+      <select
+        value={value}
+        onChange={event => onChange(event.target.value)}
+        className="min-h-12 w-full rounded-xl border border-white/15 bg-white px-4 text-sm text-slate-950 outline-none focus:border-golden focus:ring-4 focus:ring-golden/20"
+      >
+        <option value="">{emptyLabel}</option>
+        {options.map(option => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    </label>
   )
 }
 

@@ -88,20 +88,6 @@ export default function LanguageSwitcher({
     }
   }, [onDropdownToggle])
 
-  // Check for preferred language in localStorage on mount
-  useEffect(() => {
-    const preferredLanguage = localStorage.getItem("preferredLanguage")
-    if (
-      preferredLanguage &&
-      preferredLanguage !== safeLocale &&
-      languages.includes(preferredLanguage)
-    ) {
-      const currentPath = pathname.replace(`/${safeLocale}`, "") || "/"
-      const cleanPath = currentPath === "/" ? "" : currentPath
-      window.location.href = `/${preferredLanguage}${cleanPath}`
-    }
-  }, [safeLocale, pathname])
-
   const currentLangOption =
     languageOptions.find(lang => lang.code === safeLocale) || languageOptions[0]
 

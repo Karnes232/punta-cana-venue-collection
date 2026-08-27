@@ -20,11 +20,19 @@ interface Venue {
 const HeroComponent = ({
   heroImage,
   heroTitle,
+  eyebrow,
+  subtitle,
+  primaryCta,
+  secondaryCta,
   venues = [],
   locale = "en",
 }: {
-  heroImage: HeroImage
+  heroImage?: HeroImage | null
   heroTitle: string
+  eyebrow?: string
+  subtitle?: string
+  primaryCta?: { label: string; href: string }
+  secondaryCta?: { label: string; href: string }
   venues?: Venue[]
   locale?: "en" | "es"
 }) => {
@@ -34,7 +42,7 @@ const HeroComponent = ({
   const [filteredVenues, setFilteredVenues] = useState<Venue[]>([])
 
   const altText =
-    typeof heroImage.alt === "string" && heroImage.alt.trim()
+    typeof heroImage?.alt === "string" && heroImage.alt.trim()
       ? heroImage.alt
       : heroTitle
 
@@ -68,27 +76,51 @@ const HeroComponent = ({
 
   return (
     <section className="relative w-full h-[75vh] overflow-hidden">
-      <div className="absolute inset-0">
-        <Image
-          src={heroImage.asset.url}
-          alt={altText}
-          fill
-          priority
-          fetchPriority="high"
-          sizes="100vw"
-          quality={85}
-          className="object-cover object-center"
-        />
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,#12232c_0%,#173b45_52%,#167f87_100%)]">
+        {heroImage?.asset?.url && (
+          <Image
+            src={heroImage.asset.url}
+            alt={altText}
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            quality={85}
+            className="object-cover object-center"
+          />
+        )}
       </div>
 
-      <div className="absolute inset-0 bg-black/0 z-[5]" aria-hidden />
+      <div className="absolute inset-0 z-[5] bg-gradient-to-b from-black/55 via-black/35 to-black/60" aria-hidden />
 
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center font-bold text-white">
-        <h1 className="font-hero-display mb-8 max-w-4xs text-5xl font-bold text-shadow-lg md:max-w-lg md:text-7xl">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 pt-16 text-center text-white">
+        {eyebrow && (
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-golden md:text-sm">{eyebrow}</p>
+        )}
+        <h1 className="font-hero-display max-w-5xl text-4xl font-bold leading-[0.95] text-shadow-lg sm:text-5xl md:text-7xl">
           {heroTitle}
         </h1>
 
-        <div className="relative w-full max-w-md">
+        {subtitle && (
+          <p className="mt-5 max-w-3xl text-base font-normal leading-7 text-white/90 md:text-xl md:leading-8">{subtitle}</p>
+        )}
+
+        {(primaryCta || secondaryCta) && (
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            {primaryCta && (
+              <Link href={primaryCta.href} className="rounded-full bg-golden px-6 py-3 font-semibold text-charcoal transition hover:bg-golden/85">
+                {primaryCta.label}
+              </Link>
+            )}
+            {secondaryCta && (
+              <Link href={secondaryCta.href} className="rounded-full border border-white/70 bg-black/15 px-6 py-3 font-semibold text-white backdrop-blur-sm transition hover:bg-white hover:text-charcoal">
+                {secondaryCta.label}
+              </Link>
+            )}
+          </div>
+        )}
+
+        <div className="relative mt-7 w-full max-w-md">
           <div className="relative">
             <input
               type="text"
@@ -120,7 +152,7 @@ const HeroComponent = ({
                 return (
                   <Link
                     key={venue.slug.current}
-                    href={`/venues/${venue.slug.current}`}
+                    href={`${locale === "es" ? "/es" : ""}/venues/${venue.slug.current}`}
                     onClick={handleVenueClick}
                     className="block border-b border-gray-200 px-6 py-4 text-left text-gray-900 transition-colors duration-200 first:rounded-t-2xl last:rounded-b-2xl last:border-b-0 hover:bg-white/50"
                   >

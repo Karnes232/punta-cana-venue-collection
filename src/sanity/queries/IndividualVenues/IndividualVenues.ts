@@ -1,7 +1,7 @@
 import { client } from "@/sanity/lib/client"
 import { HeroImage } from "../MainPage/MainPage"
 
-export const individualVenuesQuery = `*[_type == "individualVenue" && displayed == true] {
+export const individualVenuesQuery = `*[_type == "individualVenue" && displayed == true] | order(title.en asc) {
     venueName,
     title {
         en,
@@ -45,25 +45,27 @@ export interface IndividualVenue {
     en: string
     es: string
   }
-  heroImage: HeroImage
+  heroImage: Omit<HeroImage, "alt"> & {
+    alt?: string | { en?: string; es?: string }
+  }
   slug: {
     current: string
   }
   location: { location: string }
-  type: {
+  type?: {
     title: {
       en: string
       es: string
     }
   }[]
-  capacityCocktail: number
-  amenities: {
+  capacityCocktail?: number
+  amenities?: {
     title: {
       en: string
       es: string
     }
   }[]
-  startingFrom: number
+  startingFrom?: number
 }
 
 export async function getIndividualVenues(): Promise<IndividualVenue[]> {

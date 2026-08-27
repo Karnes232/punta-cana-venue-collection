@@ -1,8 +1,8 @@
 "use client"
 import React, { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
-import { useTranslations } from "next-intl"
-import { X } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
+import { MessageCircle, X } from "lucide-react"
 import IndividualVenueContactForm from "../ContactForms/IndividualVenueContactForm"
 
 const IndividualVenueForm = ({
@@ -15,6 +15,7 @@ const IndividualVenueForm = ({
   className: string
 }) => {
   const t = useTranslations("individualVenueListing")
+  const locale = useLocale()
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -24,6 +25,7 @@ const IndividualVenueForm = ({
     phone: "",
     eventType: "",
     estimatedDate: "",
+    groupSize: "",
     message: "",
     venue: venueName,
     venueTitle: venueTitle,
@@ -48,7 +50,7 @@ const IndividualVenueForm = ({
   if (!isOpen) {
     return (
       <button onClick={handleButtonClick} className={className}>
-        {t("interested")}
+        {t("planEventHere")}
       </button>
     )
   }
@@ -70,17 +72,43 @@ const IndividualVenueForm = ({
     >
       <div
         onClick={handleModalClick}
-        className={`bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative transform transition-all duration-1000 ease-out ${isAnimating ? "scale-100 opacity-100" : "scale-50 opacity-0"}`}
+        className={`bg-white rounded-lg shadow-xl max-h-[90vh] max-w-md w-full overflow-y-auto p-6 relative transform transition-all duration-1000 ease-out ${isAnimating ? "scale-100 opacity-100" : "scale-50 opacity-0"}`}
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-medium text-gray-900">{venueTitle}</h2>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-golden">
+              {t("planEventHere")}
+            </p>
+            <h2 className="text-xl font-semibold text-gray-900">
+              {venueTitle}
+            </h2>
+          </div>
           <button
             onClick={() => setIsOpen(false)}
+            aria-label={locale === "es" ? "Cerrar formulario" : "Close form"}
             className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
           >
             <X size={20} />
           </button>
         </div>
+
+        <p className="mb-4 text-sm leading-6 text-slate-600">
+          {t("venueFormIntro")}
+        </p>
+
+        <a
+          href={`https://wa.me/18295222900?text=${encodeURIComponent(
+            locale === "es"
+              ? `Quiero realizar un evento en ${venueTitle}. Necesito asistencia con la planificación y operación.`
+              : `I want to hold an event at ${venueTitle}. I need assistance with planning and operations.`,
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mb-5 flex w-full items-center justify-center gap-2 rounded-xl border border-green-600 px-4 py-3 text-sm font-semibold text-green-700 transition hover:bg-green-50"
+        >
+          <MessageCircle className="h-4 w-4" />
+          {t("whatsappVenue")}
+        </a>
 
         <IndividualVenueContactForm
           formData={formData}
@@ -97,7 +125,7 @@ const IndividualVenueForm = ({
         onClick={handleButtonClick}
         className="flex-1 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm"
       >
-        {t("interested")}
+        {t("planEventHere")}
       </button>
 
       {mounted && createPortal(modalContent, document.body)}

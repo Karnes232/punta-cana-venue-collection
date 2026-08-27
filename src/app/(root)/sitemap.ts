@@ -1,13 +1,34 @@
 import type { MetadataRoute } from "next"
 import { getAllBlogPostsSlugs } from "@/sanity/queries/Blog/BlogPost"
 import { getIndividualVenuesSlugs } from "@/sanity/queries/IndividualVenues/IndividualVenues"
+import { corporateIntentSlugs } from "@/lib/corporateContent"
 
 export const revalidate = 3600
 
 const SITE = "https://puntacanavenuecollection.com"
 
+const CORPORATE_ROUTES: MetadataRoute.Sitemap = ["", "/es"].flatMap(prefix => [
+  {
+    url: `${SITE}${prefix}/corporate-venues`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.9,
+  },
+  ...corporateIntentSlugs.map(slug => ({
+    url: `${SITE}${prefix}/corporate-venues/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  })),
+])
+
 const STATIC_ROUTES: MetadataRoute.Sitemap = [
-  { url: SITE, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
+  {
+    url: SITE,
+    lastModified: new Date(),
+    changeFrequency: "daily",
+    priority: 1,
+  },
   {
     url: `${SITE}/es`,
     lastModified: new Date(),
@@ -99,18 +120,6 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
     priority: 0.4,
   },
   {
-    url: `${SITE}/add-venue`,
-    lastModified: new Date(),
-    changeFrequency: "daily",
-    priority: 0.6,
-  },
-  {
-    url: `${SITE}/es/add-venue`,
-    lastModified: new Date(),
-    changeFrequency: "daily",
-    priority: 0.6,
-  },
-  {
     url: `${SITE}/terms`,
     lastModified: new Date(),
     changeFrequency: "monthly",
@@ -122,13 +131,21 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
     changeFrequency: "monthly",
     priority: 0.4,
   },
+  ...CORPORATE_ROUTES,
 ]
 
 const SANITY_FETCH_MS = 25_000
 
-function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+function withTimeout<T>(
+  promise: Promise<T>,
+  ms: number,
+  label: string,
+): Promise<T> {
   return new Promise((resolve, reject) => {
-    const id = setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms)
+    const id = setTimeout(
+      () => reject(new Error(`${label} timed out after ${ms}ms`)),
+      ms,
+    )
     promise
       .then(v => {
         clearTimeout(id)
@@ -147,11 +164,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     ;[blogSlugs, venueSlugs] = await Promise.all([
-      withTimeout(getAllBlogPostsSlugs(), SANITY_FETCH_MS, "getAllBlogPostsSlugs"),
-      withTimeout(getIndividualVenuesSlugs(), SANITY_FETCH_MS, "getIndividualVenuesSlugs"),
+      withTimeout(
+        getAllBlogPostsSlugs(),
+        SANITY_FETCH_MS,
+        "getAllBlogPostsSlugs",
+      ),
+      withTimeout(
+        getIndividualVenuesSlugs(),
+        SANITY_FETCH_MS,
+        "getIndividualVenuesSlugs",
+      ),
     ])
   } catch (err) {
-    console.error("[sitemap] Sanity slug fetch failed; serving static URLs only:", err)
+    console.error(
+      "[sitemap] Sanity slug fetch failed; serving static URLs only:",
+      err,
+    )
     return STATIC_ROUTES
   }
 
@@ -181,11 +209,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  return [
-    ...STATIC_ROUTES,
-    ...blogEn,
-    ...blogEs,
-    ...venuesEn,
-    ...venuesEs,
-  ]
+  return [...STATIC_ROUTES, ...blogEn, ...blogEs, ...venuesEn, ...venuesEs]
 }

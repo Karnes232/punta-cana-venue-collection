@@ -3,7 +3,7 @@ import React from "react"
 import dynamic from "next/dynamic"
 import { Cormorant_Garamond } from "next/font/google"
 import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, MessageCircle } from "lucide-react"
 import VenueFavoriteButton from "@/components/VenueComponents/VenueFavoriteButton"
 
 const coromantGaramond = Cormorant_Garamond({
@@ -75,15 +75,6 @@ const IndividualVenueForm = dynamic(
   },
 )
 
-const ScheduleCallButton = dynamic(
-  () => import("@/components/VenueComponents/ScheduleCallButton"),
-  {
-    loading: () => (
-      <div className="w-full h-12 bg-gray-200 animate-pulse rounded-xl" />
-    ),
-  },
-)
-
 const BlockContentIndividualVenuePage = dynamic(
   () => import("@/components/BlockContent/BlockContentIndividualVenuePage"),
   {
@@ -105,9 +96,13 @@ export default function IndividualVenueContent({
   pageData,
   slug,
   locale,
-  calendlyUrls,
   t,
 }: IndividualVenueContentProps) {
+  const whatsappMessage =
+    locale === "es"
+      ? `Quiero realizar un evento en ${pageData.title[locale]}. Necesito asistencia con la planificación y operación.`
+      : `I want to hold an event at ${pageData.title[locale]}. I need assistance with planning and operations.`
+
   return (
     <>
       {/* Back to Venues Button */}
@@ -173,10 +168,15 @@ export default function IndividualVenueContent({
                   venueTitle={pageData.title[locale]}
                   className="flex-1 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm"
                 />
-                <ScheduleCallButton
-                  locale={locale}
-                  calendlyUrls={calendlyUrls.calendlyUrls}
-                />
+                <a
+                  href={`https://wa.me/18295222900?text=${encodeURIComponent(whatsappMessage)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-green-600 px-4 py-3 text-center text-sm font-semibold text-green-700 transition hover:bg-green-50"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  {t("whatsappVenue")}
+                </a>
               </div>
             </div>
           </div>

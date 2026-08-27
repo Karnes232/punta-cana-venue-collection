@@ -23,18 +23,19 @@ const HeroComponentBlog = ({
   heroImage,
   heroTitle,
 }: {
-  heroImage: HeroImage
+  heroImage?: HeroImage | null
   heroTitle: string
 }) => {
-  const {
-    props: { srcSet },
-  } = getImageProps({
-    alt: heroImage.alt,
-    width: 1000,
-    height: 1000,
-    src: heroImage.asset.url,
-  })
-  const backgroundImage = getBackgroundImage(srcSet)
+  const backgroundImage = heroImage?.asset?.url
+    ? getBackgroundImage(
+        getImageProps({
+          alt: heroImage.alt || heroTitle,
+          width: 1000,
+          height: 1000,
+          src: heroImage.asset.url,
+        }).props.srcSet,
+      )
+    : "linear-gradient(135deg, #12232c 0%, #173b45 52%, #167f87 100%)"
 
   return (
     <main

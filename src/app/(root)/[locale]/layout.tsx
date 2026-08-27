@@ -11,12 +11,9 @@ import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
 import Footer from "@/components/layout/FooterComponents/Footer"
 import Navbar from "@/components/layout/HeaderComponents/Navbar"
-import {
-  getCompanyInfo,
-  getLogo,
-} from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import CookieConsentComponent from "@/components/CookieConsentComponents/CookieConsentComponent"
 import FloatingCtaButton from "@/components/FloatingCtaButton/FloatingCtaButton"
+import { PCVC_BRAND } from "@/lib/brand"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -139,8 +136,6 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }>) {
   const { locale } = await params
-  const logo = await getLogo()
-  const companyInfo = await getCompanyInfo()
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
@@ -183,18 +178,14 @@ export default async function LocaleLayout({
           key={locale}
         >
           <div className="min-h-screen flex flex-col">
-            <Navbar
-              logo={logo.logo.asset.url}
-              email={companyInfo.email}
-              telephone={companyInfo.telephone}
-            />
+            <Navbar />
 
             <main className="flex-1">{children}</main>
-            <Footer companyInfo={companyInfo} logo={logo.logo.asset.url} />
+            <Footer />
           </div>
           <FloatingCtaButton
-            telephone={companyInfo.telephone || "18295222900"}
-            email={companyInfo.email || "info@puntacanavenuecollection.com"}
+            telephone={PCVC_BRAND.telephone}
+            email={PCVC_BRAND.email}
             locale={locale as "en" | "es"}
           />
         </NextIntlClientProvider>

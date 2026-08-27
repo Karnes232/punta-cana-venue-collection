@@ -1,8 +1,8 @@
-import BlockContent from "@/components/BlockContent/BlockContent"
-import ContactPageForm from "@/components/ContactForms/ContactPageForm"
+import type { Metadata } from "next"
+import { Mail, MessageCircle, Phone } from "lucide-react"
+import CorporateProposalForm from "@/components/CorporateComponents/CorporateProposalForm"
 import HeroComponentBlog from "@/components/HeroComponent/HeroComponentBlog"
-import { getContactPage } from "@/sanity/queries/ContactPage/ContactPage"
-import { getPageSeo, getStructuredData } from "@/sanity/queries/SEO/seo"
+import { PCVC_BRAND } from "@/lib/brand"
 import { generateHreflangAlternates } from "@/lib/hreflang"
 
 export default async function Contact({
@@ -11,34 +11,43 @@ export default async function Contact({
   params: Promise<{ locale: "en" | "es" }>
 }) {
   const { locale } = await params
-  const structuredData = await getStructuredData("contact")
-  const contactPage = await getContactPage()
-
+  const es = locale === "es"
   return (
     <>
-      {structuredData?.seo?.structuredData[locale] && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: structuredData.seo.structuredData[locale],
-          }}
-        />
-      )}
       <HeroComponentBlog
-        heroImage={contactPage.heroImage}
-        heroTitle={contactPage.title[locale]}
+        heroTitle={es ? "Hablemos de tu operación" : "Let’s discuss your operation"}
       />
-      <div className="max-w-7xl mx-auto flex flex-col gap-8 mt-5">
-        {contactPage.paragraph1 && (
-          <div className="mx-5">
-            <BlockContent
-              content={contactPage.paragraph1}
-              language={locale as "en" | "es"}
-            />
-          </div>
-        )}
-        <ContactPageForm />
-      </div>
+      <main className="bg-white px-5 py-16 text-charcoal md:py-24">
+        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <section>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-golden">
+              {es ? "Contacto directo" : "Direct contact"}
+            </p>
+            <h2 className="mt-4 font-hero-display text-4xl leading-tight md:text-5xl">
+              {es
+                ? "Comparte el alcance. Nosotros estructuramos la ejecución local."
+                : "Share the scope. We will structure the local execution."}
+            </h2>
+            <p className="mt-5 leading-7 text-charcoal/70">
+              {es
+                ? "Cuéntanos qué necesita tu agencia, las fechas aproximadas y el tamaño del grupo. Te responderemos con los próximos pasos para operar en Punta Cana o cualquier punto de República Dominicana."
+                : "Tell us what your agency needs, the approximate dates and group size. We will reply with the next steps to operate in Punta Cana or anywhere in the Dominican Republic."}
+            </p>
+            <div className="mt-8 space-y-3">
+              <a href={`https://wa.me/${PCVC_BRAND.telephone}`} className="flex items-center gap-3 rounded-xl border border-charcoal/10 p-4 transition hover:border-golden">
+                <MessageCircle className="h-5 w-5 text-golden" /> WhatsApp {PCVC_BRAND.phoneDisplay}
+              </a>
+              <a href={`tel:+${PCVC_BRAND.telephone}`} className="flex items-center gap-3 rounded-xl border border-charcoal/10 p-4 transition hover:border-golden">
+                <Phone className="h-5 w-5 text-golden" /> {PCVC_BRAND.phoneDisplay}
+              </a>
+              <a href={`mailto:${PCVC_BRAND.email}`} className="flex items-center gap-3 rounded-xl border border-charcoal/10 p-4 transition hover:border-golden">
+                <Mail className="h-5 w-5 text-golden" /> {PCVC_BRAND.email}
+              </a>
+            </div>
+          </section>
+          <CorporateProposalForm locale={locale} sourcePage="contact" />
+        </div>
+      </main>
     </>
   )
 }
@@ -46,43 +55,18 @@ export default async function Contact({
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{
-    locale: "en" | "es"
-  }>
-}) {
+  params: Promise<{ locale: "en" | "es" }>
+}): Promise<Metadata> {
   const { locale } = await params
-  const pageSeo = await getPageSeo("contact")
-
-  if (!pageSeo) {
-    return {}
-  }
-  let canonicalUrl
-  if (locale === "en") {
-    canonicalUrl = "https://puntacanavenuecollection.com/contact"
-  } else {
-    canonicalUrl = "https://puntacanavenuecollection.com/es/contact"
-  }
-
+  const es = locale === "es"
+  const canonical = `https://puntacanavenuecollection.com${es ? "/es" : ""}/contact`
   return {
-    title: pageSeo.seo.meta[locale].title,
-    description: pageSeo.seo.meta[locale].description,
-    keywords: pageSeo.seo.meta[locale].keywords.join(", "),
-    url: canonicalUrl,
-    openGraph: {
-      title: pageSeo.seo.openGraph[locale].title,
-      description: pageSeo.seo.openGraph[locale].description,
-      images: pageSeo.seo.openGraph.image.url,
-      type: "website",
-      url: canonicalUrl,
-    },
-    robots: {
-      index: !pageSeo.seo.noIndex,
-      follow: !pageSeo.seo.noFollow,
-    },
-    ...(canonicalUrl && { canonical: canonicalUrl }),
-    alternates: {
-      canonical: canonicalUrl,
-      ...generateHreflangAlternates(locale, "contact"),
-    },
+    title: es
+      ? "Contacto para operaciones de eventos en República Dominicana"
+      : "Contact for Event Operations in the Dominican Republic",
+    description: es
+      ? "Solicita apoyo white-label para venues, producción, logística y ejecución de eventos corporativos en República Dominicana."
+      : "Request white-label support for venues, production, logistics and corporate event execution in the Dominican Republic.",
+    alternates: { canonical, ...generateHreflangAlternates(locale, "contact") },
   }
 }

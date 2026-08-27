@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import {
   Send,
   Calendar,
@@ -11,7 +11,6 @@ import {
   MessageSquare,
   Heart,
 } from "lucide-react"
-import { set } from "sanity"
 
 interface FormData {
   name: string
@@ -19,6 +18,7 @@ interface FormData {
   phone: string
   eventType: string
   estimatedDate: string
+  groupSize: string
   message: string
   venue: string
   venueTitle: string
@@ -36,19 +36,18 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
   onClose,
 }) => {
   const t = useTranslations("individualVenueForm")
+  const locale = useLocale()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [errors, setErrors] = useState<Partial<FormData>>({})
+  const [submitError, setSubmitError] = useState(false)
 
-  // Common event types - you can customize these based on your needs
   const eventTypes = [
-    { value: "wedding", label: t("wedding") },
-    { value: "corporate", label: t("corporateEvent") },
-    { value: "birthday", label: t("birthdayParty") },
-    { value: "anniversary", label: t("anniversary") },
-    { value: "graduation", label: t("graduation") },
-    { value: "baby-shower", label: t("babyShower") },
-    { value: "quinceañera", label: t("quinceañera") },
+    { value: "conference-meeting", label: t("conferenceMeeting") },
+    { value: "incentive-program", label: t("incentiveProgram") },
+    { value: "launch-activation", label: t("launchActivation") },
+    { value: "retreat-offsite", label: t("retreatOffsite") },
+    { value: "wedding-social", label: t("weddingSocial") },
     { value: "other", label: t("other") },
   ]
 
@@ -87,10 +86,20 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
 
     if (!formData.phone.trim()) {
       newErrors.phone = t("phoneNumberIsRequired")
+    } else if (!/^\+[1-9][0-9\s().-]{7,19}$/.test(formData.phone.trim())) {
+      newErrors.phone = t("phoneWithCountryCodeRequired")
     }
 
     if (!formData.eventType) {
       newErrors.eventType = t("pleaseSelectAnEventType")
+    }
+
+    if (!formData.estimatedDate) {
+      newErrors.estimatedDate = t("dateIsRequired")
+    }
+
+    if (!formData.groupSize || Number(formData.groupSize) < 1) {
+      newErrors.groupSize = t("groupSizeIsRequired")
     }
 
     if (!formData.message.trim()) {
@@ -109,6 +118,7 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
     }
 
     setIsSubmitting(true)
+    setSubmitError(false)
 
     try {
       const formDataToSend = new FormData()
@@ -119,7 +129,11 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
       formDataToSend.append("venue", formData.venue)
       formDataToSend.append("eventType", formData.eventType)
       formDataToSend.append("estimatedDate", formData.estimatedDate)
+      formDataToSend.append("groupSize", formData.groupSize)
       formDataToSend.append("message", formData.message)
+      formDataToSend.append("venueTitle", formData.venueTitle)
+      formDataToSend.append("locale", locale)
+      formDataToSend.append("sourcePage", window.location.href)
 
       // Submit to Netlify
       const response = await fetch("/__forms.html", {
@@ -138,6 +152,7 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           phone: "",
           eventType: "",
           estimatedDate: "",
+          groupSize: "",
           message: "",
           venue: formData.venue, // Keep venue name
           venueTitle: formData.venueTitle,
@@ -148,11 +163,10 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           }
         }, 4000)
       } else {
-        console.error("Form submission failed:", response.status)
+        setSubmitError(true)
       }
-    } catch (error) {
-      console.error("Form submission error:", error)
-      // Handle error - you might want to show an error message
+    } catch {
+      setSubmitError(true)
     } finally {
       setIsSubmitting(false)
     }
@@ -195,6 +209,8 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           name="name"
           value={formData.name}
           onChange={handleInputChange}
+          required
+          aria-invalid={Boolean(errors.name)}
           className={`w-full px-3 py-2 border rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden ${
             errors.name ? "border-red-300" : "border-gray-300"
           }`}
@@ -220,6 +236,8 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           name="email"
           value={formData.email}
           onChange={handleInputChange}
+          required
+          aria-invalid={Boolean(errors.email)}
           className={`w-full px-3 py-2 border rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden ${
             errors.email ? "border-red-300" : "border-gray-300"
           }`}
@@ -245,10 +263,14 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           name="phone"
           value={formData.phone}
           onChange={handleInputChange}
+          required
+          aria-invalid={Boolean(errors.phone)}
           className={`w-full px-3 py-2 border rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden ${
             errors.phone ? "border-red-300" : "border-gray-300"
           }`}
-          placeholder="(555) 123-4567"
+          placeholder="+1 829 000 0000"
+          pattern="^\+[1-9][0-9\s().-]{7,19}$"
+          title={t("phoneWithCountryCodeRequired")}
         />
         {errors.phone && (
           <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
@@ -269,6 +291,8 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           name="eventType"
           value={formData.eventType}
           onChange={handleInputChange}
+          required
+          aria-invalid={Boolean(errors.eventType)}
           className={`w-full px-3 py-2 border rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden ${
             errors.eventType ? "border-red-300" : "border-gray-300"
           }`}
@@ -292,7 +316,7 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           className="block text-sm font-medium text-charcoal mb-1"
         >
           <Calendar size={14} className="inline mr-1" />
-          {t("estimatedEventDate")}
+          {t("estimatedEventDate")} *
         </label>
         <input
           type="date"
@@ -300,9 +324,39 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           name="estimatedDate"
           value={formData.estimatedDate}
           onChange={handleInputChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden"
+          required
+          aria-invalid={Boolean(errors.estimatedDate)}
+          className={`w-full px-3 py-2 border rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden ${errors.estimatedDate ? "border-red-300" : "border-gray-300"}`}
           min={new Date().toISOString().split("T")[0]}
         />
+        {errors.estimatedDate && (
+          <p className="mt-1 text-xs text-red-500">{errors.estimatedDate}</p>
+        )}
+      </div>
+
+      <div>
+        <label
+          htmlFor="groupSize"
+          className="mb-1 block text-sm font-medium text-charcoal"
+        >
+          {t("groupSize")} *
+        </label>
+        <input
+          type="number"
+          id="groupSize"
+          name="groupSize"
+          min="1"
+          max="5000"
+          value={formData.groupSize}
+          onChange={handleInputChange}
+          required
+          aria-invalid={Boolean(errors.groupSize)}
+          className={`w-full rounded-lg border px-3 py-2 text-sm transition-colors duration-200 focus:border-golden focus:outline-none focus:ring-2 focus:ring-golden/50 ${errors.groupSize ? "border-red-300" : "border-gray-300"}`}
+          placeholder={t("groupSizePlaceholder")}
+        />
+        {errors.groupSize && (
+          <p className="mt-1 text-xs text-red-500">{errors.groupSize}</p>
+        )}
       </div>
 
       {/* Message Field */}
@@ -319,6 +373,8 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           name="message"
           value={formData.message}
           onChange={handleInputChange}
+          required
+          aria-invalid={Boolean(errors.message)}
           rows={4}
           className={`w-full px-3 py-2 border rounded-lg text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-golden/50 focus:border-golden resize-none ${
             errors.message ? "border-red-300" : "border-gray-300"
@@ -329,6 +385,15 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           <p className="text-red-500 text-xs mt-1">{errors.message}</p>
         )}
       </div>
+
+      {submitError && (
+        <p
+          className="rounded-lg bg-red-50 p-3 text-sm text-red-700"
+          role="alert"
+        >
+          {t("submissionError")}
+        </p>
+      )}
 
       {/* Submit Button */}
       <div className="pt-4">
