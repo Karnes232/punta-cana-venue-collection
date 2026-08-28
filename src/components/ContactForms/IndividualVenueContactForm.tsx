@@ -121,19 +121,20 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
     setSubmitError(false)
 
     try {
-      const formDataToSend = new FormData()
-      formDataToSend.append("form-name", "individualVenueForm")
-      formDataToSend.append("name", formData.name)
-      formDataToSend.append("email", formData.email)
-      formDataToSend.append("phone", formData.phone)
-      formDataToSend.append("venue", formData.venue)
-      formDataToSend.append("eventType", formData.eventType)
-      formDataToSend.append("estimatedDate", formData.estimatedDate)
-      formDataToSend.append("groupSize", formData.groupSize)
-      formDataToSend.append("message", formData.message)
-      formDataToSend.append("venueTitle", formData.venueTitle)
-      formDataToSend.append("locale", locale)
-      formDataToSend.append("sourcePage", window.location.href)
+      const payload = new URLSearchParams({
+        "form-name": "individualVenueForm",
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        venue: formData.venue,
+        eventType: formData.eventType,
+        estimatedDate: formData.estimatedDate,
+        groupSize: formData.groupSize,
+        message: formData.message.trim(),
+        venueTitle: formData.venueTitle,
+        locale,
+        sourcePage: window.location.href,
+      })
 
       // Submit to Netlify
       const response = await fetch("/__forms.html", {
@@ -141,7 +142,7 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: new URLSearchParams(formDataToSend as any),
+        body: payload.toString(),
       })
 
       if (response.ok) {
@@ -193,7 +194,21 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form
+      name="individualVenueForm"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      onSubmit={handleSubmit}
+      className="space-y-4"
+    >
+      <input type="hidden" name="form-name" value="individualVenueForm" />
+      <input type="hidden" name="locale" value={locale} />
+      <p className="hidden">
+        <label>
+          Do not fill this field <input name="bot-field" tabIndex={-1} />
+        </label>
+      </p>
       {/* Name Field */}
       <div>
         <label
@@ -207,6 +222,7 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           type="text"
           id="name"
           name="name"
+          autoComplete="name"
           value={formData.name}
           onChange={handleInputChange}
           required
@@ -234,6 +250,7 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           type="email"
           id="email"
           name="email"
+          autoComplete="email"
           value={formData.email}
           onChange={handleInputChange}
           required
@@ -261,6 +278,8 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
           type="tel"
           id="phone"
           name="phone"
+          autoComplete="tel"
+          inputMode="tel"
           value={formData.phone}
           onChange={handleInputChange}
           required

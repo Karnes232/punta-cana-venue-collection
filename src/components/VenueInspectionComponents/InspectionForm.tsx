@@ -122,21 +122,20 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
     setSubmitError(false)
 
     try {
-      // Create FormData for Netlify
-      const formDataToSend = new FormData()
-      formDataToSend.append("form-name", "inspectionForm")
-      formDataToSend.append("name", formData.name)
-      formDataToSend.append("email", formData.email)
-      formDataToSend.append("phone", formData.phone)
-      formDataToSend.append("eventType", formData.eventType)
-      formDataToSend.append("estimatedDate", formData.estimatedDate)
-      formDataToSend.append("numberOfGuests", formData.numberOfGuests)
-      formDataToSend.append("approximateBudget", formData.approximateBudget)
-      formDataToSend.append(
-        "selectedVenues",
-        favoriteVenues.map(venue => venue.name).join(", "),
-      )
-      formDataToSend.append("message", formData.message)
+      const payload = new URLSearchParams({
+        "form-name": "inspectionForm",
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        eventType: formData.eventType,
+        estimatedDate: formData.estimatedDate,
+        numberOfGuests: formData.numberOfGuests,
+        approximateBudget: formData.approximateBudget,
+        selectedVenues: favoriteVenues.map(venue => venue.name).join(", "),
+        message: formData.message.trim(),
+        locale,
+        sourcePage: window.location.href,
+      })
 
       // Submit to Netlify
       const response = await fetch("/__forms.html", {
@@ -144,7 +143,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: new URLSearchParams(formDataToSend as any),
+        body: payload.toString(),
       })
 
       if (response.ok) {
@@ -199,7 +198,21 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
         <p className="text-slate-600">{t("formDescription")}</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-6 space-y-6">
+      <form
+        name="inspectionForm"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        onSubmit={handleSubmit}
+        className="p-6 space-y-6"
+      >
+        <input type="hidden" name="form-name" value="inspectionForm" />
+        <input type="hidden" name="locale" value={locale} />
+        <p className="hidden">
+          <label>
+            Do not fill this field <input name="bot-field" tabIndex={-1} />
+          </label>
+        </p>
         {/* Personal Information */}
         <div className="space-y-4">
           <h3
@@ -225,6 +238,8 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
+                  autoComplete="name"
+                  required
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
                     errors.name ? "border-red-300" : "border-slate-300"
                   }`}
@@ -251,6 +266,9 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
+                  autoComplete="tel"
+                  inputMode="tel"
+                  required
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
                     errors.phone ? "border-red-300" : "border-slate-300"
                   }`}
@@ -280,6 +298,8 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
+                autoComplete="email"
+                required
                 className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
                   errors.email ? "border-red-300" : "border-slate-300"
                 }`}
@@ -314,6 +334,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
                 name="eventType"
                 value={formData.eventType}
                 onChange={handleInputChange}
+                required
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
                   errors.eventType ? "border-red-300" : "border-slate-300"
                 }`}
@@ -349,6 +370,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
                   name="estimatedDate"
                   value={formData.estimatedDate}
                   onChange={handleInputChange}
+                  required
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
                     errors.estimatedDate ? "border-red-300" : "border-slate-300"
                   }`}
@@ -379,6 +401,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
                   value={formData.numberOfGuests}
                   onChange={handleInputChange}
                   min="1"
+                  required
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
                     errors.numberOfGuests
                       ? "border-red-300"
@@ -408,6 +431,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
                   name="approximateBudget"
                   value={formData.approximateBudget}
                   onChange={handleInputChange}
+                  required
                   className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors ${
                     errors.approximateBudget
                       ? "border-red-300"

@@ -139,6 +139,39 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
+  const organizationId = "https://puntacanvenuecollection.com/#organization"
+  const globalSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": organizationId,
+        name: PCVC_BRAND.name,
+        url: "https://puntacanvenuecollection.com",
+        logo: { "@type": "ImageObject", url: PCVC_BRAND.logo },
+        email: PCVC_BRAND.email,
+        telephone: PCVC_BRAND.phoneDisplay,
+        areaServed: { "@type": "Country", name: "Dominican Republic" },
+        knowsLanguage: ["en", "es"],
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          telephone: PCVC_BRAND.phoneDisplay,
+          email: PCVC_BRAND.email,
+          availableLanguage: ["English", "Spanish"],
+          areaServed: "DO",
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://puntacanvenuecollection.com/#website",
+        url: "https://puntacanvenuecollection.com",
+        name: PCVC_BRAND.name,
+        inLanguage: ["en", "es"],
+        publisher: { "@id": organizationId },
+      },
+    ],
+  }
   // Import messages for the current locale
   let messages
   try {
@@ -167,6 +200,10 @@ export default async function LocaleLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}
+        />
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           strategy="lazyOnload"

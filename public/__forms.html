@@ -5,67 +5,77 @@
   </head>
   <body>
     <form name="blogPost" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="tel" name="phone" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" required />
+      <input type="email" name="email" required />
+      <input type="tel" name="phone" pattern="^\+[1-9][0-9\s().-]{7,19}$" required />
       <input type="text" name="venue" />
+      <input type="text" name="locale" />
+      <input type="text" name="sourcePage" />
     </form>
     <form name="contactPage" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="tel" name="phone" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" required />
+      <input type="email" name="email" required />
+      <input type="tel" name="phone" pattern="^\+[1-9][0-9\s().-]{7,19}$" required />
       <input type="text" name="message" />
     </form>
     <form name="individualVenueForm" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="tel" name="phone" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" required />
+      <input type="email" name="email" required />
+      <input type="tel" name="phone" pattern="^\+[1-9][0-9\s().-]{7,19}$" required />
       <input type="text" name="venue" />
-      <input type="text" name="eventType" />
-      <input type="text" name="estimatedDate" />
-      <input type="text" name="groupSize" />
-      <input type="text" name="message" />
+      <input type="text" name="eventType" required />
+      <input type="text" name="estimatedDate" required />
+      <input type="text" name="groupSize" required />
+      <input type="text" name="message" required />
       <input type="text" name="venueTitle" />
       <input type="text" name="locale" />
       <input type="text" name="sourcePage" />
     </form>
     <form name="popUpForm" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="tel" name="phone" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" required />
+      <input type="email" name="email" required />
+      <input type="tel" name="phone" pattern="^\+[1-9][0-9\s().-]{7,19}$" required />
       <input type="text" name="eventType" />
       <input type="text" name="estimatedDate" />
       <input type="text" name="venueOfInterest" />
     </form>
     <form name="inspectionForm" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="tel" name="phone" />
-      <input type="text" name="eventType" />
-      <input type="text" name="estimatedDate" />
-      <input type="text" name="numberOfGuests" />
-      <input type="text" name="approximateBudget" />
-      <input type="text" name="selectedVenues" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" required />
+      <input type="email" name="email" required />
+      <input type="tel" name="phone" pattern="^\+[1-9][0-9\s().-]{7,19}$" required />
+      <input type="text" name="eventType" required />
+      <input type="text" name="estimatedDate" required />
+      <input type="text" name="numberOfGuests" required />
+      <input type="text" name="approximateBudget" required />
+      <input type="text" name="selectedVenues" required />
       <input type="text" name="message" />
+      <input type="text" name="locale" />
+      <input type="text" name="sourcePage" />
     </form>
     <form name="addVenueForm" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="tel" name="phone" />
+      <input type="text" name="bot-field" />
+      <input type="text" name="name" required />
+      <input type="email" name="email" required />
+      <input type="tel" name="phone" pattern="^\+[1-9][0-9\s().-]{7,19}$" required />
       <input type="text" name="venueName" />
       <input type="text" name="venueLocation" />
       <input type="text" name="message" />
     </form>
     <form name="corporateVenueProposal" netlify netlify-honeypot="bot-field" hidden>
       <input type="text" name="bot-field" />
-      <input type="text" name="fullName" />
-      <input type="text" name="company" />
-      <input type="email" name="workEmail" />
-      <input type="tel" name="phone" />
-      <input type="text" name="programType" />
-      <input type="text" name="preferredDates" />
-      <input type="text" name="groupSize" />
-      <input type="text" name="planningStage" />
+      <input type="text" name="fullName" required />
+      <input type="text" name="company" required />
+      <input type="email" name="workEmail" required />
+      <input type="tel" name="phone" pattern="^\+[1-9][0-9\s().-]{7,19}$" required />
+      <input type="text" name="programType" required />
+      <input type="text" name="preferredDates" required />
+      <input type="text" name="groupSize" required />
+      <input type="text" name="planningStage" required />
       <input type="text" name="notes" />
       <input type="text" name="locale" />
       <input type="text" name="sourcePage" />

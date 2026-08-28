@@ -24,6 +24,7 @@ const BlogPostContactForm = ({
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -36,32 +37,35 @@ const BlogPostContactForm = ({
   const isFormValid = () => {
     return (
       formData.name.trim() !== "" &&
-      formData.email.trim() !== "" &&
-      formData.phone.trim() !== ""
+      /^\S+@\S+\.\S+$/.test(formData.email.trim()) &&
+      /^\+[1-9][0-9\s().-]{7,19}$/.test(formData.phone.trim())
     )
   }
 
+  const payload = () =>
+    new URLSearchParams({
+      "form-name": "blogPost",
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      venue: formData.venue,
+      locale,
+      sourcePage: window.location.href,
+    })
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
+    if (!isFormValid()) return
     setIsSubmitting(true)
+    setSubmitError(false)
 
     try {
-      // Create FormData for Netlify
-      const formDataToSend = new FormData()
-      formDataToSend.append("form-name", "blogPost")
-      formDataToSend.append("name", formData.name)
-      formDataToSend.append("email", formData.email)
-      formDataToSend.append("phone", formData.phone)
-      formDataToSend.append("venue", formData.venue)
-
-      // Submit to Netlify
       const response = await fetch("/__forms.html", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: new URLSearchParams(formDataToSend as any),
+        body: payload().toString(),
       })
 
       if (response.ok) {
@@ -74,37 +78,12 @@ const BlogPostContactForm = ({
           venue: venueName,
         })
       } else {
-        console.error("Form submission failed:", response.status)
+        setSubmitError(true)
       }
-    } catch (error) {
-      console.error("Error submitting form:", error)
+    } catch {
+      setSubmitError(true)
     } finally {
       setIsSubmitting(false)
-    }
-  }
-
-  const submitForm = async () => {
-    if (!isFormValid()) {
-      return
-    }
-    const formDataToSend = new FormData()
-    formDataToSend.append("form-name", "blogPost")
-    formDataToSend.append("name", formData.name)
-    formDataToSend.append("email", formData.email)
-    formDataToSend.append("phone", formData.phone)
-    formDataToSend.append("venue", formData.venue)
-
-    const response = await fetch("/__forms.html", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams(formDataToSend as any),
-    })
-    if (response.ok) {
-      setIsSubmitted(true)
-    } else {
-      console.error("Form submission failed:", response.status)
     }
   }
 
@@ -122,6 +101,19 @@ const BlogPostContactForm = ({
           <p className="text-green-700">
             {t("responseMessage")} {venueName}.
           </p>
+          <a
+            href={
+              locale === "en"
+                ? calendlyUrls.englishUrl
+                : calendlyUrls.spanishUrl
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center rounded-lg bg-golden px-5 py-3 font-medium text-charcoal"
+          >
+            <Calendar size={20} className="mr-2" />
+            {locale === "en" ? "Open Calendly" : "Abrir Calendly"}
+          </a>
         </div>
       </div>
     )
@@ -145,7 +137,21 @@ const BlogPostContactForm = ({
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-8">
+        <form
+          name="blogPost"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
+          className="p-8"
+        >
+          <input type="hidden" name="form-name" value="blogPost" />
+          <input type="hidden" name="locale" value={locale} />
+          <p className="hidden">
+            <label>
+              Do not fill this field <input name="bot-field" tabIndex={-1} />
+            </label>
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-1 gap-6 mb-6">
             {/* Name Input */}
             <div>
@@ -161,6 +167,7 @@ const BlogPostContactForm = ({
                   type="text"
                   id="name"
                   name="name"
+                  autoComplete="name"
                   value={formData.name}
                   onChange={handleInputChange}
                   required
@@ -184,9 +191,17 @@ const BlogPostContactForm = ({
                   type="tel"
                   id="phone"
                   name="phone"
+                  autoComplete="tel"
+                  inputMode="tel"
                   value={formData.phone}
                   onChange={handleInputChange}
                   required
+                  pattern="^\+[1-9][0-9\s().-]{7,19}$"
+                  title={
+                    locale === "es"
+                      ? "Incluye el código de país, por ejemplo +1"
+                      : "Include the country code, for example +1"
+                  }
                   className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-golden focus:border-golden transition-colors"
                   placeholder={t("phonePlaceholder")}
                 />
@@ -208,6 +223,7 @@ const BlogPostContactForm = ({
                 type="email"
                 id="email"
                 name="email"
+                autoComplete="email"
                 value={formData.email}
                 onChange={handleInputChange}
                 required
@@ -221,32 +237,15 @@ const BlogPostContactForm = ({
           <input type="hidden" name="venue" value={formData.venue} />
 
           {/* Submit Button */}
-          <div className="flex 2xl:flex-col justify-end gap-4">
-            {isFormValid() ? (
-              <a
-                href={
-                  locale === "en"
-                    ? calendlyUrls.englishUrl
-                    : calendlyUrls.spanishUrl
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-golden/70 to-golden/90 text-charcoal font-medium rounded-lg hover:bg-golden/90 focus:ring-2 focus:ring-golden focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                onClick={submitForm}
-              >
-                <Calendar size={20} className="mr-2" />
-                {locale === "en" ? "Open Calendly" : "Abrir Calendly"}
-              </a>
-            ) : (
-              <button
-                type="submit"
-                disabled={true}
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-golden/70 to-golden/90 text-charcoal font-medium rounded-lg hover:bg-golden/90 focus:ring-2 focus:ring-golden focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                {t("fillForm")}
-              </button>
-            )}
+          {submitError && (
+            <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700" role="alert">
+              {locale === "es"
+                ? "No pudimos enviar la solicitud. Inténtalo nuevamente."
+                : "We could not send your request. Please try again."}
+            </p>
+          )}
 
+          <div className="flex justify-end">
             <button
               type="submit"
               disabled={isSubmitting}
