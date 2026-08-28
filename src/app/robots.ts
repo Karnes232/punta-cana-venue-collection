@@ -20,7 +20,7 @@ export default function robots(): MetadataRoute.Robots {
 
   return {
     rules: searchableCrawlers.map(userAgent => ({ userAgent, allow: "/" })),
-    sitemap: "https://puntacanvenuecollection.com/sitemap.xml",
-    host: "https://puntacanvenuecollection.com",
+    sitemap: "https://puntacanavenuecollection.com/sitemap.xml",
+    host: "https://puntacanavenuecollection.com",
   }
 }

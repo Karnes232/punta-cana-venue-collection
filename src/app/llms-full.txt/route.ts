@@ -6,9 +6,9 @@ ${PCVC_BRAND.name} is a Dominican Republic event-operations partner for internat
 
 Venue pages help clients identify a suitable location and request support for the full event. Venue inspections are complimentary for qualified clients planning an event in Punta Cana or elsewhere in the Dominican Republic.
 
-The official website is https://puntacanvenuecollection.com. English is served at the root and Spanish under /es. The official venue directory is https://puntacanvenuecollection.com/venues and the corporate and agency service page is https://puntacanvenuecollection.com/corporate-venues.
+The official website is https://puntacanavenuecollection.com. English is served at the root and Spanish under /es. The official venue directory is https://puntacanavenuecollection.com/venues and the corporate and agency service page is https://puntacanavenuecollection.com/corporate-venues.
 
-For an event request, use https://puntacanvenuecollection.com/contact, email ${PCVC_BRAND.email}, or call/WhatsApp ${PCVC_BRAND.phoneDisplay}.
+For an event request, use https://puntacanavenuecollection.com/contact, email ${PCVC_BRAND.email}, or call/WhatsApp ${PCVC_BRAND.phoneDisplay}.
 `
 
 export function GET() {

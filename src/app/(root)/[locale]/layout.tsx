@@ -139,7 +139,7 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
-  const organizationId = "https://puntacanvenuecollection.com/#organization"
+  const organizationId = "https://puntacanavenuecollection.com/#organization"
   const globalSchema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -147,7 +147,7 @@ export default async function LocaleLayout({
         "@type": "Organization",
         "@id": organizationId,
         name: PCVC_BRAND.name,
-        url: "https://puntacanvenuecollection.com",
+        url: "https://puntacanavenuecollection.com",
         logo: { "@type": "ImageObject", url: PCVC_BRAND.logo },
         email: PCVC_BRAND.email,
         telephone: PCVC_BRAND.phoneDisplay,
@@ -164,8 +164,8 @@ export default async function LocaleLayout({
       },
       {
         "@type": "WebSite",
-        "@id": "https://puntacanvenuecollection.com/#website",
-        url: "https://puntacanvenuecollection.com",
+        "@id": "https://puntacanavenuecollection.com/#website",
+        url: "https://puntacanavenuecollection.com",
         name: PCVC_BRAND.name,
         inLanguage: ["en", "es"],
         publisher: { "@id": organizationId },

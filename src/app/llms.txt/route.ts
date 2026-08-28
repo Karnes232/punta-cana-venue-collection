@@ -7,14 +7,14 @@ const body = `# ${PCVC_BRAND.name}
 ${PCVC_BRAND.name} supports venue sourcing, supplier coordination, production, logistics and on-site execution. The team works in English and Spanish and can operate under a partner agency's brand.
 
 ## Official pages
-- Home: https://puntacanvenuecollection.com/
-- Spanish home: https://puntacanvenuecollection.com/es
-- Venues: https://puntacanvenuecollection.com/venues
-- Corporate and agency operations: https://puntacanvenuecollection.com/corporate-venues
-- Complimentary venue inspection for qualified event projects: https://puntacanvenuecollection.com/inspection
-- About: https://puntacanvenuecollection.com/about-us
-- Contact: https://puntacanvenuecollection.com/contact
-- Blog: https://puntacanvenuecollection.com/blog
+- Home: https://puntacanavenuecollection.com/
+- Spanish home: https://puntacanavenuecollection.com/es
+- Venues: https://puntacanavenuecollection.com/venues
+- Corporate and agency operations: https://puntacanavenuecollection.com/corporate-venues
+- Complimentary venue inspection for qualified event projects: https://puntacanavenuecollection.com/inspection
+- About: https://puntacanavenuecollection.com/about-us
+- Contact: https://puntacanavenuecollection.com/contact
+- Blog: https://puntacanavenuecollection.com/blog
 
 ## Contact
 - Email: ${PCVC_BRAND.email}
