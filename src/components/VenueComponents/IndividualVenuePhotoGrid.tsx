@@ -14,7 +14,7 @@ import "yet-another-react-lightbox/styles.css"
 import { useTranslations } from "next-intl"
 
 type SanityImage = {
-  alt?: string
+  alt?: string | { en?: string; es?: string }
   asset: {
     url: string
     mimeType?: string
@@ -36,9 +36,13 @@ const mimeFromUrl = (url: string) => {
 const IndividualVenuePhotoGrid = ({
   gallery,
   videoGallery,
+  venueTitle = "Venue",
+  locale = "en",
 }: {
   gallery: SanityImage[]
   videoGallery?: string[]
+  venueTitle?: string
+  locale?: "en" | "es"
 }) => {
   const t = useTranslations("individualVenueListing")
   const [open, setOpen] = useState(false)
@@ -65,9 +69,20 @@ const IndividualVenuePhotoGrid = ({
   }
 
   // Build slides: images first, then videos (if any)
-  const imageSlides = gallery.map(photo => ({
+  const getAlt = (photo: SanityImage, index: number) => {
+    const localizedAlt =
+      typeof photo.alt === "string" ? photo.alt : photo.alt?.[locale]
+    return (
+      localizedAlt ||
+      (locale === "es"
+        ? `${venueTitle}, venue para eventos en República Dominicana — imagen ${index + 1}`
+        : `${venueTitle}, event venue in the Dominican Republic — image ${index + 1}`)
+    )
+  }
+
+  const imageSlides = gallery.map((photo, index) => ({
     src: photo.asset.url,
-    alt: photo.alt || "Venue photo",
+    alt: getAlt(photo, index),
     width: photo.asset.metadata.dimensions.width,
     height: photo.asset.metadata.dimensions.height,
     blurDataURL: photo.asset.metadata?.lqip,
@@ -98,7 +113,7 @@ const IndividualVenuePhotoGrid = ({
               width={gallery[0].asset.metadata.dimensions.width}
               height={gallery[0].asset.metadata.dimensions.height}
               src={gallery[0].asset.url}
-              alt={gallery[0].alt || "Venue photo"}
+              alt={getAlt(gallery[0], 0)}
               className={`w-full h-full object-cover cursor-pointer transition-all duration-700 group-hover:scale-105 ${
                 imageLoaded[0] ? "opacity-100" : "opacity-0"
               }`}
@@ -134,7 +149,7 @@ const IndividualVenuePhotoGrid = ({
                     width={photo.asset.metadata.dimensions.width}
                     height={photo.asset.metadata.dimensions.height}
                     src={photo.asset.url}
-                    alt={photo.alt || `Venue photo ${actualIndex + 1}`}
+                    alt={getAlt(photo, actualIndex)}
                     className={`w-full h-full object-cover cursor-pointer transition-all duration-700 group-hover:scale-110 ${
                       isLastVisible ? "brightness-50" : ""
                     } ${imageLoaded[actualIndex] ? "opacity-100" : "opacity-0"}`}

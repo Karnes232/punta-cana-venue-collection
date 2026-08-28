@@ -1,7 +1,23 @@
 import { client } from "@/sanity/lib/client"
 import { HeroImage } from "../MainPage/MainPage"
+import { applyVenueDataCorrections } from "@/lib/venueProfiles"
 
-export const individualVenuesQuery = `*[_type == "individualVenue" && displayed == true] | order(title.en asc) {
+export const REMOVED_VENUE_SLUGS = [
+  "sagrada-familia-chapel-cap-cana",
+  "basilica-nuestra-senora-de-la-altagracia",
+] as const
+
+export const DUPLICATE_VENUE_REDIRECTS: Record<string, string> = {
+  "dreams-macao-beach-punta-cana": "dreams-macao",
+}
+
+const excludedVenueSlugs = JSON.stringify([
+  ...REMOVED_VENUE_SLUGS,
+  ...Object.keys(DUPLICATE_VENUE_REDIRECTS),
+])
+const publicVenueFilter = `displayed == true && !(slug.current in ${excludedVenueSlugs})`
+
+export const individualVenuesQuery = `*[_type == "individualVenue" && ${publicVenueFilter}] | order(title.en asc) {
     venueName,
     title {
         en,
@@ -59,6 +75,7 @@ export interface IndividualVenue {
     }
   }[]
   capacityCocktail?: number
+  verifiedMaximumCapacity?: number
   amenities?: {
     title: {
       en: string
@@ -70,10 +87,10 @@ export interface IndividualVenue {
 
 export async function getIndividualVenues(): Promise<IndividualVenue[]> {
   const data = await client.fetch<IndividualVenue[]>(individualVenuesQuery)
-  return data
+  return data.map(applyVenueDataCorrections)
 }
 
-export const individualVenueSeoQuery = `*[_type == "individualVenue" && slug.current == $slug][0] {
+export const individualVenueSeoQuery = `*[_type == "individualVenue" && slug.current == $slug && ${publicVenueFilter}][0] {
     seo {
         meta {
             en {
@@ -110,7 +127,7 @@ export const individualVenueSeoQuery = `*[_type == "individualVenue" && slug.cur
 }`
 
 export interface IndividualVenueSeo {
-  seo: {
+  seo?: {
     meta: {
       en: {
         title: string
@@ -147,14 +164,15 @@ export interface IndividualVenueSeo {
 
 export async function getIndividualVenueSeo(
   slug: string,
-): Promise<IndividualVenueSeo> {
-  const data = await client.fetch<IndividualVenueSeo>(individualVenueSeoQuery, {
-    slug,
-  })
+): Promise<IndividualVenueSeo | null> {
+  const data = await client.fetch<IndividualVenueSeo | null>(
+    individualVenueSeoQuery,
+    { slug },
+  )
   return data
 }
 
-export const individualVenueSchemaQuery = `*[_type == "individualVenue" && slug.current == $slug][0] {
+export const individualVenueSchemaQuery = `*[_type == "individualVenue" && slug.current == $slug && ${publicVenueFilter}][0] {
   seo {
     structuredData {
             en,
@@ -182,7 +200,7 @@ export async function getIndividualVenueSchema(
   return data
 }
 
-export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.current == $slug][0]
+export const individualVenuePageQuery = `*[_type == "individualVenue" && slug.current == $slug && ${publicVenueFilter}][0]
 {
   venueName,
   title {
@@ -266,7 +284,9 @@ export interface IndividualVenuePage {
     en: string
     es: string
   }
-  heroImage: HeroImage
+  heroImage: Omit<HeroImage, "alt"> & {
+    alt?: string | { en?: string; es?: string }
+  }
   gallery: {
     asset: {
       url: string
@@ -278,7 +298,7 @@ export interface IndividualVenuePage {
         }
       }
     }
-    alt: string
+    alt?: string | { en?: string; es?: string }
   }[]
   videoGallery: string[]
   map: {
@@ -323,21 +343,22 @@ export interface IndividualVenuePage {
     icon: string
   }[]
   totalSpace: number
+  verifiedMaximumCapacity?: number
 }
 
 export async function getIndividualVenuePage(
   slug: string,
-): Promise<IndividualVenuePage> {
-  const data = await client.fetch<IndividualVenuePage>(
+): Promise<IndividualVenuePage | null> {
+  const data = await client.fetch<IndividualVenuePage | null>(
     individualVenuePageQuery,
     {
       slug,
     },
   )
-  return data
+  return data ? applyVenueDataCorrections(data) : null
 }
 
-export const individualVenuesMapDetailsQuery = `*[_type == "individualVenue" && displayed == true] {
+export const individualVenuesMapDetailsQuery = `*[_type == "individualVenue" && ${publicVenueFilter}] {
 title {
         en,
         es
@@ -385,7 +406,7 @@ export async function getIndividualVenuesMapDetails(): Promise<
   return data
 }
 
-export const individualVenuesSlugsQuery = `*[_type == "individualVenue"] {
+export const individualVenuesSlugsQuery = `*[_type == "individualVenue" && ${publicVenueFilter}] {
   slug {
     current
   }

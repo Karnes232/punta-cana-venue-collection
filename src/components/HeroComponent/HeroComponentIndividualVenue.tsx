@@ -22,14 +22,22 @@ function getBackgroundImage(srcSet = "") {
 const HeroComponentIndividualVenue = ({
   heroImage,
   heroTitle,
+  locale,
 }: {
-  heroImage: HeroImage
+  heroImage: Omit<HeroImage, "alt"> & {
+    alt?: string | { en?: string; es?: string }
+  }
   heroTitle: string
+  locale: "en" | "es"
 }) => {
+  const imageAlt =
+    typeof heroImage.alt === "string"
+      ? heroImage.alt
+      : heroImage.alt?.[locale] || heroTitle
   const {
     props: { srcSet },
   } = getImageProps({
-    alt: heroImage.alt,
+    alt: imageAlt,
     width: 1000,
     height: 1000,
     src: heroImage.asset.url,

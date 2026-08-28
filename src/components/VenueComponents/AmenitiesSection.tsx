@@ -56,6 +56,9 @@ interface AmenitiesSectionProps {
   locale?: "en" | "es"
 }
 
+const isWeddingAmenity = (title: string) =>
+  /\b(wedding|weddings|bridal|boda|bodas|nupcial)\b/i.test(title)
+
 const AmenitiesSection = ({
   amenities,
   locale = "en",
@@ -104,6 +107,15 @@ const AmenitiesSection = ({
     return null
   }
 
+  const orderedAmenities = [...amenities].sort((first, second) => {
+    const firstTitle = first.title[locale] || first.title.en
+    const secondTitle = second.title[locale] || second.title.en
+    return (
+      Number(isWeddingAmenity(firstTitle)) -
+      Number(isWeddingAmenity(secondTitle))
+    )
+  })
+
   return (
     <div className="space-y-6">
       {/* Header with elegant styling matching the design */}
@@ -124,7 +136,7 @@ const AmenitiesSection = ({
 
       {/* Grid layout for better visual organization */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-3 gap-3">
-        {amenities.map((amenity, index) => {
+        {orderedAmenities.map((amenity, index) => {
           const IconComponent = amenity.icon ? iconMap[amenity.icon] : null
           const title = amenity.title[locale] || amenity.title.en
 

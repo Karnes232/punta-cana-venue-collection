@@ -94,7 +94,10 @@ export default async function Venues({
                 addressLocality: venue.location?.location || "Punta Cana",
                 addressCountry: "DO",
               },
-              maximumAttendeeCapacity: venue.capacityCocktail || undefined,
+              maximumAttendeeCapacity:
+                venue.verifiedMaximumCapacity ||
+                venue.capacityCocktail ||
+                undefined,
             },
           }
         }),

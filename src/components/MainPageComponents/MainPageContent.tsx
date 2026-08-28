@@ -1,5 +1,4 @@
 import HomePageClient from "./HomePageClient"
-import HomePageMapSection from "./HomePageMapSection"
 import { CheckCircle2 } from "lucide-react"
 
 export interface MainPageContentProps {
@@ -7,7 +6,6 @@ export interface MainPageContentProps {
   locale: "en" | "es"
   typeVenue: any
   searchVenues: any
-  venues: any
   popupVenues: any
   calendlyUrls: any
 }
@@ -17,7 +15,6 @@ export default function MainPageContent({
   locale,
   typeVenue,
   searchVenues,
-  venues,
   popupVenues,
   calendlyUrls,
 }: MainPageContentProps) {
@@ -34,11 +31,10 @@ export default function MainPageContent({
       />
 
       <div
-        className="z-0 mx-auto mt-4 flex max-w-7xl flex-col gap-4 px-4 lg:flex-row-reverse"
+        className="z-0 mx-auto mt-4 max-w-7xl px-4"
         aria-labelledby="local-operations-title"
       >
-        <HomePageMapSection venues={venues} height={400} />
-        <div className="h-full w-full overflow-hidden rounded-2xl border border-charcoal/10 bg-ivory p-7 xl:w-1/2">
+        <div className="h-full w-full overflow-hidden rounded-2xl border border-charcoal/10 bg-ivory p-7">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-golden">
             {es ? "Cobertura local real" : "True local coverage"}
           </p>

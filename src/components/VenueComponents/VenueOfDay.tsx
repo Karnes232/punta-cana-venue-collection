@@ -67,7 +67,10 @@ const VenueOfDay = ({
               <div className="flex items-center justify-between">
                 <div className="flex space-x-4 text-xs text-charcoal/60">
                   <span>
-                    {t("upTo")} {venueOfTheDay.capacityCocktail} {t("guests")}
+                    {t("upTo")}{" "}
+                    {venueOfTheDay.verifiedMaximumCapacity ||
+                      venueOfTheDay.capacityCocktail}{" "}
+                    {t("guests")}
                   </span>
                   <span>•</span>
                   <span>{venueOfTheDay.type.title[locale]}</span>

@@ -102,7 +102,8 @@ const VenueListingContent = ({
         return false
       }
 
-      const capacity = venue.capacityCocktail || 0
+      const capacity =
+        venue.verifiedMaximumCapacity || venue.capacityCocktail || 0
       if (filters.capacity === t("capacityUpTo50") && capacity > 50)
         return false
       if (

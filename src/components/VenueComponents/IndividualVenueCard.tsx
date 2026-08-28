@@ -23,6 +23,11 @@ function getLocalizedText(
   return value?.[locale as "en" | "es"] || value?.en || fallback
 }
 
+const isWeddingType = (title: string) =>
+  /\b(wedding|weddings|bridal|ceremony|ceremonies|boda|bodas|nupcial|ceremonia|ceremonias)\b/i.test(
+    title,
+  )
+
 const IndividualVenueCard = ({
   venue,
   locale,
@@ -38,6 +43,7 @@ const IndividualVenueCard = ({
     location,
     type = [],
     capacityCocktail,
+    verifiedMaximumCapacity,
     amenities = [],
   } = venue
   const t = useTranslations("venueListing")
@@ -56,7 +62,11 @@ const IndividualVenueCard = ({
     title?.[locale as "en" | "es"] || title?.en || venueName
   const localizedTypes = type
     .map(item => item?.title?.[locale as "en" | "es"] || item?.title?.en)
-    .filter(Boolean)
+    .filter((value): value is string => Boolean(value))
+    .sort(
+      (first, second) =>
+        Number(isWeddingType(first)) - Number(isWeddingType(second)),
+    )
     .slice(0, 2) as string[]
   const displayAmenities = amenities.slice(0, 2)
   const detailsHref = `${locale === "es" ? "/es" : ""}/venues/${slug.current}`
@@ -161,10 +171,11 @@ const IndividualVenueCard = ({
               {location}
             </span>
           )}
-          {capacityCocktail ? (
+          {verifiedMaximumCapacity || capacityCocktail ? (
             <span className="flex items-center gap-1.5">
               <Users size={16} className="text-turquoise" aria-hidden="true" />
-              {t("upTo")} {capacityCocktail} {t("guests")}
+              {t("upTo")} {verifiedMaximumCapacity || capacityCocktail}{" "}
+              {t("guests")}
             </span>
           ) : null}
         </div>

@@ -19,14 +19,6 @@ export default async function Home({ params }: PageProps) {
   const individualVenuesMapDetails = await getIndividualVenuesMapDetails()
   const calendlyUrls = await getCalendlyUrls()
 
-  const venues = (individualVenuesMapDetails || []).map(venue => ({
-    id: venue.slug.current,
-    name: venue.title[locale],
-    position: [venue.map.latitude, venue.map.longitude] as [number, number],
-    image: venue.heroImage,
-    href: `/venues/${venue.slug.current}`,
-  }))
-
   // Transform venues for search functionality
   const searchVenues = (individualVenuesMapDetails || []).map(venue => ({
     title: venue.title,
@@ -92,7 +84,6 @@ export default async function Home({ params }: PageProps) {
         locale={locale}
         typeVenue={typeVenue}
         searchVenues={searchVenues}
-        venues={venues}
         popupVenues={popupVenues}
         calendlyUrls={calendlyUrls?.calendlyUrls}
       />

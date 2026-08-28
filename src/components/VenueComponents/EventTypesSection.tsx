@@ -34,6 +34,11 @@ interface EventTypesSectionProps {
   locale?: "en" | "es"
 }
 
+const isWeddingType = (title: string) =>
+  /\b(wedding|weddings|bridal|ceremony|ceremonies|boda|bodas|nupcial|ceremonia|ceremonias)\b/i.test(
+    title,
+  )
+
 const EventTypesSection = ({
   eventTypes,
   locale = "en",
@@ -60,6 +65,14 @@ const EventTypesSection = ({
     return null
   }
 
+  const orderedEventTypes = [...eventTypes].sort((first, second) => {
+    const firstTitle = first.title[locale] || first.title.en
+    const secondTitle = second.title[locale] || second.title.en
+    return (
+      Number(isWeddingType(firstTitle)) - Number(isWeddingType(secondTitle))
+    )
+  })
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -76,8 +89,10 @@ const EventTypesSection = ({
 
       {/* Event Types Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {eventTypes.map((eventType, index) => {
-          const IconComponent = eventType.icon ? iconMap[eventType.icon] : Heart
+        {orderedEventTypes.map((eventType, index) => {
+          const IconComponent = eventType.icon
+            ? iconMap[eventType.icon] || Calendar
+            : Calendar
           const title = eventType.title[locale] || eventType.title.en
 
           return (
