@@ -1,11 +1,12 @@
 "use client"
 import React, { useState } from "react"
 import { Send, User, Mail, Phone, MapPin } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import BlockContent from "../BlockContent/BlockContent"
 
 const ContactPageForm = () => {
   const t = useTranslations("Contact")
+  const locale = useLocale()
   const [formData, setFormData] = useState({
     "form-name": "contactPage",
     name: "",
@@ -87,7 +88,18 @@ const ContactPageForm = () => {
         {/* Header */}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-8">
+        <form
+          name="contactPage"
+          method="POST"
+          onSubmit={handleSubmit}
+          className="p-8"
+          toolname="contact-punta-cana-venue-collection"
+          tooldescription={
+            locale === "es"
+              ? "Contacta al equipo para recibir ayuda con un evento o venue en República Dominicana."
+              : "Contact the team for help with an event or venue in the Dominican Republic."
+          }
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-1 gap-6 mb-6">
             {/* Name Input */}
             <div>

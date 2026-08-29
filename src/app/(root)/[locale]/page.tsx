@@ -1,9 +1,7 @@
 import { getMainPage } from "@/sanity/queries/MainPage/MainPage"
 import { getPageSeo } from "@/sanity/queries/SEO/seo"
-import { getTypeVenue } from "@/sanity/queries/MainPage/MainPage"
-import { getIndividualVenuesMapDetails } from "@/sanity/queries/IndividualVenues/IndividualVenues"
+import { getVenueSearchIndex } from "@/sanity/queries/IndividualVenues/IndividualVenues"
 import MainPageContent from "@/components/MainPageComponents/MainPageContent"
-import { getCalendlyUrls } from "@/sanity/queries/GeneralLayout/GeneralLayout"
 import { generateHreflangAlternates } from "@/lib/hreflang"
 
 interface PageProps {
@@ -14,18 +12,13 @@ interface PageProps {
 
 export default async function Home({ params }: PageProps) {
   const { locale } = await params
-  const mainPage = await getMainPage()
-  const typeVenue = await getTypeVenue()
-  const individualVenuesMapDetails = await getIndividualVenuesMapDetails()
-  const calendlyUrls = await getCalendlyUrls()
+  const [mainPage, venueSearchIndex] = await Promise.all([
+    getMainPage(),
+    getVenueSearchIndex(),
+  ])
 
   // Transform venues for search functionality
-  const searchVenues = (individualVenuesMapDetails || []).map(venue => ({
-    title: venue.title,
-    slug: venue.slug,
-  }))
-
-  const popupVenues = (individualVenuesMapDetails || []).map(venue => ({
+  const searchVenues = (venueSearchIndex || []).map(venue => ({
     title: venue.title,
     slug: venue.slug,
   }))
@@ -82,10 +75,7 @@ export default async function Home({ params }: PageProps) {
       <MainPageContent
         mainPage={mainPage}
         locale={locale}
-        typeVenue={typeVenue}
         searchVenues={searchVenues}
-        popupVenues={popupVenues}
-        calendlyUrls={calendlyUrls?.calendlyUrls}
       />
     </>
   )

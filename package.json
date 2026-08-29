@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
+    "validate:agentic": "node scripts/validate-agentic-contract.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",

@@ -24,7 +24,7 @@ export default async function Terms({
       )}
       <div className="min-h-screen">
         <div className="container px-5 max-w-7xl lg:px-0 lg:mx-auto">
-          <BlockContent content={legalDocuments.body} language={locale} />
+          <BlockContent content={legalDocuments?.body} language={locale} />
         </div>
       </div>
     </>

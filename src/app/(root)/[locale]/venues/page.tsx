@@ -38,6 +38,8 @@ export default async function Venues({
         ? searchParamsData.budget
         : "",
   }
+  const initialSearch =
+    typeof searchParamsData.search === "string" ? searchParamsData.search : ""
 
   const localePrefix = locale === "es" ? "/es" : ""
   const pageUrl = `${BASE_URL}${localePrefix}/venues`
@@ -136,6 +138,7 @@ export default async function Venues({
         individualVenues={individualVenues}
         locale={locale}
         initialFilters={initialFilters}
+        initialSearch={initialSearch}
       />
     </>
   )

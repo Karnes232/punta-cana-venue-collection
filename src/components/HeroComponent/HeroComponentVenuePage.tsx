@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import Image from "next/image"
 import { HeroImage } from "@/sanity/queries/MainPage/MainPage"
 import { Search, SlidersHorizontal, X } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 interface FilterOptions {
   location: string
@@ -20,6 +20,7 @@ const HeroComponentVenuePage = ({
   onFiltersChange,
   filterOptions,
   initialFilters = { location: "", type: "", capacity: "", budget: "" },
+  initialSearch = "",
 }: {
   heroImage?: HeroImage | null
   heroTitle: string
@@ -32,9 +33,11 @@ const HeroComponentVenuePage = ({
     budgetRanges: string[]
   }
   initialFilters?: FilterOptions
+  initialSearch?: string
 }) => {
   const t = useTranslations("venueListing")
-  const [searchTerm, setSearchTerm] = useState("")
+  const locale = useLocale()
+  const [searchTerm, setSearchTerm] = useState(initialSearch)
   const [filters, setFilters] = useState<FilterOptions>(initialFilters)
   const [showFilters, setShowFilters] = useState(
     Object.values(initialFilters).some(Boolean),
@@ -99,6 +102,14 @@ const HeroComponentVenuePage = ({
             onSubmit={handleSearch}
             className="mt-8 w-full max-w-2xl"
             role="search"
+            name="venueSearch"
+            method="GET"
+            toolname="search-event-venues"
+            tooldescription={
+              locale === "es"
+                ? "Busca venues para eventos por nombre, ubicación o tipo en Punta Cana y República Dominicana."
+                : "Search event venues by name, location, or type in Punta Cana and the Dominican Republic."
+            }
           >
             <label htmlFor="venue-search" className="sr-only">
               {t("searchAria")}
@@ -106,6 +117,7 @@ const HeroComponentVenuePage = ({
             <div className="relative">
               <input
                 id="venue-search"
+                name="search"
                 type="search"
                 value={searchTerm}
                 onChange={event => {
@@ -114,6 +126,11 @@ const HeroComponentVenuePage = ({
                 }}
                 placeholder={t("searchPlaceholder")}
                 autoComplete="off"
+                toolparamdescription={
+                  locale === "es"
+                    ? "Nombre, ubicación o tipo de venue que se desea encontrar."
+                    : "Venue name, location, or type to find."
+                }
                 className="min-h-14 w-full rounded-2xl border border-white/30 bg-white px-5 pr-14 text-base font-normal text-slate-950 shadow-xl outline-none transition placeholder:text-slate-500 focus:border-golden focus:ring-4 focus:ring-golden/20"
               />
               <button
@@ -147,6 +164,7 @@ const HeroComponentVenuePage = ({
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <FilterSelect
+                name="location"
                 label={t("location")}
                 value={filters.location}
                 onChange={value => handleFilterChange("location", value)}
@@ -154,6 +172,7 @@ const HeroComponentVenuePage = ({
                 options={filterOptions.locations}
               />
               <FilterSelect
+                name="type"
                 label={t("type")}
                 value={filters.type}
                 onChange={value => handleFilterChange("type", value)}
@@ -161,6 +180,7 @@ const HeroComponentVenuePage = ({
                 options={filterOptions.types}
               />
               <FilterSelect
+                name="capacity"
                 label={t("capacity")}
                 value={filters.capacity}
                 onChange={value => handleFilterChange("capacity", value)}
@@ -185,12 +205,14 @@ const HeroComponentVenuePage = ({
 }
 
 function FilterSelect({
+  name,
   label,
   value,
   onChange,
   emptyLabel,
   options,
 }: {
+  name: string
   label: string
   value: string
   onChange: (value: string) => void
@@ -203,8 +225,10 @@ function FilterSelect({
         {label}
       </span>
       <select
+        name={name}
         value={value}
         onChange={event => onChange(event.target.value)}
+        toolparamdescription={label}
         className="min-h-12 w-full rounded-xl border border-white/15 bg-white px-4 text-sm text-slate-950 outline-none focus:border-golden focus:ring-4 focus:ring-golden/20"
       >
         <option value="">{emptyLabel}</option>

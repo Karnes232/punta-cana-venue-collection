@@ -108,6 +108,12 @@ export default function CorporateProposalForm({
       method="POST"
       data-netlify="true"
       data-netlify-honeypot="bot-field"
+      toolname="request-white-label-event-proposal"
+      tooldescription={
+        es
+          ? "Solicita una propuesta de operación local o white-label para un evento corporativo en República Dominicana."
+          : "Request a local or white-label operations proposal for a corporate event in the Dominican Republic."
+      }
       onSubmit={submit}
       className={`scroll-mt-36 rounded-2xl border border-golden/25 bg-ivory shadow-sm ${compact ? "p-5" : "p-6 md:p-8"}`}
     >

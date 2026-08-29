@@ -14,12 +14,6 @@ import {
 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useFavorites } from "@/customHooks/useFavoritesHook"
-import { Cormorant_Garamond } from "next/font/google"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 interface InspectionFormProps {
   locale: string
@@ -177,9 +171,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="h-8 w-8 text-green-600" />
         </div>
-        <h3
-          className={`${coromantGaramond.className} text-2xl font-semibold text-green-800 mb-2`}
-        >
+        <h3 className="font-hero-display text-2xl font-semibold text-green-800 mb-2">
           {t("thankYou")}
         </h3>
         <p className="text-green-700">{t("responseMessage")}</p>
@@ -190,9 +182,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
   return (
     <div className="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
       <div className="bg-gradient-to-r from-golden/10 to-golden/5 p-6 border-b border-slate-200">
-        <h2
-          className={`${coromantGaramond.className} text-2xl font-semibold text-charcoal mb-2`}
-        >
+        <h2 className="font-hero-display text-2xl font-semibold text-charcoal mb-2">
           {t("formTitle")}
         </h2>
         <p className="text-slate-600">{t("formDescription")}</p>
@@ -203,6 +193,12 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
         method="POST"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
+        toolname="request-venue-inspection"
+        tooldescription={
+          locale === "es"
+            ? "Solicita una inspección de venues para un proyecto de evento calificado en República Dominicana."
+            : "Request a venue inspection for a qualified event project in the Dominican Republic."
+        }
         onSubmit={handleSubmit}
         className="p-6 space-y-6"
       >
@@ -215,9 +211,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
         </p>
         {/* Personal Information */}
         <div className="space-y-4">
-          <h3
-            className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}
-          >
+          <h3 className="font-hero-display text-xl font-semibold text-charcoal flex items-center gap-2">
             <User className="w-5 h-5 text-golden" />
             {t("personalInformation")}
           </h3>
@@ -314,9 +308,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
 
         {/* Event Details */}
         <div className="space-y-4">
-          <h3
-            className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}
-          >
+          <h3 className="font-hero-display text-xl font-semibold text-charcoal flex items-center gap-2">
             <Calendar className="w-5 h-5 text-golden" />
             {t("eventDetails")}
           </h3>
@@ -457,9 +449,7 @@ const InspectionForm: React.FC<InspectionFormProps> = ({ locale }) => {
 
         {/* Venue Selection */}
         <div className="space-y-4">
-          <h3
-            className={`${coromantGaramond.className} text-xl font-semibold text-charcoal flex items-center gap-2`}
-          >
+          <h3 className="font-hero-display text-xl font-semibold text-charcoal flex items-center gap-2">
             <Star className="w-5 h-5 text-golden" />
             {t("venueSelection")} ({favoriteVenues.length}/5)
           </h3>

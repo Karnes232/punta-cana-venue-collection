@@ -1,10 +1,11 @@
 "use client"
 import React, { useState } from "react"
 import { Send, User, Mail, Phone, MapPin, House } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 const AddVenueForm = () => {
   const t = useTranslations("AddVenueForm")
+  const locale = useLocale()
   const [formData, setFormData] = useState({
     "form-name": "addVenueForm",
     name: "",
@@ -92,7 +93,18 @@ const AddVenueForm = () => {
         {/* Header */}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-8">
+        <form
+          name="addVenueForm"
+          method="POST"
+          onSubmit={handleSubmit}
+          className="p-8"
+          toolname="submit-venue-for-review"
+          tooldescription={
+            locale === "es"
+              ? "Envía la información de un venue para que el equipo considere incorporarlo a la colección."
+              : "Submit venue information for the team to consider adding it to the collection."
+          }
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-1 gap-6 mb-6">
             {/* Name Input */}
             <div>

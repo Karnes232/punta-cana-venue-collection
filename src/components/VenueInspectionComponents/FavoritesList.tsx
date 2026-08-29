@@ -5,12 +5,6 @@ import { Star, Trash2, MapPin, Calendar } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useFavorites } from "@/customHooks/useFavoritesHook"
 import Link from "next/link"
-import { Cormorant_Garamond } from "next/font/google"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 interface FavoritesListProps {
   locale: string
@@ -71,9 +65,7 @@ const FavoritesList: React.FC<FavoritesListProps> = ({
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Star className="w-6 h-6 text-golden fill-golden" />
-          <h2
-            className={`${coromantGaramond.className} text-2xl font-semibold text-charcoal`}
-          >
+          <h2 className="font-hero-display text-2xl font-semibold text-charcoal">
             {t("favorites")} ({favoriteVenues.length})
           </h2>
         </div>

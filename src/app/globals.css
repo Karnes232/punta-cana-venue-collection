@@ -6,9 +6,6 @@
   --color-turquoise: #40e0d0;
   --color-ivory: #faf9f6;
   --color-charcoal: #1c1c1c;
-
-  /* optional: fonts */
-  --font-crimson-pro: var(--font-crimson-pro), serif;
 }
 
 .font-hero-display {
@@ -23,8 +20,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: "Courier New", monospace;
 }
 
 /* @media (prefers-color-scheme: dark) {

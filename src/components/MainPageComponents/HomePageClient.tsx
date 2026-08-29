@@ -1,5 +1,3 @@
-"use client"
-
 import React from "react"
 import HeroComponent from "../HeroComponent/HeroComponent"
 import CorporateHomeSections from "../CorporateComponents/CorporateHomeSections"
@@ -8,19 +6,13 @@ import { homeCorporateCopy } from "@/lib/corporateContent"
 export interface HomePageClientProps {
   mainPage: any
   locale: "en" | "es"
-  typeVenue: any
   searchVenues: any
-  popupVenues: any
-  calendlyUrls: any
 }
 
 export default function HomePageClient({
   mainPage,
   locale,
-  typeVenue,
   searchVenues,
-  popupVenues,
-  calendlyUrls,
 }: HomePageClientProps) {
   const copy = homeCorporateCopy[locale]
   const prefix = locale === "es" ? "/es" : ""
@@ -33,13 +25,15 @@ export default function HomePageClient({
         eyebrow={copy.eyebrow}
         subtitle={copy.heroSubtitle}
         primaryCta={{ label: copy.primaryCta, href: "#venue-proposal" }}
-        secondaryCta={{ label: copy.secondaryCta, href: `${prefix}/corporate-venues` }}
+        secondaryCta={{
+          label: copy.secondaryCta,
+          href: `${prefix}/corporate-venues`,
+        }}
         venues={searchVenues}
         locale={locale}
       />
 
       <CorporateHomeSections locale={locale} />
-
     </>
   )
 }

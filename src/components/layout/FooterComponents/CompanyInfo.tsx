@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import React from "react"
-import { FaWhatsapp } from "react-icons/fa"
+import { MessageCircle } from "lucide-react"
 import { useParams } from "next/navigation"
 import { languages, fallbackLng } from "@/i18n/settings"
 import LanguageSwitcher from "@/components/LanguageSwitcher/LanguageSwitcher"
@@ -32,17 +32,11 @@ const CompanyInfo = () => {
           />
         </div>
         <div>
-          <h3 className="text-xl font-bold text-ivory">
-            Punta Cana
-          </h3>
-          <p className="text-sm text-ivory/70">
-            Venue Collection
-          </p>
+          <h3 className="text-xl font-bold text-ivory">Punta Cana</h3>
+          <p className="text-sm text-ivory/70">Venue Collection</p>
         </div>
       </div>
-      <p className="text-ivory/80 mb-6 max-w-md">
-        {companyDescription}
-      </p>
+      <p className="text-ivory/80 mb-6 max-w-md">{companyDescription}</p>
       <div className="flex space-x-4">
         <div className="w-10 h-10 bg-ivory/10 rounded-full flex items-center justify-center hover:bg-turquoise transition-colors cursor-pointer">
           <a
@@ -51,7 +45,7 @@ const CompanyInfo = () => {
             aria-label="WhatsApp"
             rel="noreferrer"
           >
-            <FaWhatsapp className="h-5 w-5 cursor-pointer hover:text-ivory transition-colors" />
+            <MessageCircle className="h-5 w-5 cursor-pointer hover:text-ivory transition-colors" />
           </a>
         </div>
         <div>

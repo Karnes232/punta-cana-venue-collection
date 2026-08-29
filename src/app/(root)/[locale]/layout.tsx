@@ -1,34 +1,21 @@
 import type { Metadata } from "next"
 import Script from "next/script"
-import { Cormorant_Garamond, Geist, Geist_Mono, Crimson_Pro } from "next/font/google"
+import { Cormorant_Garamond } from "next/font/google"
 import "../../globals.css"
 
 //import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google"
 //import { generateStructuredData } from "@/components/StructuredData/StructuredData"
 
 import { NextIntlClientProvider, hasLocale } from "next-intl"
+import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
 import Footer from "@/components/layout/FooterComponents/Footer"
 import Navbar from "@/components/layout/HeaderComponents/Navbar"
-import CookieConsentComponent from "@/components/CookieConsentComponents/CookieConsentComponent"
-import FloatingCtaButton from "@/components/FloatingCtaButton/FloatingCtaButton"
+import ClientEnhancements from "@/components/layout/ClientEnhancements"
 import { PCVC_BRAND } from "@/lib/brand"
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-})
-
-const crimsonPro = Crimson_Pro({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-crimson-pro",
-})
+export const revalidate = 3600
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -139,6 +126,7 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
+  setRequestLocale(locale)
   const organizationId = "https://puntacanavenuecollection.com/#organization"
   const globalSchema = {
     "@context": "https://schema.org",
@@ -169,6 +157,16 @@ export default async function LocaleLayout({
         name: PCVC_BRAND.name,
         inLanguage: ["en", "es"],
         publisher: { "@id": organizationId },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `https://puntacanavenuecollection.com${
+              locale === "es" ? "/es" : ""
+            }/venues?search={search_term_string}`,
+          },
+          "query-input": "required name=search_term_string",
+        },
       },
     ],
   }
@@ -185,11 +183,15 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${crimsonPro.variable} ${cormorantGaramond.variable} light`}
+      className={`${cormorantGaramond.variable} light`}
       style={{ colorScheme: "light" }}
     >
       <head>
-        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://cdn.sanity.io"
+          crossOrigin="anonymous"
+        />
         <meta name="color-scheme" content="light" />
         <meta name="supported-color-schemes" content="light" />
         <meta name="theme-color" content="#ffffff" />
@@ -197,9 +199,7 @@ export default async function LocaleLayout({
       {/* <GoogleTagManager gtmId="GTM-KGLHKQW" />
       <GoogleAnalytics gaId="G-6MJLJ90SSM" />
       <GoogleAnalytics gaId="G-JDL6KCYRYD" /> */}
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}
@@ -220,13 +220,13 @@ export default async function LocaleLayout({
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
-          <FloatingCtaButton
-            telephone={PCVC_BRAND.telephone}
-            email={PCVC_BRAND.email}
-            locale={locale as "en" | "es"}
-          />
         </NextIntlClientProvider>
-        <CookieConsentComponent key={locale} locale={locale} />
+        <ClientEnhancements
+          key={locale}
+          locale={locale as "en" | "es"}
+          telephone={PCVC_BRAND.telephone}
+          email={PCVC_BRAND.email}
+        />
       </body>
     </html>
   )

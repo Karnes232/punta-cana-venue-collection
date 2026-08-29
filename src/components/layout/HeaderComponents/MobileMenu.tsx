@@ -22,11 +22,15 @@ const MobileMenu = ({
     { href: `${prefix}/blog`, label: t("guides") },
     { href: `${prefix}/about`, label: t("about") },
     { href: `${prefix}/contact`, label: t("contact") },
-    { href: `${prefix}/corporate-venues#venue-proposal`, label: t("requestVenueProposal") },
+    {
+      href: `${prefix}/corporate-venues#venue-proposal`,
+      label: t("requestVenueProposal"),
+    },
   ]
   return (
     <>
       <div
+        id="mobile-navigation"
         className={`
                 lg:hidden fixed top-32 md:top-28 left-0 right-0 z-50
                 transform transition-all duration-300 ease-in-out min-h-screen bg-ivory
