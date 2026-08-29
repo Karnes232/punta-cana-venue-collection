@@ -11,7 +11,6 @@ import {
   getIndividualVenueSeo,
 } from "@/sanity/queries/IndividualVenues/IndividualVenues"
 import { getTranslations } from "next-intl/server"
-import { Cormorant_Garamond } from "next/font/google"
 import BlockContentIndividualVenuePage from "@/components/BlockContent/BlockContentIndividualVenuePage"
 import Location from "@/components/VenueComponents/Location"
 import VenueFavoriteButton from "@/components/VenueComponents/VenueFavoriteButton"
@@ -24,11 +23,6 @@ import { generateHreflangAlternates } from "@/lib/hreflang"
 import { PCVC_BRAND } from "@/lib/brand"
 import { getVenuePlanningProfile } from "@/lib/venueProfiles"
 import type { Metadata } from "next"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 type VenueLocale = "en" | "es"
 const SITE_URL = "https://puntacanavenuecollection.com"
@@ -362,9 +356,7 @@ export default async function VenueIndividual({
 
           {/* Description */}
           <div className="flex flex-col max-w-5xl mx-5 lg:p-2 lg:mx-auto">
-            <h2
-              className={`${coromantGaramond.className} mb-4 text-3xl font-bold`}
-            >
+            <h2 className="font-hero-display mb-4 text-3xl font-bold">
               {t("about")}
             </h2>
             {useCmsDescription ? (
@@ -388,9 +380,7 @@ export default async function VenueIndividual({
             <div className="bg-gradient-to-br from-ivory to-white border border-golden/20 rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3
-                    className={`${coromantGaramond.className} text-xl font-semibold text-charcoal`}
-                  >
+                  <h3 className="font-hero-display text-xl font-semibold text-charcoal">
                     {t("saveThisVenue")}
                   </h3>
                   <p className="text-slate-600 text-sm">{t("addFavorites")}</p>

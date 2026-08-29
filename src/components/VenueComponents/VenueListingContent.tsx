@@ -26,11 +26,13 @@ const VenueListingContent = ({
   individualVenues,
   locale,
   initialFilters = { location: "", type: "", capacity: "", budget: "" },
+  initialSearch = "",
 }: {
   venuePage: VenuePage | null
   individualVenues: IndividualVenue[] | null
   locale: "en" | "es"
   initialFilters?: FilterOptions
+  initialSearch?: string
 }) => {
   const t = useTranslations("venueListing")
   const transformedVenues: VenueWithStringLocation[] = useMemo(
@@ -43,12 +45,16 @@ const VenueListingContent = ({
         })),
     [individualVenues],
   )
-  const [searchTerm, setSearchTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useState(initialSearch)
   const [filters, setFilters] = useState<FilterOptions>(initialFilters)
 
   useEffect(() => {
     setFilters(initialFilters)
   }, [initialFilters])
+
+  useEffect(() => {
+    setSearchTerm(initialSearch)
+  }, [initialSearch])
 
   const filterOptions = useMemo(() => {
     const locations = [
@@ -148,6 +154,7 @@ const VenueListingContent = ({
         onFiltersChange={setFilters}
         filterOptions={filterOptions}
         initialFilters={initialFilters}
+        initialSearch={initialSearch}
       />
 
       <section

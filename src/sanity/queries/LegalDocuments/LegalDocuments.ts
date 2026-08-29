@@ -12,7 +12,10 @@ export const legalDocumentsQuery = `*[_type == "legalDocuments" && pageName == $
 
 export async function getLegalDocuments(
   pageName: string,
-): Promise<LegalDocuments> {
-  const legalDocuments = await client.fetch(legalDocumentsQuery, { pageName })
+): Promise<LegalDocuments | null> {
+  const legalDocuments = await client.fetch<LegalDocuments | null>(
+    legalDocumentsQuery,
+    { pageName },
+  )
   return legalDocuments
 }

@@ -406,6 +406,23 @@ export async function getIndividualVenuesMapDetails(): Promise<
   return data
 }
 
+export const venueSearchIndexQuery = `*[_type == "individualVenue" && ${publicVenueFilter}] {
+  title {
+    en,
+    es
+  },
+  slug
+}`
+
+export type VenueSearchIndexItem = Pick<
+  IndividualVenuesMapDetails,
+  "title" | "slug"
+>
+
+export async function getVenueSearchIndex(): Promise<VenueSearchIndexItem[]> {
+  return client.fetch<VenueSearchIndexItem[]>(venueSearchIndexQuery)
+}
+
 export const individualVenuesSlugsQuery = `*[_type == "individualVenue" && ${publicVenueFilter}] {
   slug {
     current

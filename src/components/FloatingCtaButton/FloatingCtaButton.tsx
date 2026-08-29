@@ -1,27 +1,14 @@
 "use client"
 
 import React, { useState } from "react"
-import {
-  FaWhatsapp,
-  FaPhone,
-  FaEnvelope,
-  FaCommentDots,
-  FaTimes,
-} from "react-icons/fa"
-// import ContactForm from "../Forms/ContactForm"
-import { useTranslations } from "next-intl"
+import { Mail, MessageCircle, Phone, X } from "lucide-react"
 
 interface FloatingCtaButtonProps {
   telephone: string
   email?: string
-  locale: "en" | "es"
 }
 
-const FloatingCtaButton = ({
-  telephone,
-  email,
-  locale,
-}: FloatingCtaButtonProps) => {
+const FloatingCtaButton = ({ telephone, email }: FloatingCtaButtonProps) => {
   const [isOpen, setIsOpen] = useState(false)
   // const [showContactForm, setShowContactForm] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
@@ -39,7 +26,7 @@ const FloatingCtaButton = ({
   const ctaOptions = [
     {
       id: "whatsapp",
-      icon: FaWhatsapp,
+      icon: MessageCircle,
       label: "WhatsApp",
       href: `https://api.whatsapp.com/send?phone=${telephone}`,
       color: "bg-[#25D366]",
@@ -48,7 +35,7 @@ const FloatingCtaButton = ({
     },
     {
       id: "phone",
-      icon: FaPhone,
+      icon: Phone,
       label: "Call",
       href: `tel:${telephone}`,
       color: "bg-golden",
@@ -57,7 +44,7 @@ const FloatingCtaButton = ({
     },
     {
       id: "email",
-      icon: FaEnvelope,
+      icon: Mail,
       label: "Email",
       href: email ? `mailto:${email}` : "#",
       color: "bg-turquoise",
@@ -145,7 +132,7 @@ const FloatingCtaButton = ({
             }`}
             aria-label={isOpen ? "Close CTA options" : "Open CTA options"}
           >
-            {isOpen ? <FaTimes size={24} /> : <FaCommentDots size={24} />}
+            {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
           </button>
         </div>
       </div>

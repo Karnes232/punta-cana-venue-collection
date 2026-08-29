@@ -98,6 +98,9 @@ export default function LanguageSwitcher({
         <button
           onClick={() => handleToggle(!isOpen)}
           disabled={isLoading}
+          aria-label={`Change language. Current language: ${currentLangOption.display}`}
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
           className={`flex items-center space-x-2 text-${color} transition-colors duration-200 px-3 py-2 rounded-lg border border-transparent ${
             isLoading ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-100"
           }`}
@@ -122,6 +125,9 @@ export default function LanguageSwitcher({
         <button
           onClick={() => handleToggle(!isOpen)}
           disabled={isLoading}
+          aria-label={`Change language. Current language: ${currentLangOption.display}`}
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
           className={`flex items-center space-x-1 text-${color} transition-colors duration-200 p-2 rounded-lg ${
             isLoading
               ? "opacity-50 cursor-not-allowed"
@@ -142,7 +148,11 @@ export default function LanguageSwitcher({
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-slate-200 py-2 z-50">
+        <div
+          className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-slate-200 py-2 z-50"
+          role="menu"
+          aria-label="Language options"
+        >
           {languageOptions.map(lng => {
             const isActive = safeLocale === lng.code
             return (
@@ -150,6 +160,8 @@ export default function LanguageSwitcher({
                 key={lng.code}
                 onClick={() => handleLanguageChange(lng.code)}
                 disabled={isLoading}
+                role="menuitem"
+                lang={lng.code}
                 className={`w-full text-left px-4 py-2 flex items-center space-x-3 transition-colors ${
                   isLoading
                     ? "opacity-50 cursor-not-allowed"

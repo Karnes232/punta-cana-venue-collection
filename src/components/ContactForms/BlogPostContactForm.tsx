@@ -142,6 +142,12 @@ const BlogPostContactForm = ({
           method="POST"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
+          toolname="contact-about-venue-guide"
+          tooldescription={
+            locale === "es"
+              ? "Solicita información sobre el venue o la guía que estás consultando."
+              : "Request information about the venue or guide you are viewing."
+          }
           onSubmit={handleSubmit}
           className="p-8"
         >
@@ -238,7 +244,10 @@ const BlogPostContactForm = ({
 
           {/* Submit Button */}
           {submitError && (
-            <p className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700" role="alert">
+            <p
+              className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700"
+              role="alert"
+            >
               {locale === "es"
                 ? "No pudimos enviar la solicitud. Inténtalo nuevamente."
                 : "We could not send your request. Please try again."}

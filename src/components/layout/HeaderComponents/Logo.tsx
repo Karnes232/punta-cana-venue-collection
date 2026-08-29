@@ -18,11 +18,13 @@ const Logo = () => {
           alt="Punta Cana Venue Collection logo"
           width={64}
           height={64}
-          priority
+          fetchPriority="low"
         />
       </div>
       <div>
-        <span className="block text-xl font-bold text-charcoal">Punta Cana</span>
+        <span className="block text-xl font-bold text-charcoal">
+          Punta Cana
+        </span>
         <p className="text-sm text-charcoal/70">Venue Collection</p>
       </div>
     </Link>

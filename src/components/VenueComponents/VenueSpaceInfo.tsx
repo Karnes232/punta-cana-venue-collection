@@ -1,12 +1,6 @@
 import React from "react"
-import { Cormorant_Garamond } from "next/font/google"
 import { useTranslations } from "next-intl"
 import { Ruler, Users } from "lucide-react"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 interface SpaceInfo {
   totalSpace: {
@@ -71,9 +65,7 @@ const VenueSpaceInfo = ({
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-200 to-cyan-100 flex items-center justify-center">
             <Ruler className="w-4 h-4 text-cyan-700" strokeWidth={2} />
           </div>
-          <h3
-            className={`${coromantGaramond.className} text-2xl font-semibold text-gray-800`}
-          >
+          <h3 className="font-hero-display text-2xl font-semibold text-gray-800">
             {t("totalSpace")}
           </h3>
         </div>
@@ -104,9 +96,7 @@ const VenueSpaceInfo = ({
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center">
             <Users className="w-4 h-4 text-green-600" strokeWidth={2} />
           </div>
-          <h3
-            className={`${coromantGaramond.className} text-2xl font-semibold text-gray-800`}
-          >
+          <h3 className="font-hero-display text-2xl font-semibold text-gray-800">
             {t("capacity")}
           </h3>
         </div>

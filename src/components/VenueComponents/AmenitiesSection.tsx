@@ -35,13 +35,7 @@ import {
   Accessibility,
 } from "lucide-react"
 import React from "react"
-import { Cormorant_Garamond } from "next/font/google"
 import { useTranslations } from "next-intl"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 interface Amenity {
   title: {
@@ -127,9 +121,7 @@ const AmenitiesSection = ({
             fill="currentColor"
           />
         </div>
-        <h3
-          className={`${coromantGaramond.className} text-2xl font-semibold text-gray-800`}
-        >
+        <h3 className="font-hero-display text-2xl font-semibold text-gray-800">
           {t("amenities")}
         </h3>
       </div>

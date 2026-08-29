@@ -7,20 +7,16 @@ import React from "react"
 const ActionButtons = ({
   isMenuOpen,
   setIsMenuOpen,
-  isSearchOpen,
-  setIsSearchOpen,
 }: {
   isMenuOpen: boolean
   setIsMenuOpen: (isMenuOpen: boolean) => void
-  isSearchOpen: boolean
-  setIsSearchOpen: (isSearchOpen: boolean) => void
 }) => {
   const t = useTranslations("Navbar")
   const locale = useLocale()
   const prefix = locale === "es" ? "/es" : ""
   return (
     <div className="flex items-center space-x-4">
-      {/* <button 
+      {/* <button
       onClick={() => setIsSearchOpen(!isSearchOpen)}
       className="p-2 text-charcoal hover:text-turquoise transition-colors"
     >
@@ -42,6 +38,17 @@ const ActionButtons = ({
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="lg:hidden p-2 text-charcoal"
+        aria-label={
+          locale === "es"
+            ? isMenuOpen
+              ? "Cerrar menú de navegación"
+              : "Abrir menú de navegación"
+            : isMenuOpen
+              ? "Close navigation menu"
+              : "Open navigation menu"
+        }
+        aria-expanded={isMenuOpen}
+        aria-controls="mobile-navigation"
       >
         {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
       </button>

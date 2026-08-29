@@ -1,15 +1,9 @@
 "use client"
 import React from "react"
 import dynamic from "next/dynamic"
-import { Cormorant_Garamond } from "next/font/google"
 import Link from "next/link"
 import { ArrowLeft, MessageCircle } from "lucide-react"
 import VenueFavoriteButton from "@/components/VenueComponents/VenueFavoriteButton"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 // Dynamically import components to improve initial page load
 const BlockContent = dynamic(
@@ -129,9 +123,7 @@ export default function IndividualVenueContent({
 
           {/* Description */}
           <div className="flex flex-col max-w-5xl mx-5 lg:p-2 lg:mx-auto">
-            <h2
-              className={`${coromantGaramond.className} mb-4 text-3xl font-bold`}
-            >
+            <h2 className="font-hero-display mb-4 text-3xl font-bold">
               {t("about")}
             </h2>
             {pageData.description && (
@@ -146,9 +138,7 @@ export default function IndividualVenueContent({
             <div className="bg-gradient-to-br from-ivory to-white border border-golden/20 rounded-2xl p-6 shadow-sm">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3
-                    className={`${coromantGaramond.className} text-xl font-semibold text-charcoal`}
-                  >
+                  <h3 className="font-hero-display text-xl font-semibold text-charcoal">
                     {t("saveThisVenue")}
                   </h3>
                   <p className="text-slate-600 text-sm">{t("addFavorites")}</p>

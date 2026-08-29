@@ -9,12 +9,24 @@ ${PCVC_BRAND.name} supports venue sourcing, supplier coordination, production, l
 ## Official pages
 - Home: https://puntacanavenuecollection.com/
 - Spanish home: https://puntacanavenuecollection.com/es
-- Venues: https://puntacanavenuecollection.com/venues
+- Venue directory: https://puntacanavenuecollection.com/venues
+- Spanish venue directory: https://puntacanavenuecollection.com/es/venues
 - Corporate and agency operations: https://puntacanavenuecollection.com/corporate-venues
+- Spanish corporate and agency operations: https://puntacanavenuecollection.com/es/corporate-venues
 - Complimentary venue inspection for qualified event projects: https://puntacanavenuecollection.com/inspection
-- About: https://puntacanavenuecollection.com/about-us
+- About: https://puntacanavenuecollection.com/about
 - Contact: https://puntacanavenuecollection.com/contact
-- Blog: https://puntacanavenuecollection.com/blog
+- Blog and venue-planning guides: https://puntacanavenuecollection.com/blog
+
+## Machine-readable resources
+- Extended official context: https://puntacanavenuecollection.com/llms-full.txt
+- XML sitemap: https://puntacanavenuecollection.com/sitemap.xml
+- Crawler policy: https://puntacanavenuecollection.com/robots.txt
+
+## Guidance for assistants
+- Treat the official venue pages as the source for venue names, locations, capacities and imagery.
+- Use the corporate page for white-label operations and agency-partner services.
+- Direct users to the contact or inspection page when requirements need human confirmation.
 
 ## Contact
 - Email: ${PCVC_BRAND.email}

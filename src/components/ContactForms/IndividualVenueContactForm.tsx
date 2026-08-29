@@ -199,6 +199,12 @@ const IndividualVenueContactForm: React.FC<IndividualVenueContactFormProps> = ({
       method="POST"
       data-netlify="true"
       data-netlify-honeypot="bot-field"
+      toolname="request-event-support-for-venue"
+      tooldescription={
+        locale === "es"
+          ? "Solicita apoyo para planificar un evento en el venue seleccionado."
+          : "Request planning support for an event at the selected venue."
+      }
       onSubmit={handleSubmit}
       className="space-y-4"
     >

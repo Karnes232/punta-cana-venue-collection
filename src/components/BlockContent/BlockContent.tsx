@@ -14,7 +14,7 @@ interface LocaleBlockContent {
 }
 
 interface Props {
-  content: LocaleBlockContent
+  content?: LocaleBlockContent | null
   language?: "en" | "es"
 }
 const builder = imageUrlBuilder(client)

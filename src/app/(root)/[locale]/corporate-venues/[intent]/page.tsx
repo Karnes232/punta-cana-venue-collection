@@ -92,7 +92,7 @@ export default async function CorporateIntentPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <CorporatePageHero
-        image={mainPage.heroImage}
+        image={mainPage?.heroImage}
         eyebrow={
           locale === "es"
             ? "Operación white-label"

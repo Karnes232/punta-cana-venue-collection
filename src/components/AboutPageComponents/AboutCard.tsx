@@ -1,12 +1,6 @@
 import { FileText, MapPin, Camera } from "lucide-react"
 import React from "react"
 import BlockContent from "../BlockContent/BlockContent"
-import { Cormorant_Garamond } from "next/font/google"
-
-const coromantGaramond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-})
 
 const AboutCard = ({
   title,
@@ -34,9 +28,7 @@ const AboutCard = ({
           )}
         </div>
       </div>
-      <h3
-        className={`${coromantGaramond.className} text-2xl lg:text-3xl font-bold`}
-      >
+      <h3 className="font-hero-display text-2xl lg:text-3xl font-bold">
         {title}
       </h3>
       <div className="flex justify-center items-center text-center gap-2 mx-2">

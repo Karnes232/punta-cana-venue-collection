@@ -5,13 +5,11 @@ import TopBar from "./TopBar"
 import Logo from "./Logo"
 import DesktopNav from "./DesktopNav"
 import ActionButtons from "./ActionButtons"
-import SearchBar from "./SearchBar"
 import MobileMenu from "./MobileMenu"
 import { PCVC_BRAND } from "@/lib/brand"
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
   return (
     <>
       <nav
@@ -25,10 +23,7 @@ const Navbar = () => {
             <ActionButtons
               isMenuOpen={isMenuOpen}
               setIsMenuOpen={setIsMenuOpen}
-              isSearchOpen={isSearchOpen}
-              setIsSearchOpen={setIsSearchOpen}
             />
-            {/* <SearchBar isSearchOpen={isSearchOpen} /> */}
             <MobileMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           </div>
         </div>

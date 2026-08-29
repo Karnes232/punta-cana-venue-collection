@@ -4,19 +4,13 @@ import { CheckCircle2 } from "lucide-react"
 export interface MainPageContentProps {
   mainPage: any
   locale: "en" | "es"
-  typeVenue: any
   searchVenues: any
-  popupVenues: any
-  calendlyUrls: any
 }
 
 export default function MainPageContent({
   mainPage,
   locale,
-  typeVenue,
   searchVenues,
-  popupVenues,
-  calendlyUrls,
 }: MainPageContentProps) {
   const es = locale === "es"
   return (
@@ -24,10 +18,7 @@ export default function MainPageContent({
       <HomePageClient
         mainPage={mainPage}
         locale={locale}
-        typeVenue={typeVenue}
         searchVenues={searchVenues}
-        popupVenues={popupVenues}
-        calendlyUrls={calendlyUrls}
       />
 
       <div
