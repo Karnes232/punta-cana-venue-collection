@@ -6,6 +6,24 @@
   NODE_VERSION = "18"
 
 [[redirects]]
+  from = "/blog/the-definitive-punta-cana-marriage-proposal-comparison-for-2026-2027"
+  to = "https://sertuinevents.com/proposal/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog/the-definitive-punta-cana-marriage-proposal-comparison-for-2026-2027"
+  to = "https://sertuinevents.com/proposal/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/es/blog/the-definitive-punta-cana-marriage-proposal-comparison-for-2026-2027"
+  to = "https://sertuinevents.com/es/proposal/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/"
   to = "/en"
   status = 302
