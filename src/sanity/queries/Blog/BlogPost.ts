@@ -1,4 +1,5 @@
 import { client } from "@/sanity/lib/client"
+import { RETIRED_BLOG_SLUGS } from "@/lib/retiredBlogRedirects"
 import { HeroImage } from "../MainPage/MainPage"
 import { BlogCategory } from "./BlogCategory"
 
@@ -74,7 +75,7 @@ export const allBlogPostsQuery = `*[_type == "blogPost"] {
 
 export async function getAllBlogPosts(): Promise<BlogPostMainPage[]> {
   const data = await client.fetch<BlogPostMainPage[]>(allBlogPostsQuery)
-  return data
+  return data.filter(post => !RETIRED_BLOG_SLUGS.has(post.slug.current))
 }
 
 export interface BlogPost {
@@ -178,7 +179,7 @@ export async function getAllBlogPostsSlugs(): Promise<
   const data = await client.fetch<{ slug: { current: string } }[]>(
     allBlogPostsSlugsQuery,
   )
-  return data
+  return data.filter(post => !RETIRED_BLOG_SLUGS.has(post.slug.current))
 }
 
 export const getRelatedBlogPostsQuery = `*[_type == "blogPost" && slug.current != $currentSlug && count((categories[]._ref)[@ in $categoryIds]) > 0] | order(publishedAt desc) [0...$limit] {
@@ -238,5 +239,5 @@ export async function getRelatedBlogPosts(
       limit,
     },
   )
-  return data
+  return data.filter(post => !RETIRED_BLOG_SLUGS.has(post.slug.current))
 }
