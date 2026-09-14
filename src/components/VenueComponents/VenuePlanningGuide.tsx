@@ -1,3 +1,4 @@
+import { isCorporateLabel } from "@/lib/content-positioning"
 import { getVenuePlanningProfile } from "@/lib/venueProfiles"
 import { PCVC_BRAND } from "@/lib/brand"
 import {
@@ -30,7 +31,7 @@ export default function VenuePlanningGuide({
     .map(eventType => eventType.title?.[locale] || eventType.title?.en)
     .filter(Boolean)
     .slice(0, 5)
-  const bestFor = profile?.bestFor?.map(localize) || defaultBestFor
+  const bestFor = profile?.bestFor?.map(localize).filter(isCorporateLabel) || defaultBestFor
   const summary =
     localize(profile?.summary) ||
     (locale === "es"

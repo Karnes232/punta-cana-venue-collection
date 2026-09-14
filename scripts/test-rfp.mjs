@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {validateBrief,scoreBrief} from '../src/lib/rfp-validation.ts';
+const brief={fullName:'Test',company:'Example',workEmail:'test@example.com',preferredDates:'November 2026',groupSize:'75',country:'US',clientType:'company',programType:'corporate-summits',duration:'4',budget:'100000-250000',rooms:'75',services:'strategy-planning,event-production,transportation-logistics,guest-management'};
+assert.deepEqual(validateBrief(brief,true),[]);
+assert.ok(scoreBrief(brief).score>=8,'Complex 75-person program must qualify without a 200-person minimum');
+assert.ok(validateBrief({...brief,workEmail:'invalid'},true).includes('workEmail'));
+assert.ok(validateBrief({...brief,groupSize:'-1'},true).includes('groupSize'));
+assert.ok(validateBrief({...brief,rooms:'1.5'},true).includes('rooms'));
+assert.ok(validateBrief({...brief,budget:'tampered'},true).includes('budget'));
+assert.ok(validateBrief({...brief,notes:'x'.repeat(10001)},true).includes('notes'));
+assert.deepEqual(validateBrief({fullName:'Test',company:'Example',workEmail:'test@example.com',preferredDates:'TBD',groupSize:'10',notes:'A four-day executive meeting'},false),[]);
+console.log('RFP validation and complexity scoring checks passed.');

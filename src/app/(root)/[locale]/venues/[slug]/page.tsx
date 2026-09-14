@@ -1,3 +1,5 @@
+import VenueSpecifications from "@/components/Enterprise/VenueSpecifications"
+import { socialTerms, isCorporateLabel } from "@/lib/content-positioning"
 import BlockContent from "@/components/BlockContent/BlockContent"
 import HeroComponentIndividualVenue from "@/components/HeroComponent/HeroComponentIndividualVenue"
 import AmenitiesSection from "@/components/VenueComponents/AmenitiesSection"
@@ -60,7 +62,7 @@ const WEDDING_TERMS =
 function isWeddingFocused(value: unknown) {
   const text =
     typeof value === "string" ? value : portableTextToPlainText(value)
-  const weddingMentions = text.match(WEDDING_TERMS)?.length || 0
+  const weddingMentions = socialTerms.test(text) ? 1 : 0
 
   return weddingMentions > 0
 }
@@ -77,7 +79,7 @@ function orderedEventTypeNames(
 ) {
   return (eventTypes || [])
     .map(eventType => eventType.title?.[locale] || eventType.title?.en)
-    .filter((value): value is string => Boolean(value))
+    .filter((value): value is string => Boolean(value) && isCorporateLabel(value || ""))
     .sort(
       (first, second) =>
         Number(isWeddingLabel(first)) - Number(isWeddingLabel(second)),
@@ -414,18 +416,7 @@ export default async function VenueIndividual({
             <MapSection venues={venues} />
           </div> */}
 
-          {/* Space Information */}
-          {pageData.totalSpace && !planningProfile?.facts?.length && (
-            <div className="flex flex-col lg:w-full max-w-5xl mx-5 lg:p-2 lg:mx-auto">
-              <VenueSpaceInfo
-                totalSpace={pageData.totalSpace}
-                capacityCocktail={pageData.capacityCocktail}
-                capacitySeated={pageData.capacitySeated}
-                locale={locale}
-              />
-            </div>
-          )}
-
+          <VenueSpecifications locale={locale} slug={slug} specs={pageData.corporateSpecifications}/>
           {/* Event Types */}
           {pageData.eventTypes && (
             <div className="flex flex-col max-w-5xl mx-5 lg:p-2 lg:mx-auto">

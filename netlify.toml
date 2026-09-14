@@ -3,7 +3,7 @@
   command = "npm run build"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "22"
 
 [[redirects]]
   from = "/blog/the-definitive-punta-cana-marriage-proposal-comparison-for-2026-2027"
@@ -23,29 +23,9 @@
   status = 301
   force = true
 
-[[redirects]]
-  from = "/"
-  to = "/en"
-  status = 302
 
-[[redirects]]
-  from = "/:locale/*"
-  to = "/:locale/:splat"
-  status = 200
 
-[[redirects]]
-  from = "/:locale"
-  to = "/:locale/"
-  status = 200
-
-# Handle language switching
-[[redirects]]
-  from = "/api/locale/:locale/*"
-  to = "/:locale/:splat"
-  status = 302
-
-# Fallback for SPA routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[[headers]]
+  for = "/__forms.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

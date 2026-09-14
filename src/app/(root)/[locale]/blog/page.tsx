@@ -23,7 +23,7 @@ export default async function Blog({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: structuredData.seo.structuredData[locale],
+            __html: structuredData.seo.structuredData[locale].replace(/</g, "\\u003c"),
           }}
         />
       )}

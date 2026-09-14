@@ -32,8 +32,8 @@ export default async function CorporateIntentPage({ params }: PageProps) {
     locale === "es"
       ? [
           [
-            "¿Cómo comienza la operación white-label?",
-            "Comienza con un brief del programa, los estándares de tu marca, las fechas, el grupo y el alcance. A partir de ahí coordinamos la ejecución local como extensión de tu agencia.",
+            "¿Cómo comienza la planificación?",
+            "Comienza con un brief del programa, los estándares de tu marca, las fechas, el grupo y el alcance. A partir de ahí coordinamos la ejecución local con un equipo responsable de tu programa.",
           ],
           [
             "¿Las inspecciones tienen costo?",
@@ -46,8 +46,8 @@ export default async function CorporateIntentPage({ params }: PageProps) {
         ]
       : [
           [
-            "How do white-label operations begin?",
-            "We start with the program brief, your brand standards, dates, group and scope. We then coordinate local execution as an extension of your agency.",
+            "How does planning begin?",
+            "We start with the program brief, your brand standards, dates, group and scope. We then coordinate local execution with one accountable team for your program.",
           ],
           [
             "Are inspections complimentary?",
@@ -95,8 +95,8 @@ export default async function CorporateIntentPage({ params }: PageProps) {
         image={mainPage?.heroImage}
         eyebrow={
           locale === "es"
-            ? "Operación white-label"
-            : "White-label event operations"
+            ? "Operación de eventos corporativos"
+            : "Corporate event operations"
         }
         title={title}
         description={intent.metaDescription[locale]}
@@ -108,7 +108,7 @@ export default async function CorporateIntentPage({ params }: PageProps) {
             ? "Ver todas las capacidades"
             : "View All Capabilities"
         }
-        secondaryHref={`${prefix}/corporate-venues`}
+        secondaryHref={`${prefix}/what-we-do`}
       />
 
       <section className="mx-auto grid max-w-7xl gap-6 px-4 py-16 md:py-20 lg:grid-cols-2">
@@ -149,13 +149,13 @@ export default async function CorporateIntentPage({ params }: PageProps) {
           </p>
           <h2 className="mt-3 max-w-4xl font-hero-display text-4xl md:text-6xl">
             {locale === "es"
-              ? "Tu agencia lidera la relación. Nosotros ejecutamos en el destino."
-              : "Your agency leads the relationship. We execute in destination."}
+              ? "Tus objetivos guían el programa. Nuestro equipo coordina la operación."
+              : "Your objectives shape the program. Our team coordinates the operation."}
           </h2>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-white/70">
             {locale === "es"
-              ? "Coordinamos el venue, proveedores, producción, transporte, invitados, contingencias y personal presencial bajo el alcance y los estándares aprobados por tu agencia."
-              : "We coordinate the venue, suppliers, production, transport, guests, contingencies and on-site team under the scope and standards approved by your agency."}
+              ? "Coordinamos el venue, proveedores, producción, transporte, invitados, contingencias y personal presencial bajo el alcance y los estándares aprobados por tu equipo."
+              : "We coordinate the venue, suppliers, production, transport, guests, contingencies and on-site team under the scope and standards approved by your team."}
           </p>
         </div>
       </section>
@@ -188,8 +188,8 @@ export default async function CorporateIntentPage({ params }: PageProps) {
           </p>
           <h2 className="mt-3 font-hero-display text-4xl leading-tight text-charcoal md:text-6xl">
             {locale === "es"
-              ? "Cuéntanos qué necesita ejecutar tu agencia"
-              : "Tell us what your agency needs executed"}
+              ? "Cuéntanos qué necesita tu próximo evento"
+              : "Tell us what your next event needs"}
           </h2>
         </div>
         <CorporateProposalForm

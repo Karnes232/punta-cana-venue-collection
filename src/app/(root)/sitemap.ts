@@ -1,3 +1,5 @@
+import { capabilities,eventTypes } from "@/lib/enterprise"
+import { ENTERPRISE_REDIRECTS } from "@/lib/enterpriseRedirects"
 import type { MetadataRoute } from "next"
 import { getAllBlogPostsSlugs } from "@/sanity/queries/Blog/BlogPost"
 import { getIndividualVenuesSlugs } from "@/sanity/queries/IndividualVenues/IndividualVenues"
@@ -180,7 +182,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       "[sitemap] Sanity slug fetch failed; serving static URLs only:",
       err,
     )
-    return STATIC_ROUTES
+    // Continue with the complete current static architecture.
   }
 
   const now = new Date()
@@ -209,5 +211,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  return [...STATIC_ROUTES, ...blogEn, ...blogEs, ...venuesEn, ...venuesEs]
+  const newPaths=["/what-we-do","/corporate-events","/destinations","/destinations/punta-cana","/destinations/santo-domingo","/for-agencies","/submit-rfp","/start-project",...capabilities.map(c=>"/what-we-do/"+c.slug),...eventTypes.map(e=>"/corporate-events/"+e.slug)]
+  const added=["","/es"].flatMap(prefix=>newPaths.map(path=>({url:SITE+prefix+path,changeFrequency:"monthly" as const,priority:0.8,alternates:{languages:{en:SITE+path,es:SITE+"/es"+path}}})))
+  return [...STATIC_ROUTES,...blogEn,...blogEs,...venuesEn,...venuesEs,...added].filter(entry=>!ENTERPRISE_REDIRECTS[new URL(entry.url).pathname.replace(/^\/es(?=\/)/,"")])
 }

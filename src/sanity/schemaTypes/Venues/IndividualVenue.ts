@@ -5,6 +5,12 @@ export default defineType({
   title: "Individual Venue",
   type: "document",
   fields: [
+    defineField({name:"corporateSpecifications",title:"Verified corporate specifications",type:"object",fields:[
+      defineField({name:"sourceUrl",type:"url",description:"Official source or specification document URL"}),
+      defineField({name:"verifiedAt",type:"date",description:"Date checked with the venue"}),
+      ...["maximum","theater","classroom","banquet","cocktail","breakouts","hotelRooms","meetingRooms","exhibitionArea"].map(name=>defineField({name,type:"number",validation:r=>r.min(0)})),
+      defineField({name:"operations",type:"localizedText",description:"Confirmed loading, bus access, AV, internet, power, F&B, airport transfer and vendor restrictions"})
+    ]}),
     defineField({
       name: "venueName",
       title: "Venue Name",

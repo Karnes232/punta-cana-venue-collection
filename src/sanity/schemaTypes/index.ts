@@ -1,3 +1,4 @@
+import corporateCaseStudy from "./CorporateCaseStudy"
 import { type SchemaTypeDefinition } from "sanity"
 import {
   localizedBlock,
@@ -41,6 +42,7 @@ import contactPage from "./ContactPage/ContactPage"
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
+    corporateCaseStudy,
     // Localized
     localizedString,
     localizedText,

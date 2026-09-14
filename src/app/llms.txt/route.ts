@@ -2,17 +2,21 @@ import { PCVC_BRAND } from "@/lib/brand"
 
 const body = `# ${PCVC_BRAND.name}
 
-> White-label event operations and local representation for international agencies, planners and corporate teams across the Dominican Republic.
+> Full-service corporate event management, production and destination operations in the Dominican Republic. One brief. One team. Complete execution.
 
 ${PCVC_BRAND.name} supports venue sourcing, supplier coordination, production, logistics and on-site execution. The team works in English and Spanish and can operate under a partner agency's brand.
 
 ## Official pages
+- Submit your RFP: https://puntacanavenuecollection.com/submit-rfp
+- Capabilities: https://puntacanavenuecollection.com/what-we-do
+- Corporate events: https://puntacanavenuecollection.com/corporate-events
+- For agencies: https://puntacanavenuecollection.com/for-agencies
 - Home: https://puntacanavenuecollection.com/
 - Spanish home: https://puntacanavenuecollection.com/es
-- Venue directory: https://puntacanavenuecollection.com/venues
+- Corporate venue collection: https://puntacanavenuecollection.com/venues
 - Spanish venue directory: https://puntacanavenuecollection.com/es/venues
-- Corporate and agency operations: https://puntacanavenuecollection.com/corporate-venues
-- Spanish corporate and agency operations: https://puntacanavenuecollection.com/es/corporate-venues
+- Corporate and agency operations: https://puntacanavenuecollection.com/for-agencies
+- Spanish corporate and agency operations: https://puntacanavenuecollection.com/es/for-agencies
 - Complimentary venue inspection for qualified event projects: https://puntacanavenuecollection.com/inspection
 - About: https://puntacanavenuecollection.com/about
 - Contact: https://puntacanavenuecollection.com/contact

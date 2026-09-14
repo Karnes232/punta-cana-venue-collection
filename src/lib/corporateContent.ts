@@ -31,8 +31,8 @@ export const corporateIntents: CorporateIntent[] = [
       es: "Espacios privados para trabajo estratégico, conversaciones confidenciales y tiempo de calidad en equipo.",
     },
     metaDescription: {
-      en: "White-label local execution for executive retreats in the Dominican Republic, including venues, transport, production, activities and on-site operations.",
-      es: "Ejecución local white-label para retiros ejecutivos en República Dominicana: venues, transporte, producción, actividades y operación presencial.",
+      en: "Complete planning and local execution for executive retreats in the Dominican Republic, including venues, transport, production, activities and on-site operations.",
+      es: "Planificación y ejecución local integral para retiros ejecutivos en República Dominicana: venues, transporte, producción, actividades y operación presencial.",
     },
     idealFor: {
       en: [
@@ -67,8 +67,8 @@ export const corporateIntents: CorporateIntent[] = [
       es: "Venues flexibles que equilibran sesiones productivas con experiencias memorables en el destino.",
     },
     metaDescription: {
-      en: "Operate company offsites in the Dominican Republic under your agency brand with local venues, suppliers, logistics, production and guest support.",
-      es: "Opera offsites corporativos en República Dominicana bajo la marca de tu agencia, con venues, proveedores, logística, producción y atención a invitados.",
+      en: "Operate company offsites in the Dominican Republic with one accountable operations team with local venues, suppliers, logistics, production and guest support.",
+      es: "Opera offsites corporativos en República Dominicana con un equipo responsable de la operación, con venues, proveedores, logística, producción y atención a invitados.",
     },
     idealFor: {
       en: [
@@ -175,7 +175,7 @@ export const corporateIntents: CorporateIntent[] = [
       es: "Venues y espacios de actividades para conectar equipos mediante experiencias bien organizadas.",
     },
     metaDescription: {
-      en: "Run team-building programs across the Dominican Republic with white-label local logistics, activities, venues, production and participant support.",
+      en: "Run team-building programs across the Dominican Republic with coordinated local logistics, activities, venues, production and participant support.",
       es: "Realiza programas de integración en República Dominicana con logística white-label, actividades, venues, producción y atención a participantes.",
     },
     idealFor: {

@@ -70,7 +70,7 @@ const components = {
     h1: ({ children }: any) => (
       <TextComponentHeading
         heading={children}
-        headingNumber="h1"
+        headingNumber="h2"
         HeadingClassName="mb-4 mt-8"
       />
     ),

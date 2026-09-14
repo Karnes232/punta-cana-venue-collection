@@ -23,7 +23,7 @@ export default function ClientEnhancements({
 }) {
   return (
     <>
-      <FloatingCtaButton telephone={telephone} email={email} />
+      <div className="hidden md:block"><FloatingCtaButton telephone={telephone} email={email} /></div>
       <CookieConsentComponent locale={locale} />
     </>
   )

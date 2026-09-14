@@ -18,12 +18,13 @@ export default async function Privacy({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: structuredData.seo.structuredData[locale],
+            __html: structuredData.seo.structuredData[locale].replace(/</g, "\\u003c"),
           }}
         />
       )}
       <div className="min-h-screen">
         <div className="container px-5 max-w-7xl lg:px-0 lg:mx-auto">
+          <h1 className="py-12 text-4xl">{locale === "es" ? "Política de privacidad" : "Privacy policy"}</h1>
           <BlockContent content={legalDocuments?.body} language={locale} />
         </div>
       </div>

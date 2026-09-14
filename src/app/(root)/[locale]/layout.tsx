@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import Script from "next/script"
 import { Cormorant_Garamond } from "next/font/google"
 import "../../globals.css"
+import "@/components/Enterprise/enterprise.css"
+import ConversionTracking from "@/components/Enterprise/ConversionTracking"
 
 //import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google"
 //import { generateStructuredData } from "@/components/StructuredData/StructuredData"
@@ -10,8 +12,8 @@ import { NextIntlClientProvider, hasLocale } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
-import Footer from "@/components/layout/FooterComponents/Footer"
-import Navbar from "@/components/layout/HeaderComponents/Navbar"
+import Footer from "@/components/Enterprise/Footer"
+import Navbar from "@/components/Enterprise/Navigation"
 import ClientEnhancements from "@/components/layout/ClientEnhancements"
 import { PCVC_BRAND } from "@/lib/brand"
 
@@ -215,9 +217,9 @@ export default async function LocaleLayout({
           key={locale}
         >
           <div className="min-h-screen flex flex-col">
-            <Navbar />
+            <Navbar /><ConversionTracking />
 
-            <main className="flex-1">{children}</main>
+            <main id="main-content" className="flex-1">{children}</main>
             <Footer />
           </div>
         </NextIntlClientProvider>

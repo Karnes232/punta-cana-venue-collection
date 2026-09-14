@@ -159,7 +159,7 @@ export default function IndividualVenueContent({
                   className="flex-1 bg-gradient-to-br from-golden/50 to-golden/90 hover:from-golden/70 hover:to-golden text-charcoal font-semibold py-3 px-4 rounded-xl text-center transition-all duration-300 hover:shadow-md text-sm"
                 />
                 <a
-                  href={`https://wa.me/18295222900?text=${encodeURIComponent(whatsappMessage)}`}
+                  href={`https://wa.me/18494520971?text=${encodeURIComponent(whatsappMessage)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-green-600 px-4 py-3 text-center text-sm font-semibold text-green-700 transition hover:bg-green-50"

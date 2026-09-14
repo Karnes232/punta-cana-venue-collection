@@ -1,3 +1,5 @@
+import { isCorporateLabel } from "@/lib/content-positioning"
+import type { VerifiedSpecs } from "@/components/Enterprise/VenueSpecifications"
 import { client } from "@/sanity/lib/client"
 import { HeroImage } from "../MainPage/MainPage"
 import { applyVenueDataCorrections } from "@/lib/venueProfiles"
@@ -342,6 +344,7 @@ export interface IndividualVenuePage {
     }
     icon: string
   }[]
+  corporateSpecifications?: VerifiedSpecs
   totalSpace: number
   verifiedMaximumCapacity?: number
 }
@@ -355,7 +358,9 @@ export async function getIndividualVenuePage(
       slug,
     },
   )
-  return data ? applyVenueDataCorrections(data) : null
+  if (!data) return null
+  const corrected=applyVenueDataCorrections(data)
+  return {...corrected,eventTypes:(corrected.eventTypes||[]).filter(x=>isCorporateLabel(x.title?.en||"")&&isCorporateLabel(x.title?.es||""))}
 }
 
 export const individualVenuesMapDetailsQuery = `*[_type == "individualVenue" && ${publicVenueFilter}] {

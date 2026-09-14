@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation"
 import BlogPostContent from "@/components/BlogComponents/BlogPostContent"
 import BlogPostHeader from "@/components/BlogComponents/BlogPostHeader"
 import BlogPostContactForm from "@/components/ContactForms/BlogPostContactForm"
@@ -21,6 +22,7 @@ export default async function BlogPost({ params }: PageProps) {
   const { locale, slug } = await params
 
   const post = await getBlogPostBySlug(slug)
+  if(!post) notFound()
   const seoSchema = await getBlogSeoSchema(slug)
   const calendlyUrls = await getCalendlyUrls()
   const relatedPosts = post.categoryIds
@@ -33,7 +35,7 @@ export default async function BlogPost({ params }: PageProps) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: seoSchema.seo.structuredData[locale],
+            __html: seoSchema.seo.structuredData[locale].replace(/</g, "\\u003c"),
           }}
         />
       )}

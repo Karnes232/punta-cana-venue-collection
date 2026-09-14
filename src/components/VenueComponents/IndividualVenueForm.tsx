@@ -97,7 +97,7 @@ const IndividualVenueForm = ({
         </p>
 
         <a
-          href={`https://wa.me/18295222900?text=${encodeURIComponent(
+          href={`https://wa.me/18494520971?text=${encodeURIComponent(
             locale === "es"
               ? `Quiero realizar un evento en ${venueTitle}. Necesito asistencia con la planificación y operación.`
               : `I want to hold an event at ${venueTitle}. I need assistance with planning and operations.`,

@@ -1,4 +1,5 @@
 "use client"
+import { isCorporateLabel } from "@/lib/content-positioning"
 
 import { IndividualVenue } from "@/sanity/queries/IndividualVenues/IndividualVenues"
 import { MapPin, MessageCircle, Star, Users } from "lucide-react"
@@ -62,7 +63,7 @@ const IndividualVenueCard = ({
     title?.[locale as "en" | "es"] || title?.en || venueName
   const localizedTypes = type
     .map(item => item?.title?.[locale as "en" | "es"] || item?.title?.en)
-    .filter((value): value is string => Boolean(value))
+    .filter((value): value is string => Boolean(value) && isCorporateLabel(value || ""))
     .sort(
       (first, second) =>
         Number(isWeddingType(first)) - Number(isWeddingType(second)),

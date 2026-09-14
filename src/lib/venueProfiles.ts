@@ -35,7 +35,7 @@ const sharedMajesticProfile: VenuePlanningProfile = {
     text("Corporate meetings", "Reuniones corporativas"),
     text("Incentive groups", "Grupos de incentivos"),
     text("Medium-size conferences", "Conferencias medianas"),
-    text("Multi-day social programs", "Programas sociales de varios días"),
+    text("Multi-day corporate programs", "Programas sociales de varios días"),
   ],
   facts: [
     fact("Published meeting area", "Área de reuniones publicada", "1,000 m²"),
@@ -55,8 +55,8 @@ const sharedMajesticProfile: VenuePlanningProfile = {
 
 const sharedHyattProfile: VenuePlanningProfile = {
   summary: text(
-    "A large shared event campus for Hyatt Ziva and Hyatt Zilara Cap Cana, suitable for multi-room conferences, incentives and large social programs.",
-    "Un amplio complejo de eventos compartido por Hyatt Ziva y Hyatt Zilara Cap Cana, adecuado para conferencias con varios salones, incentivos y grandes programas sociales.",
+    "A large shared event campus for Hyatt Ziva and Hyatt Zilara Cap Cana, suitable for multi-room conferences, incentives and large corporate programs.",
+    "Un amplio complejo de eventos compartido por Hyatt Ziva y Hyatt Zilara Cap Cana, adecuado para conferencias con varios salones, incentivos y grandes programas corporativos.",
   ),
   bestFor: [
     text("Multi-day conferences", "Conferencias de varios días"),
@@ -138,7 +138,7 @@ export const VENUE_PLANNING_PROFILES: Record<string, VenuePlanningProfile> = {
       text("Large conventions", "Grandes convenciones"),
       text("Exhibitions", "Exhibiciones"),
       text("Product launches", "Lanzamientos de producto"),
-      text("Large social programs", "Grandes programas sociales"),
+      text("Large corporate programs", "Grandes programas corporativos"),
     ],
     facts: [
       fact("Convention center", "Centro de convenciones", "123,785 ft²"),
@@ -162,14 +162,14 @@ export const VENUE_PLANNING_PROFILES: Record<string, VenuePlanningProfile> = {
   },
   "hard-rock-hotel-and-casino-punta-cana": {
     summary: text(
-      "A high-capacity resort with strong production infrastructure for concerts, conferences, brand activations and large-scale social events.",
-      "Un resort de gran capacidad con sólida infraestructura de producción para conciertos, conferencias, activaciones de marca y eventos sociales de gran escala.",
+      "A high-capacity resort with strong production infrastructure for concerts, conferences, brand activations and large-scale corporate events.",
+      "Un resort de gran capacidad con sólida infraestructura de producción para conciertos, conferencias, activaciones de marca y eventos corporativos de gran escala.",
     ),
     bestFor: [
       text("Conferences", "Conferencias"),
       text("Entertainment programs", "Programas de entretenimiento"),
       text("Product launches", "Lanzamientos de producto"),
-      text("Large social productions", "Grandes producciones sociales"),
+      text("Large corporate productions", "Grandes producciones corporativas"),
     ],
     facts: [
       fact("Fillmore Ballroom", "Salón Fillmore", "37,500 ft²"),
@@ -239,7 +239,7 @@ export const VENUE_PLANNING_PROFILES: Record<string, VenuePlanningProfile> = {
       text("Executive meetings", "Reuniones ejecutivas"),
       text("Incentive groups", "Grupos de incentivos"),
       text("Medium conferences", "Conferencias medianas"),
-      text("Adults-only social programs", "Programas sociales para adultos"),
+      text("Adults-only corporate programs", "Programas sociales para adultos"),
     ],
     facts: [
       fact("Published theater capacity", "Capacidad teatro publicada", "500"),
@@ -281,7 +281,7 @@ export const VENUE_PLANNING_PROFILES: Record<string, VenuePlanningProfile> = {
     bestFor: [
       text("Medium meetings", "Reuniones medianas"),
       text("Incentive groups", "Grupos de incentivos"),
-      text("Social events", "Eventos sociales"),
+      text("Corporate events", "Eventos corporativos"),
     ],
     facts: [
       fact("Meeting rooms", "Salones de reuniones", "2"),
@@ -369,7 +369,7 @@ export const VENUE_PLANNING_PROFILES: Record<string, VenuePlanningProfile> = {
       text("Conferences", "Conferencias"),
       text("Product presentations", "Presentaciones de producto"),
       text("Corporate meetings", "Reuniones corporativas"),
-      text("Social events", "Eventos sociales"),
+      text("Corporate events", "Eventos corporativos"),
     ],
     facts: [
       fact("Meeting rooms", "Salones de reuniones", "13"),
@@ -407,8 +407,8 @@ export const VENUE_PLANNING_PROFILES: Record<string, VenuePlanningProfile> = {
     titleOverride: text("Hodelpa Centro Plaza", "Hodelpa Centro Plaza"),
     locationOverride: "Santiago de los Caballeros",
     summary: text(
-      "A city-hotel option in central Santiago for business meetings and smaller corporate or social events.",
-      "Una opción de hotel urbano en el centro de Santiago para reuniones de negocios y eventos corporativos o sociales de menor escala.",
+      "A city-hotel option in central Santiago for business meetings and smaller corporate or corporate events.",
+      "Una opción de hotel urbano en el centro de Santiago para reuniones de negocios y eventos corporativos de menor escala.",
     ),
     considerations: [
       text(

@@ -1,3 +1,4 @@
+import { isCommercialArticle } from "@/lib/content-positioning"
 import { client } from "@/sanity/lib/client"
 import { RETIRED_BLOG_SLUGS } from "@/lib/retiredBlogRedirects"
 import { HeroImage } from "../MainPage/MainPage"
@@ -75,7 +76,7 @@ export const allBlogPostsQuery = `*[_type == "blogPost"] {
 
 export async function getAllBlogPosts(): Promise<BlogPostMainPage[]> {
   const data = await client.fetch<BlogPostMainPage[]>(allBlogPostsQuery)
-  return data.filter(post => !RETIRED_BLOG_SLUGS.has(post.slug.current))
+  return data.filter(post => !RETIRED_BLOG_SLUGS.has(post.slug.current) && isCommercialArticle(post))
 }
 
 export interface BlogPost {
@@ -239,5 +240,5 @@ export async function getRelatedBlogPosts(
       limit,
     },
   )
-  return data.filter(post => !RETIRED_BLOG_SLUGS.has(post.slug.current))
+  return data.filter(post => !RETIRED_BLOG_SLUGS.has(post.slug.current) && isCommercialArticle(post))
 }

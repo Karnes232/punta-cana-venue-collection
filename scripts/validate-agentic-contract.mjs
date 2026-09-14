@@ -33,7 +33,7 @@ expect(
 )
 
 const formFiles = [
-  "src/components/CorporateComponents/CorporateProposalForm.tsx",
+  "src/components/Enterprise/RfpForm.tsx",
   "src/components/ContactForms/ContactPageForm.tsx",
   "src/components/VenueInspectionComponents/InspectionForm.tsx",
   "src/components/ContactForms/IndividualVenueContactForm.tsx",
@@ -62,10 +62,10 @@ expect(
   "The static homepage sections must remain server-rendered",
 )
 
-const homeHero = read("src/components/HeroComponent/HeroComponent.tsx")
+const homeHero = read("src/components/Enterprise/Home.tsx")
 expect(
-  homeHero.includes('id="home-venue-search"'),
-  "Home search needs an accessible label target",
+  homeHero.includes('data-rfp-cta') || homeHero.includes('source="hero"'),
+  "Home needs a primary RFP conversion path",
 )
 expect(
   homeHero.includes("quality={75}"),

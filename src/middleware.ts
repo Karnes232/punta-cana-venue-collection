@@ -1,3 +1,4 @@
+import { ENTERPRISE_REDIRECTS } from "./lib/enterpriseRedirects"
 import createMiddleware from "next-intl/middleware"
 import { type NextRequest, NextResponse } from "next/server"
 import { routing } from "./i18n/routing"
@@ -6,6 +7,11 @@ import { RETIRED_BLOG_REDIRECTS } from "./lib/retiredBlogRedirects"
 const intlMiddleware = createMiddleware(routing)
 
 export default function middleware(request: NextRequest) {
+  const raw=request.nextUrl.pathname.replace(/\/$/,"")
+  const localePrefix=raw.startsWith("/es/")?"/es":""
+  const normalized=raw.replace(/^\/(en|es)(?=\/)/,"")
+  const enterpriseTarget=ENTERPRISE_REDIRECTS[normalized]
+  if(enterpriseTarget){const url=new URL(localePrefix+enterpriseTarget,request.url);url.search=request.nextUrl.search;return NextResponse.redirect(url,301)}
   const destination = RETIRED_BLOG_REDIRECTS[request.nextUrl.pathname]
 
   if (destination) {

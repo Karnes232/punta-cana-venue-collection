@@ -1,3 +1,4 @@
+import { isCorporateLabel } from "@/lib/content-positioning"
 import React from "react"
 import { useTranslations } from "next-intl"
 import {
@@ -59,7 +60,7 @@ const EventTypesSection = ({
     return null
   }
 
-  const orderedEventTypes = [...eventTypes].sort((first, second) => {
+  const orderedEventTypes = [...eventTypes].filter(x=>isCorporateLabel(x.title?.en||"")&&isCorporateLabel(x.title?.es||"")).sort((first, second) => {
     const firstTitle = first.title[locale] || first.title.en
     const secondTitle = second.title[locale] || second.title.en
     return (
