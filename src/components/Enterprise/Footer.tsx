@@ -3,6 +3,7 @@ import Link from "next/link"
 import { getLocale } from "next-intl/server"
 import { capabilities, eventTypes, Locale, prefix } from "@/lib/enterprise"
 import { PCVC_BRAND } from "@/lib/brand"
+import BuiltBy from "./BuiltBy"
 export default async function Footer() {
   const locale = (await getLocale()) as Locale,
     p = prefix(locale),
@@ -63,6 +64,7 @@ export default async function Footer() {
         </div>
         <div className="pc-footer-bottom">
           <span>© {new Date().getFullYear()} Punta Cana Venue Collection</span>
+          <BuiltBy locale={locale} />
           <div className="pc-footer-legal">
             {["privacy", "terms", "cookies"].map((x, i) => (
               <Link key={x} href={`${p}/${x}`}>

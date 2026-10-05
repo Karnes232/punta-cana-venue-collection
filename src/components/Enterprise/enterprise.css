@@ -702,6 +702,24 @@
 .pc-footer-legal a {
   margin: 0;
 }
+.pc-footer .pc-built-by {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  max-width: none;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #faf9f699;
+}
+.pc-footer .pc-built-by a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  font-size: 11px;
+}
 .pc-mobile-cta {
   display: none;
 }
